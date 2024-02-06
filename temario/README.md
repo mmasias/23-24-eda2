@@ -1,17 +1,14 @@
 # Temario
 
-- [x] **[Introducción](00-00-introduccion.md)**
-  - [x] **[Sub tema introducción](00-01-Algoritmos.md)**
-- [ ] Tema 1
-  - [ ] Sub tema 1.1
-  - [ ] Sub tema 1.2
-  - [ ] Sub tema 1.3
-- [ ] Tema 2
-- [ ] Tema 3
+- [ ] [Estructuras de datos](01-estructurasDeDatos/README.md)
+- [ ] [Algoritmos](02-algoritmos/README.md)
+- [ ] [Recursividad](03-recursividad/README.md)
+- [ ] [Ordenación](04-ordenacion/README.md)
+- [ ] [Hashing](05-hashing/README.md)
 
 ## Temario++
 
-- [x] Artículos varios recopilados en la [carpeta de documentos](/documentos/README.md).
+- [ ] Artículos varios recopilados en la [carpeta de documentos](/documentos/README.md).
 
 ---
 

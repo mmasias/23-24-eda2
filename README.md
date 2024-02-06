@@ -1,8 +1,8 @@
-# NombreAsignatura
+# Estructura de datos y algoritmos II
 
-Repo de materiales y proyectos de la asignatura **NombreAsignatura** del [Grado de Ingeniería Informática](https://www.uneatlantico.es/escuela-politecnica-superior/estudios-grado-oficial-en-ingenieria-informatica) la [Universidad Europea del Atlántico](https://www.uneatlantico.es).
+Repo de materiales y proyectos de la asignatura **EDA II** del [Grado de Ingeniería Informática](https://www.uneatlantico.es/escuela-politecnica-superior/estudios-grado-oficial-en-ingenieria-informatica) la [Universidad Europea del Atlántico](https://www.uneatlantico.es).
 
-## Curso *[x][x+1]*
+## Curso *[23][24]*
 
 - [Temario](temario/README.md)
   - [A día de hoy, deberíamos saber...](temario/aDiaDeHoy.md)
@@ -30,4 +30,3 @@ NOTA: *Algunos enlaces podrían requerir **credenciales de acceso al campus** o 
 
 - Hoja de asistencia et-al
 - Libro de la asignatura
-- Este repo, versión de ediciones pasadas

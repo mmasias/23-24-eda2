@@ -1,0 +1,52 @@
+@startuml
+
+interface Iterable
+interface Collection
+interface List
+interface Set
+interface SortedSet
+interface NavigableSet
+interface Queue
+interface Deque
+interface Map
+interface SortedMap
+interface NavigableMap
+
+class ArrayList
+class LinkedList
+class Vector
+class Stack
+class HashSet
+class LinkedHashSet
+class TreeSet
+class EnumSet
+class PriorityQueue
+class ArrayDeque
+class HashMap
+class TreeMap
+
+Collection -up-|> Iterable
+List -up-|> Collection
+Set -up-|> Collection
+SortedSet -up-|> Set
+NavigableSet -up-|> SortedSet
+Queue -up-|> Collection
+Deque -up-|> Queue
+SortedMap -up-|> Map
+NavigableMap -up-|> SortedMap
+
+ArrayList -up-|> List
+LinkedList -up-|> List
+LinkedList -right-|> Deque
+Vector -up-|> List
+Stack -up-|> Vector
+HashSet -up-|> Set
+LinkedHashSet -up-|> HashSet
+TreeSet -up-|> NavigableSet
+EnumSet -up-|> Set
+PriorityQueue -up-|> Queue
+ArrayDeque -up-|> Deque
+HashMap -up-|> Map
+TreeMap -up-|> NavigableMap
+
+@enduml
