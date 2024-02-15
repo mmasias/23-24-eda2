@@ -78,11 +78,30 @@ class Intake {
 
     public static void main(String[] args) {
         Intake breakfast = new Intake();
+
+        // Add multiple food items
         breakfast.addFood(new Food("Apple"));
         breakfast.addFood(new Food("Banana"));
+        System.out.println("Adding food:\n");
         breakfast.printFoodListing();
+
+        // Retrieve a food item
+        Food apple = breakfast.getFood("Apple");
+        if (apple != null) {
+            System.out.println("Retrieved food: " + apple.getName() + "\n");
+        } else {
+            System.out.println("Food not found.\n");
+        }
+
+        // Update a food item
         breakfast.updateFood("Apple", "Orange");
+        System.out.println("After updating Apple to Orange:\n");
+        breakfast.printFoodListing();
+
+        // Delete a food item
         breakfast.deleteFood("Banana");
+        System.out.println("After deleting Banana:\n");
         breakfast.printFoodListing();
     }
+
 }
