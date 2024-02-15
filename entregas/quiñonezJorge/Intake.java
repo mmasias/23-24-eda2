@@ -3,18 +3,18 @@ package entregas.quiñonezJorge;
 import java.util.Scanner;
 
 public class Intake {
-  private FoodNode first;
+  private genericNode<Food> first;
 
   public Intake() {
     first = null;
   }
 
   public void addFood(Food food) {
-    FoodNode newFoodNode = new FoodNode(food);
+    genericNode<Food> newFoodNode = new genericNode<Food>(food);
     if (first == null) {
       first = newFoodNode;
     } else {
-      FoodNode current = first;
+      genericNode<Food> current = first;
       while (current.getNext() != null) {
         current = current.getNext();
       }
@@ -50,12 +50,12 @@ public class Intake {
       if (foodName.equals("-1")) {
         editing = !editing;
       } else {
-        FoodNode current = first;
+        genericNode<Food> current = first;
         while (current != null) {
-          if (current.getFood().getName().equals(foodName)) {
+          if (current.getData().getName().equals(foodName)) {
             System.out.println("Ingrese el nuevo nombre del alimento");
             String newFoodName = userInput.nextLine();
-            current.getFood().setName(newFoodName);
+            current.getData().setName(newFoodName);
           }
           current = current.getNext();
         }
@@ -72,10 +72,10 @@ public class Intake {
       if (foodName.equals("-1")) {
         deleting = !deleting;
       } else {
-        FoodNode current = first;
-        FoodNode previous = null;
+        genericNode<Food> current = first;
+        genericNode<Food> previous = null;
         while (current != null) {
-          if (current.getFood().getName().equals(foodName)) {
+          if (current.getData().getName().equals(foodName)) {
             if (previous == null) {
               first = current.getNext();
             } else {
@@ -92,9 +92,9 @@ public class Intake {
   @Override
   public String toString() {
     String foodListing = "";
-    FoodNode current = first;
+    genericNode<Food> current = first;
     while (current != null) {
-      foodListing = foodListing + current.getFood().toString() + "\n";
+      foodListing = foodListing + current.getData().toString() + "\n";
       current = current.getNext();
     }
     return foodListing;
