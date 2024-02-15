@@ -56,8 +56,32 @@ class Intake {
 
 
     private void deleteIntake(String foodName) {
+        if (first == null){
+            System.out.println("No hay ninguna alimento");
+
+        }else {
+
+            if (first.getFood().getName().equals(foodName)) {
+                System.out.println(first.getFood().getName()+" ha sido eliminado");
+                first = first.getNext();
+
+            } else {
+
+                FoodNode current = first;
+                while (current.getNext() != null) {
+                    if (current.getNext().getFood().getName().equals(foodName)) {
+                        System.out.println(current.getNext().getFood().getName()+" ha sido eliminado");
+                        current.setNext(current.getNext().getNext());
+                        break;
+                    }
+                    current = current.getNext();
+                }
+            }
+
+        }
 
     }
+
 
     private void editIntake() {
 
@@ -68,7 +92,7 @@ class Intake {
         Intake breakfast = new Intake();
         breakfast.createIntake();
         breakfast.editIntake();
-        breakfast.deleteIntake();
+        breakfast.deleteIntake("cafe");
         breakfast.deleteAllIntake();
         breakfast.printFoodListing();
 
