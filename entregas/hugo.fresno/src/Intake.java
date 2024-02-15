@@ -1,7 +1,9 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 class Intake {
     private FoodNode first;
+    Scanner text = new Scanner(System.in);
 
     public Intake() {
         first = null;
@@ -52,25 +54,28 @@ class Intake {
 
     private void deleteAllIntake() {
         first = null;
+        System.out.println("\nTodos los alimentos han sido eliminados con exito!");
     }
 
 
-    private void deleteIntake(String foodName) {
+    private void deleteIntake() {
         if (first == null){
             System.out.println("No hay ninguna alimento");
 
         }else {
 
-            if (first.getFood().getName().equals(foodName)) {
-                System.out.println(first.getFood().getName()+" ha sido eliminado");
+            System.out.println("\n**METODO DELETE**");
+            System.out.println("Que alimento deseas eliminar?");
+            String foodToDelete = text.nextLine();
+
+            if (first.getFood().getName().equals(foodToDelete)) {
                 first = first.getNext();
 
             } else {
 
                 FoodNode current = first;
                 while (current.getNext() != null) {
-                    if (current.getNext().getFood().getName().equals(foodName)) {
-                        System.out.println(current.getNext().getFood().getName()+" ha sido eliminado");
+                    if (current.getNext().getFood().getName().equals(foodToDelete)) {
                         current.setNext(current.getNext().getNext());
                         break;
                     }
@@ -85,6 +90,35 @@ class Intake {
 
     private void editIntake() {
 
+
+        if (first == null){
+            System.out.println("No hay ninguna alimento");
+
+        }else {
+
+            System.out.println("\n**METODO EDIT**");
+            System.out.println("Que alimento deseas eliminar?");
+            String foodToDelete = text.nextLine();
+            System.out.println("Que alimento deseas añadir a cambio?");
+            String foodInChange = text.nextLine();
+
+            if (first.getFood().getName().equals(foodToDelete)) {
+                first.getFood().setName(foodInChange);
+
+            }else {
+
+                FoodNode current = first;
+                while (current!=null){
+                    if (current.getNext().getFood().getName().equals(foodToDelete)){
+                        current.getFood().setName(foodInChange);
+                        break;
+                    }
+                    current=current.getNext();
+
+                }
+
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -92,7 +126,8 @@ class Intake {
         Intake breakfast = new Intake();
         breakfast.createIntake();
         breakfast.editIntake();
-        breakfast.deleteIntake("cafe");
+        breakfast.deleteIntake();
+        breakfast.printFoodListing();
         breakfast.deleteAllIntake();
         breakfast.printFoodListing();
 
