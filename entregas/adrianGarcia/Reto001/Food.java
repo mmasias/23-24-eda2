@@ -1,4 +1,3 @@
-package vEDA.v001;
 
 class Food {
     private String name;

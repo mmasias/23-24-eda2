@@ -1,4 +1,3 @@
-package vEDA.v001;
 
 import java.util.Scanner;
 
