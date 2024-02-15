@@ -51,13 +51,17 @@ class Intake {
     }
 
     private void deleteAllIntake() {
+        first = null;
     }
 
-    private void deleteIntake() {
+
+    private void deleteIntake(String foodName) {
+
     }
 
     private void editIntake() {
-    }   
+
+    }
 
     public static void main(String[] args) {
 
