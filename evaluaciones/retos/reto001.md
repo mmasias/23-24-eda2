@@ -1,5 +1,7 @@
 # Reto 001
 
+> FechaEntrega = **22/02/2024**
+
 Partiendo de la base del código planteado en la rama vEDA del repositorio [pyDiaDietaIngesta](https://github.com/puntoReflex/pyDiaDietaIngesta)
 
 1. Complete el CRUD para la ingesta.
