@@ -68,8 +68,11 @@ class Intake {
             System.out.println("Que alimento deseas eliminar?");
             String foodToDelete = text.nextLine();
 
+            boolean found = false;
+
             if (first.getFood().getName().equals(foodToDelete)) {
                 first = first.getNext();
+                found = true;
 
             } else {
 
@@ -77,10 +80,15 @@ class Intake {
                 while (current.getNext() != null) {
                     if (current.getNext().getFood().getName().equals(foodToDelete)) {
                         current.setNext(current.getNext().getNext());
+                        found= true;
                         break;
                     }
                     current = current.getNext();
                 }
+            }
+
+            if (!found){
+                System.out.println("\nNo se ha encontrado el alimento a eliminar\n");
             }
 
         }
@@ -89,7 +97,6 @@ class Intake {
 
 
     private void editIntake() {
-
 
         if (first == null){
             System.out.println("No hay ninguna alimento");
@@ -102,21 +109,30 @@ class Intake {
             System.out.println("Que alimento deseas añadir a cambio?");
             String foodInChange = text.nextLine();
 
+            boolean found = false;
+
+
             if (first.getFood().getName().equals(foodToDelete)) {
                 first.getFood().setName(foodInChange);
+                found=true;
 
             }else {
 
                 FoodNode current = first;
                 while (current!=null){
                     if (current.getNext().getFood().getName().equals(foodToDelete)){
-                        current.getFood().setName(foodInChange);
+                        current.getNext().getFood().setName(foodInChange);
+                        found=true;
                         break;
                     }
                     current=current.getNext();
 
                 }
 
+            }
+
+            if (!found){
+                System.out.println("\nNo se ha encontrado el alimento a modificar");
             }
         }
     }
