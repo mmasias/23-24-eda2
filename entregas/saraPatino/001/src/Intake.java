@@ -41,7 +41,7 @@ class Intake {
         }
     }
 
-    public void deleteIntake() {
+    public void deleteFood() {
         Scanner userInput = new Scanner(System.in);
         if (first == null) {
             System.out.println("La lista de alimentos está vacía.");
@@ -75,12 +75,12 @@ class Intake {
         }
     }
 
-    private void deleteAllIntake() {
+    private void deleteAllFoods() {
         first = null;
         System.out.println("\nTodos los alimentos han sido eliminados con exito!");
     }
 
-    public void updateIntake() {
+    public void updateFood() {
         Scanner userInput = new Scanner(System.in);
 
         System.out.println("Que alimento deseas actualizar?");
@@ -121,7 +121,7 @@ class Intake {
     public void menu() {
         Scanner userInput = new Scanner(System.in);
         boolean finish = false;
-        System.out.println(">>OPCIONES<< \n");
+        System.out.println(">>OPCIONES INGESTA<< \n");
         while (finish == false) {
             System.out.println("1. Agregar");
             System.out.println("2. Eliminar");
@@ -135,16 +135,16 @@ class Intake {
                     createIntake();
                     break;
                 case 2:
-                    deleteIntake();
+                    deleteFood();
                     break;
                 case 3:
-                    updateIntake();
+                    updateFood();
                     break;
                 case 4:
                     printFoodListing();
                     break;
                 case 5:
-                    deleteAllIntake();
+                    deleteAllFoods();
                     break;
                 case 6:
                     finish = true;
