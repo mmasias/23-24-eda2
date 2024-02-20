@@ -22,7 +22,6 @@ class Intake {
         }
     }
 
-    // Method to edit a food item by name
     public void editIntake(String oldFoodName, String newFoodName) {
         FoodNode current = first;
         while (current != null) {
@@ -36,7 +35,6 @@ class Intake {
         System.out.println("Food not found.");
     }
 
-    // Method to delete a specific food item by name
     public void deleteIntake(String foodName) {
         FoodNode current = first;
         FoodNode previous = null;
@@ -56,7 +54,6 @@ class Intake {
         System.out.println("Food not found.");
     }
 
-    // Method to delete all food items from the intake
     public void deleteAllIntake() {
         first = null;
         System.out.println("All foods have been deleted.");
@@ -108,7 +105,7 @@ class Intake {
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline left-over
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
