@@ -1,29 +1,29 @@
-class Intake {
-    private FoodNode first;
+class Day {
+    private IntakeNode first;
 
-    public Intake() {
+    public Day() {
         first = null;
     }
 
-    public void addFood(Food food) {
-        FoodNode newFoodNode = new FoodNode(food);
+    public void addIntake(Intake intake) {
+        IntakeNode newIntakeNode = new IntakeNode(intake);
         if (first == null) {
-            first = newFoodNode;
+            first = newIntakeNode;
         } else {
-            FoodNode current = first;
+            IntakeNode current = first;
             while (current.getNext() != null) {
                 current = current.getNext();
             }
-            current.setNext(newFoodNode);
+            current.setNext(newIntakeNode);
         }
     }
 
-    public void updateFood(Food food, int index) {
-        FoodNode current = first;
+    public void updateIntake(Intake intake, int index) {
+        IntakeNode current = first;
         int count = 0;
         while (current != null) {
             if (count == index) {
-                current.setFood(food);
+                current.setIntake(intake);
                 break;
             }
             current = current.getNext();
@@ -31,11 +31,11 @@ class Intake {
         }
     }
 
-    public void deleteFood(int index) {
+    public void deleteIntake(int index) {
         if (index == 0) {
             first = first.getNext();
         } else {
-            FoodNode current = first;
+            IntakeNode current = first;
             int count = 0;
             while (current != null) {
                 if (count == index - 1) {
@@ -50,29 +50,35 @@ class Intake {
 
     @Override
     public String toString() {
-        String foodListing = "";
-        FoodNode current = first;
+        String intakeListing = "";
+        IntakeNode current = first;
         while (current != null) {
-            foodListing = foodListing + current.getFood().toString() + "\n";
+            intakeListing = intakeListing + current.getIntake().toString() + "\n";
             current = current.getNext();
         }
-        return foodListing;
+        return intakeListing;
     }
 
     public static void main(String[] args) {
+        Day monday = new Day();
         Intake breakfast = new Intake();
         breakfast.addFood(new Food("Eggs"));
         breakfast.addFood(new Food("Bacon"));
         breakfast.addFood(new Food("Toast"));
+        monday.addIntake(breakfast);
         System.out.println("Before update and delete:");
-        System.out.println(breakfast.toString());
+        System.out.println(monday.toString());
 
-        breakfast.updateFood(new Food("Pancakes"), 1);
+        Intake lunch = new Intake();
+        lunch.addFood(new Food("Sandwich"));
+        lunch.addFood(new Food("Chips"));
+        lunch.addFood(new Food("Apple"));
+        monday.updateIntake(lunch, 0);
         System.out.println("After update:");
-        System.out.println(breakfast.toString());
+        System.out.println(monday.toString());
 
-        breakfast.deleteFood(0);
+        monday.deleteIntake(0);
         System.out.println("After delete:");
-        System.out.println(breakfast.toString());
+        System.out.println(monday.toString());
     }
 }
