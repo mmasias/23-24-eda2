@@ -21,7 +21,12 @@ class Intake {
     }
 
     public void printFoodListing() {
+        if (first == null) {
+            System.out.println("No hay alimentos registrados");
+            return;
+        } else {
         System.out.println(this.toString());
+    }
     }
 
     public void createIntake() {
@@ -71,7 +76,11 @@ public void editaskedfood(String foodName) {
 }
 
 public void deleteIntake() {
-    first = null;
+    Scanner confirmación = new Scanner(System.in);
+    System.out.println("¿Estás seguro de que quieres eliminar la ingesta? (s/n)");
+    if (confirmación.nextLine().equals("s")) {
+        first = null;
+    } else{}
     return;
 }
 
@@ -91,6 +100,7 @@ public void deleteIntake() {
         Intake breakfast = new Intake();
         Boolean Editing = true;
         while (Editing){
+        System.out.println("Estás en el registro de ingestas");
         System.out.println("¿Que desea hacer?");
         System.out.println("1 Crear una ingesta");
         System.out.println("2 Leer la ingesta");

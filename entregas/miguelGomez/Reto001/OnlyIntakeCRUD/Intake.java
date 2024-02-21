@@ -76,7 +76,11 @@ class Intake {
     }
     
     public void deleteIntake() {
-        first = null;
+        Scanner confirmación = new Scanner(System.in);
+        System.out.println("¿Estás seguro de que quieres eliminar la ingesta? (s/n)");
+        if (confirmación.nextLine().equals("s")) {
+            first = null;
+        } else{}
         return;
     }
 

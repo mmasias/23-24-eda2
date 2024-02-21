@@ -21,7 +21,12 @@ class Day {
     }
 
     public void printIntakeListing() {
+        if (first == null) {
+            System.out.println("No hay Ingestas registradas");
+            return;
+        } else {
         System.out.println(this.toString());
+    }
     }
 
     public void createIntakes() {
@@ -40,6 +45,19 @@ class Day {
         }
     }
 
+    public void editDay(){
+        
+    }
+
+    public void deleteDay() {
+        Scanner confirmación = new Scanner(System.in);
+        System.out.println("¿Estás seguro de que quieres eliminar el día? (s/n)");
+        if (confirmación.nextLine().equals("s")) {
+            first = null;
+        } else{}
+        return;
+    }
+
     @Override
     public String toString() {
         String intakeListing = "";
@@ -54,7 +72,49 @@ class Day {
     public static void main(String[] args) {
 
         Day monday = new Day();
-        monday.createIntakes();
-        monday.printIntakeListing();
+        Boolean Editing = true;
+        while (Editing){
+        System.out.println("Estás en el registro de Días");
+        System.out.println("¿Que desea hacer?");
+        System.out.println("1 Crear un día");
+        System.out.println("2 Leer el día");
+        System.out.println("3 Editar un día");
+        System.out.println("4 Eliminar un día");
+        System.out.println("Para Salir introduzca [-1]");
+        Scanner userInput = new Scanner(System.in);
+        String option = userInput.nextLine();
+        switch (option) {
+            case "1":
+                System.out.println("Creando Día");
+                monday.createIntakes();
+                monday.printIntakeListing();
+                break;
+            case "2":
+                System.out.println("Mostrando Día");
+                monday.printIntakeListing();
+                break;
+            case "3":
+                System.out.println("Editando Día");
+                //editIntake();
+                monday.printIntakeListing();
+                break;
+            case "4":
+                System.out.println("Eliminando Día");
+                monday.deleteDay();
+                monday.printIntakeListing();
+                break;
+            case "-1":
+                System.out.println("Saliendo");
+                Editing = false;
+                System.out.println("Esto es el día que has registrado:");
+                monday.printIntakeListing();
+                break;
+            default:
+                System.out.println("Opción no válida");
+                break;
+        }
+        
+    }
+        
     }
 }
