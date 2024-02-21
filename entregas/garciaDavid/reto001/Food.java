@@ -1,5 +1,3 @@
-package entregas.garciaDavid.reto001;
-
 class Food {
     private String name;
 

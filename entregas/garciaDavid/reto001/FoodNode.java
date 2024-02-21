@@ -1,5 +1,3 @@
-package entregas.garciaDavid.reto001;
-
 class FoodNode {
 
     private Food food;
