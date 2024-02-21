@@ -24,6 +24,11 @@ class Intake {
         System.out.println(this.toString());
     }
 
+    public void createIntakeFunctionality(String foodName) {
+        Food food = new Food(foodName);
+        addFood(food);
+    }
+
     public void createIntake() {
         boolean creating = true;
         Scanner userInput = new Scanner(System.in);
@@ -33,9 +38,16 @@ class Intake {
             if (foodName.equals("-1")) {
                 creating = !creating;
             } else {
-                Food food = new Food(foodName);
-                addFood(food);
+                createIntakeFunctionality(foodName);
             }
+        }
+    }
+
+    public void deleteIntakeFunctionality(Food current, Food previous) {
+        if (previous == null) {
+            first = current.getNext();
+        } else {
+            previous.setNext(current.getNext());
         }
     }
 
@@ -46,31 +58,23 @@ class Intake {
     public void deleteIntake() {
         boolean deleteIntake = true;
         Scanner userInput = new Scanner(System.in);
-
         while (deleteIntake) {
             System.out.println("1) Eliminar un alimento");
             System.out.println("2) Eliminar todos los alimentos");
             System.out.println("3) Guardar" + "\n");
             String o = userInput.nextLine();
-
             if(o.equals("1")) {
                 FoodNode current = first;
                 FoodNode previous = null;
-
                 while (current != null) {
                     System.out.println("El alimento actual es: " + current.getFood().toString());
                     System.out.println("1) Eliminar");
                     System.out.println("2) Siguiente" + "\n");
                     String optionDelete = userInput.nextLine();
-                    
+
                     if(optionDelete.equals("1")) {
                         System.out.println("Eliminando un alimento");
-                        if (previous == null) {
-                            first = current.getNext();
-                        } else {
-                            previous.setNext(current.getNext());
-                        }
-                        break;
+                        deleteIntakeFunctionality(current, previous);
                     } else if(optionDelete.equals("2")) {
                         previous = current;
                         current = current.getNext();
@@ -85,38 +89,38 @@ class Intake {
         }
     }
 
-    public void editIntake() {
-        boolean editing = true;
-        Scanner userInput = new Scanner(System.in);
+    // public void editIntake() {
+    //     boolean editing = true;
+    //     Scanner userInput = new Scanner(System.in);
 
-        while (editing) {
-            System.out.println("1) Editar alimentos");
-            System.out.println("2) Guardar Alimentos" + "\n");
-            String o = userInput.nextLine();
-            if(o.equals("1")) {
-                FoodNode current = first;
+    //     while (editing) {
+    //         System.out.println("1) Editar alimentos");
+    //         System.out.println("2) Guardar Alimentos" + "\n");
+    //         String o = userInput.nextLine();
+    //         if(o.equals("1")) {
+    //             FoodNode current = first;
 
-                while (current != null) {
-                    System.out.println("El alimento actual es: " + current.getFood().toString());
-                    System.out.println("1) Editar");
-                    System.out.println("2) Siguiente" + "\n");
-                    String optionEditing = userInput.nextLine();
-                    if(optionEditing.equals("1")) {
-                        System.out.println("Editando");
-                        deleteIntake();
-                        createIntake();
-                    } else if(optionEditing.equals("2")){
-                        System.out.println("Guardado exitosamente!");
-                        Food food = current.getFood();
-                        addFood(food);
-                    }
-                    current = current.getNext();
-                }
-            } else if (o.equals("2")) {
-                editing = !editing;
-            }
-        }
-    }
+    //             while (current != null) {
+    //                 System.out.println("El alimento actual es: " + current.getFood().toString());
+    //                 System.out.println("1) Editar");
+    //                 System.out.println("2) Siguiente" + "\n");
+    //                 String optionEditing = userInput.nextLine();
+    //                 if(optionEditing.equals("1")) {
+    //                     System.out.println("Editando");
+    //                     deleteIntake();
+    //                     createIntake();
+    //                 } else if(optionEditing.equals("2")){
+    //                     System.out.println("Guardado exitosamente!");
+    //                     Food food = current.getFood();
+    //                     addFood(food);
+    //                 }
+    //                 current = current.getNext();
+    //             }
+    //         } else if (o.equals("2")) {
+    //             editing = !editing;
+    //         }
+    //     }
+    // }
 
 
     @Override
@@ -134,7 +138,7 @@ class Intake {
 
         Intake breakfast = new Intake();
         breakfast.createIntake();
-        breakfast.editIntake();
+        // breakfast.editIntake();
         breakfast.deleteIntake();
         breakfast.printFoodListing();
 
