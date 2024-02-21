@@ -21,7 +21,12 @@ class Intake {
     }
 
     public void printFoodListing() {
+        if (first == null) {
+            System.out.println("No hay alimentos registrados");
+            return;
+        } else {
         System.out.println(this.toString());
+    }
     }
 
     public void createIntake() {
@@ -38,6 +43,14 @@ class Intake {
             }
         }
     }
+
+    public void editIntake() {
+            System.out.println("Método por hacer");
+        }
+
+        public void deleteIntake() {
+            first = null;
+        }
 
     @Override
     public String toString() {
@@ -92,8 +105,9 @@ class Intake {
                 System.out.println("Opción no válida");
                 break;
         }
-    }
         
+    }
+     
 
     }
 }
