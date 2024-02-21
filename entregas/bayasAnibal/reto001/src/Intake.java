@@ -2,8 +2,10 @@ import java.util.Scanner;
 
 class Intake {
     private FoodNode first;
+    private String name;
 
-    public Intake() {
+    public Intake(String name) {
+        name = "";
         first = null;
     }
 
@@ -17,75 +19,6 @@ class Intake {
                 current = current.getNext();
             }
             current.setNext(newFoodNode);
-        }
-    }
-
-    public void deleteFood() {
-        Scanner userInput = new Scanner(System.in);
-        System.out.println("Nombre del alimento a eliminar");
-        String foodName = userInput.nextLine();
-        FoodNode current = first;
-        FoodNode previous = null;
-        while (current != null) {
-            if (current.getFood().getName().equals(foodName)) {
-                if (previous == null) {
-                    first = current.getNext();
-                } else {
-                    previous.setNext(current.getNext());
-                }
-                return;
-            }
-            previous = current;
-            current = current.getNext();
-        }
-    }
-
-    public void updateFood() {
-        Scanner userInput = new Scanner(System.in);
-        System.out.println("Nombre del alimento a modificar");
-        String foodName = userInput.nextLine();
-        FoodNode current = first;
-        while (current != null) {
-            if (current.getFood().getName().equals(foodName)) {
-                System.out.println("Nuevo nombre del alimento");
-                String newFoodName = userInput.nextLine();
-                current.getFood().setName(newFoodName);
-                return;
-            }
-            current = current.getNext();
-        }
-    }
-
-    public void menu() {
-        Scanner userInput = new Scanner(System.in);
-        boolean running = true;
-        while (running) {
-            System.out.println("1. Agregar alimento");
-            System.out.println("2. Eliminar alimento");
-            System.out.println("3. Modificar alimento");
-            System.out.println("4. Listar alimentos");
-            System.out.println("5. Salir");
-            int option = userInput.nextInt();
-            switch (option) {
-                case 1:
-                    createIntake();
-                    break;
-                case 2:
-                    deleteFood();
-                    break;
-                case 3:
-                    updateFood();
-                    break;
-                case 4:
-                    printFoodListing();
-                    break;
-                case 5:
-                    running = !running;
-                    break;
-                default:
-                    System.out.println("Opción no válida");
-                    break;
-            }
         }
     }
 
@@ -108,6 +41,76 @@ class Intake {
         }
     }
 
+    public void deleteIntake() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Nombre del alimento que quieres eliminar");
+        String foodNameToRemove = userInput.nextLine();
+        FoodNode current = first;
+        FoodNode previous = null;
+        while (current != null) {
+            if (current.getFood().getName().equals(foodNameToRemove)) {
+                if (previous == null) {
+                    first = current.getNext();
+                } else {
+                    previous.setNext(current.getNext());
+                }
+                return;
+            }
+            previous = current;
+            current = current.getNext();
+        }
+    }
+
+    public void updateIntake() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Nombre del alimento que quieres modificar");
+        String foodNameToUpdate = userInput.nextLine();
+        FoodNode current = first;
+        while (current != null) {
+            if (current.getFood().getName().equals(foodNameToUpdate)) {
+                System.out.println("Nuevo nombre del alimento");
+                String newFoodName = userInput.nextLine();
+                current.getFood().setName(newFoodName);
+                return;
+            }
+            current = current.getNext();
+        }
+    }
+
+    public void menu() {
+        Scanner userInput = new Scanner(System.in);
+        boolean running = true;
+        System.out.println(">>>BIENVENIDO AL MENU<<< \n");
+        while (running) {
+            System.out.println("1. Agregar alimento");
+            System.out.println("2. Eliminar alimento");
+            System.out.println("3. Modificar alimento");
+            System.out.println("4. Mostrar alimentos");
+            System.out.println("5. Salir");
+            int option = userInput.nextInt();
+            switch (option) {
+                case 1:
+                    createIntake();
+                    break;
+                case 2:
+                    deleteIntake();
+                    break;
+                case 3:
+                    updateIntake();
+                    break;
+                case 4:
+                    printFoodListing();
+                    break;
+                case 5:
+                    running = !running;
+                    break;
+                default:
+                    System.out.println("Opción no válida");
+                    break;
+            }
+        }
+    }
+
     @Override
     public String toString() {
         String foodListing = "";
@@ -119,13 +122,16 @@ class Intake {
         return foodListing;
     }
 
-
     public static void main(String[] args) {
-
-        Intake breakfast = new Intake();
-        breakfast.createIntake();
-        breakfast.printFoodListing();
+        Intake breakfast = new Intake( "Desayuno");
         breakfast.menu();
-
     }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }
