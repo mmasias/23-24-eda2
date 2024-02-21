@@ -7,6 +7,10 @@ public class Intake {
         first = null;
     }
 
+    public void printFoodListing() {
+        System.out.println(this.toString());
+    }
+
     public void addFood(Food food) {
         FoodNode newFoodNode = new FoodNode(food);
         if (first == null) {
@@ -18,10 +22,6 @@ public class Intake {
             }
             current.setNext(newFoodNode);
         }
-    }
-
-    public void printFoodListing() {
-        System.out.println(this.toString());
     }
 
     public void createIntake() {
@@ -39,6 +39,40 @@ public class Intake {
         }
     }
 
+    public FoodNode findFood(String foodName) {
+        FoodNode current = first;
+        while (current != null) {
+            if (current.getFood().getName().equals(foodName)) {
+                return current;
+            }
+            current = current.getNext();
+        }
+        System.out.println("El alimento no existe");
+        return null;
+    }
+    
+    public void editFood(FoodNode foodNode, String newFoodName) {
+        if (foodNode == null) {
+            return;
+        }
+        foodNode.getFood().setName(newFoodName);
+    }
+    
+    public void editIntake() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Ingrese el alimento a editar(-1 para terminar)");
+        String foodToEdit = userInput.nextLine();
+        FoodNode foodNode = findFood(foodToEdit);
+        if(foodToEdit.equals("-1")){
+            return;
+        } else if (foodNode == null) {
+            return;
+        }
+        System.out.println("Ingrese el nuevo nombre del alimento");
+        String newFoodName = userInput.nextLine();
+        editFood(foodNode, newFoodName);
+    }
+
     @Override
     public String toString() {
         String foodListing = "";
@@ -51,8 +85,10 @@ public class Intake {
     }
 
     public static void main(String[] args) {
-        Intake breakfast = new Intake();
-        breakfast.createIntake();
-        breakfast.printFoodListing();
+        Intake newIntake = new Intake();
+        newIntake.createIntake();
+        newIntake.printFoodListing();
+        newIntake.editIntake();
+        newIntake.printFoodListing();
     }
 }
