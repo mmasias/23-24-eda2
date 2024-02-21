@@ -87,12 +87,4 @@ public class Day {
     }
     return intakeList;
   }
-
-  public static void main(String[] args) {
-    Day day = new Day("Lunes");
-    day.createDay();
-    day.editDay();
-    day.deleteDay();
-    day.printIntakeListing();
-  }
 }

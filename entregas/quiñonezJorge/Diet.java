@@ -1,30 +1,21 @@
 package entregas.quiñonezJorge;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Diet {
-  private GenericNode<Day> first;
+  private ArrayList<Day> days;
 
   public Diet() {
-    first = null;
+    days = new ArrayList<Day>();
   }
 
   public void addDiet(Day day) {
-    GenericNode<Day> newDayNode = new GenericNode<Day>(day);
-    if (first == null) {
-      first = newDayNode;
-    } else {
-      GenericNode<Day> current = first;
-      while (current.getNext() != null) {
-        current = current.getNext();
-      }
-      current.setNext(newDayNode);
-    }
-
+    days.add(day);
   }
 
   public void printDayListing() {
-    System.out.println(this.toString());
+    days.forEach(day -> System.out.println(day.toString()));
   }
 
   public void createDiet() {
@@ -37,7 +28,7 @@ public class Diet {
         creating = !creating;
       } else {
         Day day = new Day(dayName);
-        addDiet(day);
+        days.add(day);
         day.createDay();
       }
     }
@@ -52,16 +43,14 @@ public class Diet {
       if (dayName.equals("-1")) {
         editing = !editing;
       } else {
-        GenericNode<Day> current = first;
-        while (current != null) {
-          if (current.getData().getName().equals(dayName)) {
+        days.forEach(day -> {
+          if (day.getName().equals(dayName)) {
             System.out.println("Ingrese el nuevo nombre del dia");
-            String newDayName = userInput.nextLine();
-            current.getData().setName(newDayName);
-            current.getData().editDay();
+            String newdayName = userInput.nextLine();
+            day.setName(newdayName);
+            day.editDay();
           }
-          current = current.getNext();
-        }
+        });
       }
     }
   }
@@ -75,31 +64,27 @@ public class Diet {
       if (dayName.equals("-1")) {
         deleting = !deleting;
       } else {
-        GenericNode<Day> current = first;
-        GenericNode<Day> previous = null;
-        while (current != null) {
-          if (current.getData().getName().equals(dayName)) {
-            if (previous == null) {
-              first = current.getNext();
-            } else {
-              previous.setNext(current.getNext());
-            }
-          }
-          previous = current;
-          current = current.getNext();
-        }
+        days.removeIf(day -> day.getName().equals(dayName));
       }
     }
   }
 
   @Override
   public String toString() {
-    String dayListing = "";
-    GenericNode<Day> current = first;
-    while (current != null) {
-      dayListing = dayListing + current.getData().toString() + "\n";
-      current = current.getNext();
+    String dayList = "";
+    for (Day day : days) {
+      dayList += day.toString() + "\n";
     }
-    return dayListing;
+    return dayList;
+  }
+
+  public static void main(String[] args) {
+
+    Diet diet = new Diet();
+    diet.createDiet();
+    diet.editDiet();
+    diet.deleteDiet();
+    diet.printDayListing();
+
   }
 }
