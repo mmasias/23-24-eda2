@@ -1,14 +1,15 @@
 package entregas.quiñonezJorge;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Day {
   private String name;
-  private GenericNode<Intake> first;
+  private ArrayList<Intake> intakes;
 
   public Day(String name) {
     this.name = name;
-    first = null;
+    intakes = new ArrayList<Intake>();
   }
 
   public String getName() {
@@ -20,21 +21,11 @@ public class Day {
   }
 
   public void addDay(Intake intake) {
-    GenericNode<Intake> newIntakeNode = new GenericNode<Intake>(intake);
-    if (first == null) {
-      first = newIntakeNode;
-    } else {
-      GenericNode<Intake> current = first;
-      while (current.getNext() != null) {
-        current = current.getNext();
-      }
-      current.setNext(newIntakeNode);
-    }
-
+    intakes.add(intake);
   }
 
   public void printIntakeListing() {
-    System.out.println(this.toString());
+    intakes.forEach(intake -> System.out.println(intake.toString()));
   }
 
   public void createDay() {
@@ -47,7 +38,7 @@ public class Day {
         creating = !creating;
       } else {
         Intake intake = new Intake(intakeName);
-        addDay(intake);
+        intakes.add(intake);
         intake.createIntake();
       }
     }
@@ -62,16 +53,14 @@ public class Day {
       if (intakeName.equals("-1")) {
         editing = !editing;
       } else {
-        GenericNode<Intake> current = first;
-        while (current != null) {
-          if (current.getData().getName().equals(intakeName)) {
+        intakes.forEach(intake -> {
+          if (intake.getName().equals(intakeName)) {
             System.out.println("Ingrese el nuevo nombre de la ingesta");
             String newIntakeName = userInput.nextLine();
-            current.getData().setName(newIntakeName);
-            current.getData().editIntake();
+            intake.setName(newIntakeName);
+            intake.editIntake();
           }
-          current = current.getNext();
-        }
+        });
       }
     }
   }
@@ -85,32 +74,25 @@ public class Day {
       if (intakeName.equals("-1")) {
         deleting = !deleting;
       } else {
-        GenericNode<Intake> current = first;
-        GenericNode<Intake> previous = null;
-        while (current != null) {
-          if (current.getData().getName().equals(intakeName)) {
-            if (previous == null) {
-              first = current.getNext();
-            } else {
-              previous.setNext(current.getNext());
-            }
-          }
-          previous = current;
-          current = current.getNext();
-        }
+        intakes.removeIf(intake -> intake.getName().equals(intakeName));
       }
     }
   }
 
   @Override
   public String toString() {
-    String intakeListing = "";
-    GenericNode<Intake> current = first;
-    intakeListing = "]> Dia: " + name + "\n";
-    while (current != null) {
-      intakeListing = intakeListing + current.getData().toString() + "\n";
-      current = current.getNext();
+    String intakeList = "]> Day: " + name + "\n";
+    for (Intake intake : intakes) {
+      intakeList += intake.toString() + "\n";
     }
-    return intakeListing;
+    return intakeList;
+  }
+
+  public static void main(String[] args) {
+    Day day = new Day("Lunes");
+    day.createDay();
+    day.editDay();
+    day.deleteDay();
+    day.printIntakeListing();
   }
 }

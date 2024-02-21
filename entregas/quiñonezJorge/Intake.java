@@ -5,9 +5,8 @@ import java.util.Scanner;
 
 public class Intake {
 
-  private ArrayList<Food> foodList;
   private String name;
-  // private GenericNode<Food> first;
+  private ArrayList<Food> foodList;
 
   public Intake(String name) {
     this.name = name;
@@ -81,16 +80,10 @@ public class Intake {
 
   @Override
   public String toString() {
-    return "]> Ingesta: " + name + "\n";
-  }
-
-  public static void main(String[] args) {
-
-    Intake intake = new Intake("Desayuno");
-    intake.createIntake();
-    intake.editIntake();
-    intake.deleteIntake();
-    intake.printFoodListing();
-
+    String foodListing = "]> Ingesta: " + name + "\n";
+    for (Food food : foodList) {
+      foodListing += food.toString();
+    }
+    return foodListing;
   }
 }
