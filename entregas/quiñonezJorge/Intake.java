@@ -3,18 +3,28 @@ package entregas.quiñonezJorge;
 import java.util.Scanner;
 
 public class Intake {
-  private genericNode<Food> first;
+  private String name;
+  private GenericNode<Food> first;
 
-  public Intake() {
+  public Intake(String name) {
+    this.name = name;
     first = null;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
   public void addFood(Food food) {
-    genericNode<Food> newFoodNode = new genericNode<Food>(food);
+    GenericNode<Food> newFoodNode = new GenericNode<Food>(food);
     if (first == null) {
       first = newFoodNode;
     } else {
-      genericNode<Food> current = first;
+      GenericNode<Food> current = first;
       while (current.getNext() != null) {
         current = current.getNext();
       }
@@ -50,7 +60,7 @@ public class Intake {
       if (foodName.equals("-1")) {
         editing = !editing;
       } else {
-        genericNode<Food> current = first;
+        GenericNode<Food> current = first;
         while (current != null) {
           if (current.getData().getName().equals(foodName)) {
             System.out.println("Ingrese el nuevo nombre del alimento");
@@ -72,8 +82,8 @@ public class Intake {
       if (foodName.equals("-1")) {
         deleting = !deleting;
       } else {
-        genericNode<Food> current = first;
-        genericNode<Food> previous = null;
+        GenericNode<Food> current = first;
+        GenericNode<Food> previous = null;
         while (current != null) {
           if (current.getData().getName().equals(foodName)) {
             if (previous == null) {
@@ -92,21 +102,12 @@ public class Intake {
   @Override
   public String toString() {
     String foodListing = "";
-    genericNode<Food> current = first;
+    GenericNode<Food> current = first;
+    foodListing = "]> Ingesta: " + name + "\n";
     while (current != null) {
       foodListing = foodListing + current.getData().toString() + "\n";
       current = current.getNext();
     }
     return foodListing;
-  }
-
-  public static void main(String[] args) {
-
-    Intake breakfast = new Intake();
-    breakfast.createIntake();
-    breakfast.editIntake();
-    breakfast.deleteIntake();
-    breakfast.printFoodListing();
-
   }
 }

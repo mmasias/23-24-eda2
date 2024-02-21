@@ -1,10 +1,10 @@
 package entregas.quiñonezJorge;
 
-public class genericNode<T> {
+public class GenericNode<T> {
   private T data;
-  private genericNode<T> next;
+  private GenericNode<T> next;
 
-  public genericNode(T data) {
+  public GenericNode(T data) {
     this.data = data;
     this.next = null;
   }
@@ -17,11 +17,11 @@ public class genericNode<T> {
     this.data = data;
   }
 
-  public genericNode<T> getNext() {
+  public GenericNode<T> getNext() {
     return next;
   }
 
-  public void setNext(genericNode<T> next) {
+  public void setNext(GenericNode<T> next) {
     this.next = next;
   }
 }
