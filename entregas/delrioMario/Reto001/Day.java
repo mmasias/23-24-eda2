@@ -2,6 +2,15 @@ import java.util.Scanner;
 
 class Day {
     private IntakeNode first;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Day() {
         first = null;
