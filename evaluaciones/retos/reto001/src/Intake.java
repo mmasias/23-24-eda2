@@ -75,6 +75,38 @@ class Intake {
         first = null;
     }
 
+    private void updateFood(String oldFoodName, String newFoodName) {
+        FoodNode current = first;
+
+        while (current != null) {
+            if (current.getFood().getName().equals(oldFoodName)) {
+                current.getFood().setName(newFoodName);
+            }
+
+            current = current.getNext();
+        }
+    }
+
+    public void updateIntake() {
+        boolean updating = true;
+        Scanner userInput = new Scanner(System.in);
+        while(updating) {
+            System.out.println("Nombre del alimento a editar (-1 para terminar): ");
+            String oldName = userInput.nextLine();
+
+            System.out.println("Nuevo nombre del alimento:" );
+            String newName = userInput.nextLine();
+
+            if (oldName.equals("-1")) {
+                updating = !updating;
+            } else {
+                updateFood(oldName, newName);
+            }
+
+        }
+    }
+
+
     @Override
     public String toString() {
         String foodListing = "";
@@ -93,7 +125,7 @@ class Intake {
         breakfast.createIntake();
         breakfast.printFoodListing();
 
-        breakfast.editIntake();
+        breakfast.updateIntake();
         breakfast.printFoodListing();
 
         breakfast.deleteIntake();
