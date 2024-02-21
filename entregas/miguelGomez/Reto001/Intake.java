@@ -48,7 +48,7 @@ class Intake {
             boolean isediting = true;
             Scanner QueEditar = new Scanner(System.in);
             while (isediting) {
-                System.out.println("¿Que alimento desea editar?");
+                System.out.println("¿Que alimento desea editar? (-1 para salir)");
                 String foodName = QueEditar.nextLine();
                 if (foodName.equals("-1")){
                     isediting = !isediting;
@@ -61,8 +61,20 @@ class Intake {
         }
 
     public void editaskedfood(String foodName) {
-        System.out.println("Metodo por hacer");
+        FoodNode current = first;
+        while (current != null) {
+            if (current.getFood().getName().equals(foodName)) {
+                System.out.println("Nuevo nombre del alimento " + foodName);
+                Scanner userInput = new Scanner(System.in);
+                String newFoodName = userInput.nextLine();
+                current.getFood().setName(newFoodName);
+                return;
+            }
+            current = current.getNext();
+        }
+        System.out.println("Alimento no encontrado");
     }
+    
     public void deleteIntake() {
         first = null;
         return;
