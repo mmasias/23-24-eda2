@@ -41,17 +41,17 @@ class Intake {
     }
 
     private void deleteFood(String foodName) {
-        FoodNode current = first;
+
+        if (first.getFood().getName().equals(foodName)) {
+            first = first.getNext();
+        } else {
+            FoodNode current = first;
         
-        while (current != null) {
-            if (current.getFood().getName().equals(foodName)) {
-                
+            while (current.getNext() != null) {
+                current = current.getNext();
             }
         }
-
-
         
-
     }
 
     public void deleteIntake() {
@@ -94,12 +94,11 @@ class Intake {
             System.out.println("Nombre del alimento a editar (-1 para terminar): ");
             String oldName = userInput.nextLine();
 
-            System.out.println("Nuevo nombre del alimento:" );
-            String newName = userInput.nextLine();
-
             if (oldName.equals("-1")) {
                 updating = !updating;
             } else {
+                System.out.println("Nuevo nombre del alimento:" );
+                String newName = userInput.nextLine();
                 updateFood(oldName, newName);
             }
 
