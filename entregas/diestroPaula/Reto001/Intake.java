@@ -113,12 +113,12 @@ class Intake {
             System.out.println("0 para salir");
             System.out.println("-----------------------------------");
 
-        int option = userInput.nextInt();
+            int option = userInput.nextInt();
             switch (option) {
                 case 1:
                     breakfast.editIntake();
                     System.out.println("¿Desea realizar otra acción? (s/n)");
-                    userInput.nextLine(); // Consumir la nueva línea después del próximoInt()
+                    userInput.nextLine();
                     if (userInput.nextLine().equalsIgnoreCase("n")) {
                         running = false;
                     }
@@ -126,7 +126,7 @@ class Intake {
                 case 2:
                     breakfast.deleteIntake();
                     System.out.println("¿Desea realizar otra acción? (s/n)");
-                    userInput.nextLine(); // Consumir la nueva línea después del próximoInt()
+                    userInput.nextLine();
                     if (userInput.nextLine().equalsIgnoreCase("n")) {
                         running = false;
                     }
@@ -134,7 +134,7 @@ class Intake {
                 case 3:
                     breakfast.deleteAllIntake();
                     System.out.println("¿Desea realizar otra acción? (s/n)");
-                    userInput.nextLine(); // Consumir la nueva línea después del próximoInt()
+                    userInput.nextLine();
                     if (userInput.nextLine().equalsIgnoreCase("n")) {
                         running = false;
                     }
@@ -142,7 +142,7 @@ class Intake {
                 case 4:
                     breakfast.printFoodListing();
                     System.out.println("¿Desea realizar otra acción? (s/n)");
-                    userInput.nextLine(); // Consumir la nueva línea después del próximoInt()
+                    userInput.nextLine();
                     if (userInput.nextLine().equalsIgnoreCase("n")) {
                         running = false;
                     }
