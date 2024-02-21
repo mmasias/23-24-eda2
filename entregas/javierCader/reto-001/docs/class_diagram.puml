@@ -1,0 +1,93 @@
+@startuml Examen_Final
+
+' Define packages
+package "Models" {
+    together {
+        class Patient {
+            - discharge_date: String
+            - surveys: List<Survey>
+            + add_survey(survey: Survey): void
+        }
+
+        class Survey {
+            - days: List[Day]
+            + add_day(day: Day): void
+        }
+
+        class Day {
+            - intakes: List[Intake]
+            + add_intake(intake: Intake): void
+        }
+
+        class Intake {
+            - foods: List[Food]
+            + add_food(food: Food): void
+        }
+
+        class Food {
+        }
+    }
+
+    Patient --> Survey : contains >
+    Survey --> Day : contains >
+    Day --> Intake : contains >
+    Intake --> Food : contains >
+}
+
+' Define other classes
+class Clinic {
+    - patient_tree: Tree
+    - patient_factory: PatientFactory
+    + receive_patient(): Patient
+    + run_clinic(): void
+}
+
+class PatientFactory {
+    + create_patient(name: String, discharge_date: String): Patient
+}
+
+class Tree {
+    - root: Node
+    + add_node(parent: Node, node: Node): void
+    + remove_node(parent: Node, node: Node): void
+    + is_empty(): bool
+    + find(data: Any): Node
+}
+
+class Node {
+    - data: Any
+    - children: List<Node]
+    + add_child(child: Node): void
+    + remove_child(child: Node): void
+}
+
+class Clinic_Controller {
+    - patient_tree: Tree
+    - patient: Patient
+    - is_running: boolean
+    + run(): void
+    + select_day(patient: Patient): int
+    + select_intake(day: Day): int
+    + get_validated_input(prompt: String, max_value: int): int
+    + add_food(intake: Intake): void
+    + ask_for_food(intake: Intake): String
+}
+
+class View {
+    + print_patient_data(patient: Patient): void
+    + print_foods(intake: Intake): void
+    + display_header(title: String): void
+    + display_prompt(prompt: String): void
+}
+
+' Define relationships
+Clinic --> Clinic_Controller : uses >
+Clinic --> PatientFactory : uses >
+Clinic --> Tree : contains >
+Clinic_Controller --> View : uses >
+Clinic_Controller --> Tree : interacts >
+Clinic_Controller ..> Models : manipulates >
+View ..> Models : displays >
+Models -up-> Node : extends >
+
+@enduml
