@@ -73,6 +73,33 @@ public class Intake {
         editFood(foodNode, newFoodName);
     }
 
+    public void deleteFood(FoodNode foodNode) {
+        if (foodNode == null) {
+            System.out.println("El alimento no existe");
+            return;
+        }
+        if (foodNode == first) {
+            first = first.getNext();
+        } else {
+            FoodNode current = first;
+            while (current.getNext() != foodNode) {
+                current = current.getNext();
+            }
+            current.setNext(foodNode.getNext());
+        }
+    }
+    
+    public void deleteIntake() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Ingrese el alimento a eliminar(-1 para terminar)");
+        String foodToDelete = userInput.nextLine();
+        if(foodToDelete.equals("-1")){
+            return;
+        }
+        FoodNode foodNode = findFood(foodToDelete);
+        deleteFood(foodNode);
+    }
+
     @Override
     public String toString() {
         String foodListing = "";
@@ -89,6 +116,8 @@ public class Intake {
         newIntake.createIntake();
         newIntake.printFoodListing();
         newIntake.editIntake();
+        newIntake.printFoodListing();
+        newIntake.deleteIntake();
         newIntake.printFoodListing();
     }
 }
