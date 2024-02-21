@@ -102,14 +102,4 @@ public class Diet {
     }
     return dayListing;
   }
-
-  public static void main(String[] args) {
-
-    Diet diet = new Diet();
-    diet.createDiet();
-    diet.editDiet();
-    diet.deleteDiet();
-    diet.printDayListing();
-
-  }
 }

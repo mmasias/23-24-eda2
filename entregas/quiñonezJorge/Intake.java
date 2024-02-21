@@ -1,14 +1,17 @@
 package entregas.quiñonezJorge;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Intake {
+
+  private ArrayList<Food> foodList;
   private String name;
-  private GenericNode<Food> first;
+  // private GenericNode<Food> first;
 
   public Intake(String name) {
     this.name = name;
-    first = null;
+    foodList = new ArrayList<Food>();
   }
 
   public String getName() {
@@ -20,20 +23,11 @@ public class Intake {
   }
 
   public void addFood(Food food) {
-    GenericNode<Food> newFoodNode = new GenericNode<Food>(food);
-    if (first == null) {
-      first = newFoodNode;
-    } else {
-      GenericNode<Food> current = first;
-      while (current.getNext() != null) {
-        current = current.getNext();
-      }
-      current.setNext(newFoodNode);
-    }
+    foodList.add(food);
   }
 
   public void printFoodListing() {
-    System.out.println(this.toString());
+    foodList.forEach(food -> System.out.println(food.toString()));
   }
 
   public void createIntake() {
@@ -60,15 +54,13 @@ public class Intake {
       if (foodName.equals("-1")) {
         editing = !editing;
       } else {
-        GenericNode<Food> current = first;
-        while (current != null) {
-          if (current.getData().getName().equals(foodName)) {
+        foodList.forEach(food -> {
+          if (food.getName().equals(foodName)) {
             System.out.println("Ingrese el nuevo nombre del alimento");
             String newFoodName = userInput.nextLine();
-            current.getData().setName(newFoodName);
+            food.setName(newFoodName);
           }
-          current = current.getNext();
-        }
+        });
       }
     }
   }
@@ -82,32 +74,23 @@ public class Intake {
       if (foodName.equals("-1")) {
         deleting = !deleting;
       } else {
-        GenericNode<Food> current = first;
-        GenericNode<Food> previous = null;
-        while (current != null) {
-          if (current.getData().getName().equals(foodName)) {
-            if (previous == null) {
-              first = current.getNext();
-            } else {
-              previous.setNext(current.getNext());
-            }
-          }
-          previous = current;
-          current = current.getNext();
-        }
+        foodList.removeIf(food -> food.getName().equals(foodName));
       }
     }
   }
 
   @Override
   public String toString() {
-    String foodListing = "";
-    GenericNode<Food> current = first;
-    foodListing = "]> Ingesta: " + name + "\n";
-    while (current != null) {
-      foodListing = foodListing + current.getData().toString() + "\n";
-      current = current.getNext();
-    }
-    return foodListing;
+    return "]> Ingesta: " + name + "\n";
+  }
+
+  public static void main(String[] args) {
+
+    Intake intake = new Intake("Desayuno");
+    intake.createIntake();
+    intake.editIntake();
+    intake.deleteIntake();
+    intake.printFoodListing();
+
   }
 }
