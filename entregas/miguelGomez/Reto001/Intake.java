@@ -45,12 +45,28 @@ class Intake {
     }
 
     public void editIntake() {
-            System.out.println("Método por hacer");
+            boolean isediting = true;
+            Scanner QueEditar = new Scanner(System.in);
+            while (isediting) {
+                System.out.println("¿Que alimento desea editar?");
+                String foodName = QueEditar.nextLine();
+                if (foodName.equals("-1")){
+                    isediting = !isediting;
+                } else {
+                    editaskedfood(foodName);
+                }
+                    
+                
+            }
         }
 
-        public void deleteIntake() {
-            first = null;
-        }
+    public void editaskedfood(String foodName) {
+        System.out.println("Metodo por hacer");
+    }
+    public void deleteIntake() {
+        first = null;
+        return;
+    }
 
     @Override
     public String toString() {
@@ -88,11 +104,12 @@ class Intake {
                 break;
             case "3":
                 System.out.println("Editando ingesta");
-
+                breakfast.editIntake();
                 breakfast.printFoodListing();
                 break;
             case "4":
                 System.out.println("Eliminando ingesta");
+                breakfast.deleteIntake();
                 breakfast.printFoodListing();
                 break;
             case "-1":
