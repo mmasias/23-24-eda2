@@ -40,12 +40,35 @@ class Intake {
         }
     }
 
-   
+    private void deleteFood(String foodName) {
+        FoodNode current = first;
+        
+        while (current != null) {
+            if (current.getFood().getName().equals(foodName)) {
+                
+            }
+        }
 
-   
 
-  
+        
 
+    }
+
+    public void deleteIntake() {
+        boolean deleting = true;
+        Scanner userInput = new Scanner(System.in);
+
+        while (deleting) {
+            System.out.println("Nombre del alimento por eliminar (-1 para terminar)");
+            String foodName = userInput.nextLine();
+
+            if (foodName.equals("-1")) {
+                deleting = !deleting;
+            } else {
+                deleteFood(foodName);
+            }
+        }
+    }
   
 
     private void deleteAllIntake() {
