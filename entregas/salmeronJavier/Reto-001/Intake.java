@@ -1,8 +1,10 @@
 class Intake {
     private FoodNode first;
+    private String identifier;
 
-    public Intake() {
-        first = null;
+    public Intake(String identifier) {
+        this.first = null;
+        this.identifier = identifier;
     }
 
     public void addFood(Food food) {
@@ -58,7 +60,6 @@ class Intake {
             }
             current = current.getNext();
         }
-
         return false;
     }
 
@@ -67,64 +68,30 @@ class Intake {
     }
 
     public void printFoodListing() {
-        System.out.println(this.toString());
+        System.out.println("Intake: " + identifier);
+        FoodNode current = first;
+        while (current != null) {
+            System.out.println(current.getFood().toString());
+            current = current.getNext();
+        }
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void updateDetails(String newIdentifier) {
+        this.identifier = newIdentifier;
     }
 
     @Override
     public String toString() {
-        String foodListing = "";
+        StringBuilder foodListing = new StringBuilder();
         FoodNode current = first;
         while (current != null) {
-            foodListing += current.getFood().toString() + "\n";
+            foodListing.append(current.getFood().toString()).append("\n");
             current = current.getNext();
         }
-        return foodListing;
+        return foodListing.toString();
     }
-
-    public static void main(String[] args) {
-
-        Intake breakfast = new Intake();
-
-        // Create
-        System.out.println("Adding food...");
-        breakfast.addFood(new Food("Apple"));
-        breakfast.addFood(new Food("Banana"));
-        breakfast.addFood(new Food("Pineapple"));
-        breakfast.addFood(new Food("Carrot"));
-        breakfast.printFoodListing();
-
-        // Read
-        System.out.println("Finding Banana...");
-        Food foundFood = breakfast.findFood("Banana");
-        if (foundFood != null) {
-            System.out.println("Found: " + foundFood);
-        } else {
-            System.out.println("Food not found.");
-        }
-
-        // Update
-        System.out.println("Updating 'Banana' to 'Raspberry'...");
-        boolean updateResult = breakfast.updateFood("Banana", "Raspberry");
-        if (updateResult) {
-            System.out.println("'Banana' updated to 'Raspberry'.");
-        } else {
-            System.out.println("Food to update was not found.");
-        }
-        breakfast.printFoodListing();
-
-        // Delete
-        System.out.println("Deleting 'Carrot'...");
-        boolean deleteResult = breakfast.deleteFood("Carrot");
-        if (deleteResult) {
-            System.out.println("'Carrot' deleted.");
-        } else {
-            System.out.println("Food to delete was not found.");
-        }
-        breakfast.printFoodListing();
-
-        System.out.println("Deleting all foods...");
-        breakfast.deleteAllFood();
-        breakfast.printFoodListing();
-    }
-
 }
