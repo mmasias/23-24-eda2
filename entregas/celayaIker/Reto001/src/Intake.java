@@ -2,9 +2,18 @@ import java.util.Scanner;
 
 public class Intake {
     private FoodNode first;
+    private String name;
 
     public Intake() {
         first = null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void addFood(Food food) {
