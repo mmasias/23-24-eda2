@@ -9,7 +9,7 @@ public class Diet {
         first = null;
     }
 
-    public void addDay(Day day){
+    private void addDay(Day day){
         DayNode newDayNode = new DayNode(day);
         if (first == null){
             first = newDayNode;
@@ -22,7 +22,7 @@ public class Diet {
         }
     }
 
-    public void deleteDay(String dayName){
+    private void deleteDay(String dayName){
         DayNode current = first;
         DayNode previous = null;
         while(current!=null && !current.getDay().getName().equals(dayName)){
@@ -72,20 +72,38 @@ public class Diet {
         }        
     }
 
-    public void editDay(String dayName) {
-        deleteDay(dayName);
-        System.out.println("Nuevo nombre del dia");
+    private void editDay(String dayName) {
         Scanner userInput = new Scanner(System.in);
-        String newName = userInput.nextLine();
-        Day newDay = new Day(newName);
-        addDay(newDay);
+        DayNode current = first;
+        while(current!=null){
+            if(current.getDay().getName().equals(dayName)){
+                System.out.println("Nuevo nombre de [" + dayName + "]");
+                String newName = userInput.nextLine();
+                current.getDay().setName(newName);
+                return;
+            }
+            current = current.getNext();
+        }
+        System.out.println("Dia no encontrado");
     }
 
     public void editDiet() {
-        System.out.println("Nombre del dia a editar");
+        boolean editing = true;
         Scanner userInput = new Scanner(System.in);
-        String dayName = userInput.nextLine();
-        editDay(dayName);       
+        while(editing){
+            System.out.println("Nombre del dia a editar (-1 para terminar)");
+            String dayName = userInput.nextLine();
+            if(dayName.equals("-1")) {
+                editing=!editing;
+            } else {
+                editDay(dayName);
+            }
+        }     
+    }
+
+    public void deleteAll() {
+        System.out.println("Eliminando todos los dias");
+        first = null;
     }
 
     @Override
@@ -107,6 +125,8 @@ public class Diet {
         diet.deleteDiet();
         diet.printDietListing();
         diet.editDiet();
+        diet.printDietListing();
+        diet.deleteAll();
         diet.printDietListing();
     }  
 }

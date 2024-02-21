@@ -20,7 +20,7 @@ class Intake {
         return name;
     }
 
-    public void addFood(Food food) {
+    private void addFood(Food food) {
         FoodNode newFoodNode = new FoodNode(food);
         if (first == null) {
             first = newFoodNode;
@@ -37,7 +37,7 @@ class Intake {
         System.out.println(this.toString());
     }
 
-    public void deleteFood(String foodName) {
+    private void deleteFood(String foodName) {
         FoodNode current = first;
         FoodNode previous = null;
         while (current != null && !current.getFood().getName().equals(foodName)) {
@@ -82,13 +82,24 @@ class Intake {
         }
     }
 
-    public void editFood(String foodName) {
-        deleteFood(foodName);
-        System.out.println("Nuevo nombre del alimento");
+    private void editFood(String foodName) {
         Scanner userInput = new Scanner(System.in);
-        String newFoodName = userInput.nextLine();
-        Food food = new Food(newFoodName);
-        addFood(food);
+        FoodNode current = first;
+        while (current != null) {
+            if (current.getFood().getName().equals(foodName)) {
+                System.out.println("Nuevo nombre de [" + foodName + "]");
+                String newFoodName = userInput.nextLine();
+                current.getFood().setName(newFoodName);
+                return;
+            }
+            current = current.getNext();
+        }
+        System.out.println("Alimento no encontrado");
+    }
+
+    public void deleteAll() {
+        System.out.println("Eliminando todos los alimentos");
+        first = null;
     }
 
     public void editIntake() {
@@ -126,6 +137,8 @@ class Intake {
         breakfast.printIntakeListing();
         System.out.println();
         breakfast.deleteIntake();
+        breakfast.printIntakeListing();
+        breakfast.deleteAll();
         breakfast.printIntakeListing();
 
     }

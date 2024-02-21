@@ -19,7 +19,7 @@ class Day {
         this.name = name;
     }
 
-    public void addIntake(Intake intake) {
+    private void addIntake(Intake intake) {
         IntakeNode newIntakeNode = new IntakeNode(intake);
         if (first == null) {
             first = newIntakeNode;
@@ -32,7 +32,7 @@ class Day {
         }
     }
 
-    public void deleteIntake(String intakeName) {
+    private void deleteIntake(String intakeName) {
         IntakeNode current = first;
         IntakeNode previous = null;
         while (current != null && !current.getIntake().getName().equals(intakeName)) {
@@ -48,14 +48,19 @@ class Day {
         }
     }
 
-    public void editIntake(String intakeName) {
-        deleteIntake(intakeName);
-        System.out.println("Nuevo nombre de la ingesta");
+    private void editIntake(String intakeName) {
         Scanner userInput = new Scanner(System.in);
-        String newName = userInput.nextLine();
-        Intake newIntake = new Intake(newName);
-        addIntake(newIntake);
-        
+        IntakeNode current = first;
+        while (current != null) {
+            if(current.getIntake().getName().equals(intakeName)) {
+                System.out.println("Nuevo nombre de [" + intakeName + "]");
+                String newName = userInput.nextLine();
+                current.getIntake().setName(newName);
+                return;
+            }
+            current = current.getNext();
+        }
+        System.out.println("Ingesta no encontrada");
     }
 
     public void printIntakeListing() {
@@ -93,10 +98,22 @@ class Day {
     }
 
     public void editDay() {
-        System.out.println("Nombre de la ingesta a editar");
+        boolean editing = true;
         Scanner userInput = new Scanner(System.in);
-        String dayName = userInput.nextLine();
-        editIntake(dayName);
+        while (editing) {
+            System.out.println("Nombre de la ingesta a editar (-1 para terminar)");
+            String dayName = userInput.nextLine();
+            if (dayName.equals("-1")) {
+                editing = !editing;
+            } else {
+                editIntake(dayName);
+            }
+        }
+    }
+
+    public void deleteAll() {
+        System.out.println("Eliminando todas las ingestas");
+        first = null;
     }
 
     @Override
@@ -120,6 +137,9 @@ class Day {
         monday.printIntakeListing();
         System.out.println();
         monday.editDay();
+        monday.printIntakeListing();
+        System.out.println();
+        monday.deleteAll();
         monday.printIntakeListing();
 
     }
