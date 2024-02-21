@@ -45,9 +45,32 @@ class Day {
         }
     }
 
-    public void editDay(){
-        
+    public void editDay() {
+        boolean isEditing = true;
+    Scanner QueEditar = new Scanner(System.in);
+    while (isEditing) {
+        System.out.println("¿Qué ingesta desea editar? (-1 para salir)");
+        String intakeName = QueEditar.nextLine();
+        if (intakeName.equals("-1")) {
+            isEditing = false;
+        } else {
+            editSpecificIntake(intakeName);
+        }
     }
+}
+
+public void editSpecificIntake(String intakeName) {
+    IntakeNode current = first;
+    while (current != null) {
+        if (equals(current.getIntake().equals(intakeName))) {
+            System.out.println("Editando la ingesta: " + intakeName);
+            current.getIntake().editIntake();
+            return;
+        }
+        current = current.getNext();
+    }
+    System.out.println("Ingesta no encontrada");
+}
 
     public void deleteDay() {
         Scanner confirmación = new Scanner(System.in);
@@ -95,7 +118,7 @@ class Day {
                 break;
             case "3":
                 System.out.println("Editando Día");
-                //editIntake();
+                monday.editDay();
                 monday.printIntakeListing();
                 break;
             case "4":
