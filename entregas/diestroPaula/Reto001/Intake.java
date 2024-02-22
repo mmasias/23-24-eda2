@@ -9,6 +9,16 @@ class Intake {
         first = null;
     }
 
+    private String name;
+
+    public Intake(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public void addFood(Food food) {
         FoodNode newFoodNode = new FoodNode(food);
         if (first == null) {
