@@ -67,6 +67,33 @@ public class Day {
         }
     }
 
+    private void removeIntake(String intakeName) {
+        if(first.getIntake().getIntakeName().equals(intakeName)) {
+            first = first.getNext();
+        } else {
+            IntakeNode current = first;
+            while(current.getNext() != null) {
+                current = current.getNext();
+            }
+        }
+    }
+
+    public void deleteIntakes() {
+        boolean deleting = true;
+        Scanner userInput = new Scanner(System.in);
+
+        while(deleting) {
+            System.out.println("Introduzca el Intake a eliminar (-1 para termianr)");
+            String intakeName = userInput.nextLine();
+
+            if (intakeName.equals("-1")) {
+                deleting = !deleting;
+            } else {
+                removeIntake(intakeName);
+            }
+        }
+    }
+
     @Override
     public String toString() {
         String intakeListing = "";
