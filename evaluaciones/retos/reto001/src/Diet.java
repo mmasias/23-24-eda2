@@ -66,6 +66,31 @@ public class Diet {
         }
     }
 
+    private void removeDay(String dayName) {
+        if(first.getDay().getDayName().equals(dayName)) {
+            first = first.getNext();
+        } else {
+            DayNode current = first;
+            while(current.getNext() != null) {
+                current = current.getNext();
+            }
+        }
+    }
+
+    public void deleteDays() {
+        boolean deleting = true;
+        while(deleting) {
+            System.out.println("Introduzca el día a eliminar (-1 para termianr)");
+            String dayName = userInput.nextLine();
+
+            if (dayName.equals("-1")) {
+                deleting = !deleting;
+            } else {
+                removeDay(dayName);
+            }
+        }
+    }
+
 
 
     @Override
