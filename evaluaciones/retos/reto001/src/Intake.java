@@ -4,6 +4,7 @@ class Intake {
     
      private FoodNode first;
      private String name;
+     Scanner userInput = new Scanner(System.in);
 
     public Intake(String name) {
         first = null;
@@ -37,7 +38,6 @@ class Intake {
 
     public void createIntake() {
         boolean creating = true;
-        Scanner userInput = new Scanner(System.in);
         while (creating) {
             System.out.println("Nombre del alimento por crear (-1 para terminar)");
             String foodName = userInput.nextLine();
@@ -66,7 +66,6 @@ class Intake {
 
     public void deleteIntake() {
         boolean deleting = true;
-        Scanner userInput = new Scanner(System.in);
 
         while (deleting) {
             System.out.println("Nombre del alimento por eliminar (-1 para terminar)");
@@ -99,7 +98,6 @@ class Intake {
 
     public void updateIntake() {
         boolean updating = true;
-        Scanner userInput = new Scanner(System.in);
         while(updating) {
             System.out.println("Nombre del alimento a editar (-1 para terminar): ");
             String oldName = userInput.nextLine();

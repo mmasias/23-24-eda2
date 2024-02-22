@@ -2,9 +2,20 @@ import java.util.Scanner;
 
 public class Day {
      private IntakeNode first;
+     private String name;
+     Scanner userInput = new Scanner(System.in);
 
-    public Day() {
+    public Day(String name) {
         first = null;
+        this.name = name;
+    }
+
+    public String getDayName() {
+        return name;
+    }
+
+    public void setDayName(String name) {
+        this.name = name;
     }
 
     private void addIntake(Intake intake) {
@@ -26,7 +37,6 @@ public class Day {
 
     public void createIntakes() {
         boolean creating = true;
-        Scanner userInput = new Scanner(System.in);
         while (creating) {
             System.out.println("Nombre de la ingesta (-1 para terminar)");
             String intakeName = userInput.nextLine();
@@ -52,7 +62,6 @@ public class Day {
 
     public void updateIntakes() {
         boolean updating = true;
-        Scanner userInput = new Scanner(System.in);
 
         while (updating) {
             System.out.println("Nombre del intake a editar (-1 para terminar)");
@@ -80,8 +89,6 @@ public class Day {
 
     public void deleteIntakes() {
         boolean deleting = true;
-        Scanner userInput = new Scanner(System.in);
-
         while(deleting) {
             System.out.println("Introduzca el Intake a eliminar (-1 para termianr)");
             String intakeName = userInput.nextLine();
@@ -106,9 +113,15 @@ public class Day {
     }
 
     public static void main(String[] args) {
+        Scanner userInput = new Scanner(System.in);
 
-        Day monday = new Day();
-        monday.createIntakes();
-        monday.printIntakeListing();
+        System.out.println("Introduce el nombre del día: ");
+        String dayName = userInput.nextLine();
+
+        Day day = new Day(dayName);
+        day.createIntakes();
+        day.printIntakeListing();
+        day.deleteIntakes();
+        day.updateIntakes();
     }
 }
