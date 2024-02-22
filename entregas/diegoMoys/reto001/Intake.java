@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Intake {
     private FoodNode first;
+    private String name;
 
     public Intake() {
         first = null;
@@ -108,6 +109,10 @@ public class Intake {
             current = current.getNext();
         }
         return foodListing;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public static void main(String[] args) {

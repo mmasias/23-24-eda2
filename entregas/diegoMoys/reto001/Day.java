@@ -40,9 +40,31 @@ public class Day {
         }
     }
 
+    public IntakeNode findIntakeNode(String intakeName) {
+        IntakeNode current = first;
+        while (current != null) {
+            if (current.getIntake().getName().equals(intakeName)) {
+                return current;
+            }
+            current = current.getNext();
+        }
+        System.out.println("La ingesta no existe");
+        return null;
+    }
+
+    public void editIntake(){
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Ingrese la ingesta que desea editar");
+        String intakeName = userInput.nextLine();
+        IntakeNode intakeNode = findIntakeNode(intakeName);
+        if (intakeNode != null) {
+            intakeNode.getIntake().editIntake();
+        }
+    }
+
     @Override
     public String toString() {
-        String intakeListing = "Ingesta:\n";
+        String intakeListing = "Ingesta\n";
         IntakeNode current = first;
         while (current != null) {
             intakeListing = intakeListing + current.getIntake().toString() + "\n";
@@ -55,6 +77,8 @@ public class Day {
 
         Day newDay = new Day();
         newDay.createIntakes();
+        newDay.printIntakeListing();
+        newDay.editIntake();
         newDay.printIntakeListing();
     }
 }
