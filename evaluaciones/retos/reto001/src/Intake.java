@@ -3,9 +3,19 @@ import java.util.Scanner;
 class Intake {
     
      private FoodNode first;
+     private String name;
 
-    public Intake() {
+    public Intake(String name) {
         first = null;
+        this.name = name;
+    }
+
+    public String getIntakeName() {
+        return name;
+    }
+
+    public void setIntakeName(String name) {
+        this.name = name;
     }
 
     public void addFood(Food food) {
@@ -118,8 +128,11 @@ class Intake {
     }
 
     public static void main(String[] args) {
+        Scanner userInput = new Scanner(System.in);
 
-        Intake breakfast = new Intake();
+        System.out.println("Introduce el nombre del intake: ");
+        String intakeName = userInput.nextLine();
+        Intake breakfast = new Intake(intakeName);
 
         breakfast.createIntake();
         breakfast.printFoodListing();
