@@ -1,10 +1,25 @@
 import java.util.Scanner;
 
 class Intake {
+    String name;
     private FoodNode first;
 
-    public Intake() {
+    public Intake(String name) {
+        this.name = name;
         first = null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toStringIntake() {
+        return "]> Ingesta: " + name;
     }
 
     public void addFood(Food food) {
@@ -154,13 +169,13 @@ class Intake {
         return foodListing;
     }
 
-    public static void main(String[] args) {
+    // public static void main(String[] args) {
 
-        Intake breakfast = new Intake();
-        breakfast.createIntake();
-        breakfast.editIntake();
-        breakfast.deleteIntake();
-        breakfast.printFoodListing();
+    //     Intake breakfast = new Intake();
+    //     breakfast.createIntake();
+    //     breakfast.editIntake();
+    //     breakfast.deleteIntake();
+    //     breakfast.printFoodListing();
 
-    }
+    // }
 }
