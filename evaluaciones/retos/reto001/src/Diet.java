@@ -108,6 +108,13 @@ public class Diet {
 
         Diet diet = new Diet();
         diet.createDays();
+        
+        diet.printDayListing();
+
+        diet.updateDays();
+        diet.printDayListing();
+
+        diet.deleteDays();
         diet.printDayListing();
     } 
 }
