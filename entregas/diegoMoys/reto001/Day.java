@@ -69,18 +69,18 @@ public class Day {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Ingrese la ingesta que desea eliminar\n");
         String intakeName = userInput.nextLine();
-        IntakeNode current = findIntakeNode(intakeName);
-        if (current != null) {
+        IntakeNode intakeToDelete = findIntakeNode(intakeName);
+        if (intakeToDelete != null) {
             IntakeNode previous = null;
-            IntakeNode temp = first;
-            while (temp != null && temp != current) {
-                previous = temp;
-                temp = temp.getNext();
+            IntakeNode currentNode = first;
+            while (currentNode != null && currentNode != intakeToDelete) {
+                previous = currentNode;
+                currentNode = currentNode.getNext();
             }
             if (previous == null) {
-                first = current.getNext();
+                first = intakeToDelete.getNext();
             } else {
-                previous.setNext(current.getNext());
+                previous.setNext(intakeToDelete.getNext());
             }
             System.out.println("La ingesta se eliminó\n");
         }
