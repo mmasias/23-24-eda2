@@ -1,3 +1,5 @@
+package LinkedListSolution;
+
 public class Food {
   private String name;
 
