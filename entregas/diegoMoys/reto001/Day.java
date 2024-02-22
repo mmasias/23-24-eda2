@@ -63,6 +63,27 @@ public class Day {
         }
     }
 
+    public void deleteIntake(){
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Ingrese la ingesta que desea eliminar");
+        String intakeName = userInput.nextLine();
+        IntakeNode current = findIntakeNode(intakeName);
+        if (current != null) {
+            IntakeNode previous = null;
+            IntakeNode temp = first;
+            while (temp != null && temp != current) {
+                previous = temp;
+                temp = temp.getNext();
+            }
+            if (previous == null) {
+                first = current.getNext();
+            } else {
+                previous.setNext(current.getNext());
+            }
+            System.out.println("La ingesta se eliminó");
+        }
+    }
+
     @Override
     public String toString() {
         String intakeListing = "Ingesta:\n";
@@ -80,6 +101,8 @@ public class Day {
         newDay.createIntakes();
         newDay.printIntakeListing();
         newDay.editIntake();
+        newDay.printIntakeListing();
+        newDay.deleteIntake();
         newDay.printIntakeListing();
     }
 }
