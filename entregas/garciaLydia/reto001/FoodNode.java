@@ -1,6 +1,8 @@
 package entregas.garciaLydia.reto001;
 
 public class FoodNode {
+
+
     private Food food;
     private FoodNode next;
 
