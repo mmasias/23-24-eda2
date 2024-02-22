@@ -75,7 +75,6 @@ public class Intake {
 
     public void deleteFood(FoodNode foodNode) {
         if (foodNode == null) {
-            System.out.println("El alimento no existe");
             return;
         }
         if (foodNode == first) {
