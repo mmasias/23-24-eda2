@@ -24,7 +24,7 @@ class Diet {
         System.out.println(this.toString());
     }
 
-    public void CreateDiets(){
+    public void createDiets(){
         boolean creating = true;
         Scanner userInput = new Scanner(System.in);
         while (creating){
@@ -55,7 +55,7 @@ class Diet {
             current = current.getNext();
         }
     }
-    public void DeleteDiets(){
+    public void deleteDiets(){
         Scanner userInput = new Scanner(System.in);
         System.out.println("Nombre del dia que quieres eliminar");
         String dayNameToRemove = userInput.nextLine();
@@ -88,7 +88,7 @@ class Diet {
             int option = userInput.nextInt();
             switch (option){
                 case 1:
-                    CreateDiets();
+                    createDiets();
                     break;
                 case 2:
                     printDayListing();
@@ -97,7 +97,7 @@ class Diet {
                     updateDiets();
                     break;
                 case 4:
-                    DeleteDiets();
+                    deleteDiets();
                     break;
                 case 5:
                     menu = !menu;
