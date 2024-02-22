@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 class Intake {
     private FoodNode first;
-    private String name; 
+    private String name;
 
     public String getName() {
         return name;
@@ -51,7 +51,7 @@ class Intake {
 
     @Override
     public String toString() {
-        String foodListing = name+"\n";
+        String foodListing = "";
         FoodNode current = first;
         while (current != null) {
             foodListing = foodListing + current.getFood().toString() + "\n";
@@ -65,6 +65,49 @@ class Intake {
         Intake breakfast = new Intake();
         breakfast.createIntake();
         breakfast.printFoodListing();
+        breakfast.deleteIntake();
+        breakfast.printFoodListing();
+        breakfast.updatefood();
+        breakfast.printFoodListing();
+
+
+    }
+
+    public void deleteIntake() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Nombre del alimento que quieres eliminar");
+        String foodName = userInput.nextLine();
+        FoodNode current = first;
+        FoodNode previous = null;
+        while (current != null) {
+            if (current.getFood().getName().equalsIgnoreCase(foodName)) {
+                if (current == first) {
+                    first = current.getNext();
+                    break;
+                } else {
+                    previous = current.getNext();
+                }
+
+            }
+            previous = current;
+            current = current.getNext();
+        }
+
+    }
+
+    public void updatefood() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Nombre del alimento que quieres actualizar");
+        String foodName = userInput.nextLine();
+        System.out.println("Nombre del nuevo alimento");
+        String newfoodName = userInput.nextLine();
+        FoodNode current = first;
+        while (current != null) {
+            if (current.getFood().getName().equalsIgnoreCase(foodName)) {
+                current.getFood().setName(newfoodName);
+            }
+            current = current.getNext();
+        }
 
     }
 }
