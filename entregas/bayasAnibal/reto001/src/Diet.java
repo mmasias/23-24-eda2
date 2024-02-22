@@ -24,7 +24,7 @@ class Diet {
         System.out.println(this.toString());
     }
 
-    public void CreateDiets(){
+    public void createDiets(){
         boolean creating = true;
         Scanner userInput = new Scanner(System.in);
         while (creating){
@@ -33,9 +33,10 @@ class Diet {
             if (dayName.equals("-1")){
                 creating = !creating;
             } else {
-                Day day = new Day(dayName);
+                Day day = new Day();
                 day.createDay();
                 addDay(day);
+                day.setName(dayName);
             }
         }
     }
@@ -54,14 +55,14 @@ class Diet {
             current = current.getNext();
         }
     }
-    public void DeleteDiets(){
+    public void deleteDiets(){
         Scanner userInput = new Scanner(System.in);
         System.out.println("Nombre del dia que quieres eliminar");
         String dayNameToRemove = userInput.nextLine();
         DayNode current = first;
         DayNode previous = null;
         while (current != null){
-            if (current.getDay() != null && current.getDay().getName() != null && current.getDay().getName().equals(dayNameToRemove)){
+            if (current.getDay().getName().equals(dayNameToRemove)){
                 if (previous == null){
                     first = current.getNext();
                 } else {
@@ -73,7 +74,6 @@ class Diet {
             current = current.getNext();
         }
     }
-
 
     public void menu(){
         Scanner userInput = new Scanner(System.in);
@@ -88,7 +88,7 @@ class Diet {
             int option = userInput.nextInt();
             switch (option){
                 case 1:
-                    CreateDiets();
+                    createDiets();
                     break;
                 case 2:
                     printDayListing();
@@ -97,7 +97,7 @@ class Diet {
                     updateDiets();
                     break;
                 case 4:
-                    DeleteDiets();
+                    deleteDiets();
                     break;
                 case 5:
                     menu = !menu;

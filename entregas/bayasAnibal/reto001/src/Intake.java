@@ -5,7 +5,7 @@ class Intake {
     private String name;
 
     public Intake(String name) {
-        name = "";
+        this.name = name;
         first = null;
     }
 

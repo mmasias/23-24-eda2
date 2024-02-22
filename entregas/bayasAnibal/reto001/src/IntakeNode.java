@@ -1,6 +1,8 @@
 class IntakeNode {
+
     private Intake intake;
     private IntakeNode next;
+
     public IntakeNode(Intake intake) {
         this.intake = intake;
         this.next = null;
