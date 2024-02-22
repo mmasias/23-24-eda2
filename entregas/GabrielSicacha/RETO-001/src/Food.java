@@ -14,6 +14,6 @@ public class Food {
     }
 
     public String toString() {
-        return "--> food: " + name;
+        return "> food: " + name;
     }
 }

@@ -40,7 +40,7 @@ public class Day {
 
     public void deleteIntake(String intakeName){
         IntakeNode iterator=this.first;
-        while ((iterator.getNext().getIntake()!=null)||(iterator.getNext().getIntake().getName().equals(intakeName))){
+        while ((iterator.getNext().getIntake()!=null)&&(!iterator.getNext().getIntake().getName().equals(intakeName))){
             iterator=iterator.getNext();
         }
         if (iterator.getIntake()!=null){
@@ -50,7 +50,7 @@ public class Day {
 
     public void editIntake(String intakeName){
         IntakeNode iterator=this.first;
-        while ((iterator.getNext().getIntake()!=null)||(iterator.getNext().getIntake().getName().equals(intakeName))){
+        while ((iterator.getNext().getIntake()!=null)&&(!iterator.getNext().getIntake().getName().equals(intakeName))){
             iterator=iterator.getNext();
         }
         if (iterator.getIntake()!=null){
@@ -64,7 +64,7 @@ public class Day {
         System.out.println(this.toString());
     }
     public String toString() {
-        String intakeListing = "";
+        String intakeListing = "--> date: "+date + "\n";
         IntakeNode current = first;
         while (current != null) {
             intakeListing = intakeListing + current.getIntake().toString() + "\n";

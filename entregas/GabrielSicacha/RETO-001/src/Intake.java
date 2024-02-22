@@ -40,7 +40,7 @@ public class Intake {
 
     public void deleteFood(String foodName){
         FoodNode iterator=this.first;
-        while ((iterator.getNext().getFood()!=null)||(iterator.getNext().getFood().getName().equals(foodName))){
+        while ((iterator.getNext().getFood()!=null)&&(!iterator.getNext().getFood().getName().equals(foodName))){
             iterator=iterator.getNext();
         }
         if (iterator.getFood()!=null){
@@ -50,7 +50,7 @@ public class Intake {
 
     public void editFood(String foodName){
         FoodNode iterator=this.first;
-        while ((iterator.getNext().getFood()!=null)||(iterator.getNext().getNext().getFood().getName().equals(foodName))){
+        while ((iterator.getNext().getFood()!=null)&&(!iterator.getNext().getNext().getFood().getName().equals(foodName))){
             iterator=iterator.getNext();
         }
         if (iterator.getFood()!=null){
@@ -64,7 +64,7 @@ public class Intake {
     }
 
     public String toString() {
-        String foodListing = "";
+        String foodListing = "-> intake: " + name + "\n";
         FoodNode current = first;
         while (current != null) {
             foodListing = foodListing + current.getFood().toString() + "\n";
