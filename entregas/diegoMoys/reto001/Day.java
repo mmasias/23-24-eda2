@@ -28,7 +28,7 @@ public class Day {
         boolean creating = true;
         Scanner userInput = new Scanner(System.in);
         while (creating) {
-            System.out.println("Nombre de la ingesta (-1 para terminar)");
+            System.out.println("Nombre de la ingesta (-1 para terminar)\n");
             String dayName = userInput.nextLine();
             Intake intake = new Intake();
             intake.name = dayName;
@@ -37,6 +37,7 @@ public class Day {
             } else {
                 intake.createIntake();
                 addIntake(intake);
+                System.out.println("Ingesta creada\n");
             }
         }
     }
@@ -49,23 +50,24 @@ public class Day {
             }
             current = current.getNext();
         }
-        System.out.println("La ingesta no existe");
+        System.out.println("La ingesta no existe\n");
         return null;
     }
 
     public void editIntake(){
         Scanner userInput = new Scanner(System.in);
-        System.out.println("Ingrese la ingesta que desea editar");
+        System.out.println("Ingrese la ingesta que desea editar\n");
         String intakeName = userInput.nextLine();
         IntakeNode intakeNode = findIntakeNode(intakeName);
         if (intakeNode != null) {
             intakeNode.getIntake().editIntake();
+            System.out.println("Ingesta editada\n");
         }
     }
 
     public void deleteIntake(){
         Scanner userInput = new Scanner(System.in);
-        System.out.println("Ingrese la ingesta que desea eliminar");
+        System.out.println("Ingrese la ingesta que desea eliminar\n");
         String intakeName = userInput.nextLine();
         IntakeNode current = findIntakeNode(intakeName);
         if (current != null) {
@@ -80,7 +82,7 @@ public class Day {
             } else {
                 previous.setNext(current.getNext());
             }
-            System.out.println("La ingesta se eliminó");
+            System.out.println("La ingesta se eliminó\n");
         }
     }
 
