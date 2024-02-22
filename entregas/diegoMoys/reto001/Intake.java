@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Intake {
     private FoodNode first;
-    private String name;
+    public String name;
 
     public Intake() {
         first = null;

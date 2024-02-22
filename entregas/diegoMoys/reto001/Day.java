@@ -30,10 +30,11 @@ public class Day {
         while (creating) {
             System.out.println("Nombre de la ingesta (-1 para terminar)");
             String dayName = userInput.nextLine();
+            Intake intake = new Intake();
+            intake.name = dayName;
             if (dayName.equals("-1")) {
                 creating = !creating;
             } else {
-                Intake intake = new Intake();
                 intake.createIntake();
                 addIntake(intake);
             }
@@ -64,7 +65,7 @@ public class Day {
 
     @Override
     public String toString() {
-        String intakeListing = "Ingesta\n";
+        String intakeListing = "Ingesta:\n";
         IntakeNode current = first;
         while (current != null) {
             intakeListing = intakeListing + current.getIntake().toString() + "\n";
