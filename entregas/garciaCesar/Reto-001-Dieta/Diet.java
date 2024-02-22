@@ -33,9 +33,10 @@ class Diet {
             if (dayName.equals("-1")){
                 creating = !creating;
             } else {
-                Day day = new Day(dayName);
+                Day day = new Day();
                 day.createDay();
                 addDay(day);
+                day.setName(dayName);
             }
         }
     }
@@ -61,7 +62,7 @@ class Diet {
         DayNode current = first;
         DayNode previous = null;
         while (current != null){
-            if (current.getDay() != null && current.getDay().getName() != null && current.getDay().getName().equals(dayNameToRemove)){
+            if (current.getDay().getName().equals(dayNameToRemove)){
                 if (previous == null){
                     first = current.getNext();
                 } else {
@@ -74,7 +75,6 @@ class Diet {
         }
     }
     
-
     public void menu(){
         Scanner userInput = new Scanner(System.in);
         boolean menu = true;

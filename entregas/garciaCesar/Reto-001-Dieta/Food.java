@@ -15,6 +15,6 @@ class Food {
 
     @Override
     public String toString() {
-        return "]> Alimento: " + name;
+        return name;
     }
 }

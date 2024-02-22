@@ -4,9 +4,15 @@ class Day {
     private IntakeNode first;
     private String name;
 
-    public Day(String name) {
-        name = "";
+    public Day() {
         first = null;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void addIntake(Intake intake) {
@@ -35,12 +41,14 @@ class Day {
             if (intakeName.equals("-1")) {
                 creating = !creating;
             } else {
-                Intake intake = new Intake(intakeName);
+                Intake intake = new Intake( intakeName);
                 intake.createIntake();
                 addIntake(intake);
+                intake.setName(intakeName);
             }
         }
     }
+
     public void updateDay() {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Nombre de la ingesta que quieres actualizar");
@@ -56,6 +64,7 @@ class Day {
             current = current.getNext();
         }
     }
+
     public void deleteDay() {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Nombre de la ingesta que quieres eliminar");
@@ -121,16 +130,8 @@ class Day {
     }
 
     public static void main(String[] args) {
-
-        Day monday = new Day( "Lunes");
+        Day monday = new Day( );
         monday.menu();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String newDayName) {
-        first.getIntake().setName(newDayName);
-    }
 }
