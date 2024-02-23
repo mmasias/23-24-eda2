@@ -1,5 +1,7 @@
 Aquí están los cruds de los tres archivos pedidos
 
+-22/02/24
+
 Tras muchos intentos no hallé la manera de hacer el método de editar en día y en dieta, ya que no sé por qué no es capaz de reconocer las ingestas registrada para editarlas (Aqui tienes un ejemplo del error)
 
 
@@ -44,3 +46,6 @@ Ingesta no encontrada
 ¿Qué ingesta desea editar? (-1 para salir)
 
 Pero tras pensarlo, por medio de borrar con el 4 y crear con el 1 se logra el crud, aunque sea una manera menos eficiente de lo que me gustaría haber podido hacer
+
+23/02/24
+Al repasar el código caí en la cuenta de que el error podría haber sido que en vsc tenía abiertas ambas carpetas de entregas, tanto la de intake solamente como en la que estaba realizando todos los cruds y efectivamente, al abrir únicamente la carpeta de todos los cruds ya funcionaba tal y como debía, asi que hoy seguiré con el trabajo hasta completar el reto
