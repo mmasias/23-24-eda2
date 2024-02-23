@@ -136,7 +136,8 @@ public void editSpecificIntake(String intakeName) {
         System.out.println("1 Crear un día");
         System.out.println("2 Leer el día");
         System.out.println("3 Editar un día");
-        System.out.println("4 Eliminar un día");
+        System.out.println("4 Eliminar datos");
+        System.out.println("5 Eliminar El registro");
         System.out.println("Para Salir introduzca [-1]");
         Scanner userInput = new Scanner(System.in);
         String option = userInput.nextLine();

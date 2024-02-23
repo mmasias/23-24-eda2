@@ -90,6 +90,47 @@ public void editaskedfood(String foodName) {
     System.out.println("Alimento no encontrado");
 }
 
+public void deleteFood() {
+    boolean isdeleting = true;
+        Scanner QueBorrar = new Scanner(System.in);
+        while (isdeleting) {
+            System.out.println("¿Que alimento desea eliminar? (-1 para salir)");
+            String foodName = QueBorrar.nextLine();
+            if (foodName.equals("-1")){
+                isdeleting = !isdeleting;
+            } else {
+                deleteaskedfood(foodName);
+            }
+                
+            
+        }
+}
+
+public void deleteaskedfood(String foodName) {
+    FoodNode previous = null;
+    FoodNode current = first;
+    while (current != null) {
+        if (current.getFood().getName().equals(foodName)) {
+            System.out.println("¿Estás seguro de que quieres eliminar el alimento? (s/n)");
+            Scanner confirmation = new Scanner(System.in);
+            if (confirmation.nextLine().equals("s")) {
+                if (previous == null) {
+                    first = current.getNext();
+                } else {
+                    previous.setNext(current.getNext());
+                }
+                System.out.println("Alimento eliminado: " + foodName);
+                return;
+            } else {
+                return;
+            }
+        }
+        previous = current;
+        current = current.getNext();
+    }
+    System.out.println("Alimento no encontrado");
+}
+
 public void deleteIntake() {
     Scanner confirmación = new Scanner(System.in);
     System.out.println("¿Estás seguro de que quieres eliminar la ingesta? (s/n)");
@@ -120,7 +161,8 @@ public void deleteIntake() {
         System.out.println("1 Crear una ingesta");
         System.out.println("2 Leer la ingesta");
         System.out.println("3 Editar una ingesta");
-        System.out.println("4 Eliminar una ingesta");
+        System.out.println("4 Eliminar datos");
+        System.out.println("5 eliminar el registro");
         System.out.println("Para Salir introduzca [-1]");
         Scanner userInput = new Scanner(System.in);
         String option = userInput.nextLine();
@@ -140,10 +182,14 @@ public void deleteIntake() {
                 breakfast.printFoodListing();
                 break;
             case "4":
+                System.out.println("Eliminando alimento");
+                breakfast.deleteFood();
+                breakfast.printFoodListing();
+            case "5":
                 System.out.println("Eliminando ingesta");
                 breakfast.deleteIntake();
                 breakfast.printFoodListing();
-                break;
+            break;
             case "-1":
                 System.out.println("Saliendo");
                 Editing = false;

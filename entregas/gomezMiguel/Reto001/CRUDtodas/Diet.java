@@ -120,7 +120,8 @@ class Diet {
         System.out.println("1 Crear un dieta");
         System.out.println("2 Leer la dieta");
         System.out.println("3 Editar la dieta");
-        System.out.println("4 Eliminar la dieta");
+        System.out.println("4 Eliminar datos");
+        System.out.println("5 Eliminar el registro");
         System.out.println("Para Salir introduzca [-1]");
         Scanner userInput = new Scanner(System.in);
         String option = userInput.nextLine();
