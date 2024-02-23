@@ -103,6 +103,66 @@ public void editSpecificIntake(String intakeName) {
     System.out.println("Ingesta no encontrada");
 }
 
+    public void deleteIntake() {
+        boolean isDeleting = true;
+        Scanner QueBorrar = new Scanner(System.in);
+        while (isDeleting) {
+            System.out.println("¿Qué ingesta desea eliminar? (-1 para salir)");
+            String intakeName = QueBorrar.nextLine();
+            if (intakeName.equals("-1")) {
+                isDeleting = false;
+            } else {
+                deleteSpecificIntake(intakeName);
+            }
+        }
+    }
+
+    public void deleteSpecificIntake(String intakeName) {
+        IntakeNode previous = null;
+        IntakeNode current = first;
+        while (current != null) {
+            if (current.getIntake().getName().equals(intakeName)) {
+                System.out.println("¿Que quieres eliminar?");
+                System.out.println("| 1 La ingesta | 2 Un alimento | 3 Salir |");
+                Scanner userInput = new Scanner(System.in);
+                String option = userInput.nextLine();
+                switch (option) {
+                    case "1":
+                        System.out.println("¿Estás seguro de que quieres eliminar la ingesta? (s/n)");
+                        Scanner confirmation = new Scanner(System.in);
+                        if (confirmation.nextLine().equals("s")) {
+                            if (previous == null) {
+                                first = current.getNext();
+                            } else {
+                                previous.setNext(current.getNext());
+                            }
+                            return;
+                        }
+                    case "2":
+                        current.getIntake().deleteFood();
+                        break;
+                    case "3":
+                        return;
+                    default:
+                        System.out.println("Opción no válida");
+                        break;
+                }
+                System.out.println("¿Estás seguro de que quieres eliminar la ingesta? (s/n)");
+                Scanner confirmation = new Scanner(System.in);
+                if (confirmation.nextLine().equals("s")) {
+                    if (previous == null) {
+                        first = current.getNext();
+                    } else {
+                        previous.setNext(current.getNext());
+                    }
+                    return;
+                }
+            }
+            previous = current;
+            current = current.getNext();
+        }
+        System.out.println("Ingesta no encontrada");
+    }
 
     public void deleteDay() {
         Scanner confirmación = new Scanner(System.in);
@@ -157,6 +217,11 @@ public void editSpecificIntake(String intakeName) {
                 monday.printIntakeListing();
                 break;
             case "4":
+                System.out.println("Eliminando datos");
+                monday.deleteIntake();
+                monday.printIntakeListing();
+                break;
+            case "5":
                 System.out.println("Eliminando Día");
                 monday.deleteDay();
                 monday.printIntakeListing();

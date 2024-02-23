@@ -89,6 +89,56 @@ class Diet {
         }
     }
 
+    public void deleteDay() {
+        boolean isDeleting = true;
+        Scanner QueBorrar = new Scanner(System.in);
+        while (isDeleting) {
+            System.out.println("¿Qué día desea eliminar? (-1 para salir)");
+            String dayName = QueBorrar.nextLine();
+            if (dayName.equals("-1")) {
+                isDeleting = false;
+            } else {
+                deleteSpecificDay(dayName);
+            }
+        }
+    }
+
+    public void deleteSpecificDay(String dayName) {
+        DayNode previous = null;
+        DayNode current = first;
+        while (current != null) {
+            if (current.getDay().getName().equals(dayName)) {
+                System.out.println("¿Que quieres hacer?");
+                System.out.println("| 1 Eliminar el día | 2 Salir |");
+                Scanner userInput = new Scanner(System.in);
+                String option = userInput.nextLine();
+                switch (option) {
+                    case "1":
+                        System.out.println("¿Estás seguro de que quieres eliminar el día? (s/n)");
+                        Scanner confirmation = new Scanner(System.in);
+                        if (confirmation.nextLine().equals("s")) {
+                            if (previous == null) {
+                                first = current.getNext();
+                            } else {
+                                previous.setNext(current.getNext());
+                            }
+                            return;
+                        }
+                    case "2":
+                        current.getDay().deleteIntake();
+                        return;
+                    default:
+                        System.out.println("Opción no válida");
+                        break;
+                }
+                
+            }
+            previous = current;
+            current = current.getNext();
+        }
+        System.out.println("Día no encontrado");
+    }
+
     public void deleteDiet() {
         Scanner confirmación = new Scanner(System.in);
         System.out.println("¿Estás seguro de que quieres eliminar la dieta? (s/n)");
@@ -141,6 +191,10 @@ class Diet {
                 diet.printDayListing();
                 break;
             case "4":
+                System.out.println("Eliminando datos");
+                diet.deleteDay();
+                diet.printDayListing();
+                case "5":
                 System.out.println("Eliminando Día");
                 diet.deleteDiet();
                 diet.printDayListing();
