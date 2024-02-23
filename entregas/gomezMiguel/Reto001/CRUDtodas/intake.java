@@ -103,7 +103,6 @@ public void deleteIntake() {
     public String toString() {
         String foodListing = "";
         FoodNode current = first;
-        System.out.println("Ingesta "+ name + ";");
         while (current != null) {
             foodListing = foodListing + current.getFood().toString() + "\n";
             current = current.getNext();

@@ -38,7 +38,7 @@ class Diet {
             if(dayName.equals("-1")) {
                 creating=!creating;
             } else {
-                Day day = new Day();
+                Day day = new Day(dayName);
                 day.createIntakes();
                 addDay(day);
             }
@@ -62,7 +62,7 @@ class Diet {
         public void editSpecificDay(String dayName) {
         DayNode current = first;
         while (current != null) {
-            if (current.getDay().equals(dayName)) {
+            if (current.getDay().getName().equals(dayName)) {
                 current.getDay().editDay();
                 return;
             }

@@ -2,9 +2,21 @@ import java.util.Scanner;
 
 class Day {
     private IntakeNode first;
-
+    String name;
     public Day() {
         first = null;
+    }
+    public Day(String name) {
+        this.name = name;
+        first = null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void addIntake(Intake intake) {
@@ -65,7 +77,25 @@ public void editSpecificIntake(String intakeName) {
     while (current != null) {
         if (current.getIntake().getName().equals(intakeName)) {
             System.out.println("Editando la ingesta: " + intakeName);
-            current.getIntake().editIntake();
+            System.out.println("¿Que quieres editar?");
+            System.out.println("|1 Nombre de la ingesta | 2 un alimento dentro de la ingesta | 3 Salir");
+            Scanner userInput = new Scanner(System.in);
+            String option = userInput.nextLine();
+            switch (option) {
+                case "1":
+                    System.out.println("Nuevo nombre de la ingesta");
+                    String newName = userInput.nextLine();
+                    current.getIntake().setName(newName);
+                    break;
+                case "2":
+                    current.getIntake().editIntake();
+                    break;
+                case "3":
+                    return;
+                default:
+                    System.out.println("Opción no válida");
+                    break;
+            }
             return;
         }
         current = current.getNext();
@@ -87,7 +117,9 @@ public void editSpecificIntake(String intakeName) {
     public String toString() {
         String intakeListing = "";
         IntakeNode current = first;
+        
         while (current != null) {
+            intakeListing = intakeListing + "Ingesta "+ current.getIntake().getName() + ";\n";
             intakeListing = intakeListing + current.getIntake().toString() + "\n";
             current = current.getNext();
         }
