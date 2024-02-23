@@ -39,6 +39,7 @@ class Day {
                 creating = !creating;
             } else {
                 Intake intake = new Intake();
+                intake.setName(intakeName);
                 intake.createIntake();
                 addIntake(intake);
             }
@@ -62,7 +63,7 @@ class Day {
 public void editSpecificIntake(String intakeName) {
     IntakeNode current = first;
     while (current != null) {
-        if (equals(current.getIntake().equals(intakeName))) {
+        if (current.getIntake().getName().equals(intakeName)) {
             System.out.println("Editando la ingesta: " + intakeName);
             current.getIntake().editIntake();
             return;
@@ -71,6 +72,7 @@ public void editSpecificIntake(String intakeName) {
     }
     System.out.println("Ingesta no encontrada");
 }
+
 
     public void deleteDay() {
         Scanner confirmación = new Scanner(System.in);

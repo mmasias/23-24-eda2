@@ -2,9 +2,15 @@ import java.util.Scanner;
 
 class Intake {
     private FoodNode first;
-
     private String name;
+
+    public Intake(String name) {
+        this.name = name;
+        first = null;
+    }
+    
     public Intake() {
+        this.name = name;
         first = null;
     }
 
@@ -97,6 +103,7 @@ public void deleteIntake() {
     public String toString() {
         String foodListing = "";
         FoodNode current = first;
+        System.out.println("Ingesta "+ name + ";");
         while (current != null) {
             foodListing = foodListing + current.getFood().toString() + "\n";
             current = current.getNext();
@@ -106,7 +113,7 @@ public void deleteIntake() {
 
     public static void main(String[] args) {
 
-        Intake breakfast = new Intake();
+    Intake breakfast = new Intake();
         Boolean Editing = true;
         while (Editing){
         System.out.println("Estás en el registro de ingestas");
