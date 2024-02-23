@@ -63,7 +63,26 @@ class Diet {
         DayNode current = first;
         while (current != null) {
             if (current.getDay().getName().equals(dayName)) {
-                current.getDay().editDay();
+                System.out.println("Editando " + dayName);
+                System.out.println("¿Que quieres hacer?");
+                System.out.println("| 1 Editar el nombre del día | 2 editar una ingesta | 3 Salir |");
+                Scanner userInput = new Scanner(System.in);
+                String option = userInput.nextLine();
+                switch (option) {
+                    case "1":
+                        System.out.println("Nuevo nombre del día");
+                        String newDayName = userInput.nextLine();
+                        current.getDay().setName(newDayName);
+                        break;
+                    case "2":
+                        current.getDay().editDay();
+                        break;
+                    case "3":
+                        return;
+                    default:
+                        System.out.println("Opción no válida");
+                        break;
+                }
                 return;
             }
             current = current.getNext();
@@ -84,6 +103,7 @@ class Diet {
         String daysListing = "";
         DayNode current = first;
         while (current != null) {
+            daysListing = daysListing + "[Día :" + current.getDay().getName() + "]\n";
             daysListing = daysListing + current.getDay().toString() + "\n";
             current = current.getNext();
         }
