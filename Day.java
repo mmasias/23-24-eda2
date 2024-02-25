@@ -33,7 +33,13 @@ class Day {
     }
 
     public void printIntakeListing() {
-        System.out.println(this.toString());
+        IntakeNode current = first;
+        while (current != null) {
+            System.out.println("Ingesta: " + current.getIntake().getName());
+            System.out.println("Alimentos:");
+            current.getIntake().printFoodListing(); 
+            current = current.getNext();
+        }
     }
 
     public void createIntakes() {

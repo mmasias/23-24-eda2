@@ -22,7 +22,13 @@ class Diet {
     }
 
     public void printDayListing(){
-        System.out.println(this.toString());
+        DayNode current = first;
+        while (current != null) {
+            System.out.println("Día: " + current.getDay().getName());
+            current.getDay().printIntakeListing(); 
+            System.out.println(); 
+            current = current.getNext();
+        }
     }
 
     public void createDays() {
@@ -86,6 +92,7 @@ class Diet {
             daysListing = daysListing + current.getDay().toString() + "\n";
             current = current.getNext();
         }
+
         return daysListing;
     }    
 
