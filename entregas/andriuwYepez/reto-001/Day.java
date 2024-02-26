@@ -1,10 +1,24 @@
 import java.util.Scanner;
 
 class Day {
+    String name;
     private IntakeNode first;
 
-    public Day() {
+    public Day(String name) {
+        this.name = name;
         first = null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDetailsDiet() {
+        return "]> Dia: " + name;
     }
 
     public void addIntake(Intake intake) {
@@ -21,7 +35,7 @@ class Day {
     }
 
     public void printIntakeListing() {
-        System.out.println(this.toStringIntake());
+        System.out.println(this.toString());
     }
 
     public void createIntakes() {
@@ -89,7 +103,7 @@ class Day {
             if (o.equals("1")) {
                 IntakeNode current = first;
                 while (current != null) {
-                    System.out.println("La ingesta actual es: " + current.getIntake().toStringIntake()); // crear un toString para intake
+                    System.out.println("La ingesta actual es: " + current.getIntake().getDetails()); // crear un toString para intake
                     System.out.println("1) Eliminar");
                     System.out.println("2) Siguiente\n");
                     String optionDelete = userInput.nextLine();
@@ -124,7 +138,7 @@ class Day {
             if (o.equals("1")) {
                 IntakeNode current = first;
                 while (current != null) {
-                    System.out.println("La ingesta actual es: " + current.getIntake().toStringIntake());
+                    System.out.println("La ingesta actual es: " + current.getIntake().getDetails());
                     System.out.println("1) Editar");
                     System.out.println("2) Siguiente\n");
                     String optionEditing = userInput.nextLine();
@@ -144,11 +158,11 @@ class Day {
     }
 
     @Override
-    public String toStringIntake() {
+    public String toString() {
         String intakeListing = "";
         IntakeNode current = first;
         while (current != null) {
-            intakeListing = intakeListing + current.getIntake().toStringIntake() + "\n";
+            intakeListing = intakeListing + current.getIntake().getDetails() + "\n";
             current = current.getNext();
         }
         return intakeListing;
@@ -156,7 +170,7 @@ class Day {
 
     public static void main(String[] args) {
 
-        Day monday = new Day();
+        Day monday = new Day("Lunes");
         monday.createIntakes();
         monday.editDay();
         monday.deleteDay();

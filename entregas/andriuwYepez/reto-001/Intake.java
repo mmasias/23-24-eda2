@@ -17,8 +17,7 @@ class Intake {
         this.name = name;
     }
 
-    @Override
-    public String toStringIntake() {
+    public String getDetails() {
         return "]> Ingesta: " + name;
     }
 
@@ -169,13 +168,11 @@ class Intake {
         return foodListing;
     }
 
-    // public static void main(String[] args) {
-
-    //     Intake breakfast = new Intake();
-    //     breakfast.createIntake();
-    //     breakfast.editIntake();
-    //     breakfast.deleteIntake();
-    //     breakfast.printFoodListing();
-
-    // }
+    public static void main(String[] args) {
+        Intake breakfast = new Intake("Banana");
+        breakfast.createIntake();
+        breakfast.editIntake();
+        breakfast.deleteIntake();
+        breakfast.printFoodListing();
+    }
 }
