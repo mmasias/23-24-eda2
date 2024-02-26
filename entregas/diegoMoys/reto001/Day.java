@@ -1,18 +1,19 @@
 import java.util.Scanner;
 
 public class Day {
-     private IntakeNode first;
+     private IntakeNode firstIntake;
+     public String name;
 
     public Day() {
-        first = null;
+        firstIntake = null;
     }
 
     public void addIntake(Intake intake) {
         IntakeNode newIntakeNode = new IntakeNode(intake);
-        if (first == null) {
-            first = newIntakeNode;
+        if (firstIntake == null) {
+            firstIntake = newIntakeNode;
         } else {
-            IntakeNode current = first;
+            IntakeNode current = firstIntake;
             while (current.getNext() != null) {
                 current = current.getNext();
             }
@@ -43,7 +44,7 @@ public class Day {
     }
 
     public IntakeNode findIntakeNode(String intakeName) {
-        IntakeNode current = first;
+        IntakeNode current = firstIntake;
         while (current != null) {
             if (current.getIntake().getName().equals(intakeName)) {
                 return current;
@@ -72,13 +73,13 @@ public class Day {
         IntakeNode intakeToDelete = findIntakeNode(intakeName);
         if (intakeToDelete != null) {
             IntakeNode previous = null;
-            IntakeNode currentNode = first;
+            IntakeNode currentNode = firstIntake;
             while (currentNode != null && currentNode != intakeToDelete) {
                 previous = currentNode;
                 currentNode = currentNode.getNext();
             }
             if (previous == null) {
-                first = intakeToDelete.getNext();
+                firstIntake = intakeToDelete.getNext();
             } else {
                 previous.setNext(intakeToDelete.getNext());
             }
@@ -89,12 +90,20 @@ public class Day {
     @Override
     public String toString() {
         String intakeListing = "Ingesta:\n";
-        IntakeNode current = first;
+        IntakeNode current = firstIntake;
         while (current != null) {
             intakeListing = intakeListing + current.getIntake().toString() + "\n";
             current = current.getNext();
         }
         return intakeListing;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public static void main(String[] args) {
