@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Intake {
     private FoodNode first;
+    public String name;
 
     public Intake() {
         first = null;
@@ -75,7 +76,6 @@ public class Intake {
 
     public void deleteFood(FoodNode foodNode) {
         if (foodNode == null) {
-            System.out.println("El alimento no existe");
             return;
         }
         if (foodNode == first) {
@@ -109,6 +109,10 @@ public class Intake {
             current = current.getNext();
         }
         return foodListing;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public static void main(String[] args) {
