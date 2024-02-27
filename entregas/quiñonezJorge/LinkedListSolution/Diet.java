@@ -1,13 +1,13 @@
 package LinkedListSolution;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Diet {
-  private ArrayList<Day> days;
+  private LinkedList<Day> days;
 
   public Diet() {
-    days = new ArrayList<Day>();
+    days = new LinkedList<Day>();
   }
 
   public void addDiet(Day day) {
@@ -80,11 +80,11 @@ public class Diet {
 
   public static void main(String[] args) {
 
-    Intake intake = new Intake("Desayuno");
-    intake.createIntake();
-    intake.editIntake();
-    intake.deleteIntake();
-    intake.printFoodListing();
+    Diet diet = new Diet();
+    diet.createDiet();
+    diet.editDiet();
+    diet.deleteDiet();
+    diet.printDayListing();
 
   }
 }

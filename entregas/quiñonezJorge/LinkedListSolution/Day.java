@@ -1,15 +1,15 @@
 package LinkedListSolution;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Day {
   private String name;
-  private ArrayList<Intake> intakes;
+  private LinkedList<Intake> intakes;
 
   public Day(String name) {
     this.name = name;
-    intakes = new ArrayList<Intake>();
+    intakes = new LinkedList<Intake>();
   }
 
   public String getName() {
@@ -22,6 +22,7 @@ public class Day {
 
   public void addDay(Intake intake) {
     intakes.add(intake);
+    intake.createIntake();
   }
 
   public void printIntakeListing() {
@@ -38,8 +39,7 @@ public class Day {
         creating = !creating;
       } else {
         Intake intake = new Intake(intakeName);
-        intakes.add(intake);
-        intake.createIntake();
+        addDay(intake);
       }
     }
   }
@@ -53,14 +53,14 @@ public class Day {
       if (intakeName.equals("-1")) {
         editing = !editing;
       } else {
-        intakes.forEach(intake -> {
+        for (Intake intake : intakes) {
           if (intake.getName().equals(intakeName)) {
             System.out.println("Ingrese el nuevo nombre de la ingesta");
             String newIntakeName = userInput.nextLine();
             intake.setName(newIntakeName);
             intake.editIntake();
           }
-        });
+        }
       }
     }
   }
