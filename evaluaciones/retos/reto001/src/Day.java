@@ -44,7 +44,6 @@ public class Day {
                 creating = !creating;
             } else {
                 Intake intake = new Intake(intakeName);
-                intake.createIntake();
                 addIntake(intake);
             }
         }
