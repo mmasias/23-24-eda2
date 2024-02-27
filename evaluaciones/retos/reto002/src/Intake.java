@@ -36,7 +36,7 @@ public class Intake {
         System.out.println(this.toString());
     }
 
-    public void createIntake() {
+    public void createFoods() {
         boolean creating = true;
         while (creating) {
             System.out.println("Nombre del alimento por crear (-1 para terminar)");
@@ -55,7 +55,7 @@ public class Intake {
         foods.remove(wantedFood);
     }
 
-    public void deleteIntake() {
+    public void deleteFoods() {
         boolean deleting = true;
 
         while (deleting) {
@@ -79,7 +79,7 @@ public class Intake {
         foodToEdit.setName(newName);
     }
 
-    public void updateIntake() {
+    public void updateFoods() {
         boolean updating = true;
         while(updating) {
             System.out.println("Nombre del alimento a editar (-1 para terminar): ");
@@ -113,13 +113,13 @@ public class Intake {
         String intakeName = userInput.nextLine();
         Intake breakfast = new Intake(intakeName);
 
-        breakfast.createIntake();
+        breakfast.createFoods();
         breakfast.printFoodListing();
 
-        breakfast.updateIntake();
+        breakfast.updateFoods();
         breakfast.printFoodListing();
 
-        breakfast.deleteIntake();
+        breakfast.deleteFoods();
         breakfast.printFoodListing();
 
         breakfast.deleteAllIntake();
