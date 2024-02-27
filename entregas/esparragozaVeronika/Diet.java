@@ -1,23 +1,15 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Diet {
-    private DayNode first;
+    private ArrayList<Day> days;
 
     public Diet() {
-        first = null;
+        days = new ArrayList<>();
     }
 
     public void addDay(Day day){
-        DayNode newDayNode = new DayNode(day);
-        if (first == null){
-            first = newDayNode;
-        } else {
-            DayNode current = first;
-            while(current.getNext()!=null){
-                current = current.getNext();
-            }
-            current.setNext(newDayNode);
-        }
+        days.add(day);
     }
 
     public void printDayListing(){
@@ -31,7 +23,7 @@ class Diet {
             System.out.println("Nombre del dia (-1 para terminar)");
             String dayName = userInput.nextLine();
             if(dayName.equals("-1")) {
-                creating=!creating;
+                creating = false;
             } else {
                 Day day = new Day();
                 day.createIntakes();
@@ -40,45 +32,22 @@ class Diet {
         }
     }
 
-    public void deleteDays(int numberDay){
-        DayNode current = first;
-        DayNode previous = null;
-        int count = 1;
-        while (current != null) {
-            if (count == numberDay) {
-                if (previous == null) {
-                    first = current.getNext();
-                } else {
-                    previous.setNext(current.getNext());
-                }
-                return;
-            }
-            count++;
-            previous = current;
-            current = current.getNext();
-        }
+    public void deleteDay(int dayIndex){
+        days.remove(dayIndex - 1);
     }
-    public void editDay(){
-        System.out.println("Número del dia a editar: ");
-        int dayEdit = Integer.parseInt(new Scanner(System.in).nextLine());
-        deleteDays(dayEdit);
+
+    public void editDay(int dayIndex){
+        deleteDay(dayIndex - 1);
         createDays();
-    }
-    public void deleteDays(){
-        System.out.println("Número del dia a eliminar: ");
-        int dayDelete = Integer.parseInt(new Scanner(System.in).nextLine());
-        deleteDays(Integer.parseInt(String.valueOf(dayDelete)));
     }
 
     @Override
     public String toString() {
-        String daysListing = "";
-        DayNode current = first;
-        while (current != null) {
-            daysListing = daysListing + current.getDay().toString() + "\n";
-            current = current.getNext();
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < days.size(); i++) {
+            result.append("Day ").append(i + 1).append(":\n").append(days.get(i)).append("\n");
         }
-        return daysListing;
+        return result.toString();
     }
 
     public static void main(String[] args) {
@@ -86,9 +55,13 @@ class Diet {
         Diet diet = new Diet();
         diet.createDays();
         diet.printDayListing();
-        diet.editDay();
+        System.out.println("Número del dia a editar: ");
+        int dayEdit = Integer.parseInt(new Scanner(System.in).nextLine());
+        diet.editDay(dayEdit);
         diet.printDayListing();
-        diet.deleteDays();
+        System.out.println("Número del dia a eliminar: ");
+        int dayDelete = Integer.parseInt(new Scanner(System.in).nextLine());
+        diet.deleteDay(dayDelete);
         diet.printDayListing();
     }
 }

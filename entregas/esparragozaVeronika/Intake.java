@@ -1,44 +1,44 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Intake {
-    private FoodNode first;
+    private ArrayList<Food> foods;
 
     public Intake() {
-        first = null;
+        this.foods = new ArrayList<>();
     }
 
     public void addFood(Food food) {
-        FoodNode newFoodNode = new FoodNode(food);
-        if (first == null) {
-            first = newFoodNode;
-        } else {
-            FoodNode current = first;
-            while (current.getNext() != null) {
-                current = current.getNext();
+        foods.add(food);
+    }
+
+    public void deleteFood(String foodName) {
+        boolean removed = false;
+        for (int i = 0; i < foods.size(); i++) {
+            if (foods.get(i).getName().equals(foodName)) {
+                foods.remove(i);
+                removed = true;
+                break;
             }
-            current.setNext(newFoodNode);
+        }
+        if (removed) {
+            System.out.println("Comida eliminada");
+        } else {
+            System.out.println("No se encontró la comida a eliminar");
         }
     }
-    public void deleteFood(String foodName){
-        FoodNode current = first;
-        FoodNode previous = null;
-        while (current != null) {
-            if (current.getFood().getName().equals(foodName)) {
-                if (previous == null) {
-                    first = current.getNext();
-                } else {
-                    previous.setNext(current.getNext());
-                }
-                return;
-            }
-            previous = current;
-            current = current.getNext();
-        }
-        System.out.println("Comida eliminada");
+
+    public void editFood(Food food) {
+        System.out.println("Nuevo nombre para " + food.getName() + ": ");
+        String newFoodName = new Scanner(System.in).nextLine();
+        food.setName(newFoodName);
+        System.out.println("Nombre del alimento actualizado correctamente.");
     }
 
     public void printFoodListing() {
-        System.out.println(this.toString());
+        for (Food food : foods) {
+            System.out.println(food);
+        }
     }
 
     public void createIntake() {
@@ -56,41 +56,44 @@ class Intake {
         }
     }
 
-    public void deleteIntake(){
+    public void deleteIntake() {
         System.out.println("Nombre del alimento a eliminar: ");
         String foodNameDelete = new Scanner(System.in).nextLine();
-        System.out.print("Eliminando esta comida: " + foodNameDelete + "\n");
         deleteFood(foodNameDelete);
     }
-    public void editIntake(){
+
+    public void editIntake() {
         System.out.println("Nombre del alimento a editar: ");
         String foodNameEdit = new Scanner(System.in).nextLine();
-        System.out.print("Editando esta comida: " + foodNameEdit + "\n");
-        deleteFood(foodNameEdit);
 
-        System.out.println("Nombre del alimento nuevo: ");
-        String foodNameNew = new Scanner(System.in).nextLine();
-        Food food = new Food(foodNameNew);
-        addFood(food);
+        boolean found = false;
+        for (Food food : foods) {
+            if (food.getName().equals(foodNameEdit)) {
+                editFood(food);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No se encontró el alimento: " + foodNameEdit);
+        }
     }
+
     @Override
     public String toString() {
-        String foodListing = "";
-        FoodNode current = first;
-        while (current != null) {
-            foodListing = foodListing + current.getFood().toString() + "\n";
-            current = current.getNext();
+        StringBuilder foodListing = new StringBuilder();
+        for (Food food : foods) {
+            foodListing.append(food.toString()).append("\n");
         }
-        return foodListing;
+        return foodListing.toString();
     }
 
     public static void main(String[] args) {
-
         Intake breakfast = new Intake();
         breakfast.createIntake();
         breakfast.editIntake();
         breakfast.deleteIntake();
         breakfast.printFoodListing();
-
     }
 }
