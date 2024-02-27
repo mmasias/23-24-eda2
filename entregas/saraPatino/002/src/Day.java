@@ -1,29 +1,23 @@
 package src;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Day {
-    private IntakeNode first;
+    private ArrayList<Intake> intakes;
 
     public Day() {
-        first = null;
+        intakes = new ArrayList<>();
     }
 
     public void addIntake(Intake intake) {
-        IntakeNode newIntakeNode = new IntakeNode(intake);
-        if (first == null) {
-            first = newIntakeNode;
-        } else {
-            IntakeNode current = first;
-            while (current.getNext() != null) {
-                current = current.getNext();
-            }
-            current.setNext(newIntakeNode);
-        }
+        intakes.add(intake);
     }
 
     public void printIntakeListing() {
-        System.out.println(this.toString());
+        for (Intake intake : intakes) {
+            System.out.println(intake);
+        }
     }
 
     public void createIntakes() {
@@ -33,7 +27,7 @@ class Day {
             System.out.println("Nombre de la ingesta (-1 para terminar)");
             String intakeName = userInput.nextLine();
             if (intakeName.equals("-1")) {
-                creating = !creating;
+                creating = false;
             } else {
                 Intake intake = new Intake();
                 intake.menu();
@@ -44,85 +38,58 @@ class Day {
 
     public void deleteIntake() {
         Scanner userInput = new Scanner(System.in);
-        if (first == null) {
+        if (intakes.isEmpty()) {
             System.out.println("La lista de ingestas está vacía.");
             return;
         }
 
-        System.out.println("Que ingesta deseas eliminar?");
-        String foodName = userInput.nextLine();
+        System.out.println("¿Qué ingesta deseas eliminar?");
+        String intakeName = userInput.nextLine();
+
         boolean found = false;
-        
-        if (first.getIntake().toString().equals(foodName)) {
-            first = first.getNext();
-            found = true;
-            return;
-        }
-
-        IntakeNode current = first;
-        IntakeNode previous = null;
-
-        while (current != null) {
-            if (current.getIntake().toString().equals(foodName)) {
-                previous.setNext(current.getNext());
+        for (Intake intake : intakes) {
+            if (intake.toString().equals(intakeName)) {
+                intakes.remove(intake);
                 found = true;
-                return;
+                break;
             }
-            previous = current;
-            current = current.getNext();
         }
-        if(found = false) {
+
+        if (!found) {
             System.out.println("No se encontró la ingesta a eliminar.");
         }
     }
 
     private void deleteAllIntakes() {
-        first = null;
-        System.out.println("\nTodos las ingestas han sido eliminados con exito!");
+        intakes.clear();
+        System.out.println("\nTodos las ingestas han sido eliminados con éxito!");
     }
 
     public void updateIntake() {
         Scanner userInput = new Scanner(System.in);
 
-        System.out.println("Que alimento deseas actualizar?");
+        System.out.println("¿Qué ingesta deseas actualizar?");
         String name = userInput.nextLine();
 
-
-        IntakeNode current = first;
-
-        boolean found = false; 
-        while (current != null) {
-            if (current.getIntake().toString().equals(name)) {
-                current.getIntake().createIntake();
+        boolean found = false;
+        for (Intake intake : intakes) {
+            if (intake.toString().equals(name)) {
+                intake.createIntake();
                 found = true;
-                return;
+                break;
             }
-            current = current.getNext();
         }
 
-        if(found = false) {
-            System.out.println("No se encontró el alimento a actualizar.");
+        if (!found) {
+            System.out.println("No se encontró la ingesta a actualizar.");
         }
-        
-    }
-
-
-    @Override
-    public String toString() {
-        String intakeListing = "";
-        IntakeNode current = first;
-        while (current != null) {
-            intakeListing = intakeListing + current.getIntake().toString() + "\n";
-            current = current.getNext();
-        }
-        return intakeListing;
     }
 
     public void menu() {
         Scanner userInput = new Scanner(System.in);
         boolean finish = false;
         System.out.println(">>OPCIONES DIA<< \n");
-        while (finish == false) {
+        while (!finish) {
             System.out.println("1. Agregar");
             System.out.println("2. Eliminar");
             System.out.println("3. Modificar");

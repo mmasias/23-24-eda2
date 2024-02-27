@@ -1,29 +1,23 @@
 package src;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Diet {
-    private DayNode first;
+    private ArrayList<Day> days;
 
     public Diet() {
-        first = null;
+        days = new ArrayList<>();
     }
 
     public void addDay(Day day){
-        DayNode newDayNode = new DayNode(day);
-        if (first == null){
-            first = newDayNode;
-        } else {
-            DayNode current = first;
-            while(current.getNext()!=null){
-                current = current.getNext();
-            }
-            current.setNext(newDayNode);
-        }
+        days.add(day);
     }
 
     public void printDayListing(){
-        System.out.println(this.toString());
+        for (Day day : days) {
+            System.out.println(day);
+        }
     }
 
     public void createDays() {
@@ -33,7 +27,7 @@ class Diet {
             System.out.println("Nombre del dia (-1 para terminar)");
             String dayName = userInput.nextLine();
             if(dayName.equals("-1")) {
-                creating=!creating;
+                creating = false;
             } else {
                 Day day = new Day();
                 day.menu();
@@ -44,84 +38,67 @@ class Diet {
 
     public void deleteDay() {
         Scanner userInput = new Scanner(System.in);
-        if (first == null) {
+        if (days.isEmpty()) {
             System.out.println("La lista de ingestas está vacía.");
             return;
         }
 
-        System.out.println("Que ingesta deseas eliminar?");
-        String foodName = userInput.nextLine();
+        System.out.println("¿Qué día deseas eliminar?");
+        String dayName = userInput.nextLine();
+
         boolean found = false;
-        
-        if (first.getDay().toString().equals(foodName)) {
-            first = first.getNext();
-            found = true;
-            return;
-        }
-
-        DayNode current = first;
-        DayNode previous = null;
-
-        while (current != null) {
-            if (current.getDay().toString().equals(foodName)) {
-                previous.setNext(current.getNext());
+        for (Day day : days) {
+            if (day.toString().equals(dayName)) {
+                days.remove(day);
                 found = true;
-                return;
+                break;
             }
-            previous = current;
-            current = current.getNext();
         }
-        if(found = false) {
-            System.out.println("No se encontró la ingesta a eliminar.");
+
+        if (!found) {
+            System.out.println("No se encontró el día a eliminar.");
         }
     }
 
     private void deleteAllDays() {
-        first = null;
-        System.out.println("\nTodos las ingestas han sido eliminados con exito!");
+        days.clear();
+        System.out.println("\nTodos los días han sido eliminados con éxito!");
     }
 
     public void updateDay() {
         Scanner userInput = new Scanner(System.in);
 
-        System.out.println("Que alimento deseas actualizar?");
+        System.out.println("¿Qué día deseas actualizar?");
         String name = userInput.nextLine();
 
-
-        DayNode current = first;
-
-        boolean found = false; 
-        while (current != null) {
-            if (current.getDay().toString().equals(name)) {
-                current.getDay().createIntakes();
+        boolean found = false;
+        for (Day day : days) {
+            if (day.toString().equals(name)) {
+                day.createIntakes();
                 found = true;
-                return;
+                break;
             }
-            current = current.getNext();
         }
 
-        if(found = false) {
-            System.out.println("No se encontró el alimento a actualizar.");
+        if (!found) {
+            System.out.println("No se encontró el día a actualizar.");
         }
-        
     }
 
     @Override
     public String toString() {
-        String daysListing = "";
-        DayNode current = first;
-        while (current != null) {
-            daysListing = daysListing + current.getDay().toString() + "\n";
-            current = current.getNext();
+        StringBuilder daysListing = new StringBuilder();
+        for (Day day : days) {
+            daysListing.append(day).append("\n");
         }
-        return daysListing;
+        return daysListing.toString();
     }
     
     public void menu() {
         Scanner userInput = new Scanner(System.in);
         boolean finish = false;
         System.out.println(">>OPCIONES DIA<< \n");
-        while (finish == false) {
+        while (!finish) {
             System.out.println("1. Agregar");
             System.out.println("2. Eliminar");
             System.out.println("3. Modificar");
