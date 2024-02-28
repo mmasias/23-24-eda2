@@ -2,19 +2,19 @@ package vEDA.v001;
 
 class FoodNode {
 
-    private Food food;
+    private Intake food;
     private FoodNode next;
 
-    public FoodNode(Food alimento) {
+    public FoodNode(Intake alimento) {
         this.food = alimento;
         this.next = null;
     }
 
-    public Food getFood() {
+    public Intake getFood() {
         return food;
     }
 
-    public void setFood(Food food) {
+    public void setFood(Intake food) {
         this.food = food;
     }
 

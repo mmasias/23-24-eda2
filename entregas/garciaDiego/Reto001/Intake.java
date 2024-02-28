@@ -9,7 +9,7 @@ class Intake {
         first = null;
     }
 
-    public void addFood(Food food) {
+    public void addFood(Intake food) {
         FoodNode newFoodNode = new FoodNode(food);
         if (first == null) {
             first = newFoodNode;
@@ -35,7 +35,7 @@ class Intake {
             if (foodName.equals("-1")) {
                 creating = !creating;
             } else {
-                Food food = new Food(foodName);
+                Intake food = new Intake(foodName);
                 addFood(food);
             }
         }
