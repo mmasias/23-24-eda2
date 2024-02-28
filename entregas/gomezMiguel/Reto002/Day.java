@@ -1,15 +1,16 @@
 import java.util.Scanner;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 class Day {
-    private IntakeNode first;
+    private ArrayList<Intake> intakeList;
     String name;
     public Day() {
-        first = null;
+        intakeList = new ArrayList<Intake>();
     }
     public Day(String name) {
         this.name = name;
-        first = null;
+        intakeList = new ArrayList<Intake>();
     }
 
     public String getName() {
@@ -21,25 +22,18 @@ class Day {
     }
 
     public void addIntake(Intake intake) {
-        IntakeNode newIntakeNode = new IntakeNode(intake);
-        if (first == null) {
-            first = newIntakeNode;
-        } else {
-            IntakeNode current = first;
-            while (current.getNext() != null) {
-                current = current.getNext();
-            }
-            current.setNext(newIntakeNode);
-        }
+        intakeList.add(intake);
     }
 
     public void printIntakeListing() {
-        if (first == null) {
+        if (intakeList.isEmpty()) {
             System.out.println("No hay Ingestas registradas");
-            return;
         } else {
-        System.out.println(this.toString());
-    }
+            for (Intake intake : intakeList) {
+                System.out.println("Ingesta " + intake.getName() + ":");
+                intake.printFoodListing();
+            }
+        }
     }
 
     public void createIntakes() {
@@ -74,22 +68,21 @@ class Day {
 }
 
 public void editSpecificIntake(String intakeName) {
-    IntakeNode current = first;
-    while (current != null) {
-        if (current.getIntake().getName().equals(intakeName)) {
+    for (Intake intake : intakeList) {
+        if (intake.getName().equals(intakeName)) {
             System.out.println("Editando la ingesta: " + intakeName);
-            System.out.println("¿Que quieres editar?");
-            System.out.println("|1 Nombre de la ingesta | 2 un alimento dentro de la ingesta | 3 Salir");
+            System.out.println("¿Qué quieres editar?");
+            System.out.println("|1 Nombre de la ingesta | 2 Un alimento dentro de la ingesta | 3 Salir|");
             Scanner userInput = new Scanner(System.in);
             String option = userInput.nextLine();
             switch (option) {
                 case "1":
                     System.out.println("Nuevo nombre de la ingesta");
                     String newName = userInput.nextLine();
-                    current.getIntake().setName(newName);
+                    intake.setName(newName);
                     break;
                 case "2":
-                    current.getIntake().editIntake();
+                    intake.editIntake();
                     break;
                 case "3":
                     return;
@@ -99,7 +92,6 @@ public void editSpecificIntake(String intakeName) {
             }
             return;
         }
-        current = current.getNext();
     }
     System.out.println("Ingesta no encontrada");
 }
@@ -119,11 +111,10 @@ public void editSpecificIntake(String intakeName) {
     }
 
     public void deleteSpecificIntake(String intakeName) {
-        IntakeNode previous = null;
-        IntakeNode current = first;
-        while (current != null) {
-            if (current.getIntake().getName().equals(intakeName)) {
-                System.out.println("¿Que quieres eliminar?");
+        for (int i = 0; i < intakeList.size(); i++) {
+            Intake intake = intakeList.get(i);
+            if (intake.getName().equals(intakeName)) {
+                System.out.println("¿Qué quieres eliminar?");
                 System.out.println("| 1 La ingesta | 2 Un alimento | 3 Salir |");
                 Scanner userInput = new Scanner(System.in);
                 String option = userInput.nextLine();
@@ -132,15 +123,12 @@ public void editSpecificIntake(String intakeName) {
                         System.out.println("¿Estás seguro de que quieres eliminar la ingesta? (s/n)");
                         Scanner confirmation = new Scanner(System.in);
                         if (confirmation.nextLine().equals("s")) {
-                            if (previous == null) {
-                                first = current.getNext();
-                            } else {
-                                previous.setNext(current.getNext());
-                            }
-                            return;
+                            intakeList.remove(i);
+                            System.out.println("Ingesta eliminada: " + intakeName);
                         }
+                        return;
                     case "2":
-                        current.getIntake().deleteFood();
+                        intake.deleteFood();
                         break;
                     case "3":
                         return;
@@ -149,8 +137,6 @@ public void editSpecificIntake(String intakeName) {
                         break;
                 }
             }
-            previous = current;
-            current = current.getNext();
         }
         System.out.println("Ingesta no encontrada");
     }
@@ -159,22 +145,9 @@ public void editSpecificIntake(String intakeName) {
         Scanner confirmación = new Scanner(System.in);
         System.out.println("¿Estás seguro de que quieres eliminar el día? (s/n)");
         if (confirmación.nextLine().equals("s")) {
-            first = null;
+            intakeList.clear();
         } else{}
         return;
-    }
-
-    @Override
-    public String toString() {
-        String intakeListing = "";
-        IntakeNode current = first;
-        
-        while (current != null) {
-            intakeListing = intakeListing + "Ingesta "+ current.getIntake().getName() + ";\n";
-            intakeListing = intakeListing + current.getIntake().toString() + "\n";
-            current = current.getNext();
-        }
-        return intakeListing;
     }
 
     public static void main(String[] args) {
