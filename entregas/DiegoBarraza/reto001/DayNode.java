@@ -1,3 +1,4 @@
+package entregas.DiegoBarraza.reto001;
 class DayNode {
 
     private Day day;

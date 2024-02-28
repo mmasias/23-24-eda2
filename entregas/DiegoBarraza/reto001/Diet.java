@@ -1,3 +1,4 @@
+package entregas.DiegoBarraza.reto001;
 import java.util.Scanner;
 
 class Diet {

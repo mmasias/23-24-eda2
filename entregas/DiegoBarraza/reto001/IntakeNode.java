@@ -1,5 +1,4 @@
-package vEDA.v003;
-
+package entregas.DiegoBarraza.reto001;
 class IntakeNode {
 
     private Intake intake;
