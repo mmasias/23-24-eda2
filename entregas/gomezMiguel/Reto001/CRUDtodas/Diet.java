@@ -109,7 +109,7 @@ class Diet {
         while (current != null) {
             if (current.getDay().getName().equals(dayName)) {
                 System.out.println("¿Que quieres hacer?");
-                System.out.println("| 1 Eliminar el día | 2 Salir |");
+                System.out.println("| 1 Eliminar el día | 2 Editar datos del día | 3 Salir |");
                 Scanner userInput = new Scanner(System.in);
                 String option = userInput.nextLine();
                 switch (option) {
@@ -126,6 +126,8 @@ class Diet {
                         }
                     case "2":
                         current.getDay().deleteIntake();
+                        break;
+                    case "3":
                         return;
                     default:
                         System.out.println("Opción no válida");

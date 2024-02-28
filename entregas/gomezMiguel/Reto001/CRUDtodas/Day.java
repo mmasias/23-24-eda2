@@ -147,16 +147,6 @@ public void editSpecificIntake(String intakeName) {
                         System.out.println("Opción no válida");
                         break;
                 }
-                System.out.println("¿Estás seguro de que quieres eliminar la ingesta? (s/n)");
-                Scanner confirmation = new Scanner(System.in);
-                if (confirmation.nextLine().equals("s")) {
-                    if (previous == null) {
-                        first = current.getNext();
-                    } else {
-                        previous.setNext(current.getNext());
-                    }
-                    return;
-                }
             }
             previous = current;
             current = current.getNext();
