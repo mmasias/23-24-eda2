@@ -10,3 +10,11 @@ Los retos se irán proponiendo, habitualmente luego de una disertación teórica
 |Retos|
 |-|
 [Completar CRUD](/evaluaciones/retos/reto001.md)
+
+## Entrega 002
+
+- A partir del código de la entrega 1, refactorizar para hacer uso de las clases que ofrecen estructuras de datos equivalentes en Java (ArrayList, LinkedList, etc.)
+
+|Retos|
+|-|
+[Completar CRUD](/evaluaciones/retos/reto002.md)
