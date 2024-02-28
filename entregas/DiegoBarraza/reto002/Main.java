@@ -31,7 +31,9 @@ public class Main {
         Day day5 = new Day();
         System.out.println("Creación de ingestas para el día 5:");
         day5.createIntakes();
+        day5.deleteIntake();
         diet.addDay(day5);
+    
         
     
         System.out.println("Lista de días y sus ingestas:");
@@ -42,6 +44,8 @@ public class Main {
     
         System.out.println("Lista actualizada de días y sus ingestas:");
         diet.printDayListing();
+
+        
         
         userInput.close();
     }
