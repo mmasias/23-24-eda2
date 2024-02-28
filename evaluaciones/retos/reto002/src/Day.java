@@ -64,7 +64,7 @@ public class Day {
             if (intakeName.equals("-1")) {
                 deleting = !deleting;
             } else {
-                deleteIntake(intakeName);;
+                deleteIntake(intakeName);
             }
         }
     }
