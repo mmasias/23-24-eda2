@@ -1,11 +1,10 @@
 from controllers.index import Clinic_Controller
 from factories.index import PatientFactory
 from models.index import Survey
-from structures.list import CustomList
 
 class Clinic:
     def __init__(self):
-        self.patients = CustomList()
+        self.patients = []
         self.patient_factory = PatientFactory()
 
     def receive_patient(self):
