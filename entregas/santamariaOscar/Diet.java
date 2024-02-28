@@ -12,7 +12,7 @@ class Diet {
         days.add(day);
     }
 
-    public void printDayListing() {
+    public void printAllDays() {
         for (Day day : days) {
             System.out.println(day);
         }
@@ -32,28 +32,56 @@ class Diet {
                 addDay(day);
             }
         }
-        userInput.close();
     }
 
-    public boolean updateDay(int position, Day newDay) {
-        if (position >= 0 && position < days.size()) {
-            days.set(position, newDay);
-            return true;
+    public void removeDays() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Nombre del día a eliminar, 0 para cancelar");
+        String dayName = userInput.nextLine();
+
+        if (dayName.equals("0")) {
+            return;
         }
-        return false;
+
+        for (Day day : days) {
+            if (day.getName().equals(dayName)) {
+                days.remove(day);
+            }
+        }
     }
 
-    public boolean deleteDay(int position) {
-        if (position >= 0 && position < days.size()) {
-            days.remove(position);
-            return true;
+    public void updateDays() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Nombre del día a modificar, 0 para cancelar");
+        String dayName = userInput.nextLine();
+
+        if (dayName.equals("0")) {
+            return;
         }
-        return false;
+
+        for (Day day : days) {
+            if (day.getName().equals(dayName)) {
+                day.createIntakes();
+            }
+        }
+    }
+
+    public void deleteDays() {
+        days.clear();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (Day day : days) {
+            result.append(day).append("\n");
+        }
+        return result.toString();
     }
 
     public static void main(String[] args) {
         Diet diet = new Diet();
         diet.createDays();
-        diet.printDayListing();
+        diet.printAllDays();
     }
 }
