@@ -31,10 +31,45 @@ class Intake {
                 addFood(food);
             }
         }
-        userInput.close();
     }
 
-    public void removeIntake() {
+    public void repleaceIntake() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Nombre del alimento a reemplazar, 0 para cancelar");
+        String foodName = userInput.nextLine();
+
+        if (foodName.equals("0")) {
+            return;
+        }
+
+        for (Food food : foods) {
+            if (food.getName().equals(foodName)) {
+                System.out.println("Nuevo nombre del alimento");
+                String newFoodName = userInput.nextLine();
+                food.setName(newFoodName);
+            }
+        }
+    }
+
+    public void updateIntake() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Nombre del alimento a modificar, 0 para cancelar");
+        String foodName = userInput.nextLine();
+
+        if (foodName.equals("0")) {
+            return;
+        }
+
+        for (Food food : foods) {
+            if (food.getName().equals(foodName)) {
+                System.out.println("Nuevo nombre del alimento");
+                String newFoodName = userInput.nextLine();
+                food.setName(newFoodName);
+            }
+        }
+    }
+
+    public void deleteIntake() {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Nombre del alimento a eliminar, 0 para cancelar");
         String foodName = userInput.nextLine();
@@ -44,36 +79,31 @@ class Intake {
         }
 
         foods.removeIf(food -> food.getName().equals(foodName));
-        
     }
 
-    public void continueAdding() {
-        Scanner userInput = new Scanner(System.in);
-        String input;
-
-        do {
-            removeIntake();
-            System.out.println("¿Desea continuar agregando alimentos? (S/N)");
-            input = userInput.nextLine();
-
-            if (!input.equalsIgnoreCase("S")) {
-                printFoodListing();
-            } else {
-                createIntake();
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("Ingesta: ");
+        if (!foods.isEmpty()) {
+            result.append(foods.get(0).getName());
+            for (int i = 1; i < foods.size(); i++) {
+                result.append(", ").append(foods.get(i).getName());
             }
-        } while (input.equalsIgnoreCase("S"));
-
-        if (!input.equalsIgnoreCase("N")) {
-            printFoodListing();
         }
-
-        userInput.close();
+        return result.toString();
     }
 
     public static void main(String[] args) {
-        Intake breakfast = new Intake();
-        breakfast.createIntake();
-        breakfast.printFoodListing();
-        breakfast.continueAdding();
+        Intake intake = new Intake();
+        intake.createIntake();
+        intake.printFoodListing();
+        intake.repleaceIntake();
+        intake.printFoodListing();
+        intake.updateIntake();
+        intake.printFoodListing();
+        intake.deleteIntake();
+        intake.printFoodListing();
     }
+
 }
