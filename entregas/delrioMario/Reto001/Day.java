@@ -1,31 +1,35 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 class Day {
-    private ArrayList<Intake> intakeList;
+    private IntakeNode first;
     private String name;
 
     public String getName() {
         return name;
     }
 
-    public  void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
     public Day() {
-        intakeList = new ArrayList<Intake>();
-
+        first = null;
     }
-
     public void addIntake(Intake intake) {
-        intakeList.add(intake);
+        IntakeNode newIntakeNode = new IntakeNode(intake);
+        if (first == null) {
+            first = newIntakeNode;
+        } else {
+            IntakeNode current = first;
+            while (current.getNext() != null) {
+                current = current.getNext();
+            }
+            current.setNext(newIntakeNode);
+        }
     }
-
     public void printIntakeListing() {
         System.out.println(this.toString());
     }
-
     public void createIntakes() {
         boolean creating = true;
         Scanner userInput = new Scanner(System.in);
@@ -42,18 +46,17 @@ class Day {
             }
         }
     }
-
     @Override
     public String toString() {
-        String intakeListing = name+"\n";
-        for (Intake intake : intakeList) {
-            intakeListing = intakeListing + intake.toString() + "\n";
+        String intakeListing = "";
+        IntakeNode current = first;
+        while (current != null) {
+            intakeListing = intakeListing + current.getIntake().toString() + "\n";
+            current = current.getNext();
         }
         return intakeListing;
     }
-
     public static void main(String[] args) {
-
         Day monday = new Day();
         monday.createIntakes();
         monday.printIntakeListing();
@@ -62,37 +65,37 @@ class Day {
         monday.updateIntakes();
         monday.printIntakeListing();
     }
-
     public void deleteIntakes() {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Nombrame el nombre de la ingesta que quieres eliminar");
         String intakeName = userInput.nextLine();
-        for(int i=0; i<this.intakeList.size();i++){
-            if (this.intakeList.get(i).getName().equalsIgnoreCase(intakeName)) {
-                this.intakeList.remove(i);
+        IntakeNode current = first;
+        IntakeNode previous = null;
+        while (current != null) {
+            if (current.getIntake().getName().equalsIgnoreCase(intakeName)) {
+                if(current == first){
+                    first=current.getNext();
+                    break;
+                }else{
+                    previous=current.getNext();
+                }
             }
-        }        
+            previous=current;
+            current=current.getNext();
+        }
     }
-
     public void updateIntakes() {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Nombrame el nombre de la ingesta que quieres actualizar");
         String intakeName = userInput.nextLine();
-        for(int i=0; i<this.intakeList.size();i++){
-            if (this.intakeList.get(i).getName().equalsIgnoreCase(intakeName)) {
-                System.out.println("Nombrame el nombre de la ingesta que quieres añadir");
-                String newintakeName = userInput.nextLine();
-
-                Intake intake= new Intake();
-                intake.setName(newintakeName);
-                intake.createIntake(); 
-                
-                intakeList.set(i, intake);
-
+        IntakeNode current = first;
+        while(current!=null){
+            if (current.getIntake().getName().equalsIgnoreCase(intakeName)) {
+                System.out.println("Dime la comida que quieres insertar en "+current.getIntake().getName());
+                String foodName = userInput.nextLine();
+                current.getIntake().addFood(new Food(foodName));
             }
-        }       
-
+            current=current.getNext();
+        }
     }
-
-    
 }

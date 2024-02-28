@@ -1,32 +1,33 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 class Intake {
-
-    private ArrayList<Food> foodList;
+    private FoodNode first;
     private String name; 
 
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public Intake() {
-        foodList = new ArrayList<Food>();
-
+        first = null;
     }
-
-    public void addFood(Food food) {        
-        foodList.add(food);
+    public void addFood(Food food) {
+        FoodNode newFoodNode = new FoodNode(food);
+        if (first == null) {
+            first = newFoodNode;
+        } else {
+            FoodNode current = first;
+            while (current.getNext() != null) {
+                current = current.getNext();
+            }
+            current.setNext(newFoodNode);
+        }
     }
-
     public void printFoodListing() {
         System.out.println(this.toString());
     }
-
     public void createIntake() {
         boolean creating = true;
         Scanner userInput = new Scanner(System.in);
@@ -45,14 +46,14 @@ class Intake {
     @Override
     public String toString() {
         String foodListing = name+"\n";
-        for (Food food : foodList) {
-            foodListing = foodListing + food.toString() + "\n";
+        FoodNode current = first;
+        while (current != null) {
+            foodListing = foodListing + current.getFood().toString() + "\n";
+            current = current.getNext();
         }
         return foodListing;
     }
-
     public static void main(String[] args) {
-
         Intake breakfast = new Intake();
         breakfast.createIntake();
         breakfast.printFoodListing();
@@ -68,10 +69,20 @@ class Intake {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Nombre del alimento que quieres eliminar");
         String foodName = userInput.nextLine();
-        for (Food food : foodList) {
-            if (food.getName().equalsIgnoreCase(foodName)) {
-                this.foodList.remove(food);
+        FoodNode current = first;
+        FoodNode previous = null;
+        while (current != null) {
+            if (current.getFood().getName().equalsIgnoreCase(foodName)) {
+                if (current == first) {
+                    first = current.getNext();
+                    break;
+                } else {
+                    previous = current.getNext();
+                }
+
             }
+            previous = current;
+            current = current.getNext();
         }
 
     }
@@ -82,10 +93,12 @@ class Intake {
         String foodName = userInput.nextLine();
         System.out.println("Nombre del nuevo alimento");
         String newfoodName = userInput.nextLine();
-        for (int i=0; i<this.foodList.size();i++) {
-            if (this.foodList.get(i).getName().equalsIgnoreCase(foodName)) {
-                this.foodList.set(i, new Food(newfoodName));
+        FoodNode current = first;
+        while (current != null) {
+            if (current.getFood().getName().equalsIgnoreCase(foodName)) {
+                current.getFood().setName(newfoodName);
             }
+            current = current.getNext();
         }
 
     }
