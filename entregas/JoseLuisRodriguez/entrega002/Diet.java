@@ -40,7 +40,7 @@ public class Diet {
         boolean creating = true;
         Scanner userInput = new Scanner(System.in);
         while(creating){
-            System.out.println("Nombre del dia (-1 para terminar)");
+            System.out.println("Day name (-1 to end)");
             String dayName = userInput.nextLine();
             Day day = new Day();
             day.name = dayName;
@@ -55,7 +55,7 @@ public class Diet {
 
     public void editDay(){
         Scanner userInput = new Scanner(System.in);
-        System.out.println("Ingrese el día que desea editar");
+        System.out.println("Write the day to edit:");
         String dayName = userInput.nextLine();
         DayNode dayNode = findDayNode(dayName);
         if (dayNode != null) {
@@ -66,7 +66,7 @@ public class Diet {
 
     public void deleteDay(){
         Scanner userInput = new Scanner(System.in);
-        System.out.println("Ingrese el día que desea eliminar");
+        System.out.println("Write the date yoou want to delete:");
         String dayName = userInput.nextLine();
         DayNode dayToDelete = findDayNode(dayName);
         if (dayToDelete != null) {
@@ -81,7 +81,7 @@ public class Diet {
             } else {
                 previous.setNext(dayToDelete.getNext());
             }
-            System.out.println("El día se eliminó\n");
+            System.out.println("The day register is deleted\n");
         }
     }
 
