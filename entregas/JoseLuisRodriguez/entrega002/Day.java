@@ -29,7 +29,7 @@ public class Day {
         boolean creating = true;
         Scanner userInput = new Scanner(System.in);
         while (creating) {
-            System.out.println("Nombre de la ingesta (-1 para terminar)\n");
+            System.out.println("Intake name (-1 to end)\n");
             String dayName = userInput.nextLine();
             Intake intake = new Intake();
             intake.name = dayName;
@@ -38,7 +38,7 @@ public class Day {
             } else {
                 intake.createIntake();
                 addIntake(intake);
-                System.out.println("Ingesta creada\n");
+                System.out.println("Intake created\n");
             }
         }
     }
@@ -57,7 +57,7 @@ public class Day {
 
     public void editIntake(){
         Scanner userInput = new Scanner(System.in);
-        System.out.println("Ingrese la ingesta que desea editar\n");
+        System.out.println("Write the inteke you want to edit:\n");
         String intakeName = userInput.nextLine();
         IntakeNode intakeNode = findIntakeNode(intakeName);
         if (intakeNode != null) {
@@ -68,7 +68,7 @@ public class Day {
 
     public void deleteIntake(){
         Scanner userInput = new Scanner(System.in);
-        System.out.println("Ingrese la ingesta que desea eliminar\n");
+        System.out.println("Write the inteke you want to delete:\n");
         String intakeName = userInput.nextLine();
         IntakeNode intakeToDelete = findIntakeNode(intakeName);
         if (intakeToDelete != null) {
