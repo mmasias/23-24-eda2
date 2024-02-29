@@ -2,8 +2,8 @@ public class FoodNode {
     private Food food;
     private FoodNode next;
 
-    public FoodNode(Food alimento) {
-        this.food = alimento;
+    public FoodNode(Food food) {
+        this.food = food;
         this.next = null;
     }
 
