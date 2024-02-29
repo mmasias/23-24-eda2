@@ -48,7 +48,7 @@ public class Intake {
             }
             current = current.getNext();
         }
-        System.out.println("El alimento no existe");
+        System.out.println("The food doesnt exist");
         return null;
     }
     
@@ -61,7 +61,7 @@ public class Intake {
     
     public void editIntake() {
         Scanner userInput = new Scanner(System.in);
-        System.out.println("Ingrese el alimento a editar(-1 para terminar)");
+        System.out.println("Write the food to edit(-1 to end editing)");
         String foodToEdit = userInput.nextLine();
         FoodNode foodNode = findFood(foodToEdit);
         if(foodToEdit.equals("-1")){
@@ -69,7 +69,7 @@ public class Intake {
         } else if (foodNode == null) {
             return;
         }
-        System.out.println("Ingrese el nuevo nombre del alimento");
+        System.out.println("Write the new food name");
         String newFoodName = userInput.nextLine();
         editFood(foodNode, newFoodName);
     }
@@ -91,7 +91,7 @@ public class Intake {
     
     public void deleteIntake() {
         Scanner userInput = new Scanner(System.in);
-        System.out.println("Ingrese el alimento a eliminar(-1 para terminar)");
+        System.out.println("Write the food to edit(-1 to end editing)");
         String foodToDelete = userInput.nextLine();
         if(foodToDelete.equals("-1")){
             return;
