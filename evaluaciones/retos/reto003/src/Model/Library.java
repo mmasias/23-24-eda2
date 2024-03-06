@@ -2,20 +2,22 @@ package Model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Factory.*;
 
-public class Biblioteca {
+public class Library {
     private ArrayList<Document> documents = new ArrayList<>();
-    DocumentoController docController;
     Scanner userInput = new Scanner(System.in);
 
-    public Biblioteca(ArrayList<Document> documents) {
+    public Library(ArrayList<Document> documents) {
         this.documents = documents;
     }
 
-    public Document searchDocumentByName(String nombreDocumento) {
+    public ArrayList<Document> getDocuments() {
+        return documents;
+    }
+
+    public Document searchDocumentByName(String documentName) {
         for(Document d : documents) {
-            if(d.equals(nombreDocumento)){
+            if(d.getTitle().equals(documentName)){
                 return d;
             }
         }
@@ -24,7 +26,7 @@ public class Biblioteca {
 
     public Document searchDocumentByPublicationYear(int year) {
         for(Document d : documents) {
-            if (d.getPublicationYear() == year) {
+            if (d.getPublishingYear() == year) {
                 return d;
             }
         }
@@ -50,9 +52,9 @@ public class Biblioteca {
 
     }
 
-    public void editDocumentPublicationYear(int oldYear, int newYear) {
-        Document document = searchDocumentByPublicationYear(oldYear);
-        document.setPublicatioYear(newYear);
+    public void editDocumentPublishingYear(String title, int oldYear, int newYear) {
+        Document document = searchDocumentByName(title);
+        document.setPublishingYear(newYear);
     }
 
     public void editDocumentKeyWord(String title, String oldKeyWord, String newKeyWord) {
