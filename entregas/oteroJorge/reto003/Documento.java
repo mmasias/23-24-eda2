@@ -44,7 +44,7 @@ public class Documento {
         this.autores = autores;
     }
 
-    private String getAutoresAsString() {
+    public String getAutoresAsString() {
         StringBuilder sb = new StringBuilder();
         for (Autor autor : autores) {
             sb.append(autor.getNombreCompleto());
