@@ -1,0 +1,45 @@
+@startuml
+hide empty methods
+hide empty fields
+
+class App {
+    + main()
+}
+class Arraylist{}
+
+
+class DocumentManagement {
+    - Arraylist<Document> documents
+    + run()
+    + createNewDocument()
+    + searchDocument()
+    + printAllDocuments()
+}
+
+class Document {
+    - String title
+    - Arraylist<String> authors
+    - String yearOfPublication;
+    - TypeDocument type
+    - Arraylist<String> keywords
+
+    + addDocument()
+    + printDocument()
+    + updateDocument()
+    + deleteDocument()
+}
+enum TypeDocument {
+    Libro
+    Revista
+    Articulo
+    Paper
+
+}
+
+DocumentManagement .. Arraylist
+Document .. Arraylist
+
+App -- DocumentManagement
+DocumentManagement -- Document
+Document -- TypeDocument
+@enduml
