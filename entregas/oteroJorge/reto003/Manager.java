@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Manager {
 
     private ArrayList<Documento> documentos;
-    private Biblioteca biblioteca;
 
     public Manager() {
         this.documentos = new ArrayList<>();
