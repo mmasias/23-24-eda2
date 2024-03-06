@@ -10,7 +10,7 @@
 
 |Proceso|Descripción|
 |-|-|
-Gestión de documentos|Los usuarios pueden agregar, editar, modificar y eliminar documentos en la biblioteca, especificando los detalles requeridos.
+Gestión de documentos|Los usuarios pueden agregar, editar, mostrar y eliminar documentos en la biblioteca, especificando los detalles requeridos.
 Búsqueda|Los usuarios pueden buscar documentos por título, autor, año de publicación, tipo de documento, o temas/palabras clave.
 Clasificación|Los documentos deben ser clasificados en categorías basadas en su tipo y temas o palabras clave.
 
