@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class Document {
+public abstract class Document {
     private String title;
     private ArrayList<String> authors = new ArrayList<>();
     private String yearOfPublication;

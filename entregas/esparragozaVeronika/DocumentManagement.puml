@@ -7,39 +7,63 @@ class App {
 }
 class Arraylist{}
 
-
 class DocumentManagement {
     - Arraylist<Document> documents
     + run()
-    + createNewDocument()
+    + addDocument()
     + searchDocument()
     + printAllDocuments()
 }
 
-class Document {
+abstract Document {
     - String title
     - Arraylist<String> authors
     - String yearOfPublication;
-    - TypeDocument type
+    - String type
     - Arraylist<String> keywords
 
-    + addDocument()
-    + printDocument()
+    + createNewDocument()
     + updateDocument()
     + deleteDocument()
-}
-enum TypeDocument {
-    Libro
-    Revista
-    Articulo
-    Paper
-
+    + printDocument()
 }
 
-DocumentManagement .. Arraylist
-Document .. Arraylist
+class Book {
+    + super(title, authors, yearOfPublication, type, keywords);
+}
+
+class Article {
+    + super(title, authors, yearOfPublication, type, keywords);
+}
+
+class Magazine {
+    + super(title, authors, yearOfPublication, type, keywords);
+}
+
+class Paper {
+    + super(title, authors, yearOfPublication, type, keywords);
+}
+
+class SearchDocument{
+    + search()
+    - searchByTitle()
+    - searchByAuthor()
+    - searchByYearOfPublication()
+    - searchByType()
+    - searchByKeywords()
+}
+
+
 
 App -- DocumentManagement
 DocumentManagement -- Document
-Document -- TypeDocument
+DocumentManagement -- SearchDocument
+
+Document -- Book
+Document -- Article
+Document -- Magazine
+Document -- Paper
+
+DocumentManagement .. Arraylist
+Document .. Arraylist
 @enduml
