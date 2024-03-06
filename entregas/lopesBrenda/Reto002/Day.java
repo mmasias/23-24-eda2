@@ -1,6 +1,7 @@
-package entregas.lopesBrenda.Reto001;
+package entregas.lopesBrenda.Reto002;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 class Day {
     private IntakeNode first;
@@ -58,5 +59,13 @@ class Day {
         Day monday = new Day();
         monday.createIntakes();
         monday.printIntakeListing();
+    }
+
+    public IntakeNode getFirst() {
+        return first;
+    }
+
+    public void setFirst(IntakeNode first) {
+        this.first = first;
     }
 }

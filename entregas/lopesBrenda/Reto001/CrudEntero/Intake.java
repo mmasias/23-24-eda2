@@ -1,12 +1,20 @@
-package entregas.lopesBrenda.Reto001;
+package entregas.lopesBrenda.Reto001.CrudEntero;
 
 import java.util.Scanner;
 
 class Intake {
     private FoodNode first;
+    private String name;
 
-    public Intake() {
+    public Intake (String name) {
+        this.name = name;
         first = null;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void addFood(Food food) {
@@ -116,7 +124,7 @@ class Intake {
 
     public static void main(String[] args) {
 
-        Intake breakfast = new Intake();
+        Intake breakfast = new Intake("Desayuno");
 
         breakfast.createIntake();
         breakfast.printFoodListing();

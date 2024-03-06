@@ -1,6 +1,8 @@
-package entregas.lopesBrenda.Reto001;
+package entregas.lopesBrenda.Reto002;
 
 import java.util.Scanner;
+import java.util.ArrayList;
+
 
 class Diet {
     private DayNode first;

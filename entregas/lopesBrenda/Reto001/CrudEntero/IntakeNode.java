@@ -1,4 +1,4 @@
-package entregas.lopesBrenda.Reto001;
+package entregas.lopesBrenda.Reto001.CrudEntero;
 
 class IntakeNode {
 
