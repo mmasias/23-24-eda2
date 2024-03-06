@@ -108,13 +108,13 @@ public class Gestion {
                     Scanner sc2 = new Scanner(System.in);
                     String nombre = sc2.nextLine();
                     System.out.println("Ingrese el apellido del autor");
-                    String apellido = sc.nextLine();
+                    String apellido = sc2.nextLine();
                     Autor autor = new Autor(nombre, apellido);
                     ArrayList<Autor> autores = new ArrayList<Autor>();
                     autores.add(autor);
                     documento.setAutores(autores);
                     System.out.println("Desea agregar otro autor? (si-no)");
-                    String respuesta = sc.nextLine();
+                    String respuesta = sc2.nextLine();
                     if (respuesta.equals("no")) {
                         agregar = false;
                     } else {
