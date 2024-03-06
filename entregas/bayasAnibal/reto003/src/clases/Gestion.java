@@ -41,14 +41,13 @@ public class Gestion {
         ArrayList<Autor> autores = new ArrayList<Autor>();
         do {
             System.out.println("Ingrese el nombre del autor");
-            Scanner sc2 = new Scanner(System.in);
-            String nombre = sc2.nextLine();
+            String nombre = sc.nextLine();
             System.out.println("Ingrese el apellido del autor");
-            String apellido = sc2.nextLine();
+            String apellido = sc.nextLine();
             Autor autor = new Autor(nombre, apellido);
             autores.add(autor);
             System.out.println("Desea agregar otro autor? (si-no)");
-            String respuesta = sc2.nextLine();
+            String respuesta = sc.nextLine();
             if (respuesta.equals("no")) {
                 agregar = false;
             } else {
@@ -104,8 +103,7 @@ public class Gestion {
                 boolean agregar = true;
                 do {
                     System.out.println("Ingrese el nombre del autor");
-                    Scanner sc2 = new Scanner(System.in);
-                    String nombre = sc2.nextLine();
+                    String nombre = sc.nextLine();
                     System.out.println("Ingrese el apellido del autor");
                     String apellido = sc.nextLine();
                     Autor autor = new Autor(nombre, apellido);
