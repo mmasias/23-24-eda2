@@ -1,7 +1,10 @@
+package Model;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Biblioteca {
     private ArrayList<Documento> documentos = new ArrayList<>();
+    
 
     public Biblioteca(ArrayList<Documento> documentos) {
         this.documentos = documentos;
@@ -16,7 +19,13 @@ public class Biblioteca {
         return null;
     }
 
-    
+    public void agregarDocumento() {
+       
+
+
+    }
+
+
 
 
 }

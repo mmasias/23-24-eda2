@@ -1,3 +1,4 @@
+package Model;
 public class Autor {
     private String nombre;
     private String apellidos;
@@ -13,6 +14,14 @@ public class Autor {
 
     public String getApellidos() {
         return apellidos;
+    }
+
+    public void setNombre(String nombreAutor) {
+        nombre = nombreAutor;
+    }
+
+    public void setApellidos(String apellidosAutor) {
+        apellidos = apellidosAutor;
     }
 
 }
