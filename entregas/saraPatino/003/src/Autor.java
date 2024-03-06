@@ -1,11 +1,11 @@
 package src;
 
-class Titulo {
+class Autor {
     private static int contadorIds = 0;
     private int id;
     private String name;
 
-    public Titulo(String name) {
+    public Autor(String name) {
         this.id = ++contadorIds;
         this.name = name;
     }
@@ -21,5 +21,4 @@ class Titulo {
     public void setName(String newName) {
         this.name = newName;
     }
-
 }
