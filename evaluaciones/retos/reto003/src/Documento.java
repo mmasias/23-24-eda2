@@ -30,7 +30,9 @@ public abstract class Documento {
         return tipoDocumento;
     }
 
-    public abstract void setTipoDocumento(String tipoDocumento);
+    public void setTipoDocumento(String tipo) {
+        tipoDocumento = tipo;
+    }
 
     public ArrayList<String> getPalabrasClave() {
         return palabrasClave;

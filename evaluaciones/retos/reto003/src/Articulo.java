@@ -6,7 +6,5 @@ public class Articulo extends Documento {
         super(titulo, autores, anhoPublicacion, tipoDocumento, palabrasClave);
     }
 
-    public void setTipoDocumento(String tipoDocumento) {
-        tipoDocumento = "Articulo";
-    }
+   
 }
