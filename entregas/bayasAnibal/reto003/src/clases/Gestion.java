@@ -135,7 +135,6 @@ public class Gestion {
         }
     }
 
-
     public void buscar() {
         System.out.println("Ingrese el titulo del documento a buscar");
         Scanner sc = new Scanner(System.in);
@@ -155,7 +154,53 @@ public class Gestion {
                 }
             }
         }
+    }
 
+
+    public void buscarPorAutor() {
+        System.out.println("Ingrese el nombre del autor a buscar");
+        Scanner sc = new Scanner(System.in);
+        String nombre = sc.nextLine();
+        for (Documento documento : documentos) {
+            for (Autor autor : documento.getAutores()) {
+                if (autor.getNombre().equals(nombre)) {
+                    System.out.println("Titulo: " + documento.getTitulo());
+                    System.out.println("Año de publicacion: " + documento.getAnoDePublicacion());
+                    System.out.println("Tipo: " + documento.getTipo());
+                    System.out.println("Autores: ");
+                    for (Autor autor2 : documento.getAutores()) {
+                        System.out.println(autor2.getNombre() + " " + autor2.getApellido());
+                    }
+                    System.out.println("Palabras clave: ");
+                    for (String palabra : documento.getPalabrasClave()) {
+                        System.out.println(palabra);
+                    }
+                }
+            }
+        }
+    }
+
+    public void buscarPorPalabrasClave() {
+        System.out.println("Ingrese la palabra clave a buscar");
+        Scanner sc = new Scanner(System.in);
+        String palabra = sc.nextLine();
+        for (Documento documento : documentos) {
+            for (String palabraClave : documento.getPalabrasClave()) {
+                if (palabraClave.equals(palabra)) {
+                    System.out.println("Titulo: " + documento.getTitulo());
+                    System.out.println("Año de publicacion: " + documento.getAnoDePublicacion());
+                    System.out.println("Tipo: " + documento.getTipo());
+                    System.out.println("Autores: ");
+                    for (Autor autor : documento.getAutores()) {
+                        System.out.println(autor.getNombre() + " " + autor.getApellido());
+                    }
+                    System.out.println("Palabras clave: ");
+                    for (String palabra2 : documento.getPalabrasClave()) {
+                        System.out.println(palabra2);
+                    }
+                }
+            }
+        }
     }
 
     public void eliminar() {
@@ -165,20 +210,21 @@ public class Gestion {
         for (Documento documento : documentos) {
             if (documento.getTitulo().equals(titulo)) {
                 documentos.remove(documento);
+                break;
             }
         }
-
     }
 
     public void menu() {
         boolean salir = false;
-        while (!salir) {
-
+        do {
             System.out.println("1. Agregar documento");
-            System.out.println("2. Editar documento");
+            System.out.println("2. Modificar documento");
             System.out.println("3. Buscar documento");
-            System.out.println("4. Eliminar documento");
-            System.out.println("5. Salir");
+            System.out.println("4. Buscar por autor");
+            System.out.println("5. Buscar por palabras clave");
+            System.out.println("6. Eliminar documento");
+            System.out.println("7. Salir");
             Scanner sc = new Scanner(System.in);
             int opcion = sc.nextInt();
             switch (opcion) {
@@ -192,14 +238,21 @@ public class Gestion {
                     buscar();
                     break;
                 case 4:
-                    eliminar();
+                    buscarPorAutor();
                     break;
                 case 5:
+                    buscarPorPalabrasClave();
+                    break;
+                case 6:
+                    eliminar();
+                    break;
+                case 7:
                     salir = true;
                     break;
                 default:
                     break;
             }
-        }
+        } while (!salir);
     }
+
 }
