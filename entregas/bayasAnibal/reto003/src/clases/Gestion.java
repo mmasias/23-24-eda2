@@ -64,7 +64,6 @@ public class Gestion {
                 documento.añadirPalabraClave(palabra);
             }
 
-
         } while (!palabra.equals("fin"));
         documentos.add(documento);
     }
@@ -155,7 +154,6 @@ public class Gestion {
             }
         }
     }
-
 
     public void buscarPorAutor() {
         System.out.println("Ingrese el nombre del autor a buscar");
