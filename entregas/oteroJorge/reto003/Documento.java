@@ -1,6 +1,7 @@
 package entregas.oteroJorge.reto003;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Documento {
 
@@ -16,10 +17,6 @@ public class Documento {
         this.tipo = tipo;
     }
 
-    public void addAutor(Autor autor) {
-        autores.add(autor);
-    }
-
     public String getTitulo() {
         return titulo;
     }
@@ -32,8 +29,16 @@ public class Documento {
         return añoPublicacion;
     }
 
+    public void setAñoPublicacion(String añoPublicacion) {
+        this.añoPublicacion = añoPublicacion;
+    }
+
     public String getTipo() {
         return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public void setTitulo(String titulo) {
