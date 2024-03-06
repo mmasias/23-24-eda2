@@ -22,59 +22,6 @@ public class Documento {
         sc = new Scanner(System.in);
     }
 
-    private void agregarAutor() {
-        System.out.print("Ingrese el nombre del autor: ");
-        String nombre = sc.nextLine();
-        Autor nuevoAutor = new Autor(nombre);
-        autores.add(nuevoAutor);
-
-        System.out.println("Autor agregado correctamente.");
-    }
-
-    private void listarAutores() {
-        if (autores.isEmpty()) {
-            System.out.println("No hay autores para listar.");
-        } else {
-            System.out.println("Lista de Autores:");
-            for (Autor autor : autores) {
-                System.out.println(autor);
-            }
-        }
-    }
-
-    private void actualizarAutor() {
-        listarAutores();
-        System.out.print("Ingrese el nombre del autor que desea actualizar: ");
-        int indice = sc.nextInt();
-        sc.nextLine();
-
-        if (indice >= 0 && indice < autores.size()) {
-            System.out.print("Ingrese el nuevo nombre del autor: ");
-            String nuevoNombre = sc.nextLine();
-
-            Autor autorActualizado = autores.get(indice);
-            autorActualizado.setNombre(nuevoNombre);
-
-            System.out.println("Autor actualizado exitosamente.");
-        } else {
-            System.out.println("Nombre no encontrado. No se puede actualizar el autor.");
-        }
-    }
-
-    private void eliminarAutor() {
-        listarAutores();
-        System.out.print("Ingrese el nombre del autor que desea eliminar: ");
-        int indice = sc.nextInt();
-        sc.nextLine();
-
-        if (indice >= 0 && indice < autores.size()) {
-            autores.remove(indice);
-            System.out.println("Autor eliminado exitosamente.");
-        } else {
-            System.out.println("Nombre no válido. No se puede eliminar el autor.");
-        }
-    }
-
     public String getTitulo() {
         return titulo;
     }
@@ -113,6 +60,59 @@ public class Documento {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    private void agregarAutor() {
+        System.out.print("Ingrese el nombre del autor: ");
+        String nombre = sc.nextLine();
+        Autor nuevoAutor = new Autor(nombre);
+        autores.add(nuevoAutor);
+
+        System.out.println("Autor agregado correctamente.");
+    }
+
+    private void listarAutores() {
+        if (autores.isEmpty()) {
+            System.out.println("No hay autores para listar.");
+        } else {
+            System.out.println("Lista de Autores:");
+            for (Autor autor : autores) {
+                System.out.println(autor);
+            }
+        }
+    }
+
+    private void actualizarAutor() {
+        listarAutores();
+        System.out.print("Ingrese el nombre del autor que desea actualizar: ");
+        int nombre = sc.nextInt();
+        sc.nextLine();
+
+        if (nombre >= 0 && nombre < autores.size()) {
+            System.out.print("Ingrese el nuevo nombre del autor: ");
+            String nuevoNombre = sc.nextLine();
+
+            Autor autorActualizado = autores.get(nombre);
+            autorActualizado.setNombre(nuevoNombre);
+
+            System.out.println("Autor actualizado exitosamente.");
+        } else {
+            System.out.println("Nombre no encontrado. No se puede actualizar el autor.");
+        }
+    }
+
+    private void eliminarAutor() {
+        listarAutores();
+        System.out.print("Ingrese el nombre del autor que desea eliminar: ");
+        int nombre = sc.nextInt();
+        sc.nextLine();
+
+        if (nombre >= 0 && nombre < autores.size()) {
+            autores.remove(nombre);
+            System.out.println("Autor eliminado exitosamente.");
+        } else {
+            System.out.println("Nombre no válido. No se puede eliminar el autor.");
+        }
     }
 
     public Documento añadir() {
