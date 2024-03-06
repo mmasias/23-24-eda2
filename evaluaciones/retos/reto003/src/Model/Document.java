@@ -57,4 +57,9 @@ public abstract class Document {
         return index;
     }
 
+    @Override
+    public String toString() {
+        return "-> Documento: " + title;
+    }
+
 }

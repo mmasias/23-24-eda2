@@ -78,7 +78,15 @@ public class Biblioteca {
         documents.clear();
     }
 
-    
+    @Override
+    public String toString() {
+        StringBuilder documentListing = new StringBuilder();
+        for (Document d : documents) {
+            documentListing.append(d.toString()).append("\n");
+        }
+        return documentListing.toString();
+    }
+
 
 
 
