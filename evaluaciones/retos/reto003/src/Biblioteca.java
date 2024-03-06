@@ -7,6 +7,15 @@ public class Biblioteca {
         this.documentos = documentos;
     }
 
+    public Documento buscarDocumentoNombre(String nombreDocumento) {
+        for(Documento d : documentos) {
+            if(d.equals(nombreDocumento)){
+                return d;
+            }
+        }
+        return null;
+    }
+
     
 
 
