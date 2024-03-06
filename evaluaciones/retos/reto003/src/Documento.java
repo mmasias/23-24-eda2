@@ -2,12 +2,12 @@ import java.util.ArrayList;
 
 public abstract class Documento {
     private String titulo;
-    private ArrayList<String> autores =  new ArrayList<>();
+    private ArrayList<Autor> autores =  new ArrayList<>();
     private int anhoPublicacion;
     private String tipoDocumento;
     private ArrayList<String> palabrasClave = new ArrayList<>();
 
-    public Documento(String titulo, ArrayList<String> autores, int anhoPublicacion,String tipoDocumento, ArrayList<String> palabrasClave) {
+    public Documento(String titulo, ArrayList<Autor> autores, int anhoPublicacion,String tipoDocumento, ArrayList<String> palabrasClave) {
         this.titulo = titulo;
         this.autores = autores;
         this.anhoPublicacion = anhoPublicacion;
@@ -18,7 +18,7 @@ public abstract class Documento {
         return titulo;
     }
 
-    public ArrayList<String> getAutores() {
+    public ArrayList<Autor> getAutores() {
         return autores;
     }
 
