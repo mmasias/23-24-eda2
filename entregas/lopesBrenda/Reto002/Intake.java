@@ -5,132 +5,81 @@ import java.util.ArrayList;
 
 
 class Intake {
-    ArrayList<Food> foods;
+    private ArrayList<Food> foods;
+    private String name;
 
-    public Intake() {
+    public Intake (String name) {
+        this.name = name;
         foods = new ArrayList<>();
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void menu() {
+        Scanner scanner = new Scanner(System.in);
+        String option;
+        do {
+            System.out.println("1. Add Food");
+            System.out.println("2. Delete Food");
+            System.out.println("3. Update Food");
+            System.out.println("4. List Foods");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
+            option = scanner.nextLine();
+
+            switch (option) {
+                case "1":
+                    System.out.print("Enter food name: ");
+                    String foodName = scanner.nextLine();
+                    addFood(new Food(foodName));
+                    break;
+                case "2":
+                    System.out.print("Enter food name to delete: ");
+                    foodName = scanner.nextLine();
+                    deleteFood(foodName);
+                    break;
+                case "3":
+                    System.out.print("Enter food name to update: ");
+                    foodName = scanner.nextLine();
+                    System.out.print("Enter new name: ");
+                    String newName = scanner.nextLine();
+                    updateFood(foodName, newName);
+                    break;
+                case "4":
+                    printFoodListing();
+                    break;
+            }
+        } while (!option.equals("5"));
     }
 
     public void addFood(Food food) {
-        FoodNode newFoodNode = new FoodNode(food);
-        if (first == null) {
-            first = newFoodNode;
-        } else {
-            FoodNode current = first;
-            while (current.getNext() != null) {
-                current = current.getNext();
-            }
-            current.setNext(newFoodNode);
-        }
+        foods.add(food);
     }
 
     public void printFoodListing() {
         System.out.println(this.toString());
     }
 
-    public void createIntake() {
-        boolean creating = true;
-        Scanner userInput = new Scanner(System.in);
-        while (creating) {
-            System.out.println("Nombre del alimento (-1 para terminar)");
-            String foodName = userInput.nextLine();
-            if (foodName.equals("-1")) {
-                creating = !creating;
-            } else {
-                Food food = new Food(foodName);
-                addFood(food);
-            }
-        }
-    }
-
-    private void editIntake() {
-        boolean editing = true;
-        Scanner userInput = new Scanner(System.in);
-        while (editing) {
-            System.out.println("Nombre del alimento por editar (-1 para terminar)");
-            String foodName = userInput.nextLine();
-            if (foodName.equals("-1")) {
-                editing = !editing;
-            } else {
-                editFood(foodName);
-            }
-        }
-    }
-
-    private void deleteIntake() {
-        Scanner userInput = new Scanner(System.in);
-        boolean deleting = true;
-        while (deleting) {
-            System.out.println("Nombre del alimento por eliminar (-1 para terminar)");
-            String foodName = userInput.nextLine();
-            if (foodName.equals("-1")) {
-                deleting = !deleting;
-            } else {
-                deleteFood(foodName);
+    public void updateFood(String foodName, String newName) {
+        for (Food food : foods) {
+            if (food.getName().equals(foodName)) {
+                food.setName(newName);
+                break;
             }
         }
     }
 
     private void deleteFood(String foodName) {
-        if (first.getFood().getName().equals(foodName)) {
-            first = first.getNext();
-            return;
-        } else {
-            FoodNode current = first;
-            while (current.getNext() != null && !current.getNext().getFood().getName().equals(foodName)) {
-                current = current.getNext();
-            }
-            if (current.getNext() != null) {
-                current.setNext(current.getNext().getNext());
-            }
-        }
+        foods.removeIf(food -> food.getName().equals(foodName));
     }
-
-    private void editFood(String foodName) {
-        Scanner userInput = new Scanner(System.in);
-        FoodNode current = first;
-        while (current != null) {
-            if (current.getFood().getName().equals(foodName)) {
-                System.out.println("Nuevo nombre de [" + foodName + "]");
-                String newFoodName = userInput.nextLine();
-                current.getFood().setName(newFoodName);
-                return;
-            }
-            current = current.getNext();
-        }
-        System.out.println("Alimento no encontrado");
-    }
-
-    private void deleteAllIntake() {
-        first = null;
-    }
-
-    @Override
-    public String toString() {
-        String foodListing = "";
-        FoodNode current = first;
-        while (current != null) {
-            foodListing = foodListing + current.getFood().toString() + "\n";
-            current = current.getNext();
-        }
-        return foodListing;
-    }
-
+    
     public static void main(String[] args) {
 
-        Intake breakfast = new Intake();
-
-        breakfast.createIntake();
-        breakfast.printFoodListing();
-
-        breakfast.editIntake();
-        breakfast.printFoodListing();
-
-        breakfast.deleteIntake();
-        breakfast.printFoodListing();
-
-        breakfast.deleteAllIntake();
-        breakfast.printFoodListing();
-
+        Intake intake = new Intake("Sample Intake");
+        intake.menu();
     }
 }

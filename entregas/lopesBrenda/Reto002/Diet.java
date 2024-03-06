@@ -2,63 +2,79 @@ package entregas.lopesBrenda.Reto002;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 
+public class Diet {
+    private List<Day> days;
+    private String name;
 
-class Diet {
-    private DayNode first;
-
-    public Diet() {
-        first = null;
+    public Diet(String name) {
+        this.name = name;
+        this.days = new ArrayList<>();
     }
 
-    public void addDay(Day day){
-        DayNode newDayNode = new DayNode(day);
-        if (first == null){
-            first = newDayNode;
-        } else {
-            DayNode current = first;
-            while(current.getNext()!=null){
-                current = current.getNext();
+    public void menu() {
+        Scanner scanner = new Scanner(System.in);
+        String option;
+        do {
+            System.out.println("1. Add Day");
+            System.out.println("2. Delete Day");
+            System.out.println("3. Update Day");
+            System.out.println("4. List Days");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
+            option = scanner.nextLine();
+
+            switch (option) {
+                case "1":
+                    System.out.print("Enter day name: ");
+                    String dayName = scanner.nextLine();
+                    addDay(new Day(dayName));
+                    break;
+                case "2":
+                    System.out.print("Enter day name to delete: ");
+                    dayName = scanner.nextLine();
+                    deleteDay(dayName);
+                    break;
+                case "3":
+                    System.out.print("Enter day name to update: ");
+                    dayName = scanner.nextLine();
+                    System.out.print("Enter new name: ");
+                    String newName = scanner.nextLine();
+                    updateDay(dayName, newName);
+                    break;
+                case "4":
+                    printDayListing();
+                    break;
             }
-            current.setNext(newDayNode);
+        } while (!option.equals("5"));
+    }
+
+    public void addDay(Day day) {
+        days.add(day);
+    }
+
+    public void deleteDay(String dayName) {
+        days.removeIf(day -> day.getName().equals(dayName));
+    }
+
+    public void updateDay(String dayName, String newName) {
+        for (Day day : days) {
+            if (day.getName().equals(dayName)) {
+                day.setName(newName);
+                break;
+            }
         }
     }
 
-    public void printDayListing(){
-        System.out.println(this.toString());
-    }
-
-    public void createDays() {
-        boolean creating = true;
-        Scanner userInput = new Scanner(System.in);
-        while(creating){
-            System.out.println("Nombre del dia (-1 para terminar)");
-            String dayName = userInput.nextLine();
-            if(dayName.equals("-1")) {
-                creating=!creating;
-            } else {
-                Day day = new Day();
-                day.createIntakes();
-                addDay(day);
-            }
-        }        
-    }
-
-    @Override
-    public String toString() {
-        String daysListing = "";
-        DayNode current = first;
-        while (current != null) {
-            daysListing = daysListing + current.getDay().toString() + "\n";
-            current = current.getNext();
+    public void printDayListing() {
+        for (Day day : days) {
+            System.out.println(day.getName());
         }
-        return daysListing;
-    }    
+    }
 
     public static void main(String[] args) {
-
-        Diet diet = new Diet();
-        diet.createDays();
-        diet.printDayListing();
-    }      
+        Diet diet = new Diet("Sample Diet");
+        diet.menu();
+    }
 }

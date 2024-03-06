@@ -2,70 +2,88 @@ package entregas.lopesBrenda.Reto002;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 
-class Day {
-    private IntakeNode first;
+public class Day {
+    private List<Intake> intakes;
+    private String name;
 
-    public Day() {
-        first = null;
+    public Day(String name) {
+        this.name = name;
+        this.intakes = new ArrayList<>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void menu() {
+        Scanner scanner = new Scanner(System.in);
+        String option;
+        do {
+            System.out.println("1. Add Intake");
+            System.out.println("2. Delete Intake");
+            System.out.println("3. Update Intake");
+            System.out.println("4. List Intakes");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
+            option = scanner.nextLine();
+
+            switch (option) {
+                case "1":
+                    System.out.print("Enter intake name: ");
+                    String intakeName = scanner.nextLine();
+                    addIntake(new Intake(intakeName));
+                    break;
+                case "2":
+                    System.out.print("Enter intake name to delete: ");
+                    intakeName = scanner.nextLine();
+                    deleteIntake(intakeName);
+                    break;
+                case "3":
+                    System.out.print("Enter intake name to update: ");
+                    intakeName = scanner.nextLine();
+                    System.out.print("Enter new name: ");
+                    String newName = scanner.nextLine();
+                    updateIntake(intakeName, newName);
+                    break;
+                case "4":
+                    printIntakeListing();
+                    break;
+            }
+        } while (!option.equals("5"));
     }
 
     public void addIntake(Intake intake) {
-        IntakeNode newIntakeNode = new IntakeNode(intake);
-        if (first == null) {
-            first = newIntakeNode;
-        } else {
-            IntakeNode current = first;
-            while (current.getNext() != null) {
-                current = current.getNext();
+        intakes.add(intake);
+    }
+
+    public void deleteIntake(String intakeName) {
+        intakes.removeIf(intake -> intake.getName().equals(intakeName));
+    }
+
+    public void updateIntake(String intakeName, String newName) {
+        for (Intake intake : intakes) {
+            if (intake.getName().equals(intakeName)) {
+                intake.setName(newName);
+                break;
             }
-            current.setNext(newIntakeNode);
         }
     }
 
     public void printIntakeListing() {
-        System.out.println(this.toString());
-    }
-
-    public void createIntakes() {
-        boolean creating = true;
-        Scanner userInput = new Scanner(System.in);
-        while (creating) {
-            System.out.println("Nombre de la ingesta (-1 para terminar)");
-            String intakeName = userInput.nextLine();
-            if (intakeName.equals("-1")) {
-                creating = !creating;
-            } else {
-                Intake intake = new Intake();
-                intake.createIntake();
-                addIntake(intake);
-            }
+        for (Intake intake : intakes) {
+            System.out.println(intake.getName());
         }
-    }
-
-    @Override
-    public String toString() {
-        String intakeListing = "";
-        IntakeNode current = first;
-        while (current != null) {
-            intakeListing = intakeListing + current.getIntake().toString() + "\n";
-            current = current.getNext();
-        }
-        return intakeListing;
     }
 
     public static void main(String[] args) {
-
-        Day monday = new Day();
-        monday.createIntakes();
-        monday.printIntakeListing();
+        Day day = new Day("Sample Day");
+        day.menu();
     }
 
-    public IntakeNode getFirst() {
-        return first;
-    }
-
-    public void setFirst(IntakeNode first) {
-        this.first = first;
-    }
 }
