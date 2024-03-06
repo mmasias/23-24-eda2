@@ -134,8 +134,6 @@ public class Gestion {
             }
         }
     
-    
-
     public void buscar() {
         System.out.println("Ingrese el titulo del documento a buscar");
         Scanner sc = new Scanner(System.in);
@@ -208,6 +206,7 @@ public class Gestion {
         for (Documento documento : documentos) {
             if (documento.getTitulo().equals(titulo)) {
                 documentos.remove(documento);
+                break;
             }
         }
     }
