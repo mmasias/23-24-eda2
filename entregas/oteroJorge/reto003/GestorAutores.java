@@ -74,6 +74,15 @@ public class GestorAutores {
         }
         return autores;
     }
+
+    public boolean existeAutor(int id){
+        for (Autor autor : autores) {
+            if (autor.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
     public static void main(String[] args) {
         GestorAutores gestorAutores = new GestorAutores();
         Autor autor1 = new Autor(1, "J.R.R. Tolkien");
