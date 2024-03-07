@@ -80,6 +80,10 @@ public class Library {
         documents.clear();
     }
 
+    public void printDocumentListing() {
+        System.out.println(this.toStringDocuments());
+    }
+
     
     public String toStringDocuments() {
         StringBuilder documentListing = new StringBuilder();

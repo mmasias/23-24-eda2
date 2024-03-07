@@ -133,7 +133,7 @@ public class Option {
         this.digitalLibrary.deleteDocument(documentTitle);
     }
     public void showDocuments() {
-        this.digitalLibrary.toStringDocuments();
+        this.digitalLibrary.printDocumentListing();
     }
 }
 
