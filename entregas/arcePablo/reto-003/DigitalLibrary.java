@@ -20,15 +20,7 @@ public class DigitalLibrary {
                     library.addDocument(documentGenerator.generateRandomDocument());
                     break;
                 /*case "f":
-                    System.out.println("Introduce el título del documento a buscar:");
-                    String title = scanner.nextLine();
-                    Document foundDocument = library.findDocumentByTitle(title);
-                    if (foundDocument != null){
-                        System.out.println("Documento encontrado:");
-                        System.out.println(foundDocument);
-                    } else {
-                        System.out.println("Documento no encontrado");
-                    }
+
                     break;*/
                 case "l":
                     library.listDocuments();
