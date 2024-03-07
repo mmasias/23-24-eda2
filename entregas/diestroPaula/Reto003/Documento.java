@@ -4,20 +4,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Documento {
-
     private String titulo;
     private ArrayList<Autor> autores;
     private String añoPublicacion;
     private ArrayList<String> palabrasClave;
     private String tipo;
-    Scanner sc;
+    private Scanner sc;
 
     public Documento(String titulo, ArrayList<Autor> autores, String añoPublicacion, ArrayList<String> palabrasClave,
             String tipo) {
         this.titulo = titulo;
-        this.autores = new ArrayList<>();
+        this.autores = autores;
         this.añoPublicacion = añoPublicacion;
-        this.palabrasClave = new ArrayList<>();
+        this.palabrasClave = palabrasClave;
         this.tipo = tipo;
         sc = new Scanner(System.in);
     }
@@ -97,7 +96,7 @@ public class Documento {
 
             System.out.println("Autor actualizado exitosamente.");
         } else {
-            System.out.println("Nombre no encontrado. No se puede actualizar el autor.");
+            System.out.println("Nombre no encontrado.");
         }
     }
 
@@ -111,7 +110,7 @@ public class Documento {
             autores.remove(nombre);
             System.out.println("Autor eliminado exitosamente.");
         } else {
-            System.out.println("Nombre no válido. No se puede eliminar el autor.");
+            System.out.println("Nombre no válido.");
         }
     }
 
@@ -122,9 +121,9 @@ public class Documento {
         ArrayList<String> autores = new ArrayList<>();
         boolean añadiendoAutores = true;
         while (añadiendoAutores) {
-            System.out.println("Añada el nombre del autor/es ('FIN' para terminar): ");
+            System.out.println("Añada el nombre del autor/es ('-1' para terminar): ");
             String nombreAutor = sc.nextLine();
-            if (nombreAutor.equalsIgnoreCase("FIN")) {
+            if (nombreAutor.equalsIgnoreCase("-1")) {
                 añadiendoAutores = false;
             } else {
                 autores.add(nombreAutor);
@@ -133,18 +132,54 @@ public class Documento {
 
         System.out.println("Introduzca la fecha de publicación: ");
         String año = sc.nextLine();
+        return null;
+    }
 
+    public Documento clasificarPalabrasClave() {
         ArrayList<String> palabrasClave = new ArrayList<>();
-        System.out.println("Introduzca las palabras clave del documento (escriba 'FIN' para terminar):");
-        while (true) {
-            String palabraClave = sc.nextLine();
-            if (palabraClave.equalsIgnoreCase("FIN")) {
-                break;
+        boolean añadiendoPalabras = true;
+        while (añadiendoPalabras) {
+            System.out.println("Añada una palabra clave ('-1' para terminar): ");
+            String palabra = sc.nextLine();
+            if (palabra.equalsIgnoreCase("-1")) {
+                añadiendoPalabras = false;
             } else {
-                palabrasClave.add(palabraClave);
+                palabrasClave.add(palabra);
             }
         }
-        Documento d = new Documento(titulo, null, año, null, tipo);
+        return null;
+    }
+
+    public Documento clasificarTipo() {
+        System.out.println("Introduzca el tipo de documento: ([L]ibro, [R]evista, [A]rtículo, [P]aper) ");
+        String tipo = sc.nextLine();
+        if (tipo.equalsIgnoreCase("L")) {
+            tipo = "Libro";
+        } else if (tipo.equalsIgnoreCase("R")) {
+            tipo = "Revista";
+        } else if (tipo.equalsIgnoreCase("A")) {
+            tipo = "Artículo";
+        } else if (tipo.equalsIgnoreCase("P")) {
+            tipo = "Paper";
+        } else {
+            System.out.println("Tipo de documento no válido.");
+        }
+
+        Documento d = new Documento(titulo, autores, añoPublicacion, palabrasClave, tipo);
         return d;
+    }
+
+    public void mostrarDetalles() {
+        System.out.println("Título: " + titulo);
+        System.out.println("Autores: ");
+        for (Autor autor : autores) {
+            System.out.println(autor.getNombre());
+        }
+        System.out.println("Año de publicación: " + añoPublicacion);
+        System.out.println("Palabras clave: ");
+        for (String palabraClave : palabrasClave) {
+            System.out.println(palabraClave);
+        }
+        System.out.println("Tipo de documento: " + tipo);
     }
 }
