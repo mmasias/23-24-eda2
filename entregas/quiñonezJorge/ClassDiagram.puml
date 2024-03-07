@@ -1,0 +1,19 @@
+@startuml class diagram
+
+hide empty methods
+hide empty attributes
+
+class Library{}
+
+class Document{}
+
+class ArrayList{}
+
+class menu{}
+
+Library -- menu : uses
+Library -- ArrayList : uses
+ArrayList -- Document : stores
+Library .. Document : manage 
+
+@enduml
