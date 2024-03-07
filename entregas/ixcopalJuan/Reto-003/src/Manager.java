@@ -55,4 +55,15 @@ public class Manager {
             number++;
         }
     }
+
+
+    public LinkedList<Document> searchByTitle(String title) {
+        LinkedList<Document> foundDocuments = new LinkedList<>();
+        for (Document document : documents) {
+            if (document.getTitle().equalsIgnoreCase(title)) {
+                foundDocuments.add(document);
+            }
+        }
+        return foundDocuments;
+    }
 }

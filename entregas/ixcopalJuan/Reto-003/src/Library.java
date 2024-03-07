@@ -23,6 +23,7 @@ public class Library {
         keyWords.add(keyWord4);
 
         Document documento1 = new Document("Libro", "Miguel de Cervantes", "Don Quijote", keyWords , 2024);
+        Document documento2 = new Document("Libro", "Miguel de Cervantes", "Don Juan", keyWords , 2024);
 
         manager.addAuthor(autor1);
         manager.addAuthor(autor2);
@@ -33,7 +34,7 @@ public class Library {
         manager.addDocumentType(tipo4);
 
         manager.addDocument(documento1);
-        manager.addDocument(documento1);
+        manager.addDocument(documento2);
 
         for (KeyWord keyword : keyWords) {
             manager.addKeyWords(keyword);
@@ -44,5 +45,19 @@ public class Library {
         manager.listDocuments();
 
         manager.listKeyWord();
+
+
+        String titleToSearch = "Don Quijote";
+        LinkedList<Document> foundDocuments = manager.searchByTitle(titleToSearch);
+        if (!foundDocuments.isEmpty()) {
+            System.out.println("Documentos encontrados con el título '" + titleToSearch + "':");
+            int number = 1;
+            for (Document document : foundDocuments) {
+                System.out.println( number + " -" + document.getDocumentData());
+                number++;
+            }
+        } else {
+            System.out.println("No se encontraron documentos con el título '" + titleToSearch + "'");
+        }
     }
 }
