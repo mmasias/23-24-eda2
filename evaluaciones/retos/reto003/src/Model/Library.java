@@ -80,11 +80,11 @@ public class Library {
         documents.clear();
     }
 
-    @Override
-    public String toString() {
+    
+    public String toStringDocuments() {
         StringBuilder documentListing = new StringBuilder();
         for (Document d : documents) {
-            documentListing.append(d.toString()).append("\n");
+            documentListing.append(d.toStringDocument()).append("\n");
         }
         return documentListing.toString();
     }

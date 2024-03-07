@@ -66,8 +66,8 @@ public abstract class Document {
         return index;
     }
 
-    @Override
-    public String toString() {
+   
+    public String toStringDocument() {
         return "-> Documento: " + title;
     }
 

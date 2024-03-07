@@ -5,14 +5,14 @@ import java.util.Scanner;
 
 public class Option {
     private ArrayList<Document> documents = new ArrayList<>();
-    Library digitalLibrary = new Library(documents);
+    Library digitalLibrary;
     Scanner userInput = new Scanner(System.in);
 
     public Option() {
-
+        this.digitalLibrary = new Library(documents);
     }
 
-    public void createDocument(String documentType) {
+    public void createDocument(String documentType) throws InterruptedException {
         int authorCount = 0;
         int wordsCount = 0;
         ArrayList<Author> authors = new ArrayList<>();
@@ -22,13 +22,14 @@ public class Option {
         System.out.println("Introduce el nombre del documento: ");
         String documentName = userInput.nextLine();
 
-        System.out.println("Introduce la cantidad de authors del documento: ");
-        int authorNumber = userInput.nextInt();
+        System.out.println("Introduce la cantidad de autores del documento: ");
+        int authorNumber = Integer.parseInt(userInput.nextLine());
 
         while (authorCount != authorNumber) {
             System.out.println("Introduce el nombre del autor: ");
             String authorName = userInput.nextLine();
 
+            
             System.out.println("Introduce los apellidos del autor: ");
             String authorSurnames = userInput.nextLine();
 
@@ -42,12 +43,13 @@ public class Option {
 
         System.out.println("Introduce el número de temas/palabras clave del documento: ");
         int keyWordNumber = userInput.nextInt();
+        userInput.nextLine();
 
         while (wordsCount != keyWordNumber) {
             System.out.println("Introduce el tema/palabra clave: ");
             String keyWord = userInput.nextLine();
             keyWords.add(keyWord);
-
+            
             wordsCount++;
         }
         
@@ -68,7 +70,6 @@ public class Option {
                 break;
         }
         digitalLibrary.addDocument(documentCreated);
-        
         
     }
 
@@ -126,10 +127,10 @@ public class Option {
         }
     }
     public void deleteDocument(String documentTitle) {
-        digitalLibrary.deleteDocument(documentTitle);
+        this.digitalLibrary.deleteDocument(documentTitle);
     }
     public void showDocuments() {
-        digitalLibrary.toString();
+        this.digitalLibrary.toStringDocuments();
     }
 }
 

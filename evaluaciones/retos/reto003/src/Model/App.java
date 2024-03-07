@@ -3,7 +3,7 @@ package Model;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Option options = new Option();
          boolean isAppRunning = true;
         Scanner userInput = new Scanner(System.in); 
@@ -16,9 +16,10 @@ public class App {
 
             switch(userResponse) {
                 case "C": 
-                    System.out.println("Introduzca el tipo de documento a editar: ");
+                    System.out.println("Introduzca el tipo de documento a crear: ");
                     String documentType = userInput.nextLine();
                     options.createDocument(documentType);
+                    break;
 
                 case "E":
                     System.out.println("Introduzca el título del documento a editar: ");
@@ -31,10 +32,11 @@ public class App {
                     options.deleteDocument(documentToDelete);
                     break;
                 case "M": 
-                    options.showDocuments();              
+                    options.showDocuments();            
                     break;
                 case "S":
                     isAppRunning = false;
+                    userInput.close();
                     break;
             }
         }
