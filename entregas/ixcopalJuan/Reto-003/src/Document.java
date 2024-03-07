@@ -1,12 +1,12 @@
 import java.util.LinkedList;
 public class Document {
     private String documentType;
-    private String author;
+    private Author author;
     private String title;
     private LinkedList<KeyWord> keyword;
     private int publishYear;
 
-    public Document (String documentType, String author, String title, LinkedList<KeyWord> keyword, int publishYear) {
+    public Document (String documentType, Author author, String title, LinkedList<KeyWord> keyword, int publishYear) {
         this.documentType = documentType;
         this.author = author;
         this.title = title;
@@ -22,11 +22,11 @@ public class Document {
         this.documentType = documentType;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
@@ -63,8 +63,10 @@ public class Document {
             keywordsString.setLength(keywordsString.length() - 2);
         }
 
+
+
         return " Tipo: " + documentType +
-                "\n    Autor: " + author +
+                "\n    Autor: " + author.getFullName() +
                 "\n    Título: " + title +
                 "\n    Palabras Clave: " + keywordsString.toString() +
                 "\n    Año de Publicación: " + publishYear;

@@ -5,6 +5,10 @@ public class Manager {
     LinkedList<Document> documents = new LinkedList<>();
     LinkedList<KeyWord> keyWords = new LinkedList<>();
 
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
     public void addAuthor(Author author){
         authors.add(author);
     }
@@ -20,8 +24,10 @@ public class Manager {
     }
 
     public void listDocumentTypes() {
+        int number = 1;
         for (DocumentType documentType : documentTypes) {
-            System.out.println("Tipo de documento: " + documentType.getType());
+            System.out.println("Tipo " + number + " : " + documentType.getType());
+            number++;
         }
     }
 
@@ -37,14 +43,23 @@ public class Manager {
         }
     }
 
-    public void addKeyWords(KeyWord keyword) {
-        keyWords.add(keyword);
+    public void removeDocumentByTitle(String title) {
+        LinkedList<Document> documentsToRemove = new LinkedList<>();
+        for (Document document : documents) {
+            if (document.getTitle().equalsIgnoreCase(title)) {
+                documentsToRemove.add(document);
+            }
+        }
+        if (!documentsToRemove.isEmpty()) {
+            documents.removeAll(documentsToRemove);
+            System.out.println(ANSI_CYAN + "Documento(s) eliminado(s) correctamente." + ANSI_RESET);
+        } else {
+            System.out.println(ANSI_RED + "No se encontró ningún documento con el título '" + title + "'." + ANSI_RESET);
+        }
     }
 
-    public void xd(){
-        for (KeyWord keyWord : keyWords){
-            keyWord.getKeyWord();
-        }
+    public void addKeyWords(KeyWord keyword) {
+        keyWords.add(keyword);
     }
 
 
