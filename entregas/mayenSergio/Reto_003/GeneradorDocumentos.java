@@ -12,14 +12,9 @@ public class GeneradorDocumentos {
     public static List<Documento> crearNuevoDocumento() {
         List<Documento> nuevosDocumentos = new ArrayList<>();
 
-        System.out.println("Ingrese la información de los nuevos documentos. Para detenerse, ingrese 'fin'.");
-        while (true) {
-            System.out.print("Título del documento (o 'fin' para salir): ");
+        do {
+            System.out.print("Título del documento: ");
             String titulo = scanner.nextLine();
-
-            if ("fin".equalsIgnoreCase(titulo.trim())) {
-                break;
-            }
 
             System.out.print("Autor del documento: ");
             String autor = scanner.nextLine();
@@ -32,7 +27,10 @@ public class GeneradorDocumentos {
             nuevosDocumentos.add(documento);
 
             System.out.println("Documento agregado correctamente.\n");
-        }
+
+            System.out.println("¿Desea crear más documentos? (si/no): ");
+
+        } while (scanner.nextLine().equalsIgnoreCase("si"));
 
         return nuevosDocumentos;
     }
