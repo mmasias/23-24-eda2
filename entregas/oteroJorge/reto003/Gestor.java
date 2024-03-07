@@ -71,8 +71,8 @@ public class Gestor {
 
     private void buscarDocumentoPorTitulo(String titulo) {
         Documento documento = null;
-        for (Documento doc : documentos) {
-            if (doc.getTitulo().equalsIgnoreCase(titulo)) {
+        for (Documento doc : this.documentos) {
+            if (doc.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
                 documento = doc;
                 break;
             }
@@ -83,6 +83,7 @@ public class Gestor {
             System.out.println("El documento no existe");
         }
     }
+    
 
     private void buscarDocumentoPorAutor(String autor) {
         ArrayList<Documento> documentosAutor = new ArrayList<>();

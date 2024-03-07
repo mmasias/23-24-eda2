@@ -31,13 +31,19 @@ public class Biblioteca {
         ArrayList<Integer> autores3 = new ArrayList<>();
         autores3.add(1);
 
-        Documento libro = new Documento("El señor de los anillos", autores1, "1954", "Libro");
-        Documento revista = new Documento("Revista de programación", autores2, "2020", "Revista");
-        Documento articulo = new Documento("Articulo de programación", autores3, "2020", "Articulo");
+        ArrayList<Integer> autores4 = new ArrayList<>();
+        autores4.add(4);
+
+        Documento libro = new Documento("El senor de los anillos", autores1, "1954", "Libro");
+        Documento revista = new Documento("Revista de programacion", autores2, "2020", "Revista");
+        Documento articulo = new Documento("Articulo de programacion", autores3, "2020", "Articulo");
+        Documento libro2 = new Documento("Hob", autores4, "1954", "Libro");
 
         this.documentos.add(libro);
         this.documentos.add(revista);
         this.documentos.add(articulo);
+
+        this.documentos.add(libro2);
     }
         
         public static void main(String[] args) {
