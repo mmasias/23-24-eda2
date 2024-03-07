@@ -3,12 +3,12 @@ package entregas.oteroJorge.reto003;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Manager {
+public class Gestor {
 
     private ArrayList<Documento> documentos;
     GestorAutores gestorAutores;
 
-    public Manager() {
+    public Gestor() {
         this.documentos = new ArrayList<>();
         this.gestorAutores = new GestorAutores();
     }

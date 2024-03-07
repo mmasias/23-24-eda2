@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Biblioteca {
 
     private ArrayList<Documento> documentos;
-    private Manager manager = new Manager();
+    private Gestor manager = new Gestor();
     public Biblioteca() {
         this.documentos = new ArrayList<>();
         this.ingresarDocumentos();
