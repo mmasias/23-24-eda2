@@ -56,12 +56,13 @@ public class Document {
     }
 
     public void displayInformation() {
+        System.out.println("-------------------------\n");
         System.out.println("Título: " + title);
         System.out.println("Autor/es: " + authors);
         System.out.println("Año de publicación: " + publicationYear);
         System.out.println("Tipo de documento: " + documentType);
         System.out.println("Palabras clave: " + keywords);
-        System.out.println();
+        System.out.println("-------------------------\n");
     }
 }
 
