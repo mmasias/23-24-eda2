@@ -151,6 +151,7 @@ public class DigitalLibrary {
 
         int choice = scanner.nextInt();
         scanner.nextLine();
+
         switch (choice) {
             case 1:
                 System.out.println("Ingrese el nuevo título:\n");
@@ -164,7 +165,7 @@ public class DigitalLibrary {
                 scanner.nextLine();
                 break;
             case 3:
-                System.out.println("Ingrese el nuevo tipo de documento (BOOK, MAGAZINE, ARTICLE, SCIENTIFIC_PAPER):\n");
+                System.out.println("Ingrese el nuevo tipo de documento (LIBRO, REVISTA, ARTICULO, PAPER_CIENTIFICO):\n");
                 DocumentType newDocumentType = DocumentType.valueOf(scanner.nextLine().toUpperCase());
                 document.setDocumentType(newDocumentType);
                 break;

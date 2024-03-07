@@ -58,7 +58,7 @@ public class DocumentCollection {
     }
 
     public void removeDocument(String title) {
-        documents.removeIf(document -> document.getTitle().equals(title));
+        documents.removeIf(document -> document.getTitle().equalsIgnoreCase(title));
     }
 
     public void displayDocuments() {
