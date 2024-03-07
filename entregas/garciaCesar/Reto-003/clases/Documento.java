@@ -49,9 +49,13 @@ public  class Documento {
     }
 
     public ArrayList<String> getPalabrasClave() {
+        for (String palabra : palabrasClave) {
+            System.out.print(" " + palabra + "\n");
+        }
+        System.out.println();
         return palabrasClave;
     }
-
+    
     public void setPalabrasClave(ArrayList<String> palabrasClave) {
         this.palabrasClave = palabrasClave;
     }
@@ -71,5 +75,4 @@ public  class Documento {
     public void eliminarPalabraClave(String palabraClave){
         this.palabrasClave.remove(palabraClave);
     }
-
 }
