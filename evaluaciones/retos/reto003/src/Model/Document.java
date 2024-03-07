@@ -68,7 +68,7 @@ public abstract class Document {
 
    
     public String toStringDocument() {
-        return "-> Documento: " + title;
+        return "-> Documento: " + this.title;
     }
 
 }

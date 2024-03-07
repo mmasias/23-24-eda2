@@ -12,7 +12,7 @@ public class Option {
         this.digitalLibrary = new Library(documents);
     }
 
-    public void createDocument(String documentType) throws InterruptedException {
+    public void createDocument(String documentType) {
         int authorCount = 0;
         int wordsCount = 0;
         ArrayList<Author> authors = new ArrayList<>();
@@ -76,55 +76,58 @@ public class Option {
     public void editDocument(String documentTitle) {
         Document documentSearched = digitalLibrary.searchDocumentByName(documentTitle);
 
-        System.out.println("¿Qué quiere editar del documento " + documentTitle + "?");
-        System.out.println("T - Título | A - Autor | P - Año de Publicación | K - Palabra Clave | Y - Tipo | S - Salir");
-        String chosenOption = userInput.nextLine();
-                 
-        switch(chosenOption) {
-            case "T": 
-                System.out.println("Introduce el nuevo título: ");
-                String newTitle = userInput.nextLine();
-                digitalLibrary.editDocumentName(documentSearched.getTitle(), newTitle);
-                break;
-            case "A":
-                System.out.println("Introduce el nombre del autor a editar: ");
-                String oldName = userInput.nextLine();
-                System.out.println("Introduce los apellidos del autor a editar: ");
-                String oldSurname = userInput.nextLine();
-
-                System.out.println("Introduce el nuevo nombre del autor: ");
-                String newName = userInput.nextLine();
-                System.out.println("Introduce los nuevos apellidos del autor: ");
-                String newSurname = userInput.nextLine();
-
-                Author oldAuthor = documentSearched.getAuthor(oldName, oldSurname);
-                Author newAuthor = new Author(newName, newSurname);
-                digitalLibrary.editDocumentAuthor(documentTitle, oldAuthor ,newAuthor);
-                break;
+        if (documentSearched != null) {
+            System.out.println("¿Qué quiere editar del documento " + documentTitle + "?");
+            System.out.println("T - Título | A - Autor | P - Año de Publicación | K - Palabra Clave | Y - Tipo | S - Salir");
+            String chosenOption = userInput.nextLine();
                     
-            case "P": 
-                System.out.println("Introduce el nuevo año de publicación: ");
-                int newYear = userInput.nextInt();
+            switch(chosenOption) {
+                case "T": 
+                    System.out.println("Introduce el nuevo título: ");
+                    String newTitle = userInput.nextLine();
+                    digitalLibrary.editDocumentName(documentSearched.getTitle(), newTitle);
+                    break;
+                case "A":
+                    System.out.println("Introduce el nombre del autor a editar: ");
+                    String oldName = userInput.nextLine();
+                    System.out.println("Introduce los apellidos del autor a editar: ");
+                    String oldSurname = userInput.nextLine();
 
-                digitalLibrary.editDocumentPublishingYear(documentSearched.getTitle(), documentSearched.getPublishingYear(), newYear);
-                break;
-            case "K":
-                System.out.println("Introduce la palabra clave a editar: ");
-                String oldKeyWord = userInput.nextLine();
+                    System.out.println("Introduce el nuevo nombre del autor: ");
+                    String newName = userInput.nextLine();
+                    System.out.println("Introduce los nuevos apellidos del autor: ");
+                    String newSurname = userInput.nextLine();
 
-                System.out.println("Introduce la nueva palabra clave: ");
-                String newKeyWord = userInput.nextLine();
+                    Author oldAuthor = documentSearched.getAuthor(oldName, oldSurname);
+                    Author newAuthor = new Author(newName, newSurname);
+                    digitalLibrary.editDocumentAuthor(documentTitle, oldAuthor ,newAuthor);
+                    break;
+                        
+                case "P": 
+                    System.out.println("Introduce el nuevo año de publicación: ");
+                    int newYear = userInput.nextInt();
 
-                digitalLibrary.editDocumentKeyWord(documentSearched.getTitle(), oldKeyWord, newKeyWord);
-                break;
-            case "Y": 
-                System.out.println("Introduce el nuevo tipo de documento (Revista, Artículo, Paper Científico o Libro): ");
-                String newType = userInput.nextLine();
-                digitalLibrary.editDocumentType(documentSearched.getTitle(), documentSearched.getDocumentType(), newType);
-                break;
-            case "S":
-                break;
+                    digitalLibrary.editDocumentPublishingYear(documentSearched.getTitle(), documentSearched.getPublishingYear(), newYear);
+                    break;
+                case "K":
+                    System.out.println("Introduce la palabra clave a editar: ");
+                    String oldKeyWord = userInput.nextLine();
+
+                    System.out.println("Introduce la nueva palabra clave: ");
+                    String newKeyWord = userInput.nextLine();
+
+                    digitalLibrary.editDocumentKeyWord(documentSearched.getTitle(), oldKeyWord, newKeyWord);
+                    break;
+                case "Y": 
+                    System.out.println("Introduce el nuevo tipo de documento (Revista, Artículo, Paper Científico o Libro): ");
+                    String newType = userInput.nextLine();
+                    digitalLibrary.editDocumentType(documentSearched.getTitle(), documentSearched.getDocumentType(), newType);
+                    break;
+                case "S":
+                    break;
+            }
         }
+        
     }
     public void deleteDocument(String documentTitle) {
         this.digitalLibrary.deleteDocument(documentTitle);
