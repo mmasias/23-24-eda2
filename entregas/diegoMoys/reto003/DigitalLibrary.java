@@ -150,7 +150,7 @@ public class DigitalLibrary {
         System.out.println("0. Volver\n");
 
         int choice = scanner.nextInt();
-        scanner.nextLine(); // Consumir la nueva línea
+        scanner.nextLine();
 
         switch (choice) {
             case 1:
@@ -162,10 +162,10 @@ public class DigitalLibrary {
                 System.out.println("Ingrese el nuevo año de publicación:\n");
                 int newPublicationYear = scanner.nextInt();
                 document.setPublicationYear(newPublicationYear);
-                scanner.nextLine(); // Consumir la nueva línea
+                scanner.nextLine();
                 break;
             case 3:
-                System.out.println("Ingrese el nuevo tipo de documento (BOOK, MAGAZINE, ARTICLE, SCIENTIFIC_PAPER):\n");
+                System.out.println("Ingrese el nuevo tipo de documento (LIBRO, REVISTA, ARTICULO, PAPER_CIENTIFICO):\n");
                 DocumentType newDocumentType = DocumentType.valueOf(scanner.nextLine().toUpperCase());
                 document.setDocumentType(newDocumentType);
                 break;

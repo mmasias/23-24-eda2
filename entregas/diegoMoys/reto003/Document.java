@@ -56,7 +56,7 @@ public class Document {
     }
 
     public void displayInformation() {
-        System.out.println("-------------------------\n");
+        System.out.println("-------------------------");
         System.out.println("Título: " + title);
         System.out.println("Autor/es: " + authors);
         System.out.println("Año de publicación: " + publicationYear);
