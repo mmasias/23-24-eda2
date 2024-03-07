@@ -87,9 +87,11 @@ public class Manager {
     private void buscarDocumentoPorAutor(String autor) {
         ArrayList<Documento> documentosAutor = new ArrayList<>();
         for (Documento doc : documentos) {
-            for (Integer aut : doc.getIdAutores()) {
-                if (aut.equals(autor)) {
-                    documentosAutor.add(doc);
+            for (int id : doc.getIdAutores()) {
+                for (Autor aut : gestorAutores.getAutores()) {
+                    if (aut.getId() == id && aut.getNombreCompleto().equals(autor)) {
+                        documentosAutor.add(doc);
+                    }
                 }
             }
         }
@@ -98,7 +100,7 @@ public class Manager {
                 doc.printDocumento(this.gestorAutores);
             }
         } else {
-            System.out.println("El autor no existe");
+            System.out.println("No hay documentos con ese autor");
         }
     }
 
