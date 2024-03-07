@@ -3,12 +3,12 @@ package entregas.DiegoBarraza.reto003;
 
 import java.util.List;
 
-abstract class Documento {
-    protected String titulo;
-    protected List<String> autores;
-    protected int añoPublicacion;
-    protected String tipoDocumento;
-    protected List<String> palabrasClave;
+public class Documento {
+    public String titulo;
+    public List<String> autores;
+    public int añoPublicacion;
+    public String tipoDocumento;
+    public List<String> palabrasClave;
 
     public Documento(String titulo, List<String> autores, int añoPublicacion, String tipoDocumento, List<String> palabrasClave) {
         this.titulo = titulo;

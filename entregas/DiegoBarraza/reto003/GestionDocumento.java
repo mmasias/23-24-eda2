@@ -66,15 +66,24 @@ class GestionDocumentos {
         }
         return resultados;
     }
-    public void eliminarDocumento(Documento documento) {
-        documentos.remove(documento);
+    public boolean eliminarDocumento(String titulo) {
+        for (Documento documento : documentos) {
+            if (documento.getTitulo().equalsIgnoreCase(titulo)) {
+                documentos.remove(documento);
+                return true; 
+            }
+        }
+        return false; 
     }
-    public void editarDocumento(Documento documento, String titulo, List<String> autores, int añoPublicacion, String tipoDocumento, List<String> palabrasClave) {
-        documento.setTitulo(titulo);
-        documento.setAutores(autores);
-        documento.setAñoPublicacion(añoPublicacion);
-        documento.setTipoDocumento(tipoDocumento);
-        documento.setPalabrasClave(palabrasClave);
+    public boolean editarDocumento(String titulo, Documento nuevoDocumento) {
+        for (int i = 0; i < documentos.size(); i++) {
+            Documento documento = documentos.get(i);
+            if (documento.getTitulo().equalsIgnoreCase(titulo)) {
+                documentos.set(i, nuevoDocumento);
+                return true; 
+            }
+        }
+        return false; 
     }
     public void mostrarDocumentos() {
         for (Documento documento : documentos) {
