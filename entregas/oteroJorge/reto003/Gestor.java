@@ -21,7 +21,7 @@ public class Gestor {
         this.documentos = documentos;
     }
 
-    private void addDocumento(Documento documento) {
+    public void addDocumento(Documento documento) {
         this.documentos.add(documento);
     }
 
@@ -57,7 +57,7 @@ public class Gestor {
     private void removeDocumentoPorTitulo(String titulo) {
         Documento documento = null;
         for (Documento doc : documentos) {
-            if (doc.getTitulo().equals(titulo)) {
+            if (doc.getTitulo().equalsIgnoreCase(titulo)) {
                 documento = doc;
                 break;
             }
@@ -72,7 +72,7 @@ public class Gestor {
     private void buscarDocumentoPorTitulo(String titulo) {
         Documento documento = null;
         for (Documento doc : documentos) {
-            if (doc.getTitulo().equals(titulo)) {
+            if (doc.getTitulo().equalsIgnoreCase(titulo)) {
                 documento = doc;
                 break;
             }
