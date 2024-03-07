@@ -9,14 +9,14 @@ public class Searchbar {
     private String titleInput;
     private Date dateInput;
     private String authorInput;
-    private DocType docType;
+    private DocType docTypeInput;
 
     public Searchbar() {
         this.keyWordsInput = new ArrayList<>();
         this.titleInput = "";
         this.dateInput = null;
         this.authorInput = "";
-        this.docType = null;
+        this.docTypeInput = null;
     }
 
     public void addKeyword(KeyWordTypes keyword) {
@@ -35,12 +35,16 @@ public class Searchbar {
                 (titleInput.isEmpty() || document.getTitle().equals(titleInput)) &&
                 (dateInput == null || document.getDatePublished().equals(dateInput)) &&
                 (authorInput.isEmpty() || document.getAuthor().equals(authorInput)) &&
-                (docType == null || document.getType().equals(docType))) {
+                (docTypeInput == null || document.getType().equals(docTypeInput))) {
                 filteredDocuments.add(document);
             }
         }
 
-        return filteredDocuments;
+        if (filteredDocuments.isEmpty()) {
+            return documents;
+        } else {
+            return filteredDocuments;
+        }
     }
 
     private boolean containsAnyKeyword(ArrayList<KeyWordTypes> documentKeywords) {
@@ -75,8 +79,8 @@ public class Searchbar {
             System.out.println("Autor: " + authorInput);
         }
 
-        if (docType != null) {
-            System.out.println("Tipo de documento: " + docType);
+        if (docTypeInput != null) {
+            System.out.println("Tipo de documento: " + docTypeInput);
         }
     }
 }

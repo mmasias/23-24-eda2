@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DigitalLibrary {
@@ -7,13 +8,14 @@ public class DigitalLibrary {
         boolean running = true;
 
         Library library = new Library();
+        Searchbar searchbar = new Searchbar();
         DocumentGenerator documentGenerator = new DocumentGenerator();
         Menu menu = new Menu();
         fillLibrary(library, documentGenerator, 30);
         menu.welcome();
 
         while (running){
-            menu.displayOptions();
+            menu.displayMainOptions();
             String option = scanner.nextLine();
             switch (option){
                 case "a":
@@ -23,7 +25,8 @@ public class DigitalLibrary {
 
                     break;*/
                 case "l":
-                    library.listDocuments();
+                    ArrayList<Document> filteredDocuments = searchbar.filterDocuments(library.getDocuments());
+                    menu.listDocuments(filteredDocuments);
                     break;
                 case "s":
                     running = false;
