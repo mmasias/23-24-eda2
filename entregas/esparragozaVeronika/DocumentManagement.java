@@ -1,28 +1,47 @@
+import searches.SearchEngine;
+import typeDocument.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DocumentManagement {
     Scanner input = new Scanner(System.in);
+    ArrayList<Document> documents;
+    SearchEngine searchEngine;
+    boolean isRunning;
     public void run(){
-        initialMenu();
+        documents = new ArrayList<>();
+        searchEngine = new SearchEngine();
+        isRunning = true;
+
+        dataFalsa();
+        while(isRunning){
+            initialMenu();
+        }
+
     }
 
-    public void initialMenu(){
+    public void initialMenu() {
         System.out.println("Ingrese lo que desea hacer: ");
         System.out.println("1. Añadir un nuevo un documento");
         System.out.println("2. Buscar un documento");
-        System.out.println("3. Salir");
+        System.out.println("3. Ver todos los documentos");
+        System.out.println("4. Salir");
 
         switch (input.nextInt()){
             case 1:
                 addDocument();
                 break;
             case 2:
-                //searchDocument();
+                searchDocument();
                 System.out.println("Buscando...");
                 break;
             case 3:
+                printAllDocuments();
+                break;
+            case 4:
                 System.out.println("Saliendo...");
+                isRunning = false;
                 break;
             default:
                 System.out.println("Opción no válida");
@@ -30,54 +49,54 @@ public class DocumentManagement {
         }
     }
 
+    private void addDocument(){
+        System.out.println("Ingrese el tipo de documento que desea agregar: ");
+        System.out.println("1. Artículo");
+        System.out.println("2. Revista");
+        System.out.println("3. Libro");
+        System.out.println("4. Paper científico");
 
-    private String addTitle(){
-        System.out.println("Ingrese el título del documento: ");
-        String title = input.next();
-        return title;
+
+        switch (input.nextInt()){
+            case 1:
+                documents.add(new Article());
+                System.out.println("Artículo agregado:: " + documents.getLast().getTitle());
+                break;
+            case 2:
+                documents.add(new Magazine());
+                break;
+            case 3:
+                documents.add(new Book());
+                break;
+            case 4:
+                documents.add(new Paper());
+                break;
+            default:
+                System.out.println("Opción no válida");
+                break;
+        }
     }
-    private String addYearOfPublication(){
-        System.out.println("Ingrese el año de publicación: ");
-        String yearOfPublication = input.next();
-        return yearOfPublication;
+    private void searchDocument() {
+        searchEngine.searchDocument();
     }
-    private TypeDocument addType(){
-        System.out.println("Ingrese el tipo de documento: ");
-        TypeDocument type = TypeDocument.valueOf(input.next());
-        return type;
+    private void printAllDocuments(){
+        for (Document document : documents){
+            document.printDocument();
+        }
+        initialMenu();
     }
-    private ArrayList<String> addAuthors(){
+
+
+    public void dataFalsa(){
         ArrayList<String> authors = new ArrayList<>();
-        boolean createAuthors = true;
-        while(createAuthors){
-            System.out.println("Ingrese un autor del documento: ");
-            String author = input.next();
-            authors.add(author);
-
-            System.out.println("Desea agregar otro autor? (s/n)");
-            if (input.next().equals("n")){
-                createAuthors = false;
-            }
-        }
-        return authors;
-    }
-    private ArrayList<String> addKeywords(){
+        authors.add("Veronika");
+        authors.add("Pablo");
         ArrayList<String> keywords = new ArrayList<>();
-        boolean createKeywords = true;
-        while(createKeywords){
-            System.out.println("Ingrese una palabra clave/tema del documento: ");
-            String author = input.next();
-            keywords.add(author);
-
-            System.out.println("Desea agregar otra palabra clave? (s/n)");
-            if (input.next().equals("n")){
-                createKeywords = false;
-            }
-        }
-        return keywords;
-    }
-
-    protected void addDocument(){
-        new Document(addTitle(), addAuthors(), addYearOfPublication(), addType(), addKeywords());
+        keywords.add("keyword1");
+        keywords.add("keyword2");
+        documents.add(new Article("La naturaleza es bella", authors, 2021, "tipo", keywords));
+        documents.add(new Magazine("que mas pues", authors, 2019, "type", keywords));
+        documents.add(new Book("el pais", authors, 2067, "tipo random", keywords, "isbn"));
+        documents.add(new Paper("diario montañes", authors, 2024, "hi", keywords));
     }
 }

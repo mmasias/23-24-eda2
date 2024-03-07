@@ -53,11 +53,28 @@ class SearchDocument{
     - searchByKeywords()
 }
 
+class SearchEngine{}
+
+class Author {
+    - id
+    - String name
+    - String alias
+}
+
+class Keyword {
+    - id
+    - String word
+}
+
 
 
 App -- DocumentManagement
 DocumentManagement -- Document
-DocumentManagement -- SearchDocument
+DocumentManagement -- SearchEngine
+
+SearchEngine -- SearchDocument
+SearchEngine -- Author
+SearchEngine -- Keyword
 
 Document -- Book
 Document -- Article
