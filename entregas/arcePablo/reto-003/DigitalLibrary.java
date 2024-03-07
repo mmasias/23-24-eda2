@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Types.KeyWordTypes;
+
 public class DigitalLibrary {
 
     public void run() {
@@ -11,7 +13,7 @@ public class DigitalLibrary {
         Searchbar searchbar = new Searchbar();
         DocumentGenerator documentGenerator = new DocumentGenerator();
         Menu menu = new Menu();
-        fillLibrary(library, documentGenerator, 30);
+        fillLibrary(library, documentGenerator, 200);
         menu.welcome();
 
         while (running){
@@ -21,11 +23,12 @@ public class DigitalLibrary {
                 case "a":
                     library.addDocument(documentGenerator.generateRandomDocument());
                     break;
-                /*case "f":
-
-                    break;*/
+                case "f":
+                    searchbar.addKeyword(KeyWordTypes.JAVA);
+                    break;
                 case "l":
                     ArrayList<Document> filteredDocuments = searchbar.filterDocuments(library.getDocuments());
+                    searchbar.displayInputs();
                     menu.listDocuments(filteredDocuments);
                     break;
                 case "s":
@@ -36,8 +39,6 @@ public class DigitalLibrary {
             }
         }
     }
-
-
 
     static void fillLibrary(Library library, DocumentGenerator documentGenerator, int amountOfDocuments){
         for (int i = 0; i < amountOfDocuments; i++){        

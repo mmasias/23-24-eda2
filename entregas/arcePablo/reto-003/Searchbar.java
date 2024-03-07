@@ -57,7 +57,7 @@ public class Searchbar {
     }
 
     public void displayInputs() {
-        System.out.println("Buscador: ");
+        System.out.println("\nBuscador: ");
 
         if (!titleInput.isEmpty() && titleInput != null) {
             System.out.println("Título: " + titleInput);
@@ -82,5 +82,7 @@ public class Searchbar {
         if (docTypeInput != null) {
             System.out.println("Tipo de documento: " + docTypeInput);
         }
+                
+        System.out.println("");
     }
 }
