@@ -137,17 +137,18 @@ public class Manager {
             sc.nextLine();
             idAutores.add(idAutor);
             if(gestorAutores.existeAutor(idAutor)){
-                System.out.println("¿Quieres añadir otro autor? (s/n)");
-                String respuesta = sc.nextLine();
-                if (respuesta.equals("n")) {
-                    añadiendoAutores = false;
-                } 
+                
             }
             else{
                 System.out.println("Introduce el nombre del autor");
                 String nombreAutor = sc.nextLine();
                 gestorAutores.agregarAutor(idAutor, nombreAutor);
             }
+            System.out.println("¿Quieres añadir otro autor? (s/n)");
+                String respuesta = sc.nextLine();
+                if (respuesta.equals("n")) {
+                    añadiendoAutores = false;
+                } 
         }
         Documento documento = new Documento(titulo, idAutores, año, tipo);
         addDocumento(documento);
