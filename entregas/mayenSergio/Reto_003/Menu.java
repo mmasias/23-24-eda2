@@ -10,34 +10,39 @@ public class Menu {
     public static void mostrarMenu(List<Documento> documentos) {
         int opcion;
         do {
-            System.out.println("Seleccione una opción:");
-            System.out.println("1. Editar documento");
-            System.out.println("2. Eliminar documento");
-            System.out.println("3. Buscar documento");
-            System.out.println("4. Mostrar lista de documentos");
-            System.out.println("5. Salir");
+            System.out.println("Seleccione una opción:");            
+            System.out.println("1. Crear otro documento");
+            System.out.println("2. Editar documento");
+            System.out.println("3. Eliminar documento");
+            System.out.println("4. Buscar documento");
+            System.out.println("5. Mostrar lista de documentos");
+            System.out.println("6. Salir");
 
             opcion = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcion) {
                 case 1:
-                    GeneradorDocumentos.editarDocumento(documentos);
+                    documentos.addAll(GeneradorDocumentos.crearNuevoDocumento());
+                    System.out.println("Nuevos documentos creados.\n");
                     break;
                 case 2:
-                    GeneradorDocumentos.eliminarDocumento(documentos);
+                    GeneradorDocumentos.editarDocumento(documentos);
                     break;
                 case 3:
-                    GeneradorDocumentos.buscarDocumento(documentos);
+                    GeneradorDocumentos.eliminarDocumento(documentos);
                     break;
                 case 4:
+                    GeneradorDocumentos.buscarDocumento(documentos);
+                    break;
+                case 5:
                     System.out.println("\nLista de documentos:");
                     for (Documento documento : documentos) {
                         System.out.println(documento);
                     }
                     System.out.println();
                     break;
-                case 5:
+                case 6:
                     System.out.println("Saliendo del programa. ¡Hasta luego!");
                     break;
                 default:

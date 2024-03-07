@@ -9,10 +9,10 @@ public class GeneradorDocumentos {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static List<Documento> generarDocumentos() {
-        List<Documento> listaDocumentos = new ArrayList<>();
+    public static List<Documento> crearNuevoDocumento() {
+        List<Documento> nuevosDocumentos = new ArrayList<>();
 
-        System.out.println("Ingrese la información de los documentos. Para detenerse, ingrese 'fin'.");
+        System.out.println("Ingrese la información de los nuevos documentos. Para detenerse, ingrese 'fin'.");
         while (true) {
             System.out.print("Título del documento (o 'fin' para salir): ");
             String titulo = scanner.nextLine();
@@ -29,12 +29,12 @@ public class GeneradorDocumentos {
             Documento.TipoDocumento tipo = Documento.TipoDocumento.valueOf(tipoStr);
 
             Documento documento = new Documento(titulo, autor, tipo);
-            listaDocumentos.add(documento);
+            nuevosDocumentos.add(documento);
 
             System.out.println("Documento agregado correctamente.\n");
         }
 
-        return listaDocumentos;
+        return nuevosDocumentos;
     }
 
     public static void editarDocumento(List<Documento> documentos) {
