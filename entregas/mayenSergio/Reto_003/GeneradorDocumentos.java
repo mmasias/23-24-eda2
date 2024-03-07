@@ -9,7 +9,6 @@ public class GeneradorDocumentos {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    // Método para generar documentos y agregarlos a una lista
     public static List<Documento> generarDocumentos() {
         List<Documento> listaDocumentos = new ArrayList<>();
 
@@ -38,7 +37,6 @@ public class GeneradorDocumentos {
         return listaDocumentos;
     }
 
-    // Método para editar un documento en la lista
     public static void editarDocumento(List<Documento> documentos) {
         System.out.print("Ingrese el título del documento que desea editar: ");
         String tituloBuscado = scanner.nextLine();
@@ -66,7 +64,6 @@ public class GeneradorDocumentos {
         System.out.println("Documento no encontrado.\n");
     }
 
-    // Método para eliminar un documento de la lista
     public static void eliminarDocumento(List<Documento> documentos) {
         System.out.print("Ingrese el título del documento que desea eliminar: ");
         String tituloBuscado = scanner.nextLine();
@@ -83,7 +80,6 @@ public class GeneradorDocumentos {
         System.out.println("Documento no encontrado.\n");
     }
 
-    // Método para buscar un documento en la lista
     public static void buscarDocumento(List<Documento> documentos) {
         System.out.print("Ingrese el título del documento que desea buscar: ");
         String tituloBuscado = scanner.nextLine();

@@ -13,14 +13,12 @@ public class Documento {
     private String autor;
     private TipoDocumento tipo;
 
-    // Constructor
     public Documento(String titulo, String autor, TipoDocumento tipo) {
         this.titulo = titulo;
         this.autor = autor;
         this.tipo = tipo;
     }
 
-    // Métodos getter
     public String getTitulo() {
         return titulo;
     }
@@ -33,7 +31,18 @@ public class Documento {
         return tipo;
     }
 
-    // Método toString para imprimir información del documento
+    public void setTitulo(String titulo){
+        this.titulo = titulo;
+    }
+
+    public void setAutor(String autor){
+        this.autor = autor;
+    }
+
+    public void setTipo(TipoDocumento tipo){
+        this.tipo = tipo;
+    }
+
     @Override
     public String toString() {
         return "Documento{" +

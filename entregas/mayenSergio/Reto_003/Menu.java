@@ -18,7 +18,7 @@ public class Menu {
             System.out.println("5. Salir");
 
             opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir la nueva línea después de la entrada del número
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1:
