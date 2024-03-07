@@ -1,6 +1,17 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Colection{
+    ArrayList<Document> documents;
+
+    public Colection() {
+        documents = new ArrayList<Document>();
+    }
+
+    public void addDocument(Document document) {
+        documents.add(document);
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean SystemOn = true;
