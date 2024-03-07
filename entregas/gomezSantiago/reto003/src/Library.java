@@ -1,10 +1,7 @@
 import java.util.LinkedList;
-
 public class Library {
     public static void main(String[] args) {
         Manager manager = new Manager();
-
-        LinkedList<String> keyWords = new LinkedList<>();
 
         Author autor1 = new Author("Juan Perez");
         Author autor2 = new Author("Manolo Martinez");
@@ -14,13 +11,19 @@ public class Library {
         DocumentType tipo3 = new DocumentType("Articulo");
         DocumentType tipo4 = new DocumentType("Paper Cientifico");
 
-        keyWords.add("Ciencia");
-        keyWords.add("Fantasia");
-        keyWords.add("Aventura");
-        keyWords.add("Naturaleza");
+        KeyWord keyWord1 = new KeyWord("Ciencia");
+        KeyWord keyWord2 = new KeyWord("Fantasia");
+        KeyWord keyWord3 = new KeyWord("Aventura");
+        KeyWord keyWord4 = new KeyWord("Naturaleza");
 
+        LinkedList<KeyWord> keyWords = new LinkedList<>();
+        keyWords.add(keyWord1);
+        keyWords.add(keyWord2);
+        keyWords.add(keyWord3);
+        keyWords.add(keyWord4);
 
-        Document documento1 = new Document("Libro", "Miguel de Cervantes", "Don Quijote", keyWords, 2024);
+        Document documento1 = new Document("Libro", "Miguel de Cervantes", "Don Quijote", keyWords , 2024);
+        Document documento2 = new Document("Libro", "Miguel de Cervantes", "Don Juan", keyWords , 2024);
 
         manager.addAuthor(autor1);
         manager.addAuthor(autor2);
@@ -31,10 +34,30 @@ public class Library {
         manager.addDocumentType(tipo4);
 
         manager.addDocument(documento1);
-        manager.addDocument(documento1);
+        manager.addDocument(documento2);
+
+        for (KeyWord keyword : keyWords) {
+            manager.addKeyWords(keyword);
+        }
 
         manager.listAuthors();
         manager.listDocumentTypes();
         manager.listDocuments();
+
+        manager.listKeyWord();
+
+
+        String titleToSearch = "Don Quijote";
+        LinkedList<Document> foundDocuments = manager.searchByTitle(titleToSearch);
+        if (!foundDocuments.isEmpty()) {
+            System.out.println("Documentos encontrados con el título '" + titleToSearch + "':");
+            int number = 1;
+            for (Document document : foundDocuments) {
+                System.out.println( number + " -" + document.getDocumentData());
+                number++;
+            }
+        } else {
+            System.out.println("No se encontraron documentos con el título '" + titleToSearch + "'");
+        }
     }
 }

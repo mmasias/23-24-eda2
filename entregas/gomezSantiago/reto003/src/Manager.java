@@ -1,10 +1,9 @@
 import java.util.LinkedList;
-
 public class Manager {
     LinkedList<Author> authors = new LinkedList<>();
     LinkedList<DocumentType> documentTypes = new LinkedList<>();
     LinkedList<Document> documents = new LinkedList<>();
-    LinkedList<String> keyWords = new LinkedList<>();
+    LinkedList<KeyWord> keyWords = new LinkedList<>();
 
     public void addAuthor(Author author){
         authors.add(author);
@@ -38,7 +37,33 @@ public class Manager {
         }
     }
 
-    public void addKeyWords(String keyword) {
+    public void addKeyWords(KeyWord keyword) {
         keyWords.add(keyword);
+    }
+
+    public void xd(){
+        for (KeyWord keyWord : keyWords){
+            keyWord.getKeyWord();
+        }
+    }
+
+
+    public void listKeyWord(){
+        int number = 1;
+        for (KeyWord keyWord : keyWords){
+            System.out.println("Tipo " + number + " : " + keyWord.getKeyWord());
+            number++;
+        }
+    }
+
+
+    public LinkedList<Document> searchByTitle(String title) {
+        LinkedList<Document> foundDocuments = new LinkedList<>();
+        for (Document document : documents) {
+            if (document.getTitle().equalsIgnoreCase(title)) {
+                foundDocuments.add(document);
+            }
+        }
+        return foundDocuments;
     }
 }

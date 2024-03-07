@@ -3,10 +3,10 @@ public class Document {
     private String documentType;
     private String author;
     private String title;
-    private LinkedList<String> keyword;
+    private LinkedList<KeyWord> keyword;
     private int publishYear;
 
-    public Document (String documentType, String author, String title, LinkedList<String> keyword, int publishYear) {
+    public Document (String documentType, String author, String title, LinkedList<KeyWord> keyword, int publishYear) {
         this.documentType = documentType;
         this.author = author;
         this.title = title;
@@ -38,11 +38,11 @@ public class Document {
         this.title = title;
     }
 
-    public LinkedList<String> getKeyword() {
+    public LinkedList<KeyWord> getKeyword() {
         return keyword;
     }
 
-    public void setKeyword(LinkedList<String> keyword) {
+    public void setKeyword(LinkedList<KeyWord> keyword) {
         this.keyword = keyword;
     }
 
@@ -55,12 +55,19 @@ public class Document {
     }
 
     public String getDocumentData(){
+        StringBuilder keywordsString = new StringBuilder();
+        for (KeyWord keyWord : keyword) {
+            keywordsString.append(keyWord.getKeyWord()).append(", ");
+        }
+        if (keywordsString.length() > 0) {
+            keywordsString.setLength(keywordsString.length() - 2);
+        }
+
         return " Tipo: " + documentType +
                 "\n    Autor: " + author +
                 "\n    Título: " + title +
-                "\n    Palabras Clave: " + keyword.toString() +
+                "\n    Palabras Clave: " + keywordsString.toString() +
                 "\n    Año de Publicación: " + publishYear;
 
     }
-
 }
