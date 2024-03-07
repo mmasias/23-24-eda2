@@ -9,8 +9,10 @@ class Document{}
 
 class ArrayList{}
 
-DocumentManager -- ArrayList : uses
-ArrayList -- Document : stores
-DocumentManager .. Document : manage 
+class Author{}
+DocumentManager .. ArrayList : uses
+DocumentManager -- Document : manage 
+Document -- Author : has
+Document .. ArrayList : uses
 
 @enduml
