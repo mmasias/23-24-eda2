@@ -3,17 +3,14 @@
 hide empty methods
 hide empty attributes
 
-class Library{}
+class DocumentManager{}
 
 class Document{}
 
 class ArrayList{}
 
-class menu{}
-
-Library -- menu : uses
-Library -- ArrayList : uses
+DocumentManager -- ArrayList : uses
 ArrayList -- Document : stores
-Library .. Document : manage 
+DocumentManager .. Document : manage 
 
 @enduml
