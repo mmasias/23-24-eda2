@@ -72,6 +72,8 @@ public class Gestion {
         Gestion biblioteca = new Gestion();
         Scanner scanner = new Scanner(System.in);
         int opcion;
+
+        System.out.println("\nGestión de biblioteca\n=====================\n");
         
         do {
             System.out.println("Menú:");
@@ -82,7 +84,7 @@ public class Gestion {
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
+            scanner.nextLine();
             
             switch (opcion) {
                 case 1:
@@ -115,7 +117,7 @@ public class Gestion {
         String titulo = scanner.nextLine();
         System.out.print("Año: ");
         int año = scanner.nextInt();
-        scanner.nextLine(); // Consumir el salto de línea
+        scanner.nextLine();
         
         ArrayList<Autor> autores = new ArrayList<>();
         System.out.println("Ingrese los autores del documento (escriba 'fin' para terminar):");
@@ -167,12 +169,14 @@ public class Gestion {
     }
     
     private static void modificarDocumento(Gestion biblioteca, Scanner scanner) {
-        System.out.print("Ingrese el título del documento a modificar: ");
-        String titulo = scanner.nextLine();
-        
-        ArrayList<Documento> resultado = biblioteca.buscar("titulo", titulo);
+        System.out.print("Ingrese el nombre del autor del documento a modificar: ");
+        String nombreAutor = scanner.nextLine();
+        System.out.print("Ingrese el apellido del autor del documento a modificar: ");
+        String apellidoAutor = scanner.nextLine();
+    
+        ArrayList<Documento> resultado = biblioteca.buscar("autor", nombreAutor + " " + apellidoAutor);
         if (resultado.isEmpty()) {
-            System.out.println("No se encontró ningún documento con ese título.");
+            System.out.println("No se encontró ningún documento asociado a ese autor.");
         } else {
             System.out.println("Documentos encontrados:");
             for (int i = 0; i < resultado.size(); i++) {
@@ -181,33 +185,33 @@ public class Gestion {
             }
             System.out.print("Seleccione el número del documento que desea modificar: ");
             int numDocumento = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
-            
+            scanner.nextLine();
+    
             if (numDocumento < 1 || numDocumento > resultado.size()) {
                 System.out.println("Número de documento no válido.");
             } else {
                 Documento documentoAModificar = resultado.get(numDocumento - 1);
-                
+    
                 System.out.println("Ingrese los nuevos detalles del documento:");
                 System.out.print("Nuevo título: ");
                 String nuevoTitulo = scanner.nextLine();
                 System.out.print("Nuevo año: ");
                 int nuevoAño = scanner.nextInt();
-                scanner.nextLine(); // Consumir el salto de línea
-                
+                scanner.nextLine();
+    
                 ArrayList<Autor> autores = new ArrayList<>();
                 System.out.println("Ingrese los nuevos autores del documento (escriba 'fin' para terminar):");
-                String nombreAutor;
+                String nombreNuevoAutor;
                 do {
                     System.out.print("Nombre del autor: ");
-                    nombreAutor = scanner.nextLine();
-                    if (!nombreAutor.equalsIgnoreCase("fin")) {
+                    nombreNuevoAutor = scanner.nextLine();
+                    if (!nombreNuevoAutor.equalsIgnoreCase("fin")) {
                         System.out.print("Apellido del autor: ");
-                        String apellidoAutor = scanner.nextLine();
-                        autores.add(new Autor(nombreAutor, apellidoAutor));
+                        String apellidoNuevoAutor = scanner.nextLine();
+                        autores.add(new Autor(nombreNuevoAutor, apellidoNuevoAutor));
                     }
-                } while (!nombreAutor.equalsIgnoreCase("fin"));
-                
+                } while (!nombreNuevoAutor.equalsIgnoreCase("fin"));
+    
                 ArrayList<String> palabrasClave = new ArrayList<>();
                 System.out.println("Ingrese las nuevas palabras clave del documento (escriba 'fin' para terminar):");
                 String palabraClave;
@@ -218,15 +222,16 @@ public class Gestion {
                         palabrasClave.add(palabraClave);
                     }
                 } while (!palabraClave.equalsIgnoreCase("fin"));
-                
+    
                 System.out.println("Ingrese el nuevo tipo del documento (LIBRO, REVISTA, ARTICULO, PAPER): ");
                 Tipo nuevoTipo = Tipo.valueOf(scanner.nextLine().toUpperCase());
-                
+    
                 biblioteca.modificar(documentoAModificar, nuevoTitulo, nuevoAño, autores, palabrasClave, nuevoTipo);
                 System.out.println("Documento modificado correctamente.");
             }
         }
     }
+    
     
     private static void eliminarDocumento(Gestion biblioteca, Scanner scanner) {
         System.out.print("Ingrese el título del documento a eliminar: ");
@@ -243,7 +248,7 @@ public class Gestion {
             }
             System.out.print("Seleccione el número del documento que desea eliminar: ");
             int numDocumento = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
+            scanner.nextLine();
             
             if (numDocumento < 1 || numDocumento > resultado.size()) {
                 System.out.println("Número de documento no válido.");
