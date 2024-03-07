@@ -41,13 +41,14 @@ public class Gestion {
         ArrayList<Autor> autores = new ArrayList<Autor>();
         do {
             System.out.println("Ingrese el nombre del autor");
-            String nombre = sc.nextLine();
+            Scanner sc2 = new Scanner(System.in);
+            String nombre = sc2.nextLine();
             System.out.println("Ingrese el apellido del autor");
-            String apellido = sc.nextLine();
+            String apellido = sc2.nextLine();
             Autor autor = new Autor(nombre, apellido);
             autores.add(autor);
             System.out.println("Desea agregar otro autor? (si-no)");
-            String respuesta = sc.nextLine();
+            String respuesta = sc2.nextLine();
             if (respuesta.equals("no")) {
                 agregar = false;
             } else {
@@ -62,6 +63,7 @@ public class Gestion {
             if (!palabra.equals("fin")) {
                 documento.añadirPalabraClave(palabra);
             }
+
 
         } while (!palabra.equals("fin"));
         documentos.add(documento);
@@ -103,15 +105,16 @@ public class Gestion {
                 boolean agregar = true;
                 do {
                     System.out.println("Ingrese el nombre del autor");
-                    String nombre = sc.nextLine();
+                    Scanner sc2 = new Scanner(System.in);
+                    String nombre = sc2.nextLine();
                     System.out.println("Ingrese el apellido del autor");
-                    String apellido = sc.nextLine();
+                    String apellido = sc2.nextLine();
                     Autor autor = new Autor(nombre, apellido);
                     ArrayList<Autor> autores = new ArrayList<Autor>();
                     autores.add(autor);
                     documento.setAutores(autores);
                     System.out.println("Desea agregar otro autor? (si-no)");
-                    String respuesta = sc.nextLine();
+                    String respuesta = sc2.nextLine();
                     if (respuesta.equals("no")) {
                         agregar = false;
                     } else {
@@ -127,9 +130,9 @@ public class Gestion {
                 if (!palabra.equals("fin")) {
                     documento.añadirPalabraClave(palabra);
                 }
-
             } while (!palabra.equals("fin"));
         }
+
     }
 
     public void buscar() {
