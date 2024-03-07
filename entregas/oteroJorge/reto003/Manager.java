@@ -6,10 +6,15 @@ import java.util.Scanner;
 public class Manager {
 
     private ArrayList<Documento> documentos;
+    GestorAutores gestorAutores;
 
     public Manager() {
         this.documentos = new ArrayList<>();
+        this.gestorAutores = new GestorAutores();
+    }
 
+    public GestorAutores getGestorAutores(){
+        return this.gestorAutores;
     }
 
     public void setDocumentos(ArrayList<Documento> documentos) {
@@ -36,15 +41,9 @@ public class Manager {
             String nuevoAño = sc.nextLine();
             System.out.println("Introduce el nuevo tipo de documento");
             String nuevoTipo = sc.nextLine();
-            System.out.println("Introduce el nuevo nombre del autor");
-            String nuevoAutor = sc.nextLine();
-            Autor autor1 = new Autor(nuevoAutor);
-            ArrayList<Autor> autores = new ArrayList<>();
-            autores.add(autor1);
             documento.setTitulo(nuevoTitulo);
             documento.setAñoPublicacion(nuevoAño);
             documento.setTipo(nuevoTipo);
-            documento.setAutores(autores);
         } else {
             System.out.println("El documento no existe");
         }
@@ -79,19 +78,27 @@ public class Manager {
             }
         }
         if (documento != null) {
-            documento.printDocumento();
+            documento.printDocumento(this.gestorAutores);
         } else {
             System.out.println("El documento no existe");
         }
     }
 
     private void buscarDocumentoPorAutor(String autor) {
+        ArrayList<Documento> documentosAutor = new ArrayList<>();
         for (Documento doc : documentos) {
-            for (Autor aut : doc.getAutores()) {
-                if (aut.getNombreCompleto().equals(autor)) {
-                    doc.printDocumento();
+            for (Integer aut : doc.getIdAutores()) {
+                if (aut.equals(autor)) {
+                    documentosAutor.add(doc);
                 }
             }
+        }
+        if (documentosAutor.size() > 0) {
+            for (Documento doc : documentosAutor) {
+                doc.printDocumento(this.gestorAutores);
+            }
+        } else {
+            System.out.println("El autor no existe");
         }
     }
 
@@ -113,7 +120,7 @@ public class Manager {
         return sb.toString();
     }
 
-    private void añadirDocumento(){
+    private void añadirDocumento(GestorAutores gestorAutores){
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduce el titulo del documento");
         String titulo = sc.nextLine();
@@ -121,18 +128,31 @@ public class Manager {
         String año = sc.nextLine();
         System.out.println("Introduce el tipo de documento");
         String tipo = sc.nextLine();
-        System.out.println("Introduce el nombre del autor");
-        String autor = sc.nextLine();
-        Autor autor1 = new Autor(autor);
-        ArrayList<Autor> autores = new ArrayList<>();
-        autores.add(autor1);
-        Documento documento = new Documento(titulo, autores, año, tipo);
+        boolean añadiendoAutores = true;
+        ArrayList<Integer> idAutores = new ArrayList<>();
+        while (añadiendoAutores) {
+            gestorAutores.listarAutores();
+            System.out.println("Introduce el id del autor");
+            int idAutor = sc.nextInt();
+            sc.nextLine();
+            idAutores.add(idAutor);
+            System.out.println("Introduce el nombre del autor");
+            String nombreAutor = sc.nextLine();
+            gestorAutores.agregarAutor(idAutor, nombreAutor);
+            System.out.println("¿Quieres añadir otro autor? (s/n)");
+            String respuesta = sc.nextLine();
+            if (respuesta.equals("n")) {
+                añadiendoAutores = false;
+            }
+        }
+        Documento documento = new Documento(titulo, idAutores, año, tipo);
         addDocumento(documento);
     }
 
     private void opciones(){
         System.out.println("1. Añadir documento");
         System.out.println("2. Editar documento por titulo");
+        System.out.println("3. Editar autor");
         System.out.println("4. Eliminar documento por titulo");
         System.out.println("5. Buscar documento por titulo");
         System.out.println("6. Buscar documento por autor");
@@ -151,12 +171,17 @@ public class Manager {
             sc.nextLine();
             switch (opcion) {
                 case 1:
-                    añadirDocumento();
+                    añadirDocumento(gestorAutores);
                     break;
                 case 2:
                     System.out.println("Introduce el titulo del documento a editar");
                     String tituloEditar = sc.nextLine();
                     editDocumento(tituloEditar);
+                    break;
+                case 3:
+                    System.out.println("Introduce el nombre del autor a editar");
+                    String nombreAutor = sc.nextLine();
+                    gestorAutores.editarAutor(nombreAutor);
                     break;
                 case 4:
                     System.out.println("Introduce el titulo del documento a eliminar");

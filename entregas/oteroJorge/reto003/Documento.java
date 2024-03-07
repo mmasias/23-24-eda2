@@ -1,28 +1,23 @@
 package entregas.oteroJorge.reto003;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Documento {
 
     private String titulo;
-    private ArrayList<Autor> autores;
+    private ArrayList<Integer> idAutores;
     private String añoPublicacion;
     private String tipo;
 
-    public Documento(String titulo, ArrayList<Autor> autores, String añoPublicacion, String tipo) {
+    public Documento(String titulo, ArrayList<Integer> idAutores, String añoPublicacion, String tipo) {
         this.titulo = titulo;
-        this.autores = autores;
+        this.idAutores = idAutores;
         this.añoPublicacion = añoPublicacion;
         this.tipo = tipo;
     }
 
     public String getTitulo() {
         return titulo;
-    }
-
-    public ArrayList<Autor> getAutores() {
-        return autores;
     }
 
     public String getAñoPublicacion() {
@@ -45,36 +40,52 @@ public class Documento {
         this.titulo = titulo;
     }
 
-    public void setAutores(ArrayList<Autor> autores) {
-        this.autores = autores;
+    public void setAutores(ArrayList<Integer> idAutores) {
+        this.idAutores = idAutores;
     }
 
-    public String getAutoresAsString() {
-        StringBuilder sb = new StringBuilder();
-        for (Autor autor : autores) {
-            sb.append(autor.getNombreCompleto());
-            sb.append(" -");
+    public ArrayList<Integer> getIdAutores() {
+        return idAutores;
+    }
+
+    public int getIdAutor(int index) {
+        return idAutores.get(index);
+    }
+
+    public void printDocumento(GestorAutores gestorAutores) {
+        System.out.println(this.toString(gestorAutores));
+    }
+
+    public String listarAutores(GestorAutores gestorAutores) {
+        String autores = "";
+        for (int id : this.idAutores) {
+            for (Autor autor : gestorAutores.getAutores()) {
+                if (autor.getId() == id) {
+                    autores += autor.getNombreCompleto() + " -";
+                }
+            }
         }
-        return sb.toString();
+        return autores;
     }
 
-    public void printDocumento() {
-        System.out.println(this.toString());
-    }
-
-    @Override
-    public String toString() {
-        return "> " + this.tipo + " -> " + this.titulo + " -> " + getAutoresAsString() + "> " + this.añoPublicacion;
+    public String toString(GestorAutores gestorAutores) {
+        return "> " + this.tipo + " -> " + this.titulo + " -> " + this.listarAutores(gestorAutores) + "> " + this.añoPublicacion;
     }
 
     public static void main(String[] args) {
-        ArrayList<Autor> autores = new ArrayList<>();
-        autores.add(new Autor("Melendi Oficial"));
-        autores.add(new Autor("Antonio Orozco"));
+        GestorAutores gestorAutores = new GestorAutores();
+        Autor autor1 = new Autor(1, "Jorge");
+        Autor autor2 = new Autor(2, "Isaac Asimov");
+        Autor autor3 = new Autor(3, "J.R.R. Tolkien");
+        gestorAutores.agregarAutor(autor1);
+        gestorAutores.agregarAutor(autor2);
+        gestorAutores.agregarAutor(autor3);
+        ArrayList<Integer> autores = new ArrayList<>();
+        autores.add(1);
+        autores.add(3);
+        Documento documento1 = new Documento("El señor de los anillos", autores, "1954",  "Libro");
+        documento1.printDocumento(gestorAutores);
 
-        Documento libro = new Documento("La Voz de tu Corazón", autores, "2020", "Libro");
-
-        libro.printDocumento();
     }
 
 }
