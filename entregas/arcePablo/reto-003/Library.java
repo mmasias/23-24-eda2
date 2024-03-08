@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Date;
 public class Library {
     private ArrayList<Document> documents;
 
@@ -33,7 +32,4 @@ public class Library {
             documents.remove(index);
         }
     }
-
-
-
 }

@@ -78,6 +78,12 @@ public void displayInputs(Searchbar searchbar) {
     public void displaySearchbarOptions() {
         System.out.println("a - Añadir palabra clave");
         System.out.println("b - Borrar palabra clave");
+        System.out.println("t - Modificar título");
+        System.out.println("d - Modificar fecha");
+        System.out.println("u - Añadir autor");
+        System.out.println("i - Borrar autor");
+        System.out.println("y - Modificar tipo de documento");
+        System.out.println("r - Volver al menú principal");
     }
 
 }
