@@ -18,31 +18,47 @@ public class Menu {
     }
 
 public void listDocuments(ArrayList<Document> documents) {
-    System.out.println("=== Lista de Documentos ===");
-    System.out.println("=".repeat(74));
-    System.out.println("|   Title"+" ".repeat(34)+ "|   Author"+" ".repeat(3)+"| Date Published |");
+        System.out.println("=== Lista de Documentos ===");
+        System.out.println("=".repeat(130));
+        System.out.println("|   Title" + " ".repeat(34) + "|   Author" + " ".repeat(3) + "| Date Published | Keywords");
+        System.out.println("=".repeat(130));
 
-    for (Document document : documents) {
-        String title = document.getTitle();
-        String author = document.getAuthor();
-        Date datePublished = document.getDatePublished();
+        for (Document document : documents) {
+            String title = document.getTitle();
+            String author = document.getAuthor();
+            Date datePublished = document.getDatePublished();
+            ArrayList<KeyWordTypes> keywords = document.getKeyWords();
 
-        String formattedTitle = formatCell(title, 40);
-        String formattedAuthor = formatCell(author, 10);
-        String formattedDate = new java.text.SimpleDateFormat("dd/MM/yyyy").format(datePublished);
+            String formattedTitle = formatCell(title, 40);
+            String formattedAuthor = formatCell(author, 10);
+            String formattedDate = new java.text.SimpleDateFormat("dd/MM/yyyy").format(datePublished);
+            String formattedKeywords = formatKeywords(keywords);
 
-        System.out.format("| %-40s | %-10s | %-14s |\n", formattedTitle, formattedAuthor, formattedDate);
+            System.out.format("| %-40s | %-10s | %-14s | %-53s |\n", formattedTitle, formattedAuthor, formattedDate, formattedKeywords);
+        }
+        System.out.println("=".repeat(130));
     }
-    System.out.println("=".repeat(74));
-}
 
-private String formatCell(String value, int maxLength) {
+    private String formatCell(String value, int maxLength) {
     if (value.length() > maxLength) {
         return value.substring(0, maxLength);
     } else {
         return value + " ".repeat(maxLength - value.length());
     }
 }
+
+    private String formatKeywords(ArrayList<KeyWordTypes> keywords) {
+        StringBuilder builder = new StringBuilder();
+        for (KeyWordTypes keyword : keywords) {
+            builder.append(keyword.toString()).append(", ");
+        }
+        String formattedKeywords = builder.toString();
+        if (formattedKeywords.length() > 50) {
+            formattedKeywords = formattedKeywords.substring(0, 50) + "...";
+        }
+        return formattedKeywords;
+    }
+
 
 public void displayInputs(Searchbar searchbar) {
         System.out.println("\nBuscador: ");
