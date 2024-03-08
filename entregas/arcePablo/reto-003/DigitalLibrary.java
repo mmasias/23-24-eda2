@@ -28,7 +28,7 @@ public class DigitalLibrary {
                     break;
                 case "l":
                     ArrayList<Document> filteredDocuments = searchbar.filterDocuments(library.getDocuments());
-                    searchbar.displayInputs();
+                    menu.displayInputs(searchbar);
                     menu.listDocuments(filteredDocuments);
                     break;
                 case "s":

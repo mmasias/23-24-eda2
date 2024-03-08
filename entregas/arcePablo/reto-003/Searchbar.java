@@ -56,33 +56,44 @@ public class Searchbar {
         return false;
     }
 
-    public void displayInputs() {
-        System.out.println("\nBuscador: ");
+    // Getters and setters
+    public ArrayList<KeyWordTypes> getKeyWordsInput() {
+        return keyWordsInput;
+    }
 
-        if (!titleInput.isEmpty() && titleInput != null) {
-            System.out.println("Título: " + titleInput);
-        }
+    public void setKeyWordsInput(ArrayList<KeyWordTypes> keyWordsInput) {
+        this.keyWordsInput = keyWordsInput;
+    }
 
-        if (!keyWordsInput.isEmpty() && keyWordsInput != null) {
-            System.out.print("Palabras claves: ");
-            for (KeyWordTypes keyword : keyWordsInput) {
-                System.out.print(keyword + ", ");
-            }
-            System.out.println();
-        }
+    public String getTitleInput() {
+        return titleInput;
+    }
 
-        if (dateInput != null) {
-            System.out.println("Fecha: " + dateInput);
-        }
+    public void setTitleInput(String titleInput) {
+        this.titleInput = titleInput;
+    }
 
-        if (!authorInput.isEmpty() && authorInput != null) {
-            System.out.println("Autor: " + authorInput);
-        }
+    public Date getDateInput() {
+        return dateInput;
+    }
 
-        if (docTypeInput != null) {
-            System.out.println("Tipo de documento: " + docTypeInput);
-        }
-                
-        System.out.println("");
+    public void setDateInput(Date dateInput) {
+        this.dateInput = dateInput;
+    }
+
+    public String getAuthorInput() {
+        return authorInput;
+    }
+
+    public void setAuthorInput(String authorInput) {
+        this.authorInput = authorInput;
+    }
+
+    public DocType getDocTypeInput() {
+        return docTypeInput;
+    }
+
+    public void setDocTypeInput(DocType docTypeInput) {
+        this.docTypeInput = docTypeInput;
     }
 }
