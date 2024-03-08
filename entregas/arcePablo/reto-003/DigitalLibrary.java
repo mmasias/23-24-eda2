@@ -89,10 +89,7 @@ public class DigitalLibrary {
                 case "d":
                     System.out.println("Ingrese la nueva fecha (en formato yyyy-MM-dd):");
                     String newDateStr = scanner.nextLine();
-                    // Aquí puedes agregar la lógica para convertir la entrada de fecha en un objeto Date
-                    // Por ejemplo: Date newDate = Date.valueOf(newDateStr);
-                    // Luego, puedes llamar al método setDateInput de la instancia searchbar
-                    // searchbar.setDateInput(newDate);
+                    // TO DO
                     break;
                 case "u":
                     System.out.println("Ingrese el nuevo autor:");
@@ -102,7 +99,7 @@ public class DigitalLibrary {
                 case "y":
                     System.out.println("Ingrese el nuevo tipo de documento:");
                     String newDocType = scanner.nextLine();
-                    // Aquí puedes agregar la lógica similar a la opción 'a' para establecer el tipo de documento
+                    // TO DO
                     break;
                 case "r":
                     System.out.println("Volviendo al menú principal...");
