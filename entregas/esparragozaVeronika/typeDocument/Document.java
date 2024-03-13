@@ -1,29 +1,34 @@
 package typeDocument;
 
+import searches.Author;
+import searches.Keyword;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class Document {
     Scanner input = new Scanner(System.in);
     private String title;
-    private ArrayList<Integer> authors = new ArrayList<>();
+    private ArrayList<Integer> authorsId = new ArrayList<>();
     private int yearOfPublication;
     private String type;
-    private ArrayList<String> keywords = new ArrayList<>();
+    private ArrayList<Integer> keywordsId = new ArrayList<>();
 
-    public Document(String title, ArrayList<Integer> authors, int yearOfPublication, String type, ArrayList<String> keywords){
+
+    public Document(String title, ArrayList<Integer> authors, int yearOfPublication, String type, ArrayList<Integer> keywords){
         this.title = title;
-        this.authors = authors;
+        this.authorsId = authors;
         this.yearOfPublication = yearOfPublication;
         this.type = type;
-        this.keywords = keywords;
+        this.keywordsId = keywords;
     }
 
     public Document() {}
 
-    public void printDocument(){
-        System.out.println("--> " + "Titulo: " + title + " - Autores: " + authors + " - Año de publicación: " + yearOfPublication + " - Tipo: " + type + " - Palabras clave: " + keywords);
+    public void printDocument(Author author, Keyword keywords) {
+        System.out.println("--> " + "Titulo: " + title + " - Autores: " +   author.printAuthors(authorsId) + " - Año de publicación: " + yearOfPublication + " - Tipo: " + type + " - Palabras clave: " + keywords.printKeywords(keywordsId));
     }
+
     protected String addTitle(){
         System.out.println("Ingrese el título del documento: ");
         this.title = input.nextLine();
@@ -54,7 +59,7 @@ public abstract class Document {
         boolean createKeywords = true;
         while(createKeywords){
             System.out.println("Ingrese una palabra clave/tema del documento: ");
-            String author = input.nextLine();
+            String author = input.next();
             keywords.add(author);
 
             System.out.println("Desea agregar otra palabra clave? (s/n)");
@@ -63,17 +68,6 @@ public abstract class Document {
             }
         }
         return keywords;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-    public String getType() {
-        return type;
-    }
-
-    public ArrayList<Integer> getAuthors() {
-        return authors;
     }
     public void setType(String type) {
         this.type = type;

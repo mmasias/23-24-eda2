@@ -1,4 +1,5 @@
 import searches.Author;
+import searches.Keyword;
 import searches.SearchEngine;
 import typeDocument.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ public class DocumentManagement {
     ArrayList<Document> documents;
     SearchEngine searchEngine;
     Author authors = new Author();
+    Keyword keywords = new Keyword();
     boolean isRunning;
 
     public void run(){
@@ -22,7 +24,6 @@ public class DocumentManagement {
         }
 
     }
-
     public void initialMenu() {
         System.out.println("Ingrese lo que desea hacer: ");
         System.out.println("1. Añadir un nuevo un documento");
@@ -49,7 +50,6 @@ public class DocumentManagement {
                 break;
         }
     }
-
     private void addDocument(){
         System.out.println("Ingrese el tipo de documento que desea agregar: ");
         System.out.println("1. Artículo");
@@ -108,17 +108,20 @@ public class DocumentManagement {
     }
     private void printAllDocuments(){
         for (Document document : documents){
-            document.printDocument();
+            document.printDocument(authors, keywords);
         }
         initialMenu();
     }
-
     public void dataFalsa(){
         authors.addNewAuthor(1, "Gabriel García Márquez");
         authors.addNewAuthor(2, "Jane Austen");
         authors.addNewAuthor(3, "Fyodor Dostoevsky");
         authors.addNewAuthor(4, "Haruki Murakami");
 
+        keywords.addNewKeyword(1, "naturaleza");
+        keywords.addNewKeyword(2, "medicina");
+        keywords.addNewKeyword(3, "salud");
+        keywords.addNewKeyword(4, "vida");
 
         ArrayList<Integer> autorDataExample1 = new ArrayList<>();
         autorDataExample1.add(4);
@@ -127,12 +130,12 @@ public class DocumentManagement {
         autorDataExample2.add(3);
         autorDataExample2.add(4);
 
-        ArrayList<String> keywordDataExample1 = new ArrayList<>();
-        keywordDataExample1.add("naturaleza");
-        ArrayList<String> keywordDataExample2 = new ArrayList<>();
-        keywordDataExample2.add("medicina");
-        keywordDataExample2.add("salud");
-        keywordDataExample2.add("vida");
+        ArrayList<Integer> keywordDataExample1 = new ArrayList<>();
+        keywordDataExample1.add(1);
+        ArrayList<Integer> keywordDataExample2 = new ArrayList<>();
+        keywordDataExample2.add(2);
+        keywordDataExample2.add(3);
+        keywordDataExample2.add(4);
 
 
         documents.add(new Article("La naturaleza es bella", autorDataExample1, 2021, "tipo", keywordDataExample2));

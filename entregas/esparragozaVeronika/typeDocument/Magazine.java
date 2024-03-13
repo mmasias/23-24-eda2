@@ -3,7 +3,7 @@ package typeDocument;
 import java.util.ArrayList;
 
 public class Magazine extends Document{
-    public Magazine(String title, ArrayList<Integer> authors, int yearOfPublication, String type, ArrayList<String> keywords) {
+    public Magazine(String title, ArrayList<Integer> authors, int yearOfPublication, String type, ArrayList<Integer> keywords) {
         super(title, authors, yearOfPublication, type, keywords);
         setType("Magazine");
     }

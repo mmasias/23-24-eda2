@@ -1,20 +1,18 @@
 package searches;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Author {
-    protected Map<Integer, String> mapAuthors;
-
+    public Map<Integer, String> mapAuthors;
     public Author() {
         mapAuthors = new HashMap<>();
     }
-
     public void addNewAuthor(int id, String nombre) {
         mapAuthors.put(id, nombre);
-        System.out.println("Autor agregado: " + nombre);
+        System.out.println("Autor agregado: " + nombre + " con ID: " + id);
     }
-
     public void showAuthorById(int selectId) {
         if (mapAuthors.containsKey(selectId)) {
             String nombreAutor = mapAuthors.get(selectId);
@@ -23,7 +21,6 @@ public class Author {
             System.out.println("No se encontró ningún autor con ID " + selectId);
         }
     }
-
     public void showAllAuthors() {
         System.out.println("Todos los autores en el mapa:");
         for (Map.Entry<Integer, String> entry : mapAuthors.entrySet()) {
@@ -32,6 +29,13 @@ public class Author {
             System.out.println("ID: " + idAuthor + ", Nombre: " + authorName);
         }
     }
-
-
+    public ArrayList<String> printAuthors(ArrayList<Integer> authorsId) {
+        ArrayList<String> authorNames = new ArrayList<>();
+        for (Integer id : authorsId) {
+            if (mapAuthors.containsKey(id)) {
+                authorNames.add(mapAuthors.get(id));
+            }
+        }
+    return authorNames;
+    }
 }

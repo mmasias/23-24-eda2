@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SearchEngine {
-    private Author authors = new Author();
     ArrayList<String> searchResults = new ArrayList<>();
     Scanner input = new Scanner(System.in);
 

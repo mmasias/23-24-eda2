@@ -1,19 +1,17 @@
 package searches;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Keyword {
     protected Map<Integer, String> mapKeyword;
-
     public Keyword() {
         mapKeyword = new HashMap<>();
     }
-
     public void addNewKeyword(int id, String keyword) {
         mapKeyword.put(id, keyword);
     }
-
     public void showKeywordById(int selectId) {
         if (mapKeyword.containsKey(selectId)) {
             String textKeyword = mapKeyword.get(selectId);
@@ -22,7 +20,6 @@ public class Keyword {
             System.out.println("No se encontró ninguna palabra clave con ID " + selectId);
         }
     }
-
     public void showAllKeywords() {
         System.out.println("Todas las palabras claves en el mapa:");
         for (Map.Entry<Integer, String> entry : mapKeyword.entrySet()) {
@@ -30,5 +27,14 @@ public class Keyword {
             String textKeyword = entry.getValue();
             System.out.println("ID: " + idKeyword + ", Palabra clave: " + textKeyword);
         }
+    }
+    public ArrayList<String> printKeywords(ArrayList<Integer> keywordsId) {
+        ArrayList<String> keywordValues = new ArrayList<>();
+        for (Integer id : keywordsId) {
+            if (mapKeyword.containsKey(id)) {
+                keywordValues.add(mapKeyword.get(id));
+            }
+        }
+        return keywordValues;
     }
 }
