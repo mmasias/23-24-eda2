@@ -36,38 +36,64 @@ public abstract class Document {
     }
     protected int addYearOfPublication(){
         System.out.println("Ingrese el año de publicación: ");
-        this.yearOfPublication = Integer.parseInt(input.next());
+        this.yearOfPublication = Integer.parseInt(input.nextLine());
         return yearOfPublication;
     }
-    protected ArrayList<String> addAuthors(){
-        ArrayList<String> authors = new ArrayList<>();
-        boolean createAuthors = true;
-        while(createAuthors){
-            System.out.println("Ingrese un autor del documento: ");
-            String author = input.nextLine();
-            authors.add(author);
 
+    protected void addAuthor(Author authors) {
+        boolean isExistAuthor = true;
+        System.out.println("Estos son los autores ya existentes, si encuentra el suyo ingrese el numero, sino ingrese el nombre del nuevo a guardar: ");
+        authors.showAllAuthors();
+        ArrayList<Integer> chooseAuthors = new ArrayList<>();
+
+        while (isExistAuthor) {
+            String userInput = input.nextLine();
+            if (userInput.matches("\\d+")) {
+                int idAuthor = Integer.parseInt(userInput);
+                chooseAuthors.add(idAuthor);
+            } else {
+                authors.addAuthor(userInput);
+                int idAuthor = authors.showAuthorByName(userInput);
+                if (idAuthor != -1){
+                chooseAuthors.add(idAuthor);
+                }
+            }
             System.out.println("Desea agregar otro autor? (s/n)");
-            if (input.next().equals("n")){
-                createAuthors = false;
+            if (input.nextLine().equalsIgnoreCase("n")){
+                isExistAuthor = false;
             }
         }
-        return authors;
+        this.authorsId = chooseAuthors;
     }
-    protected ArrayList<String> addKeywords(){
-        ArrayList<String> keywords = new ArrayList<>();
-        boolean createKeywords = true;
-        while(createKeywords){
-            System.out.println("Ingrese una palabra clave/tema del documento: ");
-            String author = input.next();
-            keywords.add(author);
 
+    protected void addKeyword(Keyword keywords) {
+        boolean isExistKeyword = true;
+        System.out.println("Estas son las palabras clave ya existentes, si encuentra la suya ingrese el numero, sino ingrese la nueva palabra clave a guardar: ");
+        keywords.showAllKeywords();
+        ArrayList<Integer> chooseKeywords = new ArrayList<>();
+
+        while (isExistKeyword) {
+            String userInput = input.nextLine();
+            if (userInput.matches("\\d+")) {
+                int idKeyword = Integer.parseInt(userInput);
+                chooseKeywords.add(idKeyword);
+            } else {
+                keywords.addKeyword(userInput);
+                int idKeyword = keywords.showKeywordByName(userInput);
+                if (idKeyword != -1) {
+                    chooseKeywords.add(idKeyword);
+                }
+            }
             System.out.println("Desea agregar otra palabra clave? (s/n)");
-            if (input.next().equals("n")){
-                createKeywords = false;
+            if (input.nextLine().equalsIgnoreCase("n")) {
+                isExistKeyword = false;
             }
         }
-        return keywords;
+        this.keywordsId = chooseKeywords;
+    }
+
+    public String getTitle() {
+        return title;
     }
     public void setType(String type) {
         this.type = type;

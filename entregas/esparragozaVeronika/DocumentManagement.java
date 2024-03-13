@@ -33,7 +33,7 @@ public class DocumentManagement {
 
         switch (input.nextInt()){
             case 1:
-                addDocument();
+                addDocument(authors);
                 break;
             case 2:
                 showFilteringOption();
@@ -50,7 +50,7 @@ public class DocumentManagement {
                 break;
         }
     }
-    private void addDocument(){
+    private void addDocument(Author authors){
         System.out.println("Ingrese el tipo de documento que desea agregar: ");
         System.out.println("1. Artículo");
         System.out.println("2. Revista");
@@ -60,17 +60,17 @@ public class DocumentManagement {
 
         switch (input.nextInt()){
             case 1:
-                documents.add(new Article());
+                documents.add(new Article(authors, keywords));
                 System.out.println("Artículo agregado:: " + documents.getLast().getTitle());
                 break;
             case 2:
-                documents.add(new Magazine());
+                documents.add(new Magazine(authors, keywords));
                 break;
             case 3:
-                documents.add(new Book());
+                documents.add(new Book(authors, keywords));
                 break;
             case 4:
-                documents.add(new Paper());
+                documents.add(new Paper(authors, keywords));
                 break;
             default:
                 System.out.println("Opción no válida");
@@ -113,6 +113,7 @@ public class DocumentManagement {
         initialMenu();
     }
     public void dataFalsa(){
+        System.out.println("Agregando datos falsos...");
         authors.addNewAuthor(1, "Gabriel García Márquez");
         authors.addNewAuthor(2, "Jane Austen");
         authors.addNewAuthor(3, "Fyodor Dostoevsky");
@@ -139,6 +140,6 @@ public class DocumentManagement {
 
 
         documents.add(new Article("La naturaleza es bella", autorDataExample1, 2021, "tipo", keywordDataExample2));
-        documents.add(new Magazine("que mas pues", autorDataExample2, 2019, "type", keywordDataExample1));
+        documents.add(new Magazine("Que mas pues", autorDataExample2, 2019, "type", keywordDataExample1));
     }
 }

@@ -12,6 +12,10 @@ public class Keyword {
     public void addNewKeyword(int id, String keyword) {
         mapKeyword.put(id, keyword);
     }
+    public void addKeyword(String keyword) {
+        int id = mapKeyword.size() + 1;
+        mapKeyword.put(id, keyword);
+    }
     public void showKeywordById(int selectId) {
         if (mapKeyword.containsKey(selectId)) {
             String textKeyword = mapKeyword.get(selectId);
@@ -19,6 +23,16 @@ public class Keyword {
         } else {
             System.out.println("No se encontró ninguna palabra clave con ID " + selectId);
         }
+    }
+    public int showKeywordByName(String keyword) {
+        for (Map.Entry<Integer, String> entry : mapKeyword.entrySet()) {
+            int idKeyword = entry.getKey();
+            String textKeyword = entry.getValue();
+            if (textKeyword.equalsIgnoreCase(keyword)) {
+                return idKeyword;
+            }
+        }
+        return -1;
     }
     public void showAllKeywords() {
         System.out.println("Todas las palabras claves en el mapa:");

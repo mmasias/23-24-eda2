@@ -13,6 +13,11 @@ public class Author {
         mapAuthors.put(id, nombre);
         System.out.println("Autor agregado: " + nombre + " con ID: " + id);
     }
+    public void addAuthor(String nombre) {
+        int id = mapAuthors.size() + 1;
+        mapAuthors.put(id, nombre);
+        System.out.println(">> Autor agregado: " + nombre + " con ID: " + id);
+    }
     public void showAuthorById(int selectId) {
         if (mapAuthors.containsKey(selectId)) {
             String nombreAutor = mapAuthors.get(selectId);
@@ -20,6 +25,16 @@ public class Author {
         } else {
             System.out.println("No se encontró ningún autor con ID " + selectId);
         }
+    }
+    public int showAuthorByName(String nombre) {
+        for (Map.Entry<Integer, String> entry : mapAuthors.entrySet()) {
+            int idAuthor = entry.getKey();
+            String authorName = entry.getValue();
+            if (authorName.equalsIgnoreCase(nombre)) {
+                return idAuthor;
+            }
+        }
+        return -1;
     }
     public void showAllAuthors() {
         System.out.println("Todos los autores en el mapa:");
