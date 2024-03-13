@@ -1,8 +1,11 @@
 package searches;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SearchEngine {
+    private Author authors = new Author();
+    ArrayList<String> searchResults = new ArrayList<>();
     Scanner input = new Scanner(System.in);
 
     public void searchDocument(){
@@ -33,6 +36,21 @@ public class SearchEngine {
         default:
             System.out.println("Opción no válida");
             break;
+        }
+    }
+
+    public void searchByAuthor(Author authors) {
+        System.out.println("A continuacion todos los autores publicados: ");
+        authors.showAllAuthors();
+        boolean isSelectAuthor = true;
+        while (isSelectAuthor) {
+            System.out.println("Ingrese el ID del autor: ");
+            authors.showAuthorById(input.nextInt());
+            System.out.println("Desea buscar por otro autor? (s/n)");
+            searchResults.add(String.valueOf(input.nextInt()));
+            if (input.next().equals("n")) {
+                isSelectAuthor = false;
+            }
         }
     }
 }
