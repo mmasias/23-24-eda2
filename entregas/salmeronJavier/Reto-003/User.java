@@ -4,6 +4,7 @@ import java.util.List;
 
 public class User {
     private Library library;
+    private Document selectedDocument = null;
 
     public User(Library library) {
         this.library = library;
@@ -17,7 +18,10 @@ public class User {
             System.out.println("  2. Delete Document");
             System.out.println("  3. Update Document");
             System.out.println("  4. Search Documents");
-            System.out.println("  5. Exit");
+            System.out.println("  5. Detail Selected Document");
+            System.out.println("  6. Deselect Document");
+            System.out.println("  0. Exit");
+
             String choice = UserIO.getInput(" Choose an option: ");
 
             switch (choice) {
@@ -34,6 +38,12 @@ public class User {
                     searchDocuments();
                     break;
                 case "5":
+                    showSelectedDocument();
+                    break;
+                case "6":
+                    deselectDocument();
+                    break;
+                case "0":
                     running = false;
                     System.out.println("Exiting...");
                     break;
@@ -121,6 +131,8 @@ public class User {
                     System.out.println(" - Publishing Year: " + document.getPublishingYear());
                     System.out.println(" - Type: " + document.getType());
                     System.out.println(" - Keywords: " + String.join(", ", document.getKeyWords()));
+                    selectedDocument = document;
+
                 } else {
                     System.out.println("No document found with the title '" + title + "'");
                 }
@@ -130,6 +142,8 @@ public class User {
                 searchResults = library.searchByAuthor(author);
                 for (Document doc : searchResults) {
                     System.out.println("Found: " + doc.getTitle() + " By: " + String.join(", ", doc.getAuthors()));
+                    selectedDocument = doc;
+
                 }
                 break;
             case "year":
@@ -137,6 +151,7 @@ public class User {
                 searchResults = library.searchByYear(year);
                 for (Document doc : searchResults) {
                     System.out.println("Found: " + doc.getTitle() + " By: " + String.join(", ", doc.getAuthors()));
+                    selectedDocument = doc;
                 }
                 break;
             case "type":
@@ -144,6 +159,7 @@ public class User {
                 searchResults = library.searchByType(type);
                 for (Document doc : searchResults) {
                     System.out.println("Found: " + doc.getTitle() + " By: " + String.join(", ", doc.getAuthors()));
+                    selectedDocument = doc;
                 }
                 break;
             case "keyword":
@@ -151,12 +167,23 @@ public class User {
                 searchResults = library.searchByKeyword(keyword);
                 for (Document doc : searchResults) {
                     System.out.println("Found: " + doc.getTitle() + " By: " + String.join(", ", doc.getAuthors()));
+                    selectedDocument = doc;
                 }
                 break;
             default:
                 System.out.println("Invalid search type.");
                 break;
         }
+    }
+
+    
+    private void showSelectedDocument() {
+        System.out.println("Currently Selected Document: " + selectedDocument.getTitle());
+    }
+
+    private void deselectDocument() {
+        selectedDocument = null;
+        System.out.println("Document Deselected.");
     }
     
 }
