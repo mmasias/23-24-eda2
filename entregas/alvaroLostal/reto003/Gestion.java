@@ -2,6 +2,7 @@ package classes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Gestion {
@@ -16,39 +17,38 @@ public class Gestion {
     }
 
     public void agregar(Documento documento) {
-        documentos.add(documento);
+        try {
+            documentos.add(documento);
 
-        ArrayList<Autor> autores = documento.getAutores();
-
-        for (Autor autor : autores) {
-            if (indiceAutores.containsKey(autor.getNombre() + " " + autor.getApellido())) {
-                ArrayList<Documento> documentoAutor = indiceAutores.get(autor.getNombre() + " " + autor.getApellido());
-                documentoAutor.add(documento);
-                indiceAutores.replace(autor.getNombre() + " " + autor.getApellido(), documentoAutor);
-
-            } else {
-                ArrayList<Documento> documentoAutor = new ArrayList<>();
-                documentoAutor.add(documento);
-                indiceAutores.put(autor.getNombre() + " " + autor.getApellido(), documentoAutor);
+            ArrayList<Autor> autores = documento.getAutores();
+            for (Autor autor : autores) {
+                String nombreCompleto = autor.getNombre() + " " + autor.getApellido();
+                if (indiceAutores.containsKey(nombreCompleto)) {
+                    indiceAutores.get(nombreCompleto).add(documento);
+                } else {
+                    ArrayList<Documento> documentosAutor = new ArrayList<>();
+                    documentosAutor.add(documento);
+                    indiceAutores.put(nombreCompleto, documentosAutor);
+                }
             }
-        }
 
-        ArrayList<String> palabrasClave = documento.getPalabrasClave();
-
-        for (String palabra : palabrasClave) {
-            if (indicePalabrasClave.containsKey(palabra)) {
-                ArrayList<Documento> documentoPalabrasClave = indicePalabrasClave.get(palabra);
-                documentoPalabrasClave.add(documento);
-                indicePalabrasClave.replace(palabra, documentoPalabrasClave);
-            } else {
-                ArrayList<Documento> documentoPalabrasClave = new ArrayList<>();
-                documentoPalabrasClave.add(documento);
-                indicePalabrasClave.put(palabra, documentoPalabrasClave);
+            ArrayList<String> palabrasClave = documento.getPalabrasClave();
+            for (String palabra : palabrasClave) {
+                if (indicePalabrasClave.containsKey(palabra)) {
+                    indicePalabrasClave.get(palabra).add(documento);
+                } else {
+                    ArrayList<Documento> documentosPalabraClave = new ArrayList<>();
+                    documentosPalabraClave.add(documento);
+                    indicePalabrasClave.put(palabra, documentosPalabraClave);
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Error al agregar documento: " + e.getMessage());
         }
     }
 
-    public void modificar(Documento documento, String titulo, int año, ArrayList<Autor> autores, ArrayList<String> palabrasClave, Tipo tipo) {
+    public void modificar(Documento documento, String titulo, int año, ArrayList<Autor> autores,
+            ArrayList<String> palabrasClave, Tipo tipo) {
         documento.setTitulo(titulo);
         documento.setAño(año);
         documento.setAutores(autores);
@@ -58,48 +58,57 @@ public class Gestion {
 
     public ArrayList<Documento> buscar(String criterio, String valor) {
         ArrayList<Documento> resultado = new ArrayList<>();
-        for (Documento doc : documentos) {
-            switch (criterio.toLowerCase()) {
-                case "titulo":
-                    if (doc.getTitulo().toLowerCase().contains(valor.toLowerCase())) {
-                        resultado.add(doc);
-                    }
-                    break;
-                case "autor":
-                    for (Autor autor : doc.getAutores()) {
-                        if (autor.getNombre().toLowerCase().contains(valor.toLowerCase()) || autor.getApellido().toLowerCase().contains(valor.toLowerCase())) {
+        try {
+            for (Documento doc : documentos) {
+                switch (criterio.toLowerCase()) {
+                    case "titulo":
+                        if (doc.getTitulo().toLowerCase().contains(valor.toLowerCase())) {
                             resultado.add(doc);
-                            break;
                         }
-                    }
-                    break;
-                case "año":
-                    if (Integer.toString(doc.getAño()).equals(valor)) {
-                        resultado.add(doc);
-                    }
-                    break;
-                case "tipo":
-                    if (doc.getTipo().toString().toLowerCase().equals(valor.toLowerCase())) {
-                        resultado.add(doc);
-                    }
-                    break;
-                case "palabras clave":
-                    for (String palabraClave : doc.getPalabrasClave()) {
-                        if (palabraClave.toLowerCase().contains(valor.toLowerCase())) {
+                        break;
+                    case "autor":
+                        for (Autor autor : doc.getAutores()) {
+                            if (autor.getNombre().toLowerCase().contains(valor.toLowerCase()) ||
+                                    autor.getApellido().toLowerCase().contains(valor.toLowerCase())) {
+                                resultado.add(doc);
+                                break;
+                            }
+                        }
+                        break;
+                    case "año":
+                        if (Integer.toString(doc.getAño()).equals(valor)) {
                             resultado.add(doc);
-                            break;
                         }
-                    }
-                    break;
-                default:
-                    break;
+                        break;
+                    case "tipo":
+                        if (doc.getTipo().toString().toLowerCase().equals(valor.toLowerCase())) {
+                            resultado.add(doc);
+                        }
+                        break;
+                    case "palabras clave":
+                        for (String palabraClave : doc.getPalabrasClave()) {
+                            if (palabraClave.toLowerCase().contains(valor.toLowerCase())) {
+                                resultado.add(doc);
+                                break;
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Error al buscar documentos: " + e.getMessage());
         }
         return resultado;
     }
 
     public void eliminar(Documento documento) {
-        documentos.remove(documento);
+        try {
+            documentos.remove(documento);
+        } catch (Exception e) {
+            System.out.println("Error al eliminar documento: " + e.getMessage());
+        }
     }
 
     public HashMap<String, ArrayList<Documento>> getIndiceAutores() {
@@ -116,43 +125,49 @@ public class Gestion {
         int opcion;
 
         do {
-            System.out.println("Menú:");
-            System.out.println("1. Agregar documento");
-            System.out.println("2. Buscar documento");
-            System.out.println("3. Modificar documento");
-            System.out.println("4. Eliminar documento");
-            System.out.println("5. Documentos de autor");
-            System.out.println("6. Documentos por palabra clave");
-            System.out.println("0. Salir");
-            System.out.print("Seleccione una opción: ");
-            opcion = scanner.nextInt();
-            scanner.nextLine();
+            try {
+                System.out.println("Menú:");
+                System.out.println("1. Agregar documento");
+                System.out.println("2. Buscar documento");
+                System.out.println("3. Modificar documento");
+                System.out.println("4. Eliminar documento");
+                System.out.println("5. Documentos de autor");
+                System.out.println("6. Documentos por palabra clave");
+                System.out.println("0. Salir");
+                System.out.print("Seleccione una opción: ");
+                opcion = scanner.nextInt();
+                scanner.nextLine();
 
-            switch (opcion) {
-                case 1:
-                    agregarDocumento(biblioteca, scanner);
-                    break;
-                case 2:
-                    buscarDocumento(biblioteca, scanner);
-                    break;
-                case 3:
-                    modificarDocumento(biblioteca, scanner);
-                    break;
-                case 4:
-                    eliminarDocumento(biblioteca, scanner);
-                    break;
-                case 5:
-                    mostrarDocumentoPorAutor(biblioteca, scanner);
-                    break;
-                case 6:
-                    mostrarDocumentoPorPalabrasClave(biblioteca, scanner);
-                    break;
-                case 0:
-                    System.out.println("Saliendo del programa...");
-                    break;
-                default:
-                    System.out.println("Opción no válida. Intente de nuevo.");
-                    break;
+                switch (opcion) {
+                    case 1:
+                        agregarDocumento(biblioteca, scanner);
+                        break;
+                    case 2:
+                        buscarDocumento(biblioteca, scanner);
+                        break;
+                    case 3:
+                        modificarDocumento(biblioteca, scanner);
+                        break;
+                    case 4:
+                        eliminarDocumento(biblioteca, scanner);
+                        break;
+                    case 5:
+                        mostrarDocumentoPorAutor(biblioteca, scanner);
+                        break;
+                    case 6:
+                        mostrarDocumentoPorPalabrasClave(biblioteca, scanner);
+                        break;
+                    case 0:
+                        System.out.println("Saliendo del programa...");
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Intente de nuevo.");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Por favor, seleccione una opción válida.");
+                scanner.nextLine();
+                opcion = -1;
             }
         } while (opcion != 0);
 
