@@ -66,4 +66,19 @@ public class Documento {
     public void agregarPalabrasClave(String palabra) {
         this.palabrasClave.add(palabra);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Título: ").append(titulo).append("\n");
+        sb.append("Año: ").append(año).append("\n");
+        sb.append("Autores: ");
+        for (Autor autor : autores) {
+            sb.append(autor.getNombre()).append(" ").append(autor.getApellido()).append(", ");
+        }
+        sb.delete(sb.length() - 2, sb.length());
+        sb.append("\nPalabras Clave: ").append(palabrasClave.toString()).append("\n");
+        sb.append("Tipo: ").append(tipo).append("\n");
+        return sb.toString();
+    }
 }

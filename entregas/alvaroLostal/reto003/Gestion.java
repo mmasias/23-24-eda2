@@ -67,8 +67,7 @@ public class Gestion {
                     break;
                 case "autor":
                     for (Autor autor : doc.getAutores()) {
-                        if (autor.getNombre().toLowerCase().contains(valor.toLowerCase())
-                                || autor.getApellido().toLowerCase().contains(valor.toLowerCase())) {
+                        if (autor.getNombre().toLowerCase().contains(valor.toLowerCase()) || autor.getApellido().toLowerCase().contains(valor.toLowerCase())) {
                             resultado.add(doc);
                             break;
                         }
@@ -312,7 +311,7 @@ public class Gestion {
         System.out.println("Ingrese el apellido del autor: ");
         String apellidoAutor = scanner.nextLine();
         String nombreCompleto = nombreAutor + " " + apellidoAutor;
-        
+
         ArrayList<Documento> docs = biblioteca.getIndiceAutores().get(nombreCompleto);
         for (Documento documento : docs) {
             System.out.println(documento.toString());
