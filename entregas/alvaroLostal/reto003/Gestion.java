@@ -103,6 +103,14 @@ public class Gestion {
         documentos.remove(documento);
     }
 
+    public HashMap<String, ArrayList<Documento>> getIndiceAutores() {
+        return indiceAutores;
+    }
+
+    public HashMap<String, ArrayList<Documento>> getIndicePalabrasClave() {
+        return indicePalabrasClave;
+    }
+
     public static void main(String[] args) {
         Gestion biblioteca = new Gestion();
         Scanner scanner = new Scanner(System.in);
@@ -207,14 +215,6 @@ public class Gestion {
                 System.out.println(doc.getTitulo() + " - " + doc.getTipo() + " - " + doc.getAño());
             }
         }
-    }
-
-    public HashMap<String, ArrayList<Documento>> getIndiceAutores() {
-        return indiceAutores;
-    }
-
-    public HashMap<String, ArrayList<Documento>> getIndicePalabrasClave() {
-        return indicePalabrasClave;
     }
 
     private static void modificarDocumento(Gestion biblioteca, Scanner scanner) {
