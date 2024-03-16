@@ -94,6 +94,7 @@ public class Gestion {
                         }
                         break;
                     default:
+                        System.out.println("Criterio de búsqueda no válido.");
                         break;
                 }
             }
@@ -126,7 +127,7 @@ public class Gestion {
 
         do {
             try {
-                System.out.println("Menú:");
+                System.out.println("\u001B[31m" + "\nBiblioteca de Documentos" + "\u001B[0m");
                 System.out.println("1. Agregar documento");
                 System.out.println("2. Buscar documento");
                 System.out.println("3. Modificar documento");
@@ -161,11 +162,11 @@ public class Gestion {
                         System.out.println("Saliendo del programa...");
                         break;
                     default:
-                        System.out.println("Opción no válida. Intente de nuevo.");
+                        System.out.println("Número no válido. Intente de nuevo.");
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida. Por favor, seleccione una opción válida.");
+                System.out.println("Formato de entrada no válido. Intente de nuevo.");
                 scanner.nextLine();
                 opcion = -1;
             }
@@ -221,13 +222,25 @@ public class Gestion {
         String valor = scanner.nextLine();
 
         ArrayList<Documento> resultado = biblioteca.buscar(criterio, valor);
+
         if (resultado.isEmpty()) {
             System.out.println("No se encontraron documentos que coincidan con la búsqueda.");
         } else {
             System.out.println("Documentos encontrados:");
             for (Documento doc : resultado) {
-                System.out.println(doc.getTitulo() + " - " + doc.getTipo() + " - " + doc.getAño());
+                System.out.println("-------------------------");
+                System.out.println("Título: " + doc.getTitulo());
+                System.out.println("Tipo: " + doc.getTipo());
+                System.out.println("Año: " + doc.getAño());
+                System.out.print("Autores: ");
+                for (Autor autor : doc.getAutores()) {
+                    System.out.print(autor.getNombre() + " " + autor.getApellido() + ", ");
+                }
+                System.out.println();
+                System.out.println("Palabras Clave: " + doc.getPalabrasClave().toString());
+
             }
+            System.out.println("-------------------------");
         }
     }
 
@@ -331,6 +344,7 @@ public class Gestion {
         for (Documento documento : docs) {
             System.out.println(documento.toString());
         }
+        System.out.println("-------------------------\n");
     }
 
     public static void mostrarDocumentoPorPalabrasClave(Gestion biblioteca, Scanner scanner) {
@@ -341,5 +355,6 @@ public class Gestion {
         for (Documento documento : docs) {
             System.out.println(documento.toString());
         }
+        System.out.println("-------------------------\n");
     }
 }

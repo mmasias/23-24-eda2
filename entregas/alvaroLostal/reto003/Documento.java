@@ -70,6 +70,7 @@ public class Documento {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("-------------------------\n");
         sb.append("Título: ").append(titulo).append("\n");
         sb.append("Año: ").append(año).append("\n");
         sb.append("Autores: ");
@@ -78,7 +79,7 @@ public class Documento {
         }
         sb.delete(sb.length() - 2, sb.length());
         sb.append("\nPalabras Clave: ").append(palabrasClave.toString()).append("\n");
-        sb.append("Tipo: ").append(tipo).append("\n");
+        sb.append("Tipo: ").append(tipo);
         return sb.toString();
     }
 }
