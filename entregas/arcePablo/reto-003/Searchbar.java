@@ -5,26 +5,26 @@ import Types.DocType;
 import Types.KeyWordTypes;
 
 public class Searchbar {
-    private ArrayList<KeyWordTypes> keyWordsInput;
-    private String titleInput;
-    private Date dateInput;
-    private String authorInput;
-    private DocType docTypeInput;
+    private ArrayList<KeyWordTypes> searchedKeyWords;
+    private String searchedTitle;
+    private Date searchedDate;
+    private String searchedAuthor;
+    private DocType searchedDocType;
 
     public Searchbar() {
-        this.keyWordsInput = new ArrayList<>();
-        this.titleInput = "";
-        this.dateInput = null;
-        this.authorInput = "";
-        this.docTypeInput = null;
+        this.searchedKeyWords = new ArrayList<>();
+        this.searchedTitle = "";
+        this.searchedDate = null;
+        this.searchedAuthor = "";
+        this.searchedDocType = null;
     }
 
     public void addKeyword(KeyWordTypes keyword) {
-        keyWordsInput.add(keyword);
+        searchedKeyWords.add(keyword);
     }
 
     public void removeKeyword(KeyWordTypes keyword) {
-        keyWordsInput.remove(keyword);
+        searchedKeyWords.remove(keyword);
     }
 
     public ArrayList<Document> filterDocuments(ArrayList<Document> documents) {
@@ -32,23 +32,19 @@ public class Searchbar {
 
         for (Document document : documents) {
             if (containsAnyKeyword(document.getKeyWords()) &&
-                (titleInput.isEmpty() || document.getTitle().equals(titleInput)) &&
-                (dateInput == null || document.getDatePublished().equals(dateInput)) &&
-                (authorInput.isEmpty() || document.getAuthor().equals(authorInput)) &&
-                (docTypeInput == null || document.getType().equals(docTypeInput))) {
+                (searchedTitle.isEmpty() || document.getTitle().equals(searchedTitle)) &&
+                (searchedDate == null || document.getDatePublished().equals(searchedDate)) &&
+                (searchedAuthor.isEmpty() || document.getAuthor().equals(searchedAuthor)) &&
+                (searchedDocType == null || document.getType().equals(searchedDocType))) {
                 filteredDocuments.add(document);
             }
         }
 
-        if (filteredDocuments.isEmpty()) {
-            return documents;
-        } else {
-            return filteredDocuments;
-        }
+        return filteredDocuments;
     }
 
     private boolean containsAnyKeyword(ArrayList<KeyWordTypes> documentKeywords) {
-        for (KeyWordTypes keyword : keyWordsInput) {
+        for (KeyWordTypes keyword : searchedKeyWords) {
             if (documentKeywords.contains(keyword)) {
                 return true;
             }
@@ -56,44 +52,52 @@ public class Searchbar {
         return false;
     }
 
+    public boolean isEmpty() {
+    return searchedKeyWords.isEmpty() &&
+           searchedTitle.isEmpty() &&
+           searchedDate == null &&
+           searchedAuthor.isEmpty() &&
+           searchedDocType == null;
+    }
+
     // Getters and setters
-    public ArrayList<KeyWordTypes> getKeyWordsInput() {
-        return keyWordsInput;
+    public ArrayList<KeyWordTypes> getsearchedKeyWords() {
+        return searchedKeyWords;
     }
 
-    public void setKeyWordsInput(ArrayList<KeyWordTypes> keyWordsInput) {
-        this.keyWordsInput = keyWordsInput;
+    public void setSearchedKeyWords(ArrayList<KeyWordTypes> searchedKeyWords) {
+        this.searchedKeyWords = searchedKeyWords;
     }
 
-    public String getTitleInput() {
-        return titleInput;
+    public String getSearchedTitle() {
+        return searchedTitle;
     }
 
-    public void setTitleInput(String titleInput) {
-        this.titleInput = titleInput;
+    public void setSearchedTitle(String searchedTitle) {
+        this.searchedTitle = searchedTitle;
     }
 
-    public Date getDateInput() {
-        return dateInput;
+    public Date getSearchedDate() {
+        return searchedDate;
     }
 
-    public void setDateInput(Date dateInput) {
-        this.dateInput = dateInput;
+    public void setSearchedDate(Date searchedDate) {
+        this.searchedDate = searchedDate;
     }
 
-    public String getAuthorInput() {
-        return authorInput;
+    public String getSearchedAuthor() {
+        return searchedAuthor;
     }
 
-    public void setAuthorInput(String authorInput) {
-        this.authorInput = authorInput;
+    public void setSearchedAuthor(String searchedAuthor) {
+        this.searchedAuthor = searchedAuthor;
     }
 
-    public DocType getDocTypeInput() {
-        return docTypeInput;
+    public DocType getSearchedDocType() {
+        return searchedDocType;
     }
 
-    public void setDocTypeInput(DocType docTypeInput) {
-        this.docTypeInput = docTypeInput;
+    public void setSearchedDocType(DocType searchedDocType) {
+        this.searchedDocType = searchedDocType;
     }
 }

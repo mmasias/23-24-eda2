@@ -29,7 +29,10 @@ public class DigitalLibrary {
                     modifySearchbar(searchbar);
                     break;
                 case "l":
-                    ArrayList<Document> filteredDocuments = searchbar.filterDocuments(library.getDocuments());
+                    ArrayList<Document> filteredDocuments = library.getDocuments();
+                    if (!searchbar.isEmpty()){
+                        filteredDocuments = searchbar.filterDocuments(filteredDocuments);
+                    } 
                     menu.displayInputs(searchbar);
                     menu.listDocuments(filteredDocuments);
                     break;
@@ -84,7 +87,7 @@ public class DigitalLibrary {
                 case "t":
                     System.out.println("Ingrese el nuevo título:");
                     String newTitle = scanner.nextLine();
-                    searchbar.setTitleInput(newTitle);
+                    searchbar.setSearchedTitle(newTitle);
                     break;
                 case "d":
                     System.out.println("Ingrese la nueva fecha (en formato yyyy-MM-dd):");
@@ -94,7 +97,7 @@ public class DigitalLibrary {
                 case "u":
                     System.out.println("Ingrese el nuevo autor:");
                     String newAuthor = scanner.nextLine();
-                    searchbar.setAuthorInput(newAuthor);
+                    searchbar.setSearchedAuthor(newAuthor);
                     break;
                 case "y":
                     System.out.println("Ingrese el nuevo tipo de documento:");
