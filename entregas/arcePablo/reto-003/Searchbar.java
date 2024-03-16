@@ -61,7 +61,7 @@ public class Searchbar {
     }
 
     // Getters and setters
-    public ArrayList<KeyWordTypes> getsearchedKeyWords() {
+    public ArrayList<KeyWordTypes> getSearchedKeyWords() {
         return searchedKeyWords;
     }
 

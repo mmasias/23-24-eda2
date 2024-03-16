@@ -63,28 +63,28 @@ public void listDocuments(ArrayList<Document> documents) {
 public void displayInputs(Searchbar searchbar) {
         System.out.println("\nBuscador: ");
 
-        if (!searchbar.getTitleInput().isEmpty() && searchbar.getTitleInput() != null) {
-            System.out.println("Título: " + searchbar.getTitleInput());
+        if (!searchbar.getSearchedTitle().isEmpty() && searchbar.getSearchedTitle() != null) {
+            System.out.println("Título: " + searchbar.getSearchedTitle());
         }
 
-        if (!searchbar.getKeyWordsInput().isEmpty() && searchbar.getKeyWordsInput() != null) {
+        if (!searchbar.getSearchedKeyWords().isEmpty() && searchbar.getSearchedKeyWords() != null) {
             System.out.print("Palabras claves: ");
-            for (KeyWordTypes keyword : searchbar.getKeyWordsInput()) {
+            for (KeyWordTypes keyword : searchbar.getSearchedKeyWords()) {
                 System.out.print(keyword + ", ");
             }
             System.out.println();
         }
 
-        if (searchbar.getDateInput() != null) {
-            System.out.println("Fecha: " + searchbar.getDateInput());
+        if (searchbar.getSearchedDate() != null) {
+            System.out.println("Fecha: " + searchbar.getSearchedDate());
         }
 
-        if (!searchbar.getAuthorInput().isEmpty() && searchbar.getAuthorInput() != null) {
-            System.out.println("Autor: " + searchbar.getAuthorInput());
+        if (!searchbar.getSearchedAuthor().isEmpty() && searchbar.getSearchedAuthor() != null) {
+            System.out.println("Autor: " + searchbar.getSearchedAuthor());
         }
 
-        if (searchbar.getDocTypeInput() != null) {
-            System.out.println("Tipo de documento: " + searchbar.getDocTypeInput());
+        if (searchbar.getSearchedDocType() != null) {
+            System.out.println("Tipo de documento: " + searchbar.getSearchedDocType());
         }
                 
         System.out.println("");
