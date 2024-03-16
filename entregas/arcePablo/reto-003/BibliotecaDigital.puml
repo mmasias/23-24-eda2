@@ -1,0 +1,16 @@
+@startuml "Biblioteca Digital"
+
+title "Biblioteca Digital"
+
+class Document
+class Library
+class Menu 
+class Searchbar
+package Types {
+    class DocType
+    class keyWordTypes
+}
+class DocumentGenerator
+class DigitalLibrary
+
+@enduml

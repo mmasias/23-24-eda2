@@ -1,0 +1,24 @@
+package Types;
+
+public enum KeyWordTypes {
+    JAVA,
+    HISTORIA,
+    INTELIGENCIA_ARTIFICIAL,
+    PROGRAMACION,
+    CIENCIA,
+    MATEMATICAS,
+    FISICA,
+    BIOLOGIA,
+    QUIMICA,
+    LITERATURA,
+    ECONOMIA,
+    ARTE,
+    MUSICA,
+    DEPORTE,
+    TECNOLOGIA,
+    EDUCACION,
+    POLITICA,
+    SALUD,
+    MEDICINA,
+    PSICOLOGIA
+}
