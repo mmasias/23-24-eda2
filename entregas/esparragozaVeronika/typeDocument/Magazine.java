@@ -14,7 +14,6 @@ public class Magazine extends Document{
         this.authors = authors;
         this.keywords = keywords;
     }
-
     public Magazine(Author authors, Keyword keywords) {
         addTitle();
         addAuthor(authors);

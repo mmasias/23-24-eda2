@@ -9,35 +9,26 @@ public class Author {
     public Author() {
         mapAuthors = new HashMap<>();
     }
-    public void addNewAuthor(int id, String nombre) {
-        mapAuthors.put(id, nombre);
-        System.out.println("Autor agregado: " + nombre + " con ID: " + id);
+    public void addNewAuthor(int id, String name) {
+        mapAuthors.put(id, name);
+        System.out.println("Autor agregado: " + name + " con ID: " + id);
     }
-    public void addAuthor(String nombre) {
+    public void addAuthor(String name) {
         int id = mapAuthors.size() + 1;
-        mapAuthors.put(id, nombre);
-        System.out.println(">> Autor agregado: " + nombre + " con ID: " + id);
+        mapAuthors.put(id, name);
+        System.out.println(">> Autor agregado: " + name + " con ID: " + id);
     }
-    public void showAuthorById(int selectId) {
-        if (mapAuthors.containsKey(selectId)) {
-            String nombreAutor = mapAuthors.get(selectId);
-            System.out.println("El autor con ID " + selectId + " es: " + nombreAutor);
-        } else {
-            System.out.println("No se encontró ningún autor con ID " + selectId);
-        }
-    }
-    public int showAuthorByName(String nombre) {
+    public int showAuthorByName(String name) {
         for (Map.Entry<Integer, String> entry : mapAuthors.entrySet()) {
             int idAuthor = entry.getKey();
             String authorName = entry.getValue();
-            if (authorName.equalsIgnoreCase(nombre)) {
+            if (authorName.equalsIgnoreCase(name)) {
                 return idAuthor;
             }
         }
         return -1;
     }
     public void showAllAuthors() {
-        System.out.println("Todos los autores en el mapa:");
         for (Map.Entry<Integer, String> entry : mapAuthors.entrySet()) {
             int idAuthor = entry.getKey();
             String authorName = entry.getValue();
@@ -52,5 +43,15 @@ public class Author {
             }
         }
     return authorNames;
+    }
+    public ArrayList<String> findSimilarAuthors(String authorName) {
+        ArrayList<String> similarAuthors = new ArrayList<>();
+        ArrayList<String> authorNames = new ArrayList<>(mapAuthors.values());
+            for (String name : authorNames) {
+                if (name.toLowerCase().contains(authorName.toLowerCase())) {
+                    similarAuthors.add(name);
+                }
+            }
+        return similarAuthors;
     }
 }

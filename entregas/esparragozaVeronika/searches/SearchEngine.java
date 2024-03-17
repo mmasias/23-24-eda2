@@ -1,55 +1,59 @@
 package searches;
 
+import typeDocument.Document;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SearchEngine {
-    ArrayList<String> searchResults = new ArrayList<>();
     Scanner input = new Scanner(System.in);
 
-    public void searchDocument(){
-        System.out.println("Ingrese la caracteristica por la que desea buscar: ");
+    public void searchDocument(ArrayList<Document> documents, Author authors, Keyword keywords){
+        System.out.println("Ingrese la característica por la que desea buscar (solo números): ");
         System.out.println("1. Título");
         System.out.println("2. Autor");
         System.out.println("3. Año de publicación");
         System.out.println("4. Tipo de documento");
         System.out.println("5. Palabra clave");
+        System.out.print("-> ");
+        SearchDocument document = new SearchDocument(documents, authors, keywords);
 
         switch (input.nextInt()){
         case 1:
             System.out.println("Ingrese el título del documento: ");
-            new SearchDocument("title", input.next());
+            System.out.print("-> ");
+            input.nextLine();
+            document.newSearch("title", input.nextLine());
             break;
         case 2:
-            new SearchDocument("author", input.next());
+            System.out.println("Ingrese el nombre del autor: ");
+            System.out.print("-> ");
+            input.nextLine();
+            document.newSearch("author", input.nextLine());
             break;
         case 3:
-            new SearchDocument("year", input.next());
+            System.out.println("Ingrese el año de publicación: ");
+            System.out.print("-> ");
+            document.newSearch("year", input.next());
             break;
         case 4:
-            new SearchDocument("type", input.next());
+            System.out.println("Los tipos de documentos son los siguientes (solo números):");
+            System.out.println("1. Artículo");
+            System.out.println("2. Revista");
+            System.out.println("3. Libro");
+            System.out.println("4. Paper científico");
+            System.out.print("-> ");
+            document.newSearch("type", input.next());
             break;
         case 5:
-            new SearchDocument("keyword", input.next());
+            System.out.println("Ingrese la palabra clave a buscar: ");
+            System.out.print("-> ");
+            input.nextLine();
+            document.newSearch("keyword", input.nextLine());
             break;
         default:
             System.out.println("Opción no válida");
             break;
-        }
-    }
-
-    public void searchByAuthor(Author authors) {
-        System.out.println("A continuacion todos los autores publicados: ");
-        authors.showAllAuthors();
-        boolean isSelectAuthor = true;
-        while (isSelectAuthor) {
-            System.out.println("Ingrese el ID del autor: ");
-            authors.showAuthorById(input.nextInt());
-            System.out.println("Desea buscar por otro autor? (s/n)");
-            searchResults.add(String.valueOf(input.nextInt()));
-            if (input.next().equals("n")) {
-                isSelectAuthor = false;
-            }
         }
     }
 }

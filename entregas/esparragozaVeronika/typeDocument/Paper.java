@@ -14,7 +14,6 @@ public class Paper extends Document{
         this.authors = authors;
         this.keywords = keywords;
     }
-
     public Paper(Author authors, Keyword keywords) {
         addTitle();
         addAuthor(authors);

@@ -9,11 +9,10 @@ import java.util.Scanner;
 public abstract class Document {
     Scanner input = new Scanner(System.in);
     private String title;
-    private ArrayList<Integer> authorsId = new ArrayList<>();
     private int yearOfPublication;
     private String type;
+    private ArrayList<Integer> authorsId = new ArrayList<>();
     private ArrayList<Integer> keywordsId = new ArrayList<>();
-
 
     public Document(String title, ArrayList<Integer> authors, int yearOfPublication, String type, ArrayList<Integer> keywords){
         this.title = title;
@@ -22,24 +21,21 @@ public abstract class Document {
         this.type = type;
         this.keywordsId = keywords;
     }
-
     public Document() {}
-
-    public void printDocument(Author author, Keyword keywords) {
-        System.out.println("--> " + "Titulo: " + title + " - Autores: " +   author.printAuthors(authorsId) + " - Año de publicación: " + yearOfPublication + " - Tipo: " + type + " - Palabras clave: " + keywords.printKeywords(keywordsId));
+    public void printDocument(Document document, Author authors, Keyword keywords) {
+        System.out.println(document.toString(authors, keywords));
     }
-
-    protected String addTitle(){
+    protected void addTitle(){
         System.out.println("Ingrese el título del documento: ");
+        System.out.print("-> ");
         this.title = input.nextLine();
-        return title;
-    }
-    protected int addYearOfPublication(){
-        System.out.println("Ingrese el año de publicación: ");
-        this.yearOfPublication = Integer.parseInt(input.nextLine());
-        return yearOfPublication;
-    }
 
+    }
+    protected void addYearOfPublication(){
+        System.out.println("Ingrese el año de publicación: ");
+        System.out.print("-> ");
+        this.yearOfPublication = Integer.parseInt(input.nextLine());
+    }
     protected void addAuthor(Author authors) {
         boolean isExistAuthor = true;
         System.out.println("Estos son los autores ya existentes, si encuentra el suyo ingrese el numero, sino ingrese el nombre del nuevo a guardar: ");
@@ -47,6 +43,7 @@ public abstract class Document {
         ArrayList<Integer> chooseAuthors = new ArrayList<>();
 
         while (isExistAuthor) {
+            System.out.print("-> ");
             String userInput = input.nextLine();
             if (userInput.matches("\\d+")) {
                 int idAuthor = Integer.parseInt(userInput);
@@ -54,8 +51,8 @@ public abstract class Document {
             } else {
                 authors.addAuthor(userInput);
                 int idAuthor = authors.showAuthorByName(userInput);
-                if (idAuthor != -1){
-                chooseAuthors.add(idAuthor);
+                if (idAuthor != -1) {
+                    chooseAuthors.add(idAuthor);
                 }
             }
             System.out.println("Desea agregar otro autor? (s/n)");
@@ -65,7 +62,6 @@ public abstract class Document {
         }
         this.authorsId = chooseAuthors;
     }
-
     protected void addKeyword(Keyword keywords) {
         boolean isExistKeyword = true;
         System.out.println("Estas son las palabras clave ya existentes, si encuentra la suya ingrese el numero, sino ingrese la nueva palabra clave a guardar: ");
@@ -73,6 +69,7 @@ public abstract class Document {
         ArrayList<Integer> chooseKeywords = new ArrayList<>();
 
         while (isExistKeyword) {
+            System.out.print("-> ");
             String userInput = input.nextLine();
             if (userInput.matches("\\d+")) {
                 int idKeyword = Integer.parseInt(userInput);
@@ -91,11 +88,25 @@ public abstract class Document {
         }
         this.keywordsId = chooseKeywords;
     }
-
     public String getTitle() {
-        return title;
+        return this.title;
+    }
+    public int getYearOfPublication() {
+        return this.yearOfPublication;
+    }
+    public String getType() {
+        return this.type;
+    }
+    public ArrayList<Integer> getKeywordsId() {
+        return this.keywordsId;
+    }
+    public ArrayList<Integer> getAuthorsId() {
+        return this.authorsId;
     }
     public void setType(String type) {
         this.type = type;
+    }
+    public String toString(Author author, Keyword keywords) {
+        return "# Titulo: " + title + " - Autores: " + author.printAuthors(authorsId) + " - Año de publicación: " + yearOfPublication + " - Tipo: " + type + " - Palabras clave: " + keywords.printKeywords(keywordsId);
     }
 }

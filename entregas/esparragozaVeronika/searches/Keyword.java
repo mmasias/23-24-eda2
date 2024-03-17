@@ -16,14 +16,6 @@ public class Keyword {
         int id = mapKeyword.size() + 1;
         mapKeyword.put(id, keyword);
     }
-    public void showKeywordById(int selectId) {
-        if (mapKeyword.containsKey(selectId)) {
-            String textKeyword = mapKeyword.get(selectId);
-            System.out.println("La palabra clave con ID " + selectId + " es: " + textKeyword);
-        } else {
-            System.out.println("No se encontró ninguna palabra clave con ID " + selectId);
-        }
-    }
     public int showKeywordByName(String keyword) {
         for (Map.Entry<Integer, String> entry : mapKeyword.entrySet()) {
             int idKeyword = entry.getKey();
