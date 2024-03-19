@@ -43,4 +43,14 @@ public class KeywordManager {
         }
         return keywordValues;
     }
+    public ArrayList<String> findSimilarKeyWords(String keyword) {
+        ArrayList<String> similarKeywords = new ArrayList<>();
+        ArrayList<String> authorNames = new ArrayList<>(mapKeyword.values());
+        for (String name : authorNames) {
+            if (name.toLowerCase().contains(keyword.toLowerCase())) {
+                similarKeywords.add(name);
+            }
+        }
+        return similarKeywords;
+    }
 }

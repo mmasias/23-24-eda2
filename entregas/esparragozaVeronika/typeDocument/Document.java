@@ -22,9 +22,7 @@ public abstract class Document {
         this.keywordsId = keywords;
     }
     public Document() {}
-    public void printDocument(Document document, AuthorManager authors, KeywordManager keywords) {
-        System.out.println(document.toString(authors, keywords));
-    }
+
     protected void addTitle(){
         System.out.println("Ingrese el título del documento: ");
         System.out.print("-> ");
@@ -106,7 +104,5 @@ public abstract class Document {
     public void setType(String type) {
         this.type = type;
     }
-    public String toString(AuthorManager author, KeywordManager keywords) {
-        return "# Titulo: " + title + " - Autores: " + author.printAuthors(authorsId) + " - Año de publicación: " + yearOfPublication + " - Tipo: " + type + " - Palabras clave: " + keywords.printKeywords(keywordsId);
-    }
+
 }
