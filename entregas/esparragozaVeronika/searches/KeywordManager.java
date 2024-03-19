@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Keyword {
+public class KeywordManager {
     protected Map<Integer, String> mapKeyword;
-    public Keyword() {
+    public KeywordManager() {
         mapKeyword = new HashMap<>();
     }
-    public void addNewKeyword(int id, String keyword) {
+    public void addKeyword(int id, String keyword) {
         mapKeyword.put(id, keyword);
     }
     public void addKeyword(String keyword) {

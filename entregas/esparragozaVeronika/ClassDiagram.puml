@@ -101,38 +101,4 @@ class Keyword{
     + Arraylist<String> printKeywords(Arraylist<Integer> keywordsId)
 }
 
-App -- DocumentManagement
-
-Document <|-- Magazine
-Document <|-- Paper
-Document <|-- Article
-Document <|-- Book
-
-
-DocumentManagement -- SearchEngine
-DocumentManagement -- Author
-DocumentManagement -- Keyword
-
-
-Arraylist -- SearchDocument
-Author -- SearchDocument
-Keyword -- SearchDocument
-Document -- SearchDocument
-
-SearchEngine -- Document
-
-Magazine -- Author
-Magazine -- Keyword
-
-Paper -- Author
-Paper -- Keyword
-
-Article -- Author
-Article -- Keyword
-
-Book -- Author
-Book -- Keyword
-
-
-
 @enduml

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Author {
+public class AuthorManager {
     public Map<Integer, String> mapAuthors;
-    public Author() {
+    public AuthorManager() {
         mapAuthors = new HashMap<>();
     }
-    public void addNewAuthor(int id, String name) {
+    public void addAuthor(int id, String name) {
         mapAuthors.put(id, name);
         System.out.println("Autor agregado: " + name + " con ID: " + id);
     }

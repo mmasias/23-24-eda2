@@ -3,17 +3,69 @@ package searches;
 import typeDocument.Document;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class SearchDocument {
+public class DocumentManager {
+    Scanner input = new Scanner(System.in);
     private final ArrayList<Document> documents;
-    private final Author authors;
-    private final Keyword keywords;
+    private final AuthorManager authors;
+    private final KeywordManager keywords;
 
-    public SearchDocument(ArrayList<Document> documents, Author authors, Keyword keywords){
+    public DocumentManager(ArrayList<Document> documents, AuthorManager authors, KeywordManager keywords){
         this.documents = documents;
         this.authors = authors;
         this.keywords = keywords;
     }
+
+    public void search(ArrayList<Document> documents, AuthorManager authors, KeywordManager keywords){
+        System.out.println("Ingrese la característica por la que desea buscar (solo números): ");
+        System.out.println("1. Título");
+        System.out.println("2. Autor");
+        System.out.println("3. Año de publicación");
+        System.out.println("4. Tipo de documento");
+        System.out.println("5. Palabra clave");
+        System.out.print("-> ");
+        DocumentManager document = new DocumentManager(documents, authors, keywords);
+
+        switch (input.nextInt()){
+            case 1:
+                System.out.println("Ingrese el título del documento: ");
+                System.out.print("-> ");
+                input.nextLine();
+                document.newSearch("title", input.nextLine());
+                break;
+            case 2:
+                System.out.println("Ingrese el nombre del autor: ");
+                System.out.print("-> ");
+                input.nextLine();
+                document.newSearch("author", input.nextLine());
+                break;
+            case 3:
+                System.out.println("Ingrese el año de publicación: ");
+                System.out.print("-> ");
+                document.newSearch("year", input.next());
+                break;
+            case 4:
+                System.out.println("Los tipos de documentos son los siguientes (solo números):");
+                System.out.println("1. Artículo");
+                System.out.println("2. Revista");
+                System.out.println("3. Libro");
+                System.out.println("4. Paper científico");
+                System.out.print("-> ");
+                document.newSearch("type", input.next());
+                break;
+            case 5:
+                System.out.println("Ingrese la palabra clave a buscar: ");
+                System.out.print("-> ");
+                input.nextLine();
+                document.newSearch("keyword", input.nextLine());
+                break;
+            default:
+                System.out.println("Opción no válida");
+                break;
+        }
+    }
+
     public void newSearch(String typeOfSearch, String dataToSearch){
         switch (typeOfSearch) {
             case "title":
@@ -23,7 +75,7 @@ public class SearchDocument {
                 printResult(searchByAuthor(dataToSearch));
                 break;
             case "year":
-                printResult(searchByYear(dataToSearch));
+                printResult(searchByYearOfPublication(Integer.parseInt(dataToSearch)));
                 break;
             case "type":
                 switch (dataToSearch) {
@@ -67,10 +119,10 @@ public class SearchDocument {
         }
         return result;
     }
-    private ArrayList<Document> searchByYear(String year){
+    private ArrayList<Document> searchByYearOfPublication(int year){
         ArrayList<Document> result = new ArrayList<>();
         for (Document document : documents) {
-            if (document.getYearOfPublication() == Integer.parseInt(year)) {
+            if (document.getYearOfPublication() == (year)) {
                 result.add(document);
             }
         }

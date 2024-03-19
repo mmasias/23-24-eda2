@@ -1,7 +1,7 @@
 package typeDocument;
 
-import searches.Author;
-import searches.Keyword;
+import searches.AuthorManager;
+import searches.KeywordManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,7 +22,7 @@ public abstract class Document {
         this.keywordsId = keywords;
     }
     public Document() {}
-    public void printDocument(Document document, Author authors, Keyword keywords) {
+    public void printDocument(Document document, AuthorManager authors, KeywordManager keywords) {
         System.out.println(document.toString(authors, keywords));
     }
     protected void addTitle(){
@@ -36,7 +36,7 @@ public abstract class Document {
         System.out.print("-> ");
         this.yearOfPublication = Integer.parseInt(input.nextLine());
     }
-    protected void addAuthor(Author authors) {
+    protected void addAuthor(AuthorManager authors) {
         boolean isExistAuthor = true;
         System.out.println("Estos son los autores ya existentes, si encuentra el suyo ingrese el numero, sino ingrese el nombre del nuevo a guardar: ");
         authors.showAllAuthors();
@@ -62,7 +62,7 @@ public abstract class Document {
         }
         this.authorsId = chooseAuthors;
     }
-    protected void addKeyword(Keyword keywords) {
+    protected void addKeyword(KeywordManager keywords) {
         boolean isExistKeyword = true;
         System.out.println("Estas son las palabras clave ya existentes, si encuentra la suya ingrese el numero, sino ingrese la nueva palabra clave a guardar: ");
         keywords.showAllKeywords();
@@ -106,7 +106,7 @@ public abstract class Document {
     public void setType(String type) {
         this.type = type;
     }
-    public String toString(Author author, Keyword keywords) {
+    public String toString(AuthorManager author, KeywordManager keywords) {
         return "# Titulo: " + title + " - Autores: " + author.printAuthors(authorsId) + " - Año de publicación: " + yearOfPublication + " - Tipo: " + type + " - Palabras clave: " + keywords.printKeywords(keywordsId);
     }
 }

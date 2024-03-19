@@ -1,21 +1,21 @@
-import searches.Author;
-import searches.Keyword;
-import searches.SearchEngine;
+import searches.AuthorManager;
+import searches.KeywordManager;
+import searches.DocumentManager;
 import typeDocument.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DocumentManagement {
+public class ManagementSystem {
     Scanner input = new Scanner(System.in);
-    ArrayList<Document> documents;
-    SearchEngine searchEngine;
-    Author authors = new Author();
-    Keyword keywords = new Keyword();
-    boolean isRunning;
+    private ArrayList<Document> documents;
+    private DocumentManager documentManager;
+    private final AuthorManager authors = new AuthorManager();
+    private final KeywordManager keywords = new KeywordManager();
+    private boolean isRunning;
 
     public void run(){
         documents = new ArrayList<>();
-        searchEngine = new SearchEngine();
+        documentManager = new DocumentManager(documents, authors, keywords);
         isRunning = true;
 
         falseData();
@@ -51,7 +51,7 @@ public class DocumentManagement {
                 break;
         }
     }
-    private void addDocument(Author authors){
+    private void addDocument(AuthorManager authors){
         System.out.println("Ingrese el tipo de documento que desea agregar (solo números): ");
         System.out.println("1. Artículo");
         System.out.println("2. Revista");
@@ -78,7 +78,7 @@ public class DocumentManagement {
         }
     }
     private void showFilteringOption() {
-        searchEngine.searchDocument(documents, authors, keywords);
+        documentManager.search(documents, authors, keywords);
     }
     private void printAllDocuments(){
         for (Document document : documents){
@@ -88,14 +88,14 @@ public class DocumentManagement {
     }
     public void falseData(){
         System.out.println("Agregando datos falsos...");
-        authors.addNewAuthor(1, "Jane Austen");
-        authors.addNewAuthor(2, "Fyodor Dostoevsky");
-        authors.addNewAuthor(3, "Haruki Murakami");
+        authors.addAuthor(1, "Jane Austen");
+        authors.addAuthor(2, "Fyodor Dostoevsky");
+        authors.addAuthor(3, "Haruki Murakami");
 
-        keywords.addNewKeyword(1, "naturaleza");
-        keywords.addNewKeyword(2, "medicina");
-        keywords.addNewKeyword(3, "salud");
-        keywords.addNewKeyword(4, "vida");
+        keywords.addKeyword(1, "naturaleza");
+        keywords.addKeyword(2, "medicina");
+        keywords.addKeyword(3, "salud");
+        keywords.addKeyword(4, "vida");
 
         ArrayList<Integer> autorDataExample1 = new ArrayList<>();
         autorDataExample1.add(3);

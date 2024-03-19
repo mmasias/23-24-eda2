@@ -1,7 +1,7 @@
 package typeDocument;
 
-import searches.Author;
-import searches.Keyword;
+import searches.AuthorManager;
+import searches.KeywordManager;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class Book extends Document {
         this.authors = authors;
         this.keywords = keywords;
     }
-    public Book(Author authors, Keyword keywords) {
+    public Book(AuthorManager authors, KeywordManager keywords) {
         addTitle();
         addAuthor(authors);
         addYearOfPublication();
