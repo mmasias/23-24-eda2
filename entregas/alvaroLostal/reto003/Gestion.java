@@ -75,8 +75,8 @@ public class Gestion {
                             }
                         }
                         break;
-                    case "año":
-                        if (Integer.toString(doc.getAño()).equals(valor)) {
+                    case "anio":
+                        if(doc.getAño()==Integer.parseInt(valor)){
                             resultado.add(doc);
                         }
                         break;
@@ -216,7 +216,7 @@ public class Gestion {
     }
 
     private static void buscarDocumento(Gestion biblioteca, Scanner scanner) {
-        System.out.print("Ingrese el criterio de búsqueda (titulo, autor, año, tipo, palabras clave): ");
+        System.out.print("Ingrese el criterio de búsqueda (titulo, autor, anio, tipo, palabras clave): ");
         String criterio = scanner.nextLine();
         System.out.print("Ingrese el valor a buscar: ");
         String valor = scanner.nextLine();
@@ -233,8 +233,12 @@ public class Gestion {
                 System.out.println("Tipo: " + doc.getTipo());
                 System.out.println("Año: " + doc.getAño());
                 System.out.print("Autores: ");
-                for (Autor autor : doc.getAutores()) {
-                    System.out.print(autor.getNombre() + " " + autor.getApellido() + ", ");
+                for (int i = 0; i < doc.getAutores().size(); i++) {
+                    Autor autor = doc.getAutores().get(i);
+                    System.out.print(autor.getNombre() + " " + autor.getApellido());
+                    if (i < doc.getAutores().size() - 1) {
+                        System.out.print(", ");
+                    }
                 }
                 System.out.println();
                 System.out.println("Palabras Clave: " + doc.getPalabrasClave().toString());

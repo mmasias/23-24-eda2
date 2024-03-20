@@ -44,12 +44,10 @@ public class Documento {
     public ArrayList<String> getPalabrasClave() {
         return palabrasClave;
     }
-    
 
     public void setPalabrasClave(ArrayList<String> palabrasClave) {
         this.palabrasClave = palabrasClave;
     }
-    
 
     public Tipo getTipo() {
         return tipo;
@@ -74,12 +72,16 @@ public class Documento {
         sb.append("Título: ").append(titulo).append("\n");
         sb.append("Año: ").append(año).append("\n");
         sb.append("Autores: ");
-        for (Autor autor : autores) {
-            sb.append(autor.getNombre()).append(" ").append(autor.getApellido()).append(", ");
+        for (int i = 0; i < autores.size(); i++) {
+            Autor autor = autores.get(i);
+            sb.append(autor.getNombre()).append(" ").append(autor.getApellido());
+            if (i < autores.size() - 1) {
+                sb.append(", ");
+            }
         }
-        sb.delete(sb.length() - 2, sb.length());
         sb.append("\nPalabras Clave: ").append(palabrasClave.toString()).append("\n");
         sb.append("Tipo: ").append(tipo);
         return sb.toString();
     }
+
 }
