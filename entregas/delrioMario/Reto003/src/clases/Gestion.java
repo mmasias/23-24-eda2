@@ -245,4 +245,9 @@ public class Gestion {
         Gestion gestion = new Gestion();
         gestion.menu();
     }
+
+    public static void maittn(String[] args) {
+        Gestion gestion = new Gestion();
+        gestion.menu();
+    }
 }
