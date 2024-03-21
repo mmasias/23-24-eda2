@@ -21,6 +21,17 @@ public class Author {
     public void addDocument(Document document) {
         if (!documents.contains(document)) {
             documents.add(document);
+            if (!document.getAuthors().contains(this)) {
+                document.addAuthor(this);
+            }
+        }
+    }
+
+    public void removeDocument(Document document) {
+        if (documents.remove(document)) {
+            if (document.getAuthors().contains(this)) {
+                document.removeAuthor(this);
+            }
         }
     }
 }

@@ -3,13 +3,33 @@ import java.util.List;
 
 public class Library {
     private List<Document> documents;
+    private List<Author> authors;
 
     public Library() {
         this.documents = new ArrayList<>();
+        this.authors = new ArrayList<>();
     }
 
-    public void addDocument(Document document) {
+    public void addDocument(Document document, List<String> authorNames) {
         documents.add(document);
+
+        for (String authorName : authorNames) {
+            Author author = findAuthorByName(authorName);
+            if (author == null) {
+                author = new Author(authorName);
+                authors.add(author);
+            }
+            author.addDocument(document);
+        }
+    }
+
+    private Author findAuthorByName(String name) {
+        for (Author author : authors) {
+            if (author.getName().equalsIgnoreCase(name)) {
+                return author;
+            }
+        }
+        return null;
     }
 
     public Document searchDocumentByTitle(String title) {
@@ -21,15 +41,11 @@ public class Library {
         return null;
     }
 
-    public List<Document> searchByAuthor(String author) {
+    public List<Document> searchByAuthor(String authorName) {
         List<Document> results = new ArrayList<>();
-        for (Document doc : documents) {
-            for (String docAuthor : doc.getAuthors()) {
-                if (docAuthor.equalsIgnoreCase(author)) {
-                    results.add(doc);
-                    break;
-                }
-            }
+        Author author = findAuthorByName(authorName);
+        if (author != null) {
+            results.addAll(author.getDocuments());
         }
         return results;
     }
