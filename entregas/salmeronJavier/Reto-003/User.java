@@ -142,8 +142,6 @@ public class User {
                 searchResults = library.searchByAuthor(author);
                 for (Document doc : searchResults) {
                     System.out.println("Found: " + doc.getTitle() + " By: " + String.join(", ", doc.getAuthors()));
-                    selectedDocument = doc;
-
                 }
                 break;
             case "year":
@@ -151,7 +149,6 @@ public class User {
                 searchResults = library.searchByYear(year);
                 for (Document doc : searchResults) {
                     System.out.println("Found: " + doc.getTitle() + " By: " + String.join(", ", doc.getAuthors()));
-                    selectedDocument = doc;
                 }
                 break;
             case "type":
@@ -159,7 +156,6 @@ public class User {
                 searchResults = library.searchByType(type);
                 for (Document doc : searchResults) {
                     System.out.println("Found: " + doc.getTitle() + " By: " + String.join(", ", doc.getAuthors()));
-                    selectedDocument = doc;
                 }
                 break;
             case "keyword":
@@ -167,7 +163,6 @@ public class User {
                 searchResults = library.searchByKeyword(keyword);
                 for (Document doc : searchResults) {
                     System.out.println("Found: " + doc.getTitle() + " By: " + String.join(", ", doc.getAuthors()));
-                    selectedDocument = doc;
                 }
                 break;
             default:
@@ -178,7 +173,9 @@ public class User {
 
     
     private void showSelectedDocument() {
-        System.out.println("Currently Selected Document: " + selectedDocument.getTitle());
+        if (selectedDocument != null){
+            System.out.println("Currently Selected Document: " + selectedDocument.getTitle());
+        } else System.out.println("No Document Selected.");
     }
 
     private void deselectDocument() {
