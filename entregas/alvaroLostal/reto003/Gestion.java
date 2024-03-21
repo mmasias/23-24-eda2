@@ -32,6 +32,8 @@ public class Gestion {
                 }
             }
 
+            //hola
+
             ArrayList<String> palabrasClave = documento.getPalabrasClave();
             for (String palabra : palabrasClave) {
                 if (indicePalabrasClave.containsKey(palabra)) {
