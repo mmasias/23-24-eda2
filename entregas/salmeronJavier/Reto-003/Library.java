@@ -10,29 +10,43 @@ public class Library {
         this.authors = new ArrayList<>();
     }
 
-    public void addDocument(Document document, List<String> authorNames) {
-        documents.add(document);
-
+    public void addDocument(String title, List<String> authorNames, int publishingYear, String type, List<String> keywords) {
+        Document document = new Document(title, publishingYear, type);
+        
         for (String authorName : authorNames) {
-            Author author = findAuthorByName(authorName);
+            Author author = null;
+            for (Author existingAuthor : authors) {
+                if (existingAuthor.getName().equalsIgnoreCase(authorName)) {
+                    author = existingAuthor;
+                    break;
+                }
+            }
             if (author == null) {
                 author = new Author(authorName);
                 authors.add(author);
             }
-            author.addDocument(document);
+            document.addAuthor(author);
         }
+
+        for (String keyword : keywords) {
+            document.addKeyword(keyword);
+        }
+        
+        documents.add(document);
     }
 
-    private Author findAuthorByName(String name) {
-        for (Author author : authors) {
-            if (author.getName().equalsIgnoreCase(name)) {
-                return author;
+    
+    public List<String> getDocAuthors(Document document) {
+        List<String> authorNames = new ArrayList<>();
+        for (Author author : this.authors) {
+            if (author.getDocuments().contains(document)) {
+                authorNames.add(author.getName());
             }
         }
-        return null;
+        return authorNames;
     }
-
-    public Document searchDocumentByTitle(String title) {
+    
+    public Document searchDocByTitle(String title) {
         for (Document doc : documents) {
             if (doc.getTitle().equalsIgnoreCase(title)) {
                 return doc;
@@ -40,17 +54,27 @@ public class Library {
         }
         return null;
     }
-
-    public List<Document> searchByAuthor(String authorName) {
+    
+    
+    public List<Document> searchDocByAuthor(String authorName) {
         List<Document> results = new ArrayList<>();
-        Author author = findAuthorByName(authorName);
+        Author author = searchAuthorByName(authorName);
         if (author != null) {
             results.addAll(author.getDocuments());
         }
         return results;
     }
-
-    public List<Document> searchByType(String type) {
+    
+    private Author searchAuthorByName(String name) {
+        for (Author author : authors) {
+            if (author.getName().equalsIgnoreCase(name)) {
+                return author;
+            }
+        }
+        return null;
+    }
+    
+    public List<Document> searcDocByType(String type) {
         List<Document> results = new ArrayList<>();
         for (Document doc : documents) {
             if (doc.getType().equalsIgnoreCase(type)) {
@@ -60,7 +84,7 @@ public class Library {
         return results;
     }
 
-    public List<Document> searchByYear(int year) {
+    public List<Document> searchDocByYear(int year) {
         List<Document> results = new ArrayList<>();
         for (Document doc : documents) {
             if (doc.getPublishingYear() == year) {
@@ -70,7 +94,7 @@ public class Library {
         return results;
     }
     
-    public List<Document> searchByKeyword(String keyword) {
+    public List<Document> searchDocByKeyword(String keyword) {
         List<Document> results = new ArrayList<>();
         for (Document doc : documents) {
             if (doc.getKeyWords().contains(keyword)) {
@@ -92,7 +116,17 @@ public class Library {
     }
 
     public void deleteDocument(String title) {
-        documents.removeIf(doc -> doc.getTitle().equalsIgnoreCase(title));
+        Document toDelete = searchDocByTitle(title);
+        
+        if (toDelete != null) {
+            List<Author> docAuthors = toDelete.getAuthors();
+            if (docAuthors != null) {
+                for (Author author : docAuthors) {
+                    author.removeDocument(toDelete);
+                }
+            }
+            documents.remove(toDelete);
+        }
     }
-
+    
 }
