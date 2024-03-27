@@ -1,14 +1,13 @@
-package clases;
 import java.util.ArrayList;
 
-public  class Documento {
+public  class Book {
     private String titulo;
     private int añoDePublicacion;
     private ArrayList<Autor> autores;
     private Tipo tipo;
     private ArrayList<String> palabrasClave;
 
-    public Documento(String titulo, int anoDePublicacion, ArrayList<Autor> autores, Tipo tipo ) {
+    public Book(String titulo, int anoDePublicacion, ArrayList<Autor> autores, Tipo tipo ) {
         this.titulo = titulo;
         this.añoDePublicacion = anoDePublicacion;
         this.autores = autores;
