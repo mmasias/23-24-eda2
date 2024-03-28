@@ -12,7 +12,7 @@ class Document {
         this.title = title;
         this.publishingYear = publishingYear;
         this.type = type;
-        this.keyWords = new ArrayList<>();
+        this.keyWords = keyWords;
     }
 
     public String getTitle() {
