@@ -24,6 +24,9 @@ public class User {
             System.out.println("  8. List Authors by Documents");
             System.out.println("  0. Exit");
 
+            if (selectedDocument != null){
+                System.out.println("\nSelected Document: " + selectedDocument.getTitle());
+            } else System.out.println("\nNothing selected");
             String choice = UserIO.getInput(" Choose an option: ");
 
             switch (choice) {
@@ -64,7 +67,7 @@ public class User {
 
     private void addDocument() {
         String title = UserIO.getInput("Enter document title: ");
-
+        
         String authorsStr = UserIO.getInput("Enter authors (comma-separated): ");
         List<String> authors = new ArrayList<>(Arrays.asList(authorsStr.split("\\s*,\\s*")));
 
@@ -84,13 +87,24 @@ public class User {
     }
 
     private void deleteDocumentByTitle() {
-        String title = UserIO.getInput("Enter the title of the document to delete: ");
+        String title;
+        if (selectedDocument != null){
+            title = selectedDocument.getTitle();
+        } else{
+            title = UserIO.getInput("Enter the title of the document to delete: ");
+        } 
         library.deleteDocument(title);
         System.out.println("Document deleted.");
     }
 
     private void updateDocument() {
-        String title = UserIO.getInput("Enter the title of the document you want to update: ");
+        String title;
+        if (selectedDocument != null){
+            title = selectedDocument.getTitle();
+        } else{
+            title = UserIO.getInput("Enter the title of the document you want to update: ");
+        } 
+
         Document existingDocument = library.searchDocByTitle(title);
         if (existingDocument == null) {
             System.out.println("Document not found.");
@@ -142,6 +156,8 @@ public class User {
         
         library.updateDocument(title, updatedDocument);
         System.out.println("Document updated successfully.");
+
+        selectedDocument = updatedDocument;
     }
     
     private void searchDocuments() {
@@ -220,7 +236,12 @@ public class User {
     
     private void showSelectedDocument() {
         if (selectedDocument != null){
-            System.out.println("Currently Selected Document: " + selectedDocument.getTitle());
+            System.out.println(" Document: " + selectedDocument);
+                    System.out.println(" - Title: " + selectedDocument.getTitle());
+                    System.out.println(" - Authors: " + String.join(", ", selectedDocument.getAuthorNames()));
+                    System.out.println(" - Publishing Year: " + selectedDocument.getPublishingYear());
+                    System.out.println(" - Type: " + selectedDocument.getType());
+                    System.out.println(" - Keywords: " + String.join(", ", selectedDocument.getKeyWords()));
         } else System.out.println("No Document Selected.");
     }
 
