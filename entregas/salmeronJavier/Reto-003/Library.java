@@ -39,6 +39,9 @@ public class Library {
         documents.add(document);
     }
 
+    public void addAuthor(Author author) {
+        authors.add(author);
+    }
     
     public List<String> getDocAuthors(Document document) {
         List<String> authorNames = new ArrayList<>();
@@ -114,6 +117,22 @@ public class Library {
                 doc.setPublishingYear(updatedDocument.getPublishingYear());
                 doc.setType(updatedDocument.getType());
                 doc.setKeyWords(updatedDocument.getKeyWords());
+
+                for (Author docAuthor : doc.getAuthors()) {
+                    boolean existsAuthor = false;
+                    for (Author author : this.authors) {
+                        if (author.getName().equals(docAuthor.getName())) {
+                            existsAuthor = true;
+                            break;
+                        }
+                    }
+                    if (!existsAuthor) {
+                        this.authors.add(docAuthor);
+                    }
+                    if (!docAuthor.getDocuments().contains(doc)) {
+                        docAuthor.addDocument(doc);
+                    }
+                }
                 return;
             }
         }
