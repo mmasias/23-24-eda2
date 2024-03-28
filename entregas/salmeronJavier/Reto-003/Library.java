@@ -19,7 +19,7 @@ public class Library {
     }
 
     public void addDocument(String title, List<String> authorNames, int publishingYear, String type, List<String> keywords) {
-        Document document = new Document(title, publishingYear, type);
+        Document document = new Document(title, publishingYear, type, keywords);
         
         for (String authorName : authorNames) {
             Author author = null;
@@ -36,10 +36,6 @@ public class Library {
             document.addAuthor(author);
         }
 
-        for (String keyword : keywords) {
-            document.addKeyword(keyword);
-        }
-        
         documents.add(document);
     }
 
@@ -119,7 +115,6 @@ public class Library {
                 return;
             }
         }
-        // Change to return null or just ignore?
     }
 
     public void deleteDocument(String title) {

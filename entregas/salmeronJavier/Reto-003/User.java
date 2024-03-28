@@ -75,10 +75,8 @@ public class User {
         String keywordsStr = UserIO.getInput("Enter keywords (comma-separated): ");
         List<String> keywords = new ArrayList<>(Arrays.asList(keywordsStr.split("\\s*,\\s*")));
 
-        Document newDocument = new Document(title, year, type);
-        for (String keyword : keywords) {
-            newDocument.addKeyword(keyword);
-        }
+        Document newDocument = new Document(title, year, type, keywords);
+        
         library.addDocument(title, authors, year, type, keywords);
         System.out.println("Document added successfully.");
 
@@ -111,11 +109,11 @@ public class User {
                 String authorModification = UserIO.getInput("Add or remove authors (+ AuthorName / - AuthorName). Type 'done' to finish: ");
                 if ("done".equalsIgnoreCase(authorModification)) {
                     break;
-                } else if (authorModification.startsWith("+ ")) {
+                } else if (authorModification.startsWith("+")) {
                     String authorName = authorModification.substring(2);
                     Author author = library.searchAuthorByName(authorName);
                     existingDocument.addAuthor(author);
-                } else if (authorModification.startsWith("- ")) {
+                } else if (authorModification.startsWith("-")) {
                     String authorName = authorModification.substring(2);
                     Author author = library.searchAuthorByName(authorName);
                     existingDocument.removeAuthor(author);
@@ -134,10 +132,7 @@ public class User {
         String keywordsStr = UserIO.getInput("Enter new keywords (comma-separated, or press Enter to keep existing): ");
         List<String> keywords = keywordsStr.isEmpty() ? existingDocument.getKeyWords() : new ArrayList<>(Arrays.asList(keywordsStr.split("\\s*,\\s*")));
     
-        Document updatedDocument = new Document(newTitle, year, type);
-        for (String keyword : keywords) {
-            updatedDocument.addKeyword(keyword);
-        }
+        Document updatedDocument = new Document(newTitle, year, type, keywords);
         
         library.updateDocument(title, updatedDocument);
         System.out.println("Document updated successfully.");

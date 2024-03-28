@@ -8,7 +8,7 @@ class Document {
     private String type;
     private List<String> keyWords = new ArrayList<>();
 
-    public Document(String title, int publishingYear, String type) {
+    public Document(String title, int publishingYear, String type, List<String> keyWords) {
         this.title = title;
         this.publishingYear = publishingYear;
         this.type = type;
@@ -68,10 +68,8 @@ class Document {
         return keyWords;
     }
 
-    public void addKeyword(String keyword) {
-        if (!keyWords.contains(keyword)) {
-            keyWords.add(keyword);
-        }
+    public void setKeyWords(List<String> keyWords) {
+        this.keyWords = new ArrayList<>(keyWords);
     }
 
 }
