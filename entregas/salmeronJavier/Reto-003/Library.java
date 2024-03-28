@@ -10,6 +10,14 @@ public class Library {
         this.authors = new ArrayList<>();
     }
 
+    public List<Document> getAllDocuments() {
+        return this.documents;
+    }
+
+    public List<Author> getAllAuthors() {
+        return this.authors;        
+    }
+
     public void addDocument(String title, List<String> authorNames, int publishingYear, String type, List<String> keywords) {
         Document document = new Document(title, publishingYear, type);
         
@@ -54,7 +62,6 @@ public class Library {
         }
         return null;
     }
-    
     
     public List<Document> searchDocByAuthor(String authorName) {
         List<Document> results = new ArrayList<>();

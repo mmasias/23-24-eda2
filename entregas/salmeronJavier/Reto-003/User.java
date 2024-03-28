@@ -20,6 +20,8 @@ public class User {
             System.out.println("  4. Search Documents");
             System.out.println("  5. Detail Selected Document");
             System.out.println("  6. Deselect Document");
+            System.out.println("  7. List Documents by Author");
+            System.out.println("  8. List Authors by Documents");
             System.out.println("  0. Exit");
 
             String choice = UserIO.getInput(" Choose an option: ");
@@ -42,6 +44,12 @@ public class User {
                     break;
                 case "6":
                     deselectDocument();
+                    break;
+                case "7":
+                    ListDocuments();
+                    break;
+                case "8":
+                    ListAuthors();
                     break;
                 case "0":
                     running = false;
@@ -73,6 +81,8 @@ public class User {
         }
         library.addDocument(title, authors, year, type, keywords);
         System.out.println("Document added successfully.");
+
+        selectedDocument = newDocument;
     }
 
     private void deleteDocumentByTitle() {
@@ -186,6 +196,26 @@ public class User {
                 break;
         }
     } 
+
+    private void ListDocuments() {
+        System.out.println("Available Documents, listed by Author:");
+        for (Author author : library.getAllAuthors()) {
+            System.out.println("  - " + author.getName() + ":");
+            for (Document document : author.getDocuments()){
+                System.out.println("    * " + document.getTitle());
+            }
+        }
+    }
+
+    private void ListAuthors() {
+        System.out.println("Available Authors, listed by Document:");
+        for (Document document : library.getAllDocuments()) {
+            System.out.println("  - " + document.getTitle() + ":");
+            for (Author author : document.getAuthors()){
+                System.out.println("    * " + author.getName());
+            }
+        }
+    }
     
     private void showSelectedDocument() {
         if (selectedDocument != null){
