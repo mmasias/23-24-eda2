@@ -108,10 +108,12 @@ public class Library {
     }
 
     public void updateDocument(String title, Document updatedDocument) {
-        for (int i = 0; i < documents.size(); i++) {
-            Document doc = documents.get(i);
+        for (Document doc : documents) {
             if (doc.getTitle().equalsIgnoreCase(title)) {
-                documents.set(i, updatedDocument);
+                doc.setTitle(updatedDocument.getTitle());
+                doc.setPublishingYear(updatedDocument.getPublishingYear());
+                doc.setType(updatedDocument.getType());
+                doc.setKeyWords(updatedDocument.getKeyWords());
                 return;
             }
         }

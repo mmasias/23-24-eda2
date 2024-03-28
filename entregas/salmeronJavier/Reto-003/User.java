@@ -112,11 +112,17 @@ public class User {
                 } else if (authorModification.startsWith("+")) {
                     String authorName = authorModification.substring(2);
                     Author author = library.searchAuthorByName(authorName);
-                    existingDocument.addAuthor(author);
+                    if (author != null){
+                        existingDocument.addAuthor(author);
+                    } else {
+                        existingDocument.addAuthor(new Author(authorName));
+                    }
                 } else if (authorModification.startsWith("-")) {
                     String authorName = authorModification.substring(2);
                     Author author = library.searchAuthorByName(authorName);
-                    existingDocument.removeAuthor(author);
+                    if (author != null){
+                        existingDocument.removeAuthor(author);
+                    }
                 }
             }
         }
