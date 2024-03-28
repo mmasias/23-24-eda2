@@ -65,7 +65,7 @@ public class Library {
         return results;
     }
     
-    private Author searchAuthorByName(String name) {
+    public Author searchAuthorByName(String name) {
         for (Author author : authors) {
             if (author.getName().equalsIgnoreCase(name)) {
                 return author;

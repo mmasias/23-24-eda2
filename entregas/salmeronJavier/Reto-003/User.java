@@ -94,8 +94,24 @@ public class User {
             newTitle = existingDocument.getTitle();
         }
 
-        String authorsStr = UserIO.getInput("Enter new authors (comma-separated, or press Enter to keep existing): ");
-        List<String> authors = authorsStr.isEmpty() ? library.getDocAuthors(existingDocument) : new ArrayList<>(Arrays.asList(authorsStr.split("\\s*,\\s*")));
+        String modifyAuthors = UserIO.getInput("Do you want to modify authors? (yes/no): ");
+        if ("yes".equalsIgnoreCase(modifyAuthors)) {
+            System.out.println("Current document authors: " + String.join(", ", existingDocument.getAuthorNames()));
+            while (true) {
+                String authorModification = UserIO.getInput("Add or remove authors (+ AuthorName / - AuthorName). Type 'done' to finish: ");
+                if ("done".equalsIgnoreCase(authorModification)) {
+                    break;
+                } else if (authorModification.startsWith("+ ")) {
+                    String authorName = authorModification.substring(2);
+                    Author author = library.searchAuthorByName(authorName);
+                    existingDocument.addAuthor(author);
+                } else if (authorModification.startsWith("- ")) {
+                    String authorName = authorModification.substring(2);
+                    Author author = library.searchAuthorByName(authorName);
+                    existingDocument.removeAuthor(author);
+                }
+            }
+        }
 
         String yearStr = UserIO.getInput("Enter new publishing year (or press Enter to keep '" + existingDocument.getPublishingYear() + "''): ");
         int year = yearStr.isEmpty() ? existingDocument.getPublishingYear() : Integer.parseInt(yearStr);
