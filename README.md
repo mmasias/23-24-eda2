@@ -11,7 +11,7 @@ Repo de materiales y proyectos de la asignatura **EDA II** del [Grado de Ingenie
 - Evaluaciones
   - Evaluación continua: [Retos!](evaluaciones/retos/README.md)
   - Exámenes
-    - Parcial: Enunciado | Repositorio de trabajo y entrega.
+    - Parcial: [Enunciado](evaluaciones/parcial/README.md) | [Repositorio de trabajo y entrega.](https://github.com/mmasias/23-24-eda2-ep)
     - Final: Enunciado | Repositorio de trabajo y entrega.
 
 > ***NOTA:*** Los repositorios de entrega de exámenes estarán disponible días antes del examen. El repositorio con el enunciado del examen se activa al inicio del examen y permitirá entregas hasta la finalización del mismo.
