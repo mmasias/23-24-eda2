@@ -47,3 +47,31 @@ O(*n*)|O(*n²*)|O(*n³*)|...|O(*n^m*)
 
 </div>
 
+### Identificación
+
+#### O(log N)
+
+- ***División sucesiva***: Generalmente, los algoritmos que reducen el problema a la mitad (o una fracción) en cada paso tienen una complejidad logarítmica. Un ejemplo clásico es la búsqueda binaria, donde se elimina la mitad del espacio de búsqueda con cada comparación.
+- ***Iteraciones que multiplican***: Inversamente, si el tamaño de problema necesario para alcanzar N se duplica con cada iteración, estás viendo un proceso O(logN). Es decir, cuántas veces necesitas doblar 1 para llegar a N.
+
+#### O(N²)
+
+- ***Bucles anidados***: Cuando tienes un bucle dentro de otro bucle, y cada uno de estos recorre el arreglo de entrada, la complejidad es cuadrática. Un ejemplo típico es el algoritmo de ordenamiento de burbuja (Bubble Sort), donde cada elemento es comparado con los otros en secuencia.
+- ***Pares de elementos***: Cualquier algoritmo que necesite considerar todos los pares posibles de elementos en un conjunto generalmente tendrá una complejidad O(N²).
+
+#### O(N³)
+
+- ***Triple anidación de bucles***: Similar a O(N²), pero con una capa adicional. Un buen ejemplo sería un algoritmo que verifica triples de elementos para alguna condición, como ciertos tipos de algoritmos de programación dinámica o multiplicación de matrices (dependiendo de la implementación).
+
+#### O(2^N)
+
+- ***Recursión con dos llamadas por nivel***: Los algoritmos que hacen dos llamadas recursivas en cada paso tienden a tener una complejidad O(2^N). Un ejemplo clásico es el cálculo de los números de Fibonacci mediante recursión sin memorización, donde cada término se calcula a partir de los dos términos precedentes, duplicando el número de operaciones necesarias con cada incremento en NNN.
+- ***Subconjuntos o combinaciones***: Cualquier algoritmo que necesite generar todos los subconjuntos posibles de un conjunto entrará en esta categoría, ya que hay 2^N subconjuntos de un conjunto de N elementos.
+
+##### Identificación en la práctica
+
+- **Conteo de operaciones**: Para identificar la complejidad, cuenta cómo crece el número de operaciones necesarias a medida que aumenta N. Si el número de operaciones se duplica cada vez que añades un elemento, piensa en O(2^N). Si el crecimiento parece relacionarse con el cuadrado o el cubo del tamaño de entrada, piensa en O(N²) o O(N³), respectivamente.
+- **Estructura del algoritmo**: Examina la estructura del algoritmo. La presencia de bucles anidados o llamadas recursivas múltiples suele ser un indicador claro de la complejidad.
+- **Divide y vencerás**: Los algoritmos de divide y vencerás que parten el problema en mitades (o fracciones constantes) tienden a tener una complejidad O(log N), especialmente si se resuelve una mitad a la vez o si la combinación de soluciones es lineal o logarítmica.
+
+La identificación precisa de la complejidad algorítmica a menudo requiere descomponer el algoritmo en sus componentes básicos y analizar cómo cada parte contribuye al rendimiento general en función del tamaño de entrada.
