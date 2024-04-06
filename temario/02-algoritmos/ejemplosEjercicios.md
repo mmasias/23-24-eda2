@@ -1,6 +1,6 @@
 # Ejercicios
 
-Desarrolle un algoritmo que resuelva el problema planteado, demuestre su funcionamiento y calcule su complejidad BigO
+Desarrolle un algoritmo que resuelva el problema planteado, demuestre su funcionamiento y justifique (usted, no el algoritmo) su complejidad BigO
 
 ## Ejercicio 1
 
