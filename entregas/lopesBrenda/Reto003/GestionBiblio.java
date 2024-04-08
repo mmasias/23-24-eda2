@@ -12,6 +12,7 @@ class GestionBiblio {
         this.documentos = new ArrayList<>();
         this.scanner = new Scanner(System.in);
     }
+    
     public void menu() {
         Scanner scanner = new Scanner(System.in);
         String opcion;
@@ -92,7 +93,7 @@ class GestionBiblio {
                 opcion = scanner.nextLine();
     
                 switch (opcion) {
-                    case "1":
+                    case "1": 
                         System.out.print("Introduce el nuevo titulo: ");
                         String nuevoTitulo = scanner.nextLine();
                         documento.setName(nuevoTitulo);

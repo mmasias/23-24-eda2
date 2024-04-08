@@ -24,24 +24,12 @@ public class Documento {
             this.titulo = titulo;
         }
 
-        public String getCategoria() {
-            return categoria;
-        }
-
         public void setCategoria(String categoria) {
             this.categoria = categoria;
         }
 
-        public String getAutor() {
-            return autor;
-        }
-
         public void setAutor(String autor) {
             this.autor = autor;
-        }
-
-        public int getAño() {
-            return año;
         }
 
         public void setAño(int año) {
@@ -50,7 +38,6 @@ public class Documento {
     
         @Override
         public String toString() {
-            // ORDEN RUIM
             return "Documento {" +
                    "Titulo = '" + titulo + '\'' +
                    ", Categoria = '" + categoria + '\'' +
