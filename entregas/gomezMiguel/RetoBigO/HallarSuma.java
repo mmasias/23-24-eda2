@@ -12,3 +12,5 @@ public class HallarSuma {
         }
     }
 }
+
+// La complejidad de este programa segun bigO es de O(n^2) siendo n la longitud de la matriz numbers.
