@@ -15,13 +15,15 @@ public class BigOACaracter {
     }
    
     public static int[] encontrarPalabraClave(char[] caracteres, String palabraClave) {
-        int[] indices = new int[3];
-        String palabra= new String(caracteres);
+        int[] indices = new int[3];     //o(1)
+        String palabra= new String(caracteres); //o(n)
 
-        for(int i=0; i<palabraClave.length();i++){
-            indices[i]=palabra.indexOf(palabraClave.charAt(i));
+        for(int i=0; i<palabraClave.length();i++){ //O(1)*O(m)
+            indices[i]=palabra.indexOf(palabraClave.charAt(i)); //O(1)*O(m)
         }
-        return indices;
+        return indices;//O(1)
     }
 
 }
+
+//La complejidad de todo el método es de O(m*n) donde n es la longitud del array y m la longitud de la palabra clave
