@@ -6,17 +6,15 @@ import java.time.LocalDateTime;
 public class Reto1 {
     public static void main(String[] args) {
         int[] array = { 8, 1, 3, 4, 5,78,45,9,9,5,45,65 };
-        LocalDateTime inicio = LocalDateTime.now();
         int[] resul = algoritmoSuma(array, 11);
-        LocalDateTime fin = LocalDateTime.now();
-        Duration duracion = Duration.between(inicio,fin);
-        System.out.println("Tiempo de ejecución 1: "+ duracion.getNano()+ "ms");
-
-        inicio = System.nanoTime();
+        if (resul[0] == -1) {
+            System.out.println("No se ha encontrado la secuencia");
+        } else {
+            System.out.println("La secuencia es: " + resul[0] + " " + resul[1]);
+        }
+        
         resul = algoritmoSuma2(array, 11);
-        fin = System.nanoTime();
-        duracion = fin - inicio;
-        System.out.println("Tiempo de ejecución en nanosegundos: " + duracio + "ns");
+
         if (resul[0] == -1) {
             System.out.println("No se ha encontrado la secuencia");
         } else {
