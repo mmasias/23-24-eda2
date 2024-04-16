@@ -36,11 +36,11 @@ public class Reto2 {
         return keywordIndices;//O(1)
     }
 
-    public static int[] algoritmoEncontrar2(char[] letras, String palabra){// Suma de complejidades: O(1) + O(n) + O(n) + O(n) + O(1) = O(3n + 2) ≈ O(n)
+    public static int[] algoritmoEncontrar2(char[] letras, String palabra){// Suma de complejidades: O(1) + O(n) + O(n) + O(n^2) + O(1) = O(n^2+ 2n + 2) ≈ O(n)
         int[] indices = {-1, -1, -1};//O(1)
         String letraString = new String(letras);//O(n)
         for (int i = 0; i < palabra.length(); i++) {//O(n)
-            indices[i] = letraString.indexOf(palabra.charAt(i));//O(n)
+            indices[i] = letraString.indexOf(palabra.charAt(i));//O(n^2)
         }
 
         return indices;//O(1)
