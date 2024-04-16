@@ -8,6 +8,13 @@
             "type": "java",
             "name": "App",
             "request": "launch",
+            "mainClass": "entregas.zamanilloLucia.ejerciciosBigO.ejercicio2.App",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
             "mainClass": "entregas.zamanilloLucia.ejerciciosBigO.ejercicio1.App",
             "projectName": "23-24-eda2_b7da4c2"
         },
