@@ -3,6 +3,9 @@ package entregas.zamanilloLucia.ejerciciosBigO.ejercicio2;
 import java.util.ArrayList;
 
 public class CharacterOperator {
+     /*
+     * La complejidad del algoritmo es de O(n^2) debido al doble bucle for
+     */
 
     public ArrayList<Integer> wordIndexCalculator(String[] wordArray, String chosenWord) {
         int chosenWordPointer;
