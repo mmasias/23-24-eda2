@@ -1,6 +1,6 @@
 # Reto 004
 
-## Trababilidad
+## Trazabilidad
 
 ### Parte 1
 
