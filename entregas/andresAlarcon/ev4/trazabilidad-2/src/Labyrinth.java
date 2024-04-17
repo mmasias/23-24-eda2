@@ -21,7 +21,7 @@ public class Labyrinth {
             return true;
         }
         maze[x][y] = PATH;
-        System.out.println("Exploring cell: (" + x + ", " + y + ")");
+        System.out.println("Moving to the cell: (" + x + ", " + y + ")");
         printMaze(maze);
 
         if (solveMaze(maze, x + 1, y) || solveMaze(maze, x, y + 1) ||
@@ -30,7 +30,7 @@ public class Labyrinth {
         }
 
         maze[x][y] = VISITED;
-        System.out.println("Backtracking cell: (" + x + ", " + y + ")");
+        System.out.println("Moving back to the cell: (" + x + ", " + y + ")");
         printMaze(maze);
         return false;
     }
@@ -72,5 +72,3 @@ public class Labyrinth {
         }
     }
 }
-
-
