@@ -16,7 +16,7 @@ public class HanoiMuted {
       }
 
     public static void main(String[] args) {
-        int numeroDeDiscos = 5;
+        int numeroDeDiscos = 3;
         cleanScreen();
         System.out.println("Iniciando Torres de Hanói con " + numeroDeDiscos + " discos.");
         resolverTorresDeHanoi(numeroDeDiscos, 'A', 'C', 'B');
