@@ -83,7 +83,7 @@ class Biblioteca {
             System.out.println("3. Salir");
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer
+            scanner.nextLine(); 
 
             switch (opcion) {
                 case 1:
@@ -99,7 +99,7 @@ class Biblioteca {
 
                     System.out.print("Ingrese la cantidad de autores del documento: ");
                     int numAutores = scanner.nextInt();
-                    scanner.nextLine(); // Limpiar el buffer
+                    scanner.nextLine(); 
                     Autor[] autores = new Autor[numAutores];
                     for (int i = 0; i < numAutores; i++) {
                         System.out.print("Ingrese el nombre del autor " + (i + 1) + ": ");
@@ -109,7 +109,7 @@ class Biblioteca {
 
                     System.out.print("Ingrese la cantidad de keywords del documento: ");
                     int numKeywords = scanner.nextInt();
-                    scanner.nextLine(); // Limpiar el buffer
+                    scanner.nextLine(); 
                     String[] keywords = new String[numKeywords];
                     for (int i = 0; i < numKeywords; i++) {
                         System.out.print("Ingrese la keyword " + (i + 1) + ": ");
@@ -129,7 +129,7 @@ class Biblioteca {
                     System.out.println("5. Keyword");
                     System.out.print("Opción: ");
                     int criterio = scanner.nextInt();
-                    scanner.nextLine(); // Limpiar el buffer
+                    scanner.nextLine(); 
 
                     System.out.print("Ingrese el valor de búsqueda: ");
                     String valor = scanner.nextLine();
