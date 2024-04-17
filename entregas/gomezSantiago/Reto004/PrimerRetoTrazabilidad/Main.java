@@ -4,7 +4,7 @@ package entregas.gomezSantiago.Reto004.PrimerRetoTrazabilidad;
 
 public class Main {
     public static void main(String[] args) {
-    recursividad(1, 10);
+      recursividad(1, 10);
     }
     
     static void recursividad(int i, int x) {

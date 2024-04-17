@@ -6,19 +6,21 @@ public class MainTrazabilidad {
     }
   
     static void recursividad(int i, int x) {
-      System.out.println("+---------------------------------------+");
-      System.out.println("| Entrando a la función de recursividad |"); 
-      System.out.println("+---------------------------------------+");
+        System.out.println("+---------------------------------------+");
+        System.out.println("| Entrando a la función de recursividad |"); 
+        System.out.println("+---------------------------------------+");
   
         if (i <= x) {
-          System.out.println("+--------------------------------------------------+");
-          System.out.println("| Entrando a la función de recursividad con i = " + i); 
-          System.out.println("+--------------------------------------------------+");
+            System.out.println("+--------------------------------------------------+");
+            System.out.println("| Entrando a la función de recursividad con i = " + i); 
+            System.out.println("+--------------------------------------------------+");
+
             System.out.println("+------------------------+");
             System.out.println("| El valor de i es: " + i); 
             System.out.println("| Sumando i para obtener el siguiente número |"); 
             System.out.println("+--------------------------------------------+");
             i++; 
+            
             System.out.println("+---------------------------+");
             System.out.println("| El siguiente número es: " + i); 
             System.out.println("+---------------------------+");
