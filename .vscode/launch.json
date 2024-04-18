@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Exercise",
             "request": "launch",
+            "mainClass": "evaluaciones.retos.reto004.parte1.Exercise",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
+            "name": "Exercise",
+            "request": "launch",
             "mainClass": "entregas.zamanilloLucia.ejerciciosRecursividad.Exercise",
             "projectName": "23-24-eda2_b7da4c2"
         },
