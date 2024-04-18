@@ -77,7 +77,7 @@ public class Queens {
       }
 
     public static void main(String[] args) {
-        QueensMuted queen = new QueensMuted(4);
+        Queens queen = new Queens(8);
         queen.solveNQ();
     }
 }
