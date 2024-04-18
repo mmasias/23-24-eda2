@@ -1,10 +1,7 @@
 # Reto 004
 
-<<<<<<< HEAD
 > *Fecha de entrega*: 26 de abril
 
-=======
->>>>>>> 7148807464215e38900271ffdeba3fa1a9d8be6b
 ## Trazabilidad
 
 ### Parte 1
