@@ -11,9 +11,11 @@ public class Labyrinth {
 
     public static boolean solveMaze(int[][] maze, int x, int y) {
         if (x < 0 || x >= maze.length || y < 0 || y >= maze[0].length) {
+            System.out.println("Intento ir a (" + x + ", " + y + "): Me saldría del laberinto.");
             return false;
         }
         if (maze[x][y] != FREE) {
+            System.out.println("Intento ir a (" + x + ", " + y + "): Si voy me choco.");
             return false;
         }
         if (x == maze.length - 1 && y == maze[0].length - 1) {
@@ -21,6 +23,10 @@ public class Labyrinth {
             return true;
         }
         maze[x][y] = PATH;
+
+        System.out.println("voy a (" + x + ", " + y + "): Por aquí creo que voy bien, lo marco");
+        printMazeWithPosition(maze, x, y);
+        new Scanner(System.in).nextLine();
 
         if (solveMaze(maze, x + 1, y) || solveMaze(maze, x, y + 1) ||
             solveMaze(maze, x - 1, y) || solveMaze(maze, x, y - 1)) {
@@ -42,6 +48,21 @@ public class Labyrinth {
         System.out.println("===".repeat(maze[0].length));
     }
 
+    public static void printMazeWithPosition(int[][] maze, int x, int y) {
+        System.out.println("===".repeat(maze[0].length));
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[i].length; j++) {
+                if (i == x && j == y) {
+                    System.out.print(" @ ");
+                } else {
+                    System.out.print(celda[maze[i][j]]);
+                }
+            }
+            System.out.println();
+        }
+        System.out.println("===".repeat(maze[0].length));
+    }
+
     public static void main(String[] args) {
         int[][] maze = {
             {0,1,0,0,1,0,0,1,0,0,1,0,0,0},
@@ -55,14 +76,14 @@ public class Labyrinth {
         };
 
         System.out.println("Laberinto:");
-        printMaze(maze);
+        printMazeWithPosition(maze, 0, 0);
         
         System.out.println("Pulse una tecla para intentar resolver el laberinto...");
         new Scanner(System.in).nextLine();
 
         if (solveMaze(maze, 0, 0)) {
             System.out.println("Ruta de escape:");
-            printMaze(maze);
+            printMazeWithPosition(maze, maze.length - 1, maze[0].length - 1);
         } else {
             System.out.println("No se puede escapar!!!.");
         }
