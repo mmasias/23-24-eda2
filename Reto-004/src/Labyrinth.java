@@ -22,17 +22,15 @@ public class Labyrinth {
         }
         maze[x][y] = PATH;
 
-        // Tracer: Mark the current cell as visited
-        maze[x][y] = VISITED;
+        System.out.println("Current position: (" + x + ", " + y + ")");
 
-        // Recursively try all four directions
         if (solveMaze(maze, x + 1, y) || solveMaze(maze, x, y + 1) ||
                 solveMaze(maze, x - 1, y) || solveMaze(maze, x, y - 1)) {
             return true;
         }
 
-        // Tracer: Mark the current cell as not part of the solution path
-        maze[x][y] = FREE;
+        maze[x][y] = VISITED;
+        System.out.println("Backtracking from: (" + x + ", " + y + ")");
         return false;
     }
 
@@ -73,4 +71,3 @@ public class Labyrinth {
         }
     }
 }
-
