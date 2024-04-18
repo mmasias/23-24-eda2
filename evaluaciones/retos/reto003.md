@@ -1,5 +1,11 @@
 # Gestión de biblioteca digital
 
+<div align=right>
+
+***[Propuesta revisada en clase](https://github.com/mmasias/BiblioEDA/tree/main/src/v003)***
+
+</div>
+
 ## Contexto
 
 ||||
