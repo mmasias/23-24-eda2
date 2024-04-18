@@ -1,4 +1,4 @@
-package entregas.santamariaOscar;
+package BigO;
 
 public class BigOACaracter {
    
