@@ -1,5 +1,3 @@
-package entregas.santamariaOscar;
-
 /**
  * BigO
  */
