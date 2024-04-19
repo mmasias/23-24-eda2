@@ -22,3 +22,11 @@ Los retos se irán proponiendo, habitualmente luego de una disertación teórica
 ## Entrega 003
 
 - Desarrolle el ejercicio propuesto en el [Reto 003](/evaluaciones/retos/reto003.md)
+
+## Entrega 004
+
+- Desarrolle los ejercicios propuestos en el [Reto 004](reto004.md)
+
+### Entrega 005
+
+- Desarrolle el ejercicio propuesto en el [Reto 005](reto005.md)
