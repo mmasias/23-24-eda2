@@ -11,17 +11,20 @@ public class Labyrinth {
 
     public static boolean solveMaze(int[][] maze, int x, int y) {
         if (x < 0 || x >= maze.length || y < 0 || y >= maze[0].length) {
+            System.out.println("Moving to the Cell: (" + y + ", " + x + ") - Out of Bounds.");
             return false;
         }
         if (maze[x][y] != FREE) {
+            System.out.println("Moving to the Cell: (" + y + ", " + x + ") - Cell Block or Already Visited.");
             return false;
         }
         if (x == maze.length - 1 && y == maze[0].length - 1) {
             maze[x][y] = PATH;
+            System.out.println("Moving to the Cell: (" + x + ", " + y + ") - Route Found");
             return true;
         }
         maze[x][y] = PATH;
-        System.out.println("Moving to the cell: (" + x + ", " + y + ")");
+        System.out.println("Moving to the Cell: (" + x + ", " + y + ") - Marking Cell");
         printMaze(maze);
 
         if (solveMaze(maze, x + 1, y) || solveMaze(maze, x, y + 1) ||
@@ -30,7 +33,7 @@ public class Labyrinth {
         }
 
         maze[x][y] = VISITED;
-        System.out.println("Moving back to the cell: (" + x + ", " + y + ")");
+        System.out.println("Moving back to the Cell: (" + x + ", " + y + ") - Marking Cell as Visited");
         printMaze(maze);
         return false;
     }
@@ -58,17 +61,17 @@ public class Labyrinth {
                 { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0 }
         };
 
-        System.out.println("Laberinto:");
+        System.out.println("labyrinth:");
         printMaze(maze);
 
-        System.out.println("Pulse una tecla para intentar resolver el laberinto...");
+        System.out.println("Press any key to solve the labyrinth...");
         new Scanner(System.in).nextLine();
 
         if (solveMaze(maze, 0, 0)) {
-            System.out.println("Ruta de escape:");
+            System.out.println("Escape Route:");
             printMaze(maze);
         } else {
-            System.out.println("No se puede escapar!!!.");
+            System.out.println("Theres no escape!!!.");
         }
     }
 }
