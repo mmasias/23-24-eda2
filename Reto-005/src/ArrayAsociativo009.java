@@ -25,7 +25,7 @@ public class ArrayAsociativo009 {
             {0, -1},
             {0, 1}
     };
-   static int filaDestino = 39;
+    static int filaDestino = 39;
     static int columnaDestino = 70;
     static double hora = 9.0;
     static int alcanceVision;
@@ -35,7 +35,7 @@ public class ArrayAsociativo009 {
     static int minFila, minColumna, maxFila, maxColumna;
 
     static boolean jugando = true;
-   public static String[] dosCastillos = {
+    public static String[] dosCastillos = {
             "............................................................................................................................................................",
             "............................................................................................................................................................",
             "..............................................................................                                                                              ",
@@ -116,7 +116,7 @@ public class ArrayAsociativo009 {
             "............................................................................................................................................................"
     };
 
-    public  static String[] castilloLB = {
+    public static String[] castilloLB = {
             "..............................................................................",
             "..............................................................................",
             "..............................................................................",
@@ -196,7 +196,7 @@ public class ArrayAsociativo009 {
             "..............................................................................",
             ".............................................................................."
     };
-   public static String[] castilloEX = {
+    public static String[] castilloEX = {
             "                                                                              ",
             "                                                                              ",
             "                                                                              ",
@@ -273,7 +273,6 @@ public class ArrayAsociativo009 {
             "                                      +++                                     ",
             "                                      +++                                     "
     };
-
 
 
     public static void main(String[] args) {
@@ -364,7 +363,6 @@ public class ArrayAsociativo009 {
     }
 
 
-
     static int[][] convertirMapaACeldas(String[] mapa) {
         int filas = mapa.length;
         int columnas = mapa[0].length();
@@ -376,6 +374,7 @@ public class ArrayAsociativo009 {
         }
         return celdas;
     }
+
     private static void inicializarMundo(String[] mundo) {
 
         viewPort = 7;
@@ -604,6 +603,41 @@ public class ArrayAsociativo009 {
         }
     }
 
+    static void moverPersonajeAutomaticamente(List<int[]> camino, String[] mapa) {
+        // Obtener las coordenadas iniciales del personaje del primer elemento del camino
+        int filaPersonaje = camino.get(0)[0];
+        int columnaPersonaje = camino.get(0)[1];
+
+        for (int i = 1; i < camino.size(); i++) {
+            int filaDestino = camino.get(i)[0];
+            int columnaDestino = camino.get(i)[1];
+            mover(new int[]{filaPersonaje, columnaPersonaje}, calcularDireccion(filaPersonaje, columnaPersonaje, filaDestino, columnaDestino), mapa);
+            filaPersonaje = filaDestino; // Actualizar las coordenadas del personaje
+            columnaPersonaje = columnaDestino;
+            // Agrega un retraso para visualizar mejor el movimiento en la terminal
+            try {
+                Thread.sleep(500); // Retraso de medio segundo (ajusta según necesites)
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    static int calcularDireccion(int filaActual, int columnaActual, int filaDestino, int columnaDestino) {
+        if (filaDestino < filaActual) {
+            return ARRIBA;
+        } else if (filaDestino > filaActual) {
+            return ABAJO;
+        } else if (columnaDestino < columnaActual) {
+            return IZQUIERDA;
+        } else if (columnaDestino > columnaActual) {
+            return DERECHA;
+        } else {
+            // Si estamos ya en la posición destino, simplemente retornamos una dirección válida
+            return DERECHA; // Cualquier dirección
+        }
+    }
+
     static void resolverAutomaticamente() {
         // Laberinto (asume que ya está definido)
 
@@ -624,6 +658,23 @@ public class ArrayAsociativo009 {
             for (int[] posicion : camino) {
                 System.out.println("(" + posicion[0] + ", " + posicion[1] + ")");
             }
+        } else {
+            System.out.println("No se encontró un camino hacia el destino.");
+        }
+    }
+
+    static void iniciarMovimientoAutomatico(String[] mapa) {
+        // Inicializar el laberinto y obtener el camino hacia el destino
+        int[][] laberinto = convertirMapaACeldas(castilloLB);
+        int filaInicio = 0;
+        int columnaInicio = 0;
+        int filaDestino = 39;
+        int columnaDestino = 70;
+        List<int[]> camino = resolverLaberinto(laberinto, filaInicio, columnaInicio, filaDestino, columnaDestino);
+
+        if (camino != null) {
+            // Comenzar el movimiento automático del personaje
+            moverPersonajeAutomaticamente(camino, mapa);
         } else {
             System.out.println("No se encontró un camino hacia el destino.");
         }
@@ -652,7 +703,7 @@ public class ArrayAsociativo009 {
                 cambiaVisualizacion();
                 break;
             case AUTORESOLUCUION:
-                resolverAutomaticamente();
+                inicializarMundo(castilloLB);
                 break;
             case NADA:
                 break;
