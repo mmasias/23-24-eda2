@@ -1,6 +1,6 @@
 package reto004;
 
-public class Programa {
+public class Parte1 {
 
     public static void main(String[] args) {
         int x = 1;
