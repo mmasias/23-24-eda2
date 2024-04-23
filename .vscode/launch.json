@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Labyrinth",
+            "request": "launch",
+            "mainClass": "evaluaciones.retos.reto004.parte2.Labyrinth",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
             "name": "Exercise",
             "request": "launch",
             "mainClass": "evaluaciones.retos.reto004.parte1.Exercise",
