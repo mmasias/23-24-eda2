@@ -45,7 +45,7 @@ public class Labyrinth {
         printMaze(maze);
         return false;
     }
-
+ 
     public static void printMaze(int[][] maze) {
         System.out.println("===".repeat(maze[0].length));
         for (int[] row : maze) {
