@@ -41,6 +41,8 @@ public class Map {
     static int minFila, minColumna, maxFila, maxColumna;
 
     static boolean jugando = true;
+    static boolean authomaticSearch = false;
+    static int[][] maze;
 
     public static void main(String[] args) {
 
@@ -598,6 +600,9 @@ public class Map {
                 break;
             case CAMBIA_VISUALIZACION:
                 cambiaVisualizacion();
+                break;
+            case BUSQUEDA_AUTOMATICA:
+                authomaticSearch = true;
                 break;
             case NADA:
                 break;
