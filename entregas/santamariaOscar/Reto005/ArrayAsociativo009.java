@@ -299,6 +299,12 @@ public class ArrayAsociativo009 {
             actualizarTiempo();
             imprimirMundo(castilloLB, elPersonaje);
             verAccion(elPersonaje, castilloLB);
+
+            if (elPersonaje[0] == 40 && elPersonaje[1] == 42 && !modoAutomatico) {
+                System.out.println("Intentando moverse a: (" + elPersonaje[0] + ", " + elPersonaje[1] + ") - Salida Encontrada.");
+                maze[elPersonaje[0]][elPersonaje[1]] = PATH;
+            
+            }
         } while (jugando && !modoAutomatico);
 
         if (modoAutomatico) {
@@ -645,7 +651,7 @@ public class ArrayAsociativo009 {
 
     static void pause(int seconds) {
         try {
-            Thread.sleep(100 * seconds);
+            Thread.sleep(200 * seconds);
         } catch (InterruptedException e) {
         }
     }
