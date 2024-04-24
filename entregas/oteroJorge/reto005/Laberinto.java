@@ -125,14 +125,15 @@ public class Laberinto {
                 ".............................................................................."
         };
 
-        int[] elPersonaje = { 31, 33 };
+        int[] elPersonaje = { 14, 15 };
+        int[] laSalida = { preguntaInt("Objetivo fila: "), preguntaInt("Objetivo columna: ")};
 
         inicializarMundo(castilloLB);
 
         do {
             actualizarTiempo();
             imprimirMundo(castilloLB, elPersonaje);
-            verAccion(elPersonaje, castilloLB);
+            verAccion(elPersonaje, castilloLB, laSalida);
         } while (jugando);
     }
 
@@ -175,6 +176,7 @@ public class Laberinto {
     static void imprimirMundo(String[] castillo, int[] personaje) {
 
         String elemento;
+        borrarPantalla();
         imprimirElCielo();
         for (int fila = personaje[FILA] - viewPort; fila <= personaje[FILA] + viewPort; fila++) {
             for (int columna = personaje[COLUMNA] - viewPort; columna <= personaje[COLUMNA] + viewPort; columna++) {
@@ -371,7 +373,7 @@ public class Laberinto {
         }
     }
 
-    static void verAccion(int[] elPersonaje, String[] elMundo) {
+    static void verAccion(int[] elPersonaje, String[] elMundo, int[] objetivo) {
 
         switch (capturarMovimiento()) {
             case ARRIBA:
@@ -393,7 +395,7 @@ public class Laberinto {
                 cambiaVisualizacion();
                 break;
             case ALGORITMO:
-                solveMaze(convierteMapa(elMundo), elPersonaje, ABAJO, elMundo);
+                solveMaze(convierteMapa(elMundo), elPersonaje, objetivo, elMundo);
                 break;
             case NADA:
                 break;
@@ -469,47 +471,53 @@ public class Laberinto {
         return mapita;
     }
 
-    static boolean solveMaze(int[][] mapita, int[] elPersonaje, int movimiento, String[] mapa) { 
+    static int preguntaInt(String mensaje){
+        System.out.println(mensaje);
+        Scanner entrada = new Scanner(System.in);
+        return entrada.nextInt();
+    }
+
+    static boolean solveMaze(int[][] mapita, int[] elPersonaje,int[] objetivo, String[] mapa) {
+        actualizarTiempo();
         try {
-            actualizarTiempo();
-            Thread.sleep(500);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        elPersonaje[FILA] += MOVIMIENTO[movimiento][FILA];
-        elPersonaje[COLUMNA] += MOVIMIENTO[movimiento][COLUMNA];
-        int movimientoFila = elPersonaje[FILA];
-        int movimientoColumna = elPersonaje[COLUMNA];
+    
+        int fila = elPersonaje[FILA];
+        int columna = elPersonaje[COLUMNA];
         
-        if(movimientoFila<0 || movimientoFila>=mapita.length || movimientoColumna<0 || movimientoColumna>=mapita[0].length){
-            System.out.println("Posicion (" + movimientoFila + "," + movimientoColumna + ") fuera del mapa");
+        if (fila < 10 || fila >= mapita.length - 10 || columna < 7 || columna >= mapita[0].length - 7) {
+            System.out.println("Posición (" + fila + "," + columna + ") fuera del mapa");
             return false;
         }
-        if(mapita[movimientoFila][movimientoColumna] != FREE){
-            System.out.println("Posicion (" + movimientoFila + "," + movimientoColumna + ") es un obstaculo");
+        if (mapita[fila][columna] != FREE) {
+            System.out.println("Posición (" + fila + "," + columna + ") es un obstáculo");
             return false;
         }
-        if(movimientoFila == 40 && movimientoColumna == 42){
-            System.out.println("Posicion (" + movimientoFila + "," + movimientoColumna + ") es la salida");
+        if (fila == objetivo[FILA] && columna == objetivo[COLUMNA]) {
+            System.out.println("Posición (" + fila + "," + columna + ") es la salida");
             return true;
         }
-        mapita[movimientoFila][movimientoColumna] = FREE;
-        System.out.println("Posicion (" + movimientoFila + "," + movimientoColumna + ") es transitable");
+    
+        mapita[fila][columna] = PATH;
         imprimirMundo(mapa, elPersonaje);
-
-        if (solveMaze(mapita, elPersonaje, DERECHA, mapa)) {
-            return true;
+        System.out.println("Posición (" + fila + "," + columna + ") es transitable");
+    
+        int[][] movimientos = {{1, 0}, {0, 1}, {0, -1}, {-1, 0}};
+        for (int[] movimiento : movimientos) {
+            int nuevaFila = fila + movimiento[FILA];
+            int nuevaColumna = columna + movimiento[COLUMNA];
+            elPersonaje[FILA] = nuevaFila;
+            elPersonaje[COLUMNA] = nuevaColumna;
+    
+            if (solveMaze(mapita, elPersonaje,objetivo, mapa)) {
+                return true;
+            }
         }
-        if (solveMaze(mapita, elPersonaje, ABAJO, mapa)) {
-            return true;
-        }
-        if (solveMaze(mapita, elPersonaje, ARRIBA, mapa)) {
-            return true;
-        }
-        if (solveMaze(mapita, elPersonaje, IZQUIERDA, mapa)) {
-            return true;
-        }
-        mapita[movimientoFila][movimientoColumna] = VISITED;
+    
+        mapita[fila][columna] = VISITED;
         imprimirMundo(mapa, elPersonaje);
         return false;
     }
