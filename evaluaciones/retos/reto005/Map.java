@@ -14,6 +14,7 @@ public class Map {
     static final int SALIR = 4;
     static final int CAMBIA_VISUALIZACION = 5;
     static final int BUSQUEDA_AUTOMATICA = 6;
+    static final int ESTABLECER_LLEGADA = 7;
     static final int NADA = 999;
 
     static final int VISUALIZACION_NORMAL = 0;
@@ -43,6 +44,9 @@ public class Map {
     static boolean jugando = true;
     static boolean authomaticSearch = false;
     static int[][] maze;
+    static int[] arrivalPoint = {40, 42};
+
+    
 
     public static void main(String[] args) {
 
@@ -298,7 +302,7 @@ public class Map {
 
         if (authomaticSearch) {
             maze = createMaze(castilloLB);
-            if (solveMaze(maze, ABAJO, elPersonaje, castilloLB)) {
+            if (solveMaze(maze, DERECHA, elPersonaje, castilloLB)) {
                 System.out.println("Ruta de escape:");
                 imprimirMundo(castilloLB, elPersonaje);
             } else {
@@ -383,6 +387,23 @@ public class Map {
         return maze;
     }
 
+    private static void setArrivalPoint() {
+        Scanner entrada = new Scanner(System.in);
+    
+        
+        System.out.println("Introduzca la coordenada x del punto de llegada deseado: ");
+        int inputUsuario = entrada.nextInt();
+        arrivalPoint[0] = inputUsuario;
+
+        System.out.println("Introduzca la coordenada y del punto de llegada deseado: ");
+        inputUsuario = entrada.nextInt();
+        arrivalPoint[1] = inputUsuario;
+
+        System.out.println("> Punto de llegada (" + arrivalPoint[0] + ", " + arrivalPoint[1] + ") establecido <");
+        
+
+    }
+
     private static boolean solveMaze(int[][] maze, int direction, int[] theCharacter, String[] castle) {
         theCharacter[FILA] += MOVIMIENTO[direction][FILA];
         theCharacter[COLUMNA] += MOVIMIENTO[direction][COLUMNA];
@@ -406,7 +427,8 @@ public class Map {
             return false;
 
         }
-        if (x == 40 && y == 42) {
+
+        if (x == arrivalPoint[0] && y == arrivalPoint[1]) {
             maze[x][y] = PATH;
             System.out.println("Moviendo al punto (" + x + ", " + y + "): Solución encontrada");
             imprimirMundo(castle, theCharacter);
@@ -620,6 +642,9 @@ public class Map {
             case BUSQUEDA_AUTOMATICA:
                 authomaticSearch = true;
                 break;
+            case ESTABLECER_LLEGADA:
+                setArrivalPoint();
+                break;
             case NADA:
                 break;
         }
@@ -649,6 +674,8 @@ public class Map {
                 return CAMBIA_VISUALIZACION;
             case 'b', 'B':
                 return BUSQUEDA_AUTOMATICA;
+            case 'o', 'O':
+                return ESTABLECER_LLEGADA;
         }
         return NADA;
     }
