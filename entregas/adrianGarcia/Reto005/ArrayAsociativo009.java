@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Laberinto {
+public class ArrayAsociativo009 {
 
     static final int FILA = 0;
     static final int COLUMNA = 1;
