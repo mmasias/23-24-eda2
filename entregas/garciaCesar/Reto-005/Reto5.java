@@ -284,7 +284,7 @@ public class Reto5 {
                 "                                      +++                                     "
         };
 
-        int[] elPersonaje = { 31, 33 };
+        int[] elPersonaje = { 14, 15 };
 
         inicializarMundo(castilloLB);
 
@@ -645,15 +645,13 @@ public class Reto5 {
         int y = personaje[COLUMNA];
         if (x < 0 || x >= maze.length || y < 0 || y >= maze[0].length) {
             System.out.println("Intentando moverse a: (" + x + ", " + y + ") - Fuera de los límites.");
-
             return false;
         }
         if (maze[x][y] != FREE) {
             System.out.println("Intentando moverse a: (" + x + ", " + y + ") - No es un camino libre.");
-
             return false;
         }
-        if (x == 70 && y == 39) {
+        if (x == 40 && y == 42) {
             System.out.println("Intentando moverse a: (" + x + ", " + y + ") - ¡¡¡Salida encontrada!!!");
             maze[x][y] = PATH;
             return true;
