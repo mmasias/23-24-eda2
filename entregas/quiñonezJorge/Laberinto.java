@@ -3,17 +3,6 @@ package entregas.quiñonezJorge;
 import java.util.*;
 
 public class Laberinto {
-  static final int FILA = 0;
-  static final int COLUMNA = 1;
-
-  static final int ARRIBA = 0;
-  static final int ABAJO = 1;
-  static final int IZQUIERDA = 2;
-  static final int DERECHA = 3;
-  static final int SALIR = 4;
-  static final int CAMBIA_VISUALIZACION = 5;
-  static final int NADA = 999;
-
   static final int VISUALIZACION_NORMAL = 0;
   static final int VISUALIZACION_SIN_COLOR = 1;
   static final int VISUALIZACION_RAW = 2;
@@ -329,15 +318,15 @@ public class Laberinto {
     String elemento;
     limpiarPantalla();
     imprimirElCielo();
-    for (int fila = personaje[FILA] - viewPort; fila <= personaje[FILA] + viewPort; fila++) {
-      for (int columna = personaje[COLUMNA] - viewPort; columna <= personaje[COLUMNA] + viewPort; columna++) {
+    for (int fila = personaje[0] - viewPort; fila <= personaje[0] + viewPort; fila++) {
+      for (int columna = personaje[1] - viewPort; columna <= personaje[1] + viewPort; columna++) {
 
         elemento = mapear('P', modoVisualizacion);
-        if (!(fila == personaje[FILA] && columna == personaje[COLUMNA])) {
-          elemento = mapear(castillo[fila].charAt(columna), modoVisualizacion);
+        if (!(fila == personaje[0] && columna == personaje[1])) {
+          elemento = mapear(castillo[0].charAt(columna), modoVisualizacion);
         }
 
-        if (!(Math.pow((fila - personaje[FILA]), 2) + Math.pow((columna - personaje[COLUMNA]), 2) <= alcanceVision
+        if (!(Math.pow((fila - personaje[0]), 2) + Math.pow((columna - personaje[1]), 2) <= alcanceVision
             * alcanceVision)) {
           elemento = mapear('D', modoVisualizacion);
         }
@@ -352,7 +341,7 @@ public class Laberinto {
 
     imprimirLinea();
     System.out.print("HORA: [" + (int) hora + "] ");
-    System.out.print("/ (" + personaje[FILA] + "," + personaje[COLUMNA] + ")");
+    System.out.print("/ (" + personaje[0] + "," + personaje[1] + ")");
     System.out.println(" / SKIN[" + modoVisualizacion + "]");
     imprimirLinea();
   }
@@ -491,53 +480,53 @@ public class Laberinto {
 
   static void mover(int[] unPersonaje, int direccion, String[] mapa) {
 
-    int oldFila = unPersonaje[FILA];
-    int oldColumna = unPersonaje[COLUMNA];
+    int oldFila = unPersonaje[0];
+    int oldColumna = unPersonaje[1];
 
-    unPersonaje[FILA] += MOVIMIENTO[direccion][FILA];
-    unPersonaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
+    unPersonaje[0] += MOVIMIENTO[direccion][0];
+    unPersonaje[1] += MOVIMIENTO[direccion][1];
 
-    if (!tipoTerreno(mapa[unPersonaje[FILA]].charAt(unPersonaje[COLUMNA])).equals("0")) {
-      unPersonaje[FILA] = oldFila;
-      unPersonaje[COLUMNA] = oldColumna;
+    if (!tipoTerreno(mapa[unPersonaje[0]].charAt(unPersonaje[1])).equals("0")) {
+      unPersonaje[0] = oldFila;
+      unPersonaje[1] = oldColumna;
     }
 
-    if (unPersonaje[FILA] < minFila) {
-      unPersonaje[FILA] = unPersonaje[FILA] + 1;
+    if (unPersonaje[0] < minFila) {
+      unPersonaje[0] = unPersonaje[0] + 1;
     }
-    if (unPersonaje[FILA] > maxFila) {
-      unPersonaje[FILA] = unPersonaje[FILA] - 1;
+    if (unPersonaje[0] > maxFila) {
+      unPersonaje[0] = unPersonaje[0] - 1;
     }
-    if (unPersonaje[COLUMNA] < minColumna) {
-      unPersonaje[COLUMNA] = unPersonaje[COLUMNA] + 1;
+    if (unPersonaje[1] < minColumna) {
+      unPersonaje[1] = unPersonaje[1] + 1;
     }
-    if (unPersonaje[COLUMNA] > maxColumna) {
-      unPersonaje[COLUMNA] = unPersonaje[COLUMNA] - 1;
+    if (unPersonaje[1] > maxColumna) {
+      unPersonaje[1] = unPersonaje[1] - 1;
     }
   }
 
   static void verAccion(int[] elPersonaje, String[] elMundo) {
 
     switch (capturarMovimiento()) {
-      case ARRIBA:
-        mover(elPersonaje, ARRIBA, elMundo);
+      case 0:
+        mover(elPersonaje, 0, elMundo);
         break;
-      case ABAJO:
-        mover(elPersonaje, ABAJO, elMundo);
+      case 1:
+        mover(elPersonaje, 1, elMundo);
         break;
-      case IZQUIERDA:
-        mover(elPersonaje, IZQUIERDA, elMundo);
+      case 2:
+        mover(elPersonaje, 2, elMundo);
         break;
-      case DERECHA:
-        mover(elPersonaje, DERECHA, elMundo);
+      case 3:
+        mover(elPersonaje, 3, elMundo);
         break;
-      case SALIR:
+      case 4:
         jugando = !jugando;
         break;
-      case CAMBIA_VISUALIZACION:
+      case 5:
         cambiaVisualizacion();
         break;
-      case NADA:
+      case 9:
         break;
     }
   }
@@ -552,20 +541,22 @@ public class Laberinto {
   static int capturarMovimiento() {
 
     switch (pedirChar()) {
-      case 's', 'S', '8':
-        return ABAJO;
       case 'w', 'W', '2':
-        return ARRIBA;
+        return 0;
+      case 's', 'S', '8':
+        return 1;
       case 'a', 'A', '4':
-        return IZQUIERDA;
+        return 2;
       case 'd', 'D', '6':
-        return DERECHA;
+        return 3;
       case 'f', 'F':
-        return SALIR;
+        return 4;
       case 'v', 'V':
-        return CAMBIA_VISUALIZACION;
+        return 5;
+      case 'b', 'B':
+        solveMaze();
     }
-    return NADA;
+    return 9;
   }
 
   static char pedirChar() {
@@ -573,6 +564,10 @@ public class Laberinto {
     Scanner entrada = new Scanner(System.in);
     String inputUsuario = entrada.nextLine() + "x"; // Este es un caso que justifica un comentario!
     return inputUsuario.charAt(0); // Lo comentamos en clase ;)
+  }
+
+  static void solveMaze() {
+
   }
 
   static void limpiarPantalla() {
