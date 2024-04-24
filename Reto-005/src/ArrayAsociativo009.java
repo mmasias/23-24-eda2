@@ -638,7 +638,8 @@ return maza;
 
         */
         try {
-            Thread.sleep(500);
+            Thread.sleep(200);
+            actualizarTiempo();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -666,17 +667,18 @@ return maza;
         System.out.println("Intentando moverse a: (" + y + ", " + x + "): Marcando como parte del camino.");
     imprimirMundo(mapa,personaje);
 
-    if (movimientoAut(maze, personaje, DERECHA, mapa)){
+    if (movimientoAut(maze, personaje, ABAJO, mapa)){
         return true;
     }if (movimientoAut(maze, personaje, IZQUIERDA, mapa)){
             return true;
-        }if (movimientoAut(maze, personaje, ARRIBA, mapa)){
+        }if (movimientoAut(maze, personaje, DERECHA, mapa)){
             return true;
         }
-        if (movimientoAut(maze, personaje, ABAJO, mapa)){
+        if (movimientoAut(maze, personaje, ARRIBA, mapa)){
             return true;
         }
         maze[x][y] = VISITED;
+
         imprimirMundo(mapa,personaje);
         return false;
     }
