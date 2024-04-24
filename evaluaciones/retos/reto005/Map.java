@@ -294,6 +294,16 @@ public class Map {
             actualizarTiempo();
             imprimirMundo(castilloLB, elPersonaje);
             verAccion(elPersonaje, castilloLB);
+
+            if (authomaticSearch) {
+                maze = createMaze(castilloLB);
+                if (solveMaze(maze, ABAJO, elPersonaje, castilloLB)) {
+                    System.out.println("Ruta de escape:");
+                    imprimirMundo(castilloLB, elPersonaje);
+                } else {
+                    System.out.println("No se puede escapar!!!.");
+                }
+            }
         } while (jugando);
     }
 
@@ -390,7 +400,7 @@ public class Map {
             return false;
 
         }
-        if (x == 14 && y == 36) {
+        if (x == 40 && y == 42) {
             maze[x][y] = PATH;
             System.out.println("Moviendo al punto (" + x + ", " + y + "): Solución encontrada");
             imprimirMundo(castle, theCharacter);
