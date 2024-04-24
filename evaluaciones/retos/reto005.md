@@ -8,3 +8,7 @@ A partir de su código de el laberinto (o del código planteado en la [novena ve
 
 ![](https://github.com/mmasias/mmasias/raw/main/imagenes/ArrayAsociativoV9SKIN0.png)
 
+## Actualización
+
+- Permitir que el usuario especifique un punto de llegada pulsando la tecla O (Objetivo).
+- Almacenar (en una estructura de datos) los pasos dados, de modo que podamos pedirle con la tecla R (Regresar) volver sobre los pasos.
