@@ -661,16 +661,13 @@ public class ArrayAsociativo009 {
         int x = personaje[FILA];
         int y = personaje[COLUMNA];
         if (x < 0 || x >= maze.length || y < 0 || y >= maze[0].length) {
-            System.out.println("Intentando mover a (" + y + ", " + x + "): Fuera de los límites del laberinto.");
             return false;
         }
         if (maze[x][y] != FREE) {
-            System.out.println("Intentando mover a (" + y + ", " + x + "): Celda bloqueada o ya visitada.");
             return false;
         }
         if (x == 40 && y == 42) {
             maze[x][y] = PATH;
-            System.out.println("Moviendo a (" + y + ", " + x + "): ¡Ruta encontrada!");
             return true;
         }
         maze[x][y] = PATH;
