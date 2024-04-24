@@ -350,8 +350,9 @@ public class Reto005 {
         }
 
         String elemento;
-        limpiarPantalla();
         imprimirElCielo();
+        limpiarPantalla();
+
         for (int fila = personaje[FILA] - viewPort; fila <= personaje[FILA] + viewPort; fila++) {
             for (int columna = personaje[COLUMNA] - viewPort; columna <= personaje[COLUMNA] + viewPort; columna++) {
 
@@ -611,7 +612,7 @@ public class Reto005 {
     }
 
     static void imprimirElCielo() {
-        
+        limpiarPantalla();
         imprimirLinea();
         for (int i = 0; i < viewPort * 2 + 1; i = i + 1) {
             if ((hora > 6) && (hora <= 18) && (i == (int) (((viewPort * 2)) - ((hora - 7) * (viewPort * 2) / 12)))) {
@@ -639,7 +640,6 @@ public class Reto005 {
     }
 
     static boolean movimientoAutomatico(int[][] maze, int[] personaje, int direccion, String[] mapa){
-        
         
         actualizarTiempo();
         int oldFila = personaje[FILA];
@@ -750,4 +750,5 @@ public class Reto005 {
     public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m";
     public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";
+
 }
