@@ -11,9 +11,8 @@ public class ArrayAsociativo009 {
     static final int DERECHA = 3;
     static final int SALIR = 4;
     static final int CAMBIA_VISUALIZACION = 5;
-    static final int BUSCAR_CAMINO = 6;
     static final int NADA = 999;
-
+    static final int AUTOMATICO = 6;
     static final int VISUALIZACION_NORMAL = 0;
     static final int VISUALIZACION_SIN_COLOR = 1;
     static final int VISUALIZACION_RAW = 2;
@@ -34,6 +33,14 @@ public class ArrayAsociativo009 {
     static int minFila, minColumna, maxFila, maxColumna;
 
     static boolean jugando = true;
+    static boolean automatico= false;
+     static final int FREE = 0;
+     static final int WALL = 1;
+     static final int PATH = 2;
+     static final int VISITED = 3;
+
+     static String[] celda = {" · ", "[ ]", " * ", " x "};
+     static int[][] laberinto;
 
     public static void main(String[] args) {
 
@@ -212,69 +219,69 @@ public class ArrayAsociativo009 {
                 "                                                 %%%%%%%%%%%%%%%%%%%%%%       ",
                 "                                                 %%%%%%%%%%%%%%%%%%%%%%       ",
                 "                                                 %%%%%%%%%%%%%%%%%%%%%%       ",
-                "                              |----------------|%%%%%%%%%%%%%%%%%%%%%%%       ",
-                "                              |   ###%%%%###   |%%%%%%%%%%%%%%%%%%%%%%%       ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
+                "                                      +++                                     ",
                 "                              |   ##      ##   |%%%%%%%%%%%%%%%%%%%%%%%       ",
-                "                    |------|  |   #  ****  #   |%%%%%%%%%%%%%%%%%%%%%%%       ",
+                "                              |   ###%%%%###   |%%%%%%%%%%%%%%%%%%%%%%%       ",
+                "                              |----------------|%%%%%%%%%%%%%%%%%%%%%%%       ",
                 "                    |******|  |     #****#     |%%%%%%%%%%%%%%%%%%%%%%%       ",
-                "       |--------|----******---|     #****#     |---------###%%%%%%%%%%%       ",
-                "       |===*****|******||*****|     #****#     |%%%*****O**#%%%%%%%%%%%       ",
-                "       |+===****|XX****||*****|    ###**###    |%%******|**#%%%%%%%%%%%       ",
-                "       |++|------XX|-----O-|**|    #%%**%%#    |%**|-----###%%%%%%%%%%%       ",
-                "       |++|******XX|*******|**|    #%%**%%#    |%****|%%%%%%%%%%%%%%%%%       ",
-                "       |++|********|*******|**|    #%%**%%#    |*****|%%%%%%%%%%%%%%%%%       ",
-                "       |++|-**------**-|---|**|    ###**###    |*****|%%%%%%%%%%%%%%%%%       ",
+                "                    |------|  |   #  ****  #   |%%%%%%%%%%%%%%%%%%%%%%%       ",
+                "                   -------            +++                                     ",
+                "                   |%%%%%|          #|***|#                                   ",
+                "                   |%%%%%|          #|***|#        --------                   ",
+                "                   |%%-%%|           |***|         |++++++|                   ",
+                "                   |%%|%%|           |***|         |++++++|                   ",
+                "                   |*%|%%|----    ---|***|---   ---|++--++|                   ",
+                "                ---|**|%*****|    |%%*****%%|   |+++++||++|                   ",
+                "                |%%%%*|******|    |%%%***%%%|   |+++++||++|                   ",
+                "                |%%%**|----**|####|%%%%*%%%%|###|++----|++|---                ",
+                "                |%%---|---|*******%%%%---%%******++|||+++++++|                ",
+                "                |*%|%%***||********%%%|-|%%%*****++|||+++++++|                ",
+                "               |%%%%%%||++++++++++++++++++++++++|--------**%%***%%%|%%|       ",
+                "          ------|**|%%%%*||**-####-%%%|-|%%*-###-++|-|++---++|                ",
+                "          |%%%%***%|%%-******|    |*%%%**%**|   |++++|++++|++|---             ",
+                "          |%%%***%%|%%|******|    |**%******|   |++++|++++|+++++|             ",
+                "          |%*|-O------|               #*****#   |++++|||%%%%%%***%***%|       ",
+                "          |*%%%%%%||%%|------------------***----|+++++++%%%%%%***%*|%%|       ",
+                "          |*%------|%%|------|    |---***---|   |--++|--++|+++++|             ",
+                "          |**%%*%%||%%|                ##***#   |++--|-|%%%%%%%*****%%|       ",
+                "          |**|%%%%%%%%|              #***##     |-|++|||++|---++|---          ",
+                "          |**|%*%%%%%%|               #****#    |++++|||+%%%%%**%%%|---       ",
+                "          |-----%%%%%%||++++++++++++++++++++++++|++++++++%%%%%***%%|%%|       ",
+                "       --------|-------|+++++++#=+++=#++++++++++XX++|***********%%%|%%|       ",
+                "       |++++++++++++++XX+++------#+#---------+++XX++|***********%%%|%%|       ",
+                "       |++++++++++++++XX+++|    |+++|*******|+++--++|***-******%%%%|%%|       ",
+                "       |++-----***------+++|    |#+#|*    **|+++||++|***|----------|%%|       ",
                 "       |++|#**#%%%%#**#|%%%|**-------****-------**|**|%%%%%%%%%%%%%%%%%       ",
+                "       |++|%%%|***|%%%%|++=|    **+***   --O|=+=||++|-***%#%#%#%-**|%%|       ",
+                "       |++|%%*|***|*%%%|+==|    *+++*    |**|===||++||**********O**O*%|       ",
                 "       |++|%**%%%%%%***|%%%|**********************|**|%%%%%%%%%%%%%%%%%       ",
                 "       |++|%**%|-|%%***|%%%|**********************|XX|%%%%%%%%%%%%%%%%%       ",
+                "       |++|%*********#%|===|     ***     |**|===|---||***%#%#%#%-**|%%|       ",
+                "       |++|*#*%***%***%|===|             |**|==%%%|*****-----------|--|       ",
                 "       |++|**%%|-|%%#**|%%=|-------------|--|-----|XX---|%%%%%%%%%%%%%%       ",
                 "       |++|***%---%%***|%==|    *****    |**|=%%%%|XX***|%%%%%%%%%%%%%%       ",
-                "       |++|*#*%***%***%|===|             |**|==%%%|*****-----------|--|       ",
-                "       |++|%*********#%|===|     ***     |**|===|---||***%#%#%#%-**|%%|       ",
-                "       |++|%%*|***|*%%%|+==|    *+++*    |**|===||++||**********O**O*%|       ",
-                "       |++|%%%|***|%%%%|++=|    **+***   --O|=+=||++|-***%#%#%#%-**|%%|       ",
-                "       |++-----***------+++|    |#+#|*    **|+++||++|***|----------|%%|       ",
-                "       |++++++++++++++XX+++|    |+++|*******|+++--++|***-******%%%%|%%|       ",
-                "       |++++++++++++++XX+++------#+#---------+++XX++|***********%%%|%%|       ",
-                "       --------|-------|+++++++#=+++=#++++++++++XX++|***********%%%|%%|       ",
-                "               |%%%%%%||++++++++++++++++++++++++|--------**%%***%%%|%%|       ",
-                "          |-----%%%%%%||++++++++++++++++++++++++|++++++++%%%%%***%%|%%|       ",
-                "          |*%%%%%%||%%|------------------***----|+++++++%%%%%%***%*|%%|       ",
-                "          |**%%*%%||%%|                ##***#   |++--|-|%%%%%%%*****%%|       ",
-                "          |%*|-O------|               #*****#   |++++|||%%%%%%***%***%|       ",
-                "          |**|%*%%%%%%|               #****#    |++++|||+%%%%%**%%%|---       ",
-                "          |**|%%%%%%%%|              #***##     |-|++|||++|---++|---          ",
-                "          |*%------|%%|------|    |---***---|   |--++|--++|+++++|             ",
-                "          |%%%***%%|%%|******|    |**%******|   |++++|++++|+++++|             ",
-                "          |%%%%***%|%%-******|    |*%%%**%**|   |++++|++++|++|---             ",
-                "          ------|**|%%%%*||**-####-%%%|-|%%*-###-++|-|++---++|                ",
-                "                |*%|%%***||********%%%|-|%%%*****++|||+++++++|                ",
-                "                |%%---|---|*******%%%%---%%******++|||+++++++|                ",
-                "                |%%%**|----**|####|%%%%*%%%%|###|++----|++|---                ",
-                "                |%%%%*|******|    |%%%***%%%|   |+++++||++|                   ",
-                "                ---|**|%*****|    |%%*****%%|   |+++++||++|                   ",
-                "                   |*%|%%|----    ---|***|---   ---|++--++|                   ",
-                "                   |%%|%%|           |***|         |++++++|                   ",
-                "                   |%%-%%|           |***|         |++++++|                   ",
-                "                   |%%%%%|          #|***|#        --------                   ",
-                "                   |%%%%%|          #|***|#                                   ",
-                "                   -------            +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     ",
-                "                                      +++                                     "
+                "       |++|********|*******|**|    #%%**%%#    |*****|%%%%%%%%%%%%%%%%%       ",
+                "       |++|******XX|*******|**|    #%%**%%#    |%****|%%%%%%%%%%%%%%%%%       ",
+                "       |++|-**------**-|---|**|    ###**###    |*****|%%%%%%%%%%%%%%%%%       ",
+                "       |++|------XX|-----O-|**|    #%%**%%#    |%**|-----###%%%%%%%%%%%       ",
+                "       |+===****|XX****||*****|    ###**###    |%%******|**#%%%%%%%%%%%       ",
+                "       |--------|----******---|     #****#     |---------###%%%%%%%%%%%       ",
+                "       |===*****|******||*****|     #****#     |%%%*****O**#%%%%%%%%%%%       "
         };
 
         int[] elPersonaje = { 31, 33 };
@@ -285,7 +292,18 @@ public class ArrayAsociativo009 {
             actualizarTiempo();
             imprimirMundo(castilloLB, elPersonaje);
             verAccion(elPersonaje, castilloLB);
-        } while (jugando);
+        } while (jugando && !automatico);
+        if (automatico){
+            System.out.printf("Empezando Modo Automatico");
+            laberinto=inicializarLaberinto(castilloLB);
+            int[] obtenerObjetivo = obtenerObjetivo();
+            if (buscarRuta(laberinto,elPersonaje,DERECHA,castilloLB, obtenerObjetivo[0], obtenerObjetivo[1])){
+                imprimirMundo(castilloLB,elPersonaje);
+                System.out.println("Llegamos a la posicion especificada!!!");
+            }else {
+                System.out.println("Ruta no encontra");
+            }
+        }
     }
 
     private static void inicializarMundo(String[] mundo) {
@@ -537,36 +555,12 @@ public class ArrayAsociativo009 {
             case CAMBIA_VISUALIZACION:
                 cambiaVisualizacion();
                 break;
-                case BUSCAR_CAMINO:
-                if (buscarCamino(elMundo, elPersonaje[FILA], elPersonaje[COLUMNA], 5, 66)) {
-                    System.out.println("Camino encontrado y marcado en el mapa.");
-                } else {
-                    System.out.println("No hay camino disponible.");
-                }
-                break;
             case NADA:
                 break;
+            case AUTOMATICO:
+                automatico=true;
+                break;
         }
-    }
-
-    static boolean buscarCamino(String[] mundo, int fila, int columna, int filaDestino, int columnaDestino) {
-        if (fila < 0 || fila >= mundo.length || columna < 0 || columna >= mundo[0].length() || mundo[fila].charAt(columna) == '#') {
-            return false;
-        }
-        if (fila == filaDestino && columna == columnaDestino) {
-            mundo[fila] = mundo[fila].substring(0, columna) + 'X' + mundo[fila].substring(columna + 1);
-            return true;
-        }
-        char temp = mundo[fila].charAt(columna);
-        mundo[fila] = mundo[fila].substring(0, columna) + '*' + mundo[fila].substring(columna + 1);
-        int[][] direcciones = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        for (int[] direccion : direcciones) {
-            if (buscarCamino(mundo, fila + direccion[0], columna + direccion[1], filaDestino, columnaDestino)) {
-                return true;
-            }
-        }
-        mundo[fila] = mundo[fila].substring(0, columna) + temp + mundo[fila].substring(columna + 1);
-        return false;
     }
 
     static void cambiaVisualizacion() {
@@ -592,9 +586,20 @@ public class ArrayAsociativo009 {
             case 'v', 'V':
                 return CAMBIA_VISUALIZACION;
             case 'c', 'C':
-                return BUSCAR_CAMINO;
+                return AUTOMATICO;
         }
         return NADA;
+    }
+
+    static int[] obtenerObjetivo() {
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("Establezca el lugar de objetico en posicion X");
+        int x = entrada.nextInt();
+        System.out.println("Establezca el lugar de objetico en posicion Y");
+        int y = entrada.nextInt();
+
+        int[] posicionFinal = {x, y};
+        return posicionFinal;
     }
 
     static char pedirChar() {
@@ -623,6 +628,69 @@ public class ArrayAsociativo009 {
         System.out.println();
         imprimirLinea();
     }
+
+
+    static int[][] inicializarLaberinto(String []mapa){
+        int[] [] laberinto=new int[mapa.length][mapa[0].length()];
+        for (int i = 0; i < mapa.length; i++) {
+            for (int j = 0; j < mapa.length; j++) {
+                    if(mapa[i].charAt(j)==' '  || mapa[i].charAt(j)=='-'|| mapa[i].charAt(j)=='|'|| mapa[i].charAt(j)=='~'){
+                        laberinto[i][j]=WALL;
+
+                    }else {
+                        laberinto[i][j]=FREE;
+                    }
+            }
+        }
+return laberinto;
+    }
+
+    static boolean buscarRuta(int[][ ] maze, int [] personaje, int direccion, String[] mapa, int posicionFinalX, int PosicionFinalY){
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        personaje[FILA] += MOVIMIENTO[direccion][FILA];
+        personaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
+        int x= personaje[FILA];
+        int y= personaje[COLUMNA];
+
+
+
+        if (x < 0 || x >= maze.length || y < 0 || y >= maze[0].length) {
+            System.out.println("la posción x: "+ x + " + y: "+ y +" en el mundo no esta disponible...");
+            return false;
+        }
+        if (maze[x][y] != FREE) {
+            System.out.println("la posción x: "+ x + " + y: "+ y +" en el mundo no podemos pasar  Buscaremos otro camino...");
+            return false;
+        }
+        if (x == posicionFinalX && y == PosicionFinalY) {
+            System.out.println("Intentando moverse a: (" + x + ", " + y + ") - ¡¡¡Salida encontrada!!!");
+            maze[x][y] = PATH;
+            return true;
+        }
+        maze[x][y] = PATH;
+        System.out.println("Intentando moverse a: (" + y + ", " + x + "): Marcando como parte del camino.");
+    imprimirMundo(mapa,personaje);
+
+    if (buscarRuta(maze, personaje, DERECHA, mapa, posicionFinalX, PosicionFinalY)){
+        return true;
+    }if (buscarRuta(maze, personaje, IZQUIERDA, mapa, posicionFinalX, PosicionFinalY)){
+            return true;
+        }if (buscarRuta(maze, personaje, ARRIBA, mapa, posicionFinalX, PosicionFinalY)){
+            return true;
+        }
+        if (buscarRuta(maze, personaje, ABAJO, mapa, posicionFinalX, PosicionFinalY)){
+            return true;
+        }
+        maze[x][y] = VISITED;
+        imprimirMundo(mapa,personaje);
+        return false;
+    }
+
 
     public static final String RESET = "\033[0m";
 

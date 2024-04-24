@@ -1,6 +1,6 @@
 package entregas.saraPatino.retos;
 
-public class reto1 {
+public class ImprimeNumero {
     public static void main(String[] args) {
         recursividad(1, 10);
         }
