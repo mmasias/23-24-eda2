@@ -295,7 +295,7 @@ public class ArrayAsociativo009 {
         } while (jugando && !automatico);
         if (automatico){
             System.out.printf("Empezando Modo Automatico");
-            laberinto=inicializarLaberinto(castilloLB);
+            laberinto=analizarMapa(castilloLB);
             int[] obtenerObjetivo = obtenerObjetivo();
             if (buscarRuta(laberinto,elPersonaje,DERECHA,castilloLB, obtenerObjetivo[0], obtenerObjetivo[1])){
                 imprimirMundo(castilloLB,elPersonaje);
@@ -630,7 +630,7 @@ public class ArrayAsociativo009 {
     }
 
 
-    static int[][] inicializarLaberinto(String []mapa){
+    static int[][] analizarMapa(String []mapa){
         int[] [] laberinto=new int[mapa.length][mapa[0].length()];
         for (int i = 0; i < mapa.length; i++) {
             for (int j = 0; j < mapa.length; j++) {
@@ -642,7 +642,7 @@ public class ArrayAsociativo009 {
                     }
             }
         }
-return laberinto;
+        return laberinto;
     }
 
     static boolean buscarRuta(int[][ ] maze, int [] personaje, int direccion, String[] mapa, int posicionFinalX, int PosicionFinalY){
@@ -674,21 +674,21 @@ return laberinto;
         }
         maze[x][y] = PATH;
         System.out.println("Intentando moverse a: (" + y + ", " + x + "): Marcando como parte del camino.");
-    imprimirMundo(mapa,personaje);
-
-    if (buscarRuta(maze, personaje, DERECHA, mapa, posicionFinalX, PosicionFinalY)){
-        return true;
-    }if (buscarRuta(maze, personaje, IZQUIERDA, mapa, posicionFinalX, PosicionFinalY)){
-            return true;
-        }if (buscarRuta(maze, personaje, ARRIBA, mapa, posicionFinalX, PosicionFinalY)){
-            return true;
-        }
-        if (buscarRuta(maze, personaje, ABAJO, mapa, posicionFinalX, PosicionFinalY)){
-            return true;
-        }
-        maze[x][y] = VISITED;
         imprimirMundo(mapa,personaje);
-        return false;
+
+        if (buscarRuta(maze, personaje, DERECHA, mapa, posicionFinalX, PosicionFinalY)){
+            return true;
+        }if (buscarRuta(maze, personaje, IZQUIERDA, mapa, posicionFinalX, PosicionFinalY)){
+                return true;
+            }if (buscarRuta(maze, personaje, ARRIBA, mapa, posicionFinalX, PosicionFinalY)){
+                return true;
+            }
+            if (buscarRuta(maze, personaje, ABAJO, mapa, posicionFinalX, PosicionFinalY)){
+                return true;
+            }
+            maze[x][y] = VISITED;
+            imprimirMundo(mapa,personaje);
+            return false;
     }
 
 
