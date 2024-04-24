@@ -43,7 +43,6 @@ public class ArrayAsociativo009 {
     static final int FREE = 0;
     static final int WALL = 1;
     static final int PATH = 2;
-    static final int VISITED = 3;
 
     static String[] cell = { " · ", "[ ]", " * ", " x " };
 
@@ -297,7 +296,10 @@ public class ArrayAsociativo009 {
             actualizarTiempo();
             imprimirMundo(castilloLB, elPersonaje);
             verAccion(elPersonaje, castilloLB);
-            // Agregar una condición para verificar si el modo automático está activado
+            if (elPersonaje[0] == 40 && elPersonaje[1] == 42 && !modoAutomatico) {
+                System.out.println("¡Encontraste la ruta!");
+                jugando = false;
+            }
             if (modoAutomatico) {
                 maze = inicializarMaze(castilloLB);
                 System.out.println("MODO AUTOMÁTICO");
@@ -306,7 +308,6 @@ public class ArrayAsociativo009 {
                 } else {
                     System.out.println("NO HAY SALIDA");
                 }
-                // Desactivar el modo automático después de una iteración
                 modoAutomatico = false;
             }
         } while (jugando);
