@@ -345,7 +345,7 @@ public class Reto5 {
     static void imprimirMundo(String[] castillo, int[] personaje) {
         if (automatico) {
             System.out.println("Pulse una tecla...");
-        new Scanner(System.in).nextLine();
+            new Scanner(System.in).nextLine();
         }
         String elemento;
         limpiarPantalla();
@@ -637,8 +637,6 @@ public class Reto5 {
 
     static boolean movimientoAutomatico(int[][] maze, int[] personaje, int direccion, String [] mapa){
         actualizarTiempo();
-        int oldFila = personaje[FILA];
-        int oldColumna = personaje[COLUMNA];
         personaje[FILA] += MOVIMIENTO[direccion][FILA];
         personaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
         int x = personaje[FILA];
@@ -657,8 +655,8 @@ public class Reto5 {
             return true;
         }
         maze[x][y] = PATH;
-        System.out.println("Intentando moverse a: (" + y + ", " + x + "): Marcando como parte del camino.");
         imprimirMundo(mapa, personaje);
+        System.out.println("Intentando moverse a: (" + y + ", " + x + "): Marcando como parte del camino.");
         if (movimientoAutomatico(maze, personaje, DERECHA, mapa)) {
             return true;
         }
