@@ -18,3 +18,11 @@ Los retos se irán proponiendo, habitualmente luego de una disertación teórica
 |Retos|
 |-|
 [Completar CRUD](/evaluaciones/retos/reto002.md)
+
+## Entrega 003
+
+- Desarrolle el ejercicio propuesto en el [Reto 003](/evaluaciones/retos/reto003.md)
+
+## Entrega 004
+
+- Desarrolle los ejercicios propuestos en el [Reto 004](reto004.md)
