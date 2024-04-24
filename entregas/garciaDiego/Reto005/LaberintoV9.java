@@ -572,6 +572,7 @@ public class LaberintoV9 {
 
     static int capturarMovimiento() {
 
+        System.out.println("Introduce z para activar el modo automatico, v para cambiar de Skin o selecciona una dirección (w,a,s,d) o f para salir:");
         switch (pedirChar()) {
             case 's', 'S', '8':
                 return ABAJO;
