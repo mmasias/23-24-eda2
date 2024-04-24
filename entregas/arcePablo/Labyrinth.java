@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Labyrinth {
 
@@ -8,8 +8,9 @@ public class Labyrinth {
     private static final int VISITED = 3;
 
     private static String[] celda = {" · ", "[ ]", " * ", " x "};
+    public static int[] currentPosition = {0,0};
 
-    public static boolean solveMaze(int[][] maze, int x, int y) {
+    public static boolean solveMaze (int[][] maze, int x, int y) throws InterruptedException {
         if (x < 0 || x >= maze.length || y < 0 || y >= maze[0].length) {
             return false;
         }
@@ -21,6 +22,10 @@ public class Labyrinth {
             return true;
         }
         maze[x][y] = PATH;
+
+        printMaze(maze);
+        Thread.sleep(400);
+        printAccountability(x, y);
 
         if (solveMaze(maze, x + 1, y) || solveMaze(maze, x, y + 1) ||
             solveMaze(maze, x - 1, y) || solveMaze(maze, x, y - 1)) {
@@ -42,8 +47,23 @@ public class Labyrinth {
         System.out.println("===".repeat(maze[0].length));
     }
 
+    public static void printAccountability(int x, int y) {
+        System.out.println("Posición actual: (" + x + ", " + y + ")");
+        if (x > currentPosition[0]) {
+            System.out.println("Movimiento abajo...");
+        } else if (x < currentPosition[0]) {
+            System.out.println("Movimiento arriba...");
+        } else if (y > currentPosition[1]) {
+            System.out.println("Movimiento derecha...");
+        } else if (y < currentPosition[1]) {
+            System.out.println("Movimiento izquierda...");
+        }
+        currentPosition[0] = x;
+        currentPosition[1] = y;
+    }
+
     @SuppressWarnings("resource")
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         int[][] maze = {
             {0,1,0,0,1,0,0,1,0,0,1,0,0,0},
             {0,1,0,1,1,0,1,1,0,1,1,0,1,0},
