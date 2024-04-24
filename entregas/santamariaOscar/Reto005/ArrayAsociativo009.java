@@ -304,7 +304,13 @@ public class ArrayAsociativo009 {
         if(modoAutomatico){
             maze= inicializarMaze(castilloLB);
             System.out.println("Iniciando Modo Automático");
+        
+            if (moverAutomatico(maze, elPersonaje, DERECHA, castilloLB)) {
+              imprimirMundo(castilloLB, elPersonaje);
+            }
         }
+
+        
     }
 
     private static void inicializarMundo(String[] mundo) {
@@ -433,21 +439,21 @@ public class ArrayAsociativo009 {
 
         HashMap<String, String> tiles = new HashMap<>();
 
-        tiles.put(" ", " ~~ "); //muro
+        tiles.put(" ", " ~~ "); 
         tiles.put(".", " . .");
-        tiles.put("-", "[##]"); //muro
+        tiles.put("-", "[##]"); 
         tiles.put("=", "||||");
-        tiles.put("|", "[##]"); //muro
+        tiles.put("|", "[##]"); 
         tiles.put(":", "oO*o");
         tiles.put("+", "..:.");
         tiles.put("O", "[  ]");
-        tiles.put("#", "::::"); //muro
+        tiles.put("#", "::::"); 
         tiles.put("*", "    ");
         tiles.put("$", "$$$$");
         tiles.put("X", "||||");
         tiles.put("%", "%%%%");
         tiles.put("_", "____");
-        tiles.put("~", " ~ ~"); //muro
+        tiles.put("~", " ~ ~"); 
         tiles.put("B", "====");
         tiles.put("P", "_()_");
         tiles.put("D", "    ");
@@ -642,7 +648,7 @@ public class ArrayAsociativo009 {
         for(int i=0; i<mapa.length; i++){
            for(int j=0; j<mapa[0].length(); j++){
             
-            if (mapa[i].charAt(j)=='#' || mapa[i].charAt(j)=='|' || mapa[i].charAt(j)=='-' || mapa[i].charAt(j)==' ' ) {
+            if (mapa[i].charAt(j)==' ' || mapa[i].charAt(j)=='|' || mapa[i].charAt(j)=='-' || mapa[i].charAt(j)=='~') {
                     maze[i][j]= WALL;
             }else{
                 maze[i][j]=FREE;
@@ -674,6 +680,13 @@ public class ArrayAsociativo009 {
             return false;
         }
 
+        if (x==70 && y==31) {
+            System.out.println("Felicidades, has llegado a la salida");
+            maze[x][y] = PATH;
+            return true;
+            
+        }
+
         maze[x][y] = PATH;
 
         imprimirMundo(mapa, personaje);
@@ -682,23 +695,26 @@ public class ArrayAsociativo009 {
             return true;
         }
 
+        
+        if (moverAutomatico(maze, personaje, ABAJO, mapa)) {
+            return true;
+        }
+
         if (moverAutomatico(maze, personaje, IZQUIERDA, mapa)) {
             return true;
         }
+        
 
         if (moverAutomatico(maze, personaje, ARRIBA, mapa)) {
             return true;
         }
 
-        if (moverAutomatico(maze, personaje, ABAJO, mapa)) {
-            return true;
-        }
-
         maze[x][y] = VISITED;
-        System.out.println("Celda Sin Salida");
 
         return false;
     }
+
+
 
     public static final String RESET = "\033[0m";
 
