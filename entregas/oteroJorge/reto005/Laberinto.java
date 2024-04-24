@@ -497,10 +497,10 @@ public class Laberinto {
         System.out.println("Posicion (" + movimientoFila + "," + movimientoColumna + ") es transitable");
         imprimirMundo(mapa, elPersonaje);
 
-        if (solveMaze(mapita, elPersonaje, ABAJO, mapa)) {
+        if (solveMaze(mapita, elPersonaje, DERECHA, mapa)) {
             return true;
         }
-        if (solveMaze(mapita, elPersonaje, DERECHA, mapa)) {
+        if (solveMaze(mapita, elPersonaje, ABAJO, mapa)) {
             return true;
         }
         if (solveMaze(mapita, elPersonaje, ARRIBA, mapa)) {
