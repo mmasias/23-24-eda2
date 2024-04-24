@@ -1,4 +1,5 @@
 package Reto005;
+
 import java.util.*;
 
 public class ArrayAsociativo009 {
@@ -13,7 +14,7 @@ public class ArrayAsociativo009 {
     static final int SALIR = 4;
     static final int CAMBIA_VISUALIZACION = 5;
     static final int NADA = 999;
-    static final int MODOAUTOMATICO= 6;
+    static final int MODOAUTOMATICO = 6;
 
     static final int VISUALIZACION_NORMAL = 0;
     static final int VISUALIZACION_SIN_COLOR = 1;
@@ -36,8 +37,8 @@ public class ArrayAsociativo009 {
 
     static boolean jugando = true;
 
-     static boolean modoAutomatico = false;
-     static int ultimoMovimiento = DERECHA;
+    static boolean modoAutomatico = false;
+    static int ultimoMovimiento = DERECHA;
 
     static final int FREE = 0;
     static final int WALL = 1;
@@ -46,10 +47,9 @@ public class ArrayAsociativo009 {
 
     static String[] celda = { " · ", "[ ]", " * ", " x " };
 
-    static int[][] maze={};
+    static int[][] maze = {};
 
     public static void main(String[] args) {
-
 
         String[] dosCastillos = {
                 "............................................................................................................................................................",
@@ -212,7 +212,7 @@ public class ArrayAsociativo009 {
                 "..............................................................................",
                 ".............................................................................."
         };
-        
+
         String[] castilloEX = {
                 "                                                                              ",
                 "                                                                              ",
@@ -291,7 +291,7 @@ public class ArrayAsociativo009 {
                 "                                      +++                                     "
         };
 
-        int[] elPersonaje = { 31, 33 };
+        int[] elPersonaje = { 14, 15};
 
         inicializarMundo(castilloLB);
 
@@ -301,16 +301,17 @@ public class ArrayAsociativo009 {
             verAccion(elPersonaje, castilloLB);
         } while (jugando && !modoAutomatico);
 
-        if(modoAutomatico){
-            maze= inicializarMaze(castilloLB);
+        if (modoAutomatico) {
+
             System.out.println("Iniciando Modo Automático");
-        
+            maze = inicializarMaze(castilloLB);
             if (moverAutomatico(maze, elPersonaje, DERECHA, castilloLB)) {
-              imprimirMundo(castilloLB, elPersonaje);
+                imprimirMundo(castilloLB, elPersonaje);
+            } else {
+                System.out.println("No se puede llegar a la salida");
             }
         }
 
-        
     }
 
     private static void inicializarMundo(String[] mundo) {
@@ -439,21 +440,21 @@ public class ArrayAsociativo009 {
 
         HashMap<String, String> tiles = new HashMap<>();
 
-        tiles.put(" ", " ~~ "); 
+        tiles.put(" ", " ~~ ");
         tiles.put(".", " . .");
-        tiles.put("-", "[##]"); 
+        tiles.put("-", "[##]");
         tiles.put("=", "||||");
-        tiles.put("|", "[##]"); 
+        tiles.put("|", "[##]");
         tiles.put(":", "oO*o");
         tiles.put("+", "..:.");
         tiles.put("O", "[  ]");
-        tiles.put("#", "::::"); 
+        tiles.put("#", "::::");
         tiles.put("*", "    ");
         tiles.put("$", "$$$$");
         tiles.put("X", "||||");
         tiles.put("%", "%%%%");
         tiles.put("_", "____");
-        tiles.put("~", " ~ ~"); 
+        tiles.put("~", " ~ ~");
         tiles.put("B", "====");
         tiles.put("P", "_()_");
         tiles.put("D", "    ");
@@ -570,7 +571,7 @@ public class ArrayAsociativo009 {
             case NADA:
                 break;
             case MODOAUTOMATICO:
-                modoAutomatico=true;
+                modoAutomatico = true;
                 break;
         }
     }
@@ -609,7 +610,7 @@ public class ArrayAsociativo009 {
                 return CAMBIA_VISUALIZACION;
             case 'e':
             case 'E':
-                return MODOAUTOMATICO; 
+                return MODOAUTOMATICO;
         }
         return NADA;
     }
@@ -641,61 +642,76 @@ public class ArrayAsociativo009 {
         imprimirLinea();
     }
 
-    static int[][] inicializarMaze(String[] mapa){
-       
-        int[][] maze = new int[mapa.length][mapa[0].length()];
-       
-        for(int i=0; i<mapa.length; i++){
-           for(int j=0; j<mapa[0].length(); j++){
-            
-            if (mapa[i].charAt(j)==' ' || mapa[i].charAt(j)=='|' || mapa[i].charAt(j)=='-' || mapa[i].charAt(j)=='~') {
-                    maze[i][j]= WALL;
-            }else{
-                maze[i][j]=FREE;
-            }
-               
-           }
-       }
-       return maze;
+
+    static void pause(int seconds) {
+        try {
+            Thread.sleep(100 * seconds);
+        } catch (InterruptedException e) {
+        }
     }
-    
-    static boolean moverAutomatico(int[][] maze, int[] personaje, int direccion, String[] mapa){
-        Scanner sc= new Scanner(System.in);
-        sc.nextLine();
+
+    static int[][] inicializarMaze(String[] mapa) {
+
+        int[][] maze = new int[mapa.length][mapa[0].length()];
+
+        for (int i = 0; i < mapa.length; i++) {
+            for (int j = 0; j < mapa[0].length(); j++) {
+
+                if (mapa[i].charAt(j) == ' ' || mapa[i].charAt(j) == '|' || mapa[i].charAt(j) == '-'
+                        || mapa[i].charAt(j) == '~') {
+                    maze[i][j] = WALL;
+                } else {
+                    maze[i][j] = FREE;
+                }
+
+            }
+        }
+        return maze;
+    }
+
+    static boolean moverAutomatico(int[][] maze, int[] personaje, int direccion, String[] mapa) {
+        /*
+         * Scanner sc= new Scanner(System.in);
+         * sc.nextLine();
+         */
+       actualizarTiempo();
+
+    pause(1);
 
         int ultimaFila = personaje[FILA];
-        int ultimaColumna= personaje[COLUMNA];
+        int ultimaColumna = personaje[COLUMNA];
 
-        personaje[FILA] += MOVIMIENTO[direccion][FILA]; ;
+        personaje[FILA] += MOVIMIENTO[direccion][FILA];
         personaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
-        
-        int x= personaje[FILA];
-        int y= personaje[COLUMNA];
+        int x = personaje[FILA];
+        int y = personaje[COLUMNA];
 
         if (x < 0 || x >= maze.length || y < 0 || y >= maze[0].length) {
+            System.out.println("Intentando moverse a: (" + x + ", " + y + ") - Fuera de los límites.");
             return false;
         }
 
         if (maze[x][y] != FREE) {
+            System.out.println("Intentando moverse a: (" + x + ", " + y + ") - No es camino libre.");
             return false;
         }
 
-        if (x==70 && y==31) {
-            System.out.println("Felicidades, has llegado a la salida");
+        if (x == 40 && y == 42) {
+            System.out.println("Intentando moverse a: (" + x + ", " + y + ") - Salida Encontrada.");
             maze[x][y] = PATH;
             return true;
-            
+
         }
 
-        maze[x][y] = PATH;
 
+        maze[x][y] = PATH;
+        System.out.println("Intentando moverse a: (" + x + ", " + y + ") - Marcando como parte del camino.");
         imprimirMundo(mapa, personaje);
 
         if (moverAutomatico(maze, personaje, DERECHA, mapa)) {
             return true;
         }
 
-        
         if (moverAutomatico(maze, personaje, ABAJO, mapa)) {
             return true;
         }
@@ -703,18 +719,15 @@ public class ArrayAsociativo009 {
         if (moverAutomatico(maze, personaje, IZQUIERDA, mapa)) {
             return true;
         }
-        
 
         if (moverAutomatico(maze, personaje, ARRIBA, mapa)) {
             return true;
         }
 
         maze[x][y] = VISITED;
-
+        imprimirMundo(mapa, personaje);
         return false;
     }
-
-
 
     public static final String RESET = "\033[0m";
 
