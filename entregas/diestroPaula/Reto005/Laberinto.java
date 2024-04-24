@@ -13,6 +13,7 @@ public class Laberinto {
     static final int DERECHA = 3;
     static final int SALIR = 4;
     static final int CAMBIA_VISUALIZACION = 5;
+    static final int BUSCAR_SALIDA = 6;
     static final int NADA = 999;
 
     static final int VISUALIZACION_NORMAL = 0;
@@ -35,6 +36,14 @@ public class Laberinto {
     static int minFila, minColumna, maxFila, maxColumna;
 
     static boolean jugando = true;
+    static boolean buscandoSalida = false;
+    static int[][] maze;
+    static final int FREE = 0;
+    static final int WALL = 1;
+    static final int PATH = 2;
+    static final int VISITED = 3;
+    static String[] celda = { " · ", "[ ]", " * ", " x " };
+    static int ultimoMovimiento = DERECHA;
 
     public static void main(String[] args) {
 
@@ -285,7 +294,17 @@ public class Laberinto {
             actualizarTiempo();
             imprimirMundo(castilloLB, elPersonaje);
             verAccion(elPersonaje, castilloLB);
-        } while (jugando);
+        } while (jugando && !buscandoSalida);
+        if (buscandoSalida) {
+            maze = inicializarMaze(castilloLB);
+            System.out.println("Modo buscar salida automáticamente activado");
+            if (movimientoAuto(maze, elPersonaje, ultimoMovimiento, castilloLB)) {
+                imprimirMundo(castilloLB, elPersonaje);
+            } else {
+                System.out.println("No se puede alcanzar la salida");
+            }
+
+        }
     }
 
     private static void inicializarMundo(String[] mundo) {
@@ -538,6 +557,9 @@ public class Laberinto {
             case CAMBIA_VISUALIZACION:
                 cambiaVisualizacion();
                 break;
+            case BUSCAR_SALIDA:
+                buscandoSalida = true;
+                break;
             case NADA:
                 break;
         }
@@ -565,6 +587,8 @@ public class Laberinto {
                 return SALIR;
             case 'v', 'V':
                 return CAMBIA_VISUALIZACION;
+            case 'b', 'B':
+                return BUSCAR_SALIDA;
         }
         return NADA;
     }
@@ -594,6 +618,61 @@ public class Laberinto {
         }
         System.out.println();
         imprimirLinea();
+    }
+
+    static int[][] inicializarMaze(String[] mapa) {
+        int[][] maze = new int[mapa.length][mapa[0].length()];
+        for (int i = 0; i < mapa.length; i++) {
+            for (int j = 0; j < mapa[0].length(); j++) {
+                if (mapa[i].charAt(j) == ' ' || mapa[i].charAt(j) == '-' || mapa[i].charAt(j) == '|') {
+                    maze[i][j] = WALL;
+                } else {
+                    maze[i][j] = FREE;
+
+                }
+            }
+        }
+        return maze;
+    }
+
+    static boolean movimientoAuto(int[][] maze, int[] personaje, int direccion, String[] mapa) {
+        actualizarTiempo();
+        personaje[FILA] += MOVIMIENTO[direccion][FILA];
+        personaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
+        int x = personaje[FILA];
+        int y = personaje[COLUMNA];
+        if (x < 0 || x >= maze.length || y < 0 || y >= maze[0].length) {
+            System.out.println("Intentando moverse a: (" + x + ", " + y + "): Fuera de los límites.");
+            return false;
+        }
+        if (maze[x][y] != FREE) {
+            System.out.println("Intentando moverse a: (" + x + ", " + y + "): No es un camino libre.");
+            return false;
+        }
+        if (x == 40 && y == 42) {
+            System.out.println("Intentando moverse a: (" + x + ", " + y + "): ¡Salida encontrada!");
+            maze[x][y] = PATH;
+            return true;
+        }
+        maze[x][y] = PATH;
+        imprimirMundo(mapa, personaje);
+        System.out.println("Intentando moverse a: (" + y + ", " + x + "): Marcando como parte del camino.");
+        if (movimientoAuto(maze, personaje, DERECHA, mapa)) {
+            return true;
+        }
+        if (movimientoAuto(maze, personaje, ABAJO, mapa)) {
+            return true;
+        }
+        if (movimientoAuto(maze, personaje, IZQUIERDA, mapa)) {
+            return true;
+        }
+        if (movimientoAuto(maze, personaje, ARRIBA, mapa)) {
+            return true;
+        }
+        maze[x][y] = VISITED;
+        System.out.println("Intentando moverse a: (" + x + ", " + y + "): No es posible pasar");
+        imprimirMundo(mapa, personaje);
+        return false;
     }
 
     public static final String RESET = "\033[0m";
