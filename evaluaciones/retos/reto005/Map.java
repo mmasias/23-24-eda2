@@ -15,6 +15,7 @@ public class Map {
     static final int CAMBIA_VISUALIZACION = 5;
     static final int BUSQUEDA_AUTOMATICA = 6;
     static final int ESTABLECER_LLEGADA = 7;
+    static final int REGRESAR = 8;
     static final int NADA = 999;
 
     static final int VISUALIZACION_NORMAL = 0;
@@ -45,6 +46,8 @@ public class Map {
     static boolean authomaticSearch = false;
     static int[][] maze;
     static int[] arrivalPoint = {40, 42};
+
+    private static Stack<Integer> stepsStack = new Stack<>();
 
     
 
@@ -450,6 +453,31 @@ public class Map {
 
     }
 
+    private static void returnSteps(int[] elPersonaje, String[] elMundo) {
+
+        for (int i = stepsStack.size() - 1; i >= 0; i-- ) {
+           
+            int stackElement = stepsStack.elementAt(i);
+            switch(stackElement) {
+                case ARRIBA:
+                    mover(elPersonaje, ABAJO, elMundo);
+                    break;
+                case ABAJO:
+                    mover(elPersonaje, ARRIBA, elMundo);
+                    break;
+                case DERECHA:
+                    mover(elPersonaje, IZQUIERDA, elMundo);
+                    break;
+                case IZQUIERDA:
+                    mover(elPersonaje, DERECHA, elMundo);
+                    break;
+            }
+            
+
+        }
+
+    }
+
     private static void imprimirStatus(int[] personaje) {
         
         imprimirLinea();
@@ -619,8 +647,9 @@ public class Map {
     }
 
     static void verAccion(int[] elPersonaje, String[] elMundo) {
-
-        switch (capturarMovimiento()) {
+        int movement = capturarMovimiento();
+        stepsStack.push(movement);
+        switch (movement) {
             case ARRIBA:
                 mover(elPersonaje, ARRIBA, elMundo);
                 break;
@@ -644,6 +673,9 @@ public class Map {
                 break;
             case ESTABLECER_LLEGADA:
                 setArrivalPoint();
+                break;
+            case REGRESAR:
+                returnSteps(elPersonaje, elMundo);
                 break;
             case NADA:
                 break;
@@ -676,6 +708,8 @@ public class Map {
                 return BUSQUEDA_AUTOMATICA;
             case 'o', 'O':
                 return ESTABLECER_LLEGADA;
+            case 'r', 'R':
+                return REGRESAR;
         }
         return NADA;
     }
