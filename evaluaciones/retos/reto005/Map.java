@@ -293,18 +293,18 @@ public class Map {
         do {
             actualizarTiempo();
             imprimirMundo(castilloLB, elPersonaje);
-            verAccion(elPersonaje, castilloLB);
+            verAccion(elPersonaje, castilloLB);    
+        } while (jugando && !authomaticSearch);
 
-            if (authomaticSearch) {
-                maze = createMaze(castilloLB);
-                if (solveMaze(maze, ABAJO, elPersonaje, castilloLB)) {
-                    System.out.println("Ruta de escape:");
-                    imprimirMundo(castilloLB, elPersonaje);
-                } else {
-                    System.out.println("No se puede escapar!!!.");
-                }
+        if (authomaticSearch) {
+            maze = createMaze(castilloLB);
+            if (solveMaze(maze, ABAJO, elPersonaje, castilloLB)) {
+                System.out.println("Ruta de escape:");
+                imprimirMundo(castilloLB, elPersonaje);
+            } else {
+                System.out.println("No se puede escapar!!!.");
             }
-        } while (jugando);
+        }
     }
 
     private static void inicializarMundo(String[] mundo) {
@@ -388,6 +388,12 @@ public class Map {
         theCharacter[COLUMNA] += MOVIMIENTO[direction][COLUMNA];
         int x = theCharacter[FILA];
         int y = theCharacter[COLUMNA];
+
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         actualizarTiempo();
 
