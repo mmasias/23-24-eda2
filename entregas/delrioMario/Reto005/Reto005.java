@@ -118,7 +118,7 @@ public class Reto005 {
             "...........                           +++                           ..........                                      +++                                     ",
             "............                          +++                          ...........                                      +++                                     ",
             "..............                        +++                        .............                                      +++                                     ",
-            "......................................+++.....................................                                      +++                                     ",
+            ".....................................|+++|....................................                                      +++                                     ",
             "..............................................................................                                      +++                                     ",
             "..............................................................................                                      +++                                     ",
             "..............................................................................                                      +++                                     ",
@@ -286,7 +286,7 @@ public class Reto005 {
                 "                                      +++                                     "
         };
 
-        int[] elPersonaje = { 31, 33 };
+        int[] elPersonaje = { 14, 15 };
 
         inicializarMundo(castilloLB);
 
@@ -344,6 +344,10 @@ public class Reto005 {
     }
 
     static void imprimirMundo(String[] castillo, int[] personaje) {
+        if(automatico) {
+            System.out.println("Pulse una tecla: ");
+            new Scanner(System.in).nextLine();
+        }
 
         String elemento;
         limpiarPantalla();
@@ -635,8 +639,7 @@ public class Reto005 {
     }
 
     static boolean movimientoAutomatico(int[][] maze, int[] personaje, int direccion, String[] mapa){
-        Scanner entrada = new Scanner(System.in);
-        entrada.nextLine();
+        
         
         actualizarTiempo();
         int oldFila = personaje[FILA];
@@ -652,13 +655,16 @@ public class Reto005 {
         }
         if (maze[x][y] != FREE) {
             System.out.println("Intentando moverse a: ("+ y + ", " + x +" ) No es un camino válido");
-            return false;
+
+            return false;            
         }
-        if (x == 70 && y == 39) {
+        if (x == 40 && y == 42) {
             System.out.println("Intentando moverse a: ("+ y + ", " + x +" ) Salida encontrada");
             maze[x][y] = PATH;
+            System.out.println("SALIDA ENCONTRADA!!!!!!!!");
             return true;
         }
+        
         maze[x][y] = PATH;
         System.out.println("Moviendo a (" + y + ", " + x + "): Marcando como parte del camino.");
         imprimirMundo(mapa, personaje);
@@ -675,7 +681,6 @@ public class Reto005 {
         if(movimientoAutomatico(maze, personaje, ARRIBA, mapa)){
             return true;
         }
-        maze[x][y] = VISITED;
 
 
         return false;
