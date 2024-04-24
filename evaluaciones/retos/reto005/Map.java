@@ -13,6 +13,7 @@ public class Map {
     static final int DERECHA = 3;
     static final int SALIR = 4;
     static final int CAMBIA_VISUALIZACION = 5;
+    static final int BUSQUEDA_AUTOMATICA = 6;
     static final int NADA = 999;
 
     static final int VISUALIZACION_NORMAL = 0;
@@ -353,12 +354,12 @@ public class Map {
         }
         imprimirStatus(personaje);
     }
-    private static int[][] createMaze(String[] castillo) {
-        int[][] maze = new int[castillo.length][castillo[0].length()];
+    private static int[][] createMaze(String[] castle) {
+        int[][] maze = new int[castle.length][castle[0].length()];
         
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[0].length; j++) {
-                if (castillo[i].charAt(j) == ' ' || castillo[i].charAt(j) == '-' || castillo[i].charAt(j) == '|' || castillo[i].charAt(j) == '~') {
+                if (castle[i].charAt(j) == ' ' || castle[i].charAt(j) == '-' || castle[i].charAt(j) == '|' || castle[i].charAt(j) == '~') {
                     maze[i][j] = 1;
                 } else {
                     maze[i][j] = 0;
@@ -370,9 +371,13 @@ public class Map {
         return maze;
     }
 
-    private static boolean solveMaze(int[][] maze, int x, int y, int[] elPersonaje, String[] castillo) {
-        x = elPersonaje[FILA];
-        y = elPersonaje[COLUMNA];
+    private static boolean solveMaze(int[][] maze, int direction, int[] theCharacter, String[] castle) {
+        theCharacter[FILA] += MOVIMIENTO[direction][FILA];
+        theCharacter[COLUMNA] += MOVIMIENTO[direction][COLUMNA];
+        int x = theCharacter[FILA];
+        int y = theCharacter[COLUMNA];
+
+        actualizarTiempo();
 
         if (x < 0 || x >= maze.length || y < 0 || y >= maze[0].length) {
             System.out.println("Intentando mover al punto (" + x + ", " + y + "): No se puede avanzar, fuera de los límites del laberinto.");
@@ -383,24 +388,24 @@ public class Map {
             return false;
 
         }
-        if (x == maze.length - 1 && y == maze[0].length - 1) {
+        if (x == 14 && y == 36) {
             maze[x][y] = PATH;
             System.out.println("Moviendo al punto (" + x + ", " + y + "): Solución encontrada");
-            imprimirMundo(castillo, elPersonaje);
+            imprimirMundo(castle, theCharacter);
             return true;
         }
         maze[x][y] = PATH;
         System.out.println("Marcando el punto (" + x + ", " + y + ") como parte del camino.");
-        imprimirMundo(castillo, elPersonaje);
+        imprimirMundo(castle, theCharacter);
 
-        if (solveMaze(maze, x + 1, y, elPersonaje, castillo) || solveMaze(maze, x, y + 1, elPersonaje, castillo) ||
-        solveMaze(maze, x - 1, y, elPersonaje, castillo) || solveMaze(maze, x, y - 1, elPersonaje, castillo)) {
+        if (solveMaze(maze, ARRIBA, theCharacter, castle) || solveMaze(maze, ABAJO, theCharacter, castle) ||
+        solveMaze(maze, DERECHA, theCharacter, castle) || solveMaze(maze, IZQUIERDA, theCharacter, castle)) {
         return true;
         }
 
         maze[x][y] = VISITED; 
         System.out.println("Moviedo al punto (" + x + ", " + y + "): Ya se ha visitado");
-        imprimirMundo(castillo, elPersonaje);
+        imprimirMundo(castle, theCharacter);
         return false;
 
     }
@@ -621,6 +626,8 @@ public class Map {
                 return SALIR;
             case 'v', 'V':
                 return CAMBIA_VISUALIZACION;
+            case 'b', 'B':
+                return BUSQUEDA_AUTOMATICA;
         }
         return NADA;
     }
