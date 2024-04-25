@@ -18,6 +18,7 @@ public class ArrayAsociativo009 {
     static final int DERECHA = 3;
     static final int SALIR = 4;
     static final int CAMBIA_VISUALIZACION = 5;
+    static final int AUTOMATICO = 6;
     static final int NADA = 999;
 
     static final int VISUALIZACION_NORMAL = 0;
@@ -342,8 +343,8 @@ public class ArrayAsociativo009 {
         }
         personaje[FILA] += MOVIMIENTO[direccion][FILA];
         personaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
-        int x= personaje[FILA];
-        int y= personaje[COLUMNA];
+        int x = personaje[FILA];
+        int y = personaje[COLUMNA];
  
         if (x < 0 || x >= maze.length || y < 0 || y >= maze[0].length) {
              System.out.println("Intentando moverse a: (" + x + ", " + y + ") - Fuera de los límites.");
