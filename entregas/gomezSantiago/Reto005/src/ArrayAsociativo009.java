@@ -37,6 +37,9 @@ public class ArrayAsociativo009 {
     static int minFila, minColumna, maxFila, maxColumna;
 
     static boolean jugando = true;
+    static boolean solvingMaze = false;
+
+    static int[][] bot;
 
     public static void main(String[] args) {
 
@@ -129,7 +132,17 @@ public class ArrayAsociativo009 {
             actualizarTiempo();
             imprimirMundo(castilloLB, elPersonaje);
             verAccion(elPersonaje, castilloLB);
-        } while (jugando);
+        } while (jugando && !solvingMaze);
+
+        if (solvingMaze) {
+            System.out.printf("Empezando Modo Automatico");
+            bot = moverHaciaDestino(castilloLB);
+            if (solveMaze(bot, elPersonaje, DERECHA, castilloLB)) {
+                imprimirMundo(castilloLB, elPersonaje);
+            } else {
+                System.out.println("Ruta no encontra");
+            }
+        }
     }
 
     private static void inicializarMundo(String[] mundo) {
@@ -168,7 +181,8 @@ public class ArrayAsociativo009 {
                     elemento = mapear(castillo[fila].charAt(columna), modoVisualizacion);
                 }
 
-                if (!(Math.pow((fila - personaje[FILA]), 2)+ Math.pow((columna - personaje[COLUMNA]), 2) <= alcanceVision * alcanceVision)) {
+                if (!(Math.pow((fila - personaje[FILA]), 2)
+                        + Math.pow((columna - personaje[COLUMNA]), 2) <= alcanceVision * alcanceVision)) {
                     elemento = mapear('D', modoVisualizacion);
                 }
                 System.out.print(elemento);
@@ -359,13 +373,24 @@ public class ArrayAsociativo009 {
         }
         System.out.println();
         try {
-            Thread.sleep(500); 
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public static boolean solveMaze(int[][] maze, int x, int y, String[] elMundo, int[]elPersonaje) {
+    public static boolean solveMaze(int[][] maze, int[] elPersonaje, int direction, String[] mapa) {
+
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        elPersonaje[FILA] += MOVIMIENTO[direction][FILA];
+        elPersonaje[COLUMNA] += MOVIMIENTO[direction][COLUMNA];
+        int x = elPersonaje[FILA];
+        int y = elPersonaje[COLUMNA];
+
         if (x < 0 || x >= maze.length || y < 0 || y >= maze[0].length) {
             System.out.println("Intentando mover a (" + y + ", " + x + "): Fuera de los límites del laberinto.");
             return false;
@@ -374,37 +399,35 @@ public class ArrayAsociativo009 {
             System.out.println("Intentando mover a (" + y + ", " + x + "): Celda bloqueada o ya visitada.");
             return false;
         }
-        if (x == maze.length - 1 && y == maze[0].length - 1) {
-            maze[x][y] = PATH;
+        if (x == 40 && y == 42) {
             System.out.println("Moviendo a (" + y + ", " + x + "): ¡Ruta encontrada!");
-            printMaze(maze);
+            maze[x][y] = PATH;
             return true;
         }
 
         maze[x][y] = PATH;
         System.out.println("Moviendo a (" + y + ", " + x + "): Marcando como parte del camino.");
-        printMaze(maze);
+        imprimirMundo(mapa, elPersonaje);
 
-        if (solveMaze(maze, x + 1, y, elMundo, elPersonaje)) {
+        if (solveMaze(maze, elPersonaje, DERECHA, mapa)) {
             return true;
         }
-        if (solveMaze(maze, x, y + 1, elMundo, elPersonaje)) {
+        if (solveMaze(maze, elPersonaje, IZQUIERDA, mapa)) {
             return true;
         }
-        if (solveMaze(maze, x - 1, y, elMundo, elPersonaje)) {
+        if (solveMaze(maze, elPersonaje, ARRIBA, mapa)) {
             return true;
         }
-        if (solveMaze(maze, x, y - 1, elMundo, elPersonaje)) {
+        if (solveMaze(maze, elPersonaje, ABAJO, mapa)) {
             return true;
         }
 
         maze[x][y] = VISITED;
         System.out.println("Moviendo a (" + y + ", " + x + "): Marcando como visitado y retrocediendo.");
-        printMaze(maze);
+        imprimirMundo(mapa, elPersonaje);
         return false;
     }
 
-    
     static void verAccion(int[] elPersonaje, String[] elMundo) {
         switch (capturarMovimiento()) {
             case ARRIBA:
@@ -426,46 +449,26 @@ public class ArrayAsociativo009 {
                 cambiaVisualizacion();
                 break;
             case 'P':
-                moverHaciaDestino(elPersonaje, elMundo, 40, 42);
+                solvingMaze = true;
                 break;
             case NADA:
                 break;
         }
     }
 
-    static void moverHaciaDestino(int[] elPersonaje, String[] elMundo, int filaDestino, int columnaDestino) {
-        int[][] maze = new int[elMundo.length][elMundo[0].length()];
-        for (int i = 0; i < elMundo.length; i++) {
-            for (int j = 0; j < elMundo[i].length(); j++) {
-                maze[i][j] = (elMundo[i].charAt(j) == '.') ? FREE : NADA;
+    static int[][] moverHaciaDestino(String[] mapa) {
+        int[][] maze = new int[mapa.length][mapa[0].length()];
+        for (int i = 0; i < mapa.length; i++) {
+            for (int j = 0; j < mapa[i].length(); j++) {
+                maze[i][j] = (mapa[i].charAt(j) == '.') ? FREE : NADA;
             }
         }
-
-
-        maze[elPersonaje[FILA]][elPersonaje[COLUMNA]] = FREE;
-
-        if (solveMaze(maze, elPersonaje[COLUMNA], elPersonaje[FILA], elMundo, elPersonaje)) {
-            for (int i = 1; i < maze.length; i++) {
-                for (int j = 1; j < maze[i].length; j++) {
-                    if (maze[i][j] == PATH) {
-                        elPersonaje[FILA] = i;
-                        elPersonaje[COLUMNA] = j;
-                        imprimirMundo(elMundo, elPersonaje); 
-                        try {
-                            Thread.sleep(200);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        } else {
-            System.out.println("No se encontró una ruta hacia el destino.");
-        }
+        return maze;
     }
 
     static boolean esPosicionValida(int fila, int columna, String[] elMundo) {
-        return fila >= 0 && fila < elMundo.length && columna >= 0 && columna < elMundo[0].length() && elMundo[fila].charAt(columna) == '.';
+        return fila >= 0 && fila < elMundo.length && columna >= 0 && columna < elMundo[0].length()
+                && elMundo[fila].charAt(columna) == '.';
     }
 
     static void cambiaVisualizacion() {
@@ -523,9 +526,6 @@ public class ArrayAsociativo009 {
         imprimirLinea();
     }
 
-    
-    
-    
     public static final String RESET = "\033[0m";
 
     public static final String BLACK = "\033[0;30m";
