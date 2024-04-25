@@ -4,7 +4,6 @@ public class R5Laberinto {
 
     static final int FILA = 0;
     static final int COLUMNA = 1;
-
     static final int ARRIBA = 0;
     static final int ABAJO = 1;
     static final int IZQUIERDA = 2;
@@ -18,6 +17,15 @@ public class R5Laberinto {
     static final int VISUALIZACION_SIN_COLOR = 1;
     static final int VISUALIZACION_RAW = 2;
     static final int VISUALIZACION_COLISIONES = 3;
+    static final int FREE = 0;
+    static final int WALL = 1;
+    static final int PATH = 2;
+    static final int VISITED = 3;
+
+    static double hora = 9.0;
+    static int alcanceVision;
+    static int viewPort;
+    static int modoVisualizacion = VISUALIZACION_NORMAL;
 
     static final int[][] MOVIMIENTO = {
             { -1, 0 },
@@ -25,16 +33,6 @@ public class R5Laberinto {
             { 0, -1 },
             { 0, 1 }
     };
-
-    static double hora = 9.0;
-    static int alcanceVision;
-    static int viewPort;
-    static int modoVisualizacion = VISUALIZACION_NORMAL;
-
-    static final int FREE = 0;
-    static final int WALL = 1;
-    static final int PATH = 2;
-    static final int VISITED = 3;
 
     static String[] celda = { " · ", "[ ]", " * ", " x " };
     static int[][] maze;
