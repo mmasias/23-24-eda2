@@ -549,9 +549,6 @@ public class Laberinto {
   }
 
   static void resolverLaberinto(int[] unPersonaje, String[] mapa) {
-    int y = unPersonaje[0];
-    int x = unPersonaje[1];
-
     int[][] maze = new int[mapa.length][mapa[0].length()];
 
     for (int i = 0; i < mapa.length; i++) {
