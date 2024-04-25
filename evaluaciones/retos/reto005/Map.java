@@ -431,7 +431,7 @@ public class Map {
 
         }
 
-        if (x == arrivalPoint[0] && y == arrivalPoint[1]) {
+        if (x == arrivalPoint[FILA] && y == arrivalPoint[COLUMNA]) {
             maze[x][y] = PATH;
             System.out.println("Moviendo al punto (" + x + ", " + y + "): Solución encontrada");
             imprimirMundo(castle, theCharacter);
