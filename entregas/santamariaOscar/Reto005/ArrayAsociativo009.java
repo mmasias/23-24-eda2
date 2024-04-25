@@ -291,7 +291,7 @@ public class ArrayAsociativo009 {
                 "                                      +++                                     "
         };
 
-        int[] elPersonaje = { 14, 15};
+        int[] elPersonaje = { 14, 15 };
 
         inicializarMundo(castilloLB);
 
@@ -301,9 +301,11 @@ public class ArrayAsociativo009 {
             verAccion(elPersonaje, castilloLB);
 
             if (elPersonaje[0] == 40 && elPersonaje[1] == 42 && !modoAutomatico) {
-                System.out.println("Intentando moverse a: (" + elPersonaje[0] + ", " + elPersonaje[1] + ") - Salida Encontrada.");
-                maze[elPersonaje[0]][elPersonaje[1]] = PATH;
-            
+                System.out.println(
+                        "Intentando moverse a: (" + elPersonaje[0] + ", " + elPersonaje[1] + ") - Salida Encontrada.");
+
+                System.out.println("ENHORABUENA HA ENCONTRADO LA SALIDA");
+                jugando = false;
             }
         } while (jugando && !modoAutomatico);
 
@@ -648,10 +650,9 @@ public class ArrayAsociativo009 {
         imprimirLinea();
     }
 
-
     static void pause(int seconds) {
         try {
-            Thread.sleep(200 * seconds);
+            Thread.sleep(100 * seconds);
         } catch (InterruptedException e) {
         }
     }
@@ -676,13 +677,10 @@ public class ArrayAsociativo009 {
     }
 
     static boolean moverAutomatico(int[][] maze, int[] personaje, int direccion, String[] mapa) {
-        /*
-         * Scanner sc= new Scanner(System.in);
-         * sc.nextLine();
-         */
-       actualizarTiempo();
+      
+        actualizarTiempo();
 
-    pause(1);
+        pause(1);
 
         int ultimaFila = personaje[FILA];
         int ultimaColumna = personaje[COLUMNA];
@@ -703,12 +701,10 @@ public class ArrayAsociativo009 {
         }
 
         if (x == 40 && y == 42) {
-            System.out.println("Intentando moverse a: (" + x + ", " + y + ") - Salida Encontrada.");
-            maze[x][y] = PATH;
+            System.out.println("Salida Encontrada.");
             return true;
 
         }
-
 
         maze[x][y] = PATH;
         System.out.println("Intentando moverse a: (" + x + ", " + y + ") - Marcando como parte del camino.");
