@@ -8,6 +8,7 @@ public class GameWorld {
   private int visualRange;
   private int viewPort;
   private int visualizationMode;
+  private String lastPathMessage;
 
   private List<int[]> pathTaken = new ArrayList<>();
 
@@ -49,10 +50,20 @@ public class GameWorld {
     return false;
   }
 
+  public String getLastPathMessage() {
+    return lastPathMessage;
+  }
+
   public boolean solveMaze(String[] map, int startX, int startY, int goalX, int goalY) {
     pathTaken.clear();
     HashSet<String> visited = new HashSet<>();
-    return findPath(map, startX, startY, goalX, goalY, visited);
+    boolean result = findPath(map, startX, startY, goalX, goalY, visited);
+    if (result) {
+      lastPathMessage = "Path found. Press 'b' to start moving.";
+    } else {
+      lastPathMessage = "No path available.";
+    }
+    return result;
   }
 
   public List<int[]> getPathTaken() {

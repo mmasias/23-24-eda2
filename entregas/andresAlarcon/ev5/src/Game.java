@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Game {
   public static void main(String[] args) {
+    String actionResultMessage = "";
     String[] dosCastillos = {
         "............................................................................................................................................................",
         "............................................................................................................................................................",
@@ -252,6 +253,9 @@ public class Game {
     boolean playing = true;
     while (playing) {
       renderer.printWorld(worldMap, player, world, visualizer);
+      if (!actionResultMessage.isEmpty()) {
+        System.out.println(actionResultMessage);
+      }
       System.out.print("Enter command (w/a/s/d/q/e/o/b):  \n");
       System.out.println("w: Up  s: Down  a: Left  d: Right  q: Quit  e: Change skin o: Set path  b: Follow path");
       char command = scanner.next().charAt(0);
@@ -278,17 +282,15 @@ public class Game {
           System.out.println("Enter goal coordinates (x y):");
           int goalX = scanner.nextInt();
           int goalY = scanner.nextInt();
-          if (world.solveMaze(worldMap, player.getRow(), player.getColumn(), goalX, goalY)) {
-            System.out.println("Path found. Press 'b' to start moving.");
-          } else {
-            System.out.println("No path available.");
-          }
+          world.solveMaze(dosCastillos, player.getRow(), player.getColumn(), goalX, goalY);
+          actionResultMessage = world.getLastPathMessage();
           break;
         case 'b':
           player.followPath(world.getPathTaken(), renderer, worldMap, world, visualizer);
-
+          actionResultMessage = "";
           break;
         default:
+          actionResultMessage = "";
           System.out.println("Invalid command.");
           break;
       }
