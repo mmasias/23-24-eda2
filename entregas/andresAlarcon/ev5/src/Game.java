@@ -252,8 +252,8 @@ public class Game {
     boolean playing = true;
     while (playing) {
       renderer.printWorld(worldMap, player, world, visualizer);
-      System.out.print("Enter command (w/a/s/d/q/e/o/b/r):  \n");
-      System.out.println("w: Up  s: Down  a: Left  d: Right  q: Quit  e: Change skin o: Set path  b: Follow path  r: Reset path");
+      System.out.print("Enter command (w/a/s/d/q/e/o/b):  \n");
+      System.out.println("w: Up  s: Down  a: Left  d: Right  q: Quit  e: Change skin o: Set path  b: Follow path");
       char command = scanner.next().charAt(0);
       switch (command) {
         case 'w':
@@ -278,19 +278,18 @@ public class Game {
           System.out.println("Enter goal coordinates (x y):");
           int goalX = scanner.nextInt();
           int goalY = scanner.nextInt();
-          if (world.solveMaze(dosCastillos, player.getRow(), player.getColumn(), goalX, goalY)) {
+          if (world.solveMaze(worldMap, player.getRow(), player.getColumn(), goalX, goalY)) {
             System.out.println("Path found. Press 'b' to start moving.");
           } else {
             System.out.println("No path available.");
           }
           break;
         case 'b':
-          player.followPath(world.getPathTaken());
-          break;
-        case 'r':
-          player.followPath(world.getPathTaken());
+          player.followPath(world.getPathTaken(), renderer, worldMap, world, visualizer);
+
           break;
         default:
+          System.out.println("Invalid command.");
           break;
       }
       world.updateTime();

@@ -11,10 +11,16 @@ public class Player {
     initializeTerrainMapping();
   }
 
-  public void followPath(List<int[]> path) {
+  public void followPath(List<int[]> path, Renderer renderer, String[] map, GameWorld world, Visualizer visualizer) {
     for (int[] step : path) {
-      this.row = step[0];
-      this.column = step[1];
+      moveTo(step[0], step[1]);
+      clearScreen();
+      renderer.printWorld(map, this, world, visualizer);
+      try {
+        Thread.sleep(500); // 500 milliseconds delay for each step
+      } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+      }
     }
   }
 
@@ -76,10 +82,9 @@ public class Player {
   public void moveTo(int newX, int newY) {
     this.row = newX;
     this.column = newY;
-}
+  }
 
   private boolean isWalkable(char terrain) {
-
     return terrainMapping.getOrDefault(terrain, "1").equals("0");
   }
 
@@ -89,5 +94,10 @@ public class Player {
 
   public int getColumn() {
     return column;
+  }
+
+  private void clearScreen() {
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
   }
 }
