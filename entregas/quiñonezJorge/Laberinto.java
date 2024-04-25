@@ -3,6 +3,18 @@ package entregas.quiñonezJorge;
 import java.util.*;
 
 public class Laberinto {
+  static final int FILA = 0;
+  static final int COLUMNA = 1;
+
+  static final int ARRIBA = 0;
+  static final int ABAJO = 1;
+  static final int IZQUIERDA = 2;
+  static final int DERECHA = 3;
+  static final int SALIR = 4;
+  static final int CAMBIA_VISUALIZACION = 5;
+  static final int RESOLVER_LABERINTO = 6;
+  static final int NADA = 999;
+
   static final int VISUALIZACION_NORMAL = 0;
   static final int VISUALIZACION_SIN_COLOR = 1;
   static final int VISUALIZACION_RAW = 2;
@@ -316,17 +328,17 @@ public class Laberinto {
   static void imprimirMundo(String[] castillo, int[] personaje) {
 
     String elemento;
-    limpiarPantalla();
+    // limpiarPantalla();
     imprimirElCielo();
-    for (int fila = personaje[0] - viewPort; fila <= personaje[0] + viewPort; fila++) {
-      for (int columna = personaje[1] - viewPort; columna <= personaje[1] + viewPort; columna++) {
+    for (int fila = personaje[FILA] - viewPort; fila <= personaje[FILA] + viewPort; fila++) {
+      for (int columna = personaje[COLUMNA] - viewPort; columna <= personaje[COLUMNA] + viewPort; columna++) {
 
         elemento = mapear('P', modoVisualizacion);
-        if (!(fila == personaje[0] && columna == personaje[1])) {
-          elemento = mapear(castillo[0].charAt(columna), modoVisualizacion);
+        if (!(fila == personaje[FILA] && columna == personaje[COLUMNA])) {
+          elemento = mapear(castillo[fila].charAt(columna), modoVisualizacion);
         }
 
-        if (!(Math.pow((fila - personaje[0]), 2) + Math.pow((columna - personaje[1]), 2) <= alcanceVision
+        if (!(Math.pow((fila - personaje[FILA]), 2) + Math.pow((columna - personaje[COLUMNA]), 2) <= alcanceVision
             * alcanceVision)) {
           elemento = mapear('D', modoVisualizacion);
         }
@@ -341,7 +353,7 @@ public class Laberinto {
 
     imprimirLinea();
     System.out.print("HORA: [" + (int) hora + "] ");
-    System.out.print("/ (" + personaje[0] + "," + personaje[1] + ")");
+    System.out.print("/ (" + personaje[FILA] + "," + personaje[COLUMNA] + ")");
     System.out.println(" / SKIN[" + modoVisualizacion + "]");
     imprimirLinea();
   }
@@ -456,6 +468,8 @@ public class Laberinto {
 
     tiles.put(" ", "1");
     tiles.put(".", "0");
+    tiles.put("*", "2");
+    tiles.put("X", "3");
     tiles.put("-", "1");
     tiles.put("=", "0");
     tiles.put("|", "1");
@@ -480,55 +494,112 @@ public class Laberinto {
 
   static void mover(int[] unPersonaje, int direccion, String[] mapa) {
 
-    int oldFila = unPersonaje[0];
-    int oldColumna = unPersonaje[1];
+    int oldFila = unPersonaje[FILA];
+    int oldColumna = unPersonaje[COLUMNA];
 
-    unPersonaje[0] += MOVIMIENTO[direccion][0];
-    unPersonaje[1] += MOVIMIENTO[direccion][1];
+    unPersonaje[FILA] += MOVIMIENTO[direccion][FILA];
+    unPersonaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
 
-    if (!tipoTerreno(mapa[unPersonaje[0]].charAt(unPersonaje[1])).equals("0")) {
-      unPersonaje[0] = oldFila;
-      unPersonaje[1] = oldColumna;
+    if (!tipoTerreno(mapa[unPersonaje[FILA]].charAt(unPersonaje[COLUMNA])).equals("0")) {
+      unPersonaje[FILA] = oldFila;
+      unPersonaje[COLUMNA] = oldColumna;
     }
 
-    if (unPersonaje[0] < minFila) {
-      unPersonaje[0] = unPersonaje[0] + 1;
+    if (unPersonaje[FILA] < minFila) {
+      unPersonaje[FILA] = unPersonaje[FILA] + 1;
     }
-    if (unPersonaje[0] > maxFila) {
-      unPersonaje[0] = unPersonaje[0] - 1;
+    if (unPersonaje[FILA] > maxFila) {
+      unPersonaje[FILA] = unPersonaje[FILA] - 1;
     }
-    if (unPersonaje[1] < minColumna) {
-      unPersonaje[1] = unPersonaje[1] + 1;
+    if (unPersonaje[COLUMNA] < minColumna) {
+      unPersonaje[COLUMNA] = unPersonaje[COLUMNA] + 1;
     }
-    if (unPersonaje[1] > maxColumna) {
-      unPersonaje[1] = unPersonaje[1] - 1;
+    if (unPersonaje[COLUMNA] > maxColumna) {
+      unPersonaje[COLUMNA] = unPersonaje[COLUMNA] - 1;
     }
   }
 
   static void verAccion(int[] elPersonaje, String[] elMundo) {
 
     switch (capturarMovimiento()) {
-      case 0:
-        mover(elPersonaje, 0, elMundo);
+      case ARRIBA:
+        mover(elPersonaje, ARRIBA, elMundo);
         break;
-      case 1:
-        mover(elPersonaje, 1, elMundo);
+      case ABAJO:
+        mover(elPersonaje, ABAJO, elMundo);
         break;
-      case 2:
-        mover(elPersonaje, 2, elMundo);
+      case IZQUIERDA:
+        mover(elPersonaje, IZQUIERDA, elMundo);
         break;
-      case 3:
-        mover(elPersonaje, 3, elMundo);
+      case DERECHA:
+        mover(elPersonaje, DERECHA, elMundo);
         break;
-      case 4:
+      case SALIR:
         jugando = !jugando;
         break;
-      case 5:
+      case CAMBIA_VISUALIZACION:
         cambiaVisualizacion();
         break;
-      case 9:
+      case RESOLVER_LABERINTO:
+        resolverLaberinto(elPersonaje, elMundo);
+        break;
+      case NADA:
         break;
     }
+  }
+
+  static void resolverLaberinto(int[] unPersonaje, String[] mapa) {
+    int y = unPersonaje[0];
+    int x = unPersonaje[1];
+
+    int[][] maze = new int[mapa.length][mapa[0].length()];
+
+    for (int i = 0; i < mapa.length; i++) {
+      for (int j = 0; j < mapa[i].length(); j++) {
+        maze[i][j] = Integer.parseInt(tipoTerreno(mapa[i].charAt(j)));
+      }
+    }
+    if (resolverRecursivo(unPersonaje, maze, mapa)) {
+      System.out.println("Se salio del laberinto!!!");
+    } else {
+      System.out.println("Laberinto sin solucion");
+    }
+
+  }
+
+  static boolean resolverRecursivo(int[] personaje, int[][] maze, String[] mapa) {
+    int x = personaje[0];
+    int y = personaje[1];
+
+    if (y > maze.length || y < 0 || x > maze[0].length || x < 0) {
+      System.out.println("Intentando moverse a (" + y + "," + x + "): Fuera de los limites");
+      return false;
+    }
+
+    if (maze[x][y] != 0) {
+      System.out.println("Intentando moverse a (" + x + "," + y + "): Celda no disponible");
+      return false;
+    }
+
+    if (y == 40 && x == 65) {
+      return true;
+    }
+
+    maze[x][y] = 2;
+
+    System.out.println("Moviendose a (" + x + "," + y + "): Marcando camino");
+    new Scanner(System.in).nextLine();
+    imprimirMundo(mapa, personaje);
+
+    if (resolverRecursivo(new int[] { x + 1, y }, maze, mapa) ||
+        resolverRecursivo(new int[] { x, y + 1 }, maze, mapa) ||
+        resolverRecursivo(new int[] { x, y - 1 }, maze, mapa) ||
+        resolverRecursivo(new int[] { x - 1, y }, maze, mapa)) {
+      return true;
+    }
+
+    maze[x][y] = 3;
+    return false;
   }
 
   static void cambiaVisualizacion() {
@@ -541,22 +612,22 @@ public class Laberinto {
   static int capturarMovimiento() {
 
     switch (pedirChar()) {
-      case 'w', 'W', '2':
-        return 0;
       case 's', 'S', '8':
-        return 1;
+        return ABAJO;
+      case 'w', 'W', '2':
+        return ARRIBA;
       case 'a', 'A', '4':
-        return 2;
+        return IZQUIERDA;
       case 'd', 'D', '6':
-        return 3;
+        return DERECHA;
       case 'f', 'F':
-        return 4;
+        return SALIR;
       case 'v', 'V':
-        return 5;
+        return CAMBIA_VISUALIZACION;
       case 'b', 'B':
-        solveMaze();
+        return RESOLVER_LABERINTO;
     }
-    return 9;
+    return NADA;
   }
 
   static char pedirChar() {
@@ -564,10 +635,6 @@ public class Laberinto {
     Scanner entrada = new Scanner(System.in);
     String inputUsuario = entrada.nextLine() + "x"; // Este es un caso que justifica un comentario!
     return inputUsuario.charAt(0); // Lo comentamos en clase ;)
-  }
-
-  static void solveMaze() {
-
   }
 
   static void limpiarPantalla() {
