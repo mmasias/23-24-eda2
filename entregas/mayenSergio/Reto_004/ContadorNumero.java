@@ -1,6 +1,8 @@
+package entregas.mayenSergio.Reto_004;
+
 import java.util.Scanner;
 
-public class Reto {
+public class ContadorNumero {
 
     public static void main(String[] args) {
 
