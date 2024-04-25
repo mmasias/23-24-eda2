@@ -472,6 +472,12 @@ public class Map {
                     mover(elPersonaje, DERECHA, elMundo);
                     break;
             }
+            try {
+                Thread.sleep(150);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            imprimirMundo(elMundo, elPersonaje);
             
 
         }
