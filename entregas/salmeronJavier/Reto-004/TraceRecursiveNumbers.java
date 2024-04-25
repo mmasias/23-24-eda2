@@ -2,12 +2,14 @@ public class TraceRecursiveNumbers {
     public static void main(String[] args) {
         int target = 10;
         recursiveNumbers(1, target);
+
+        System.out.println("Hello from main!");
     }
     
     private static void recursiveNumbers(int current, int target) {
-        System.out.println("Called recursiveNumbers from " + current + " to " + target);
+        System.out.println("\nCalled recursiveNumbers from " + current + " to " + target);
         if (current > target) {
-            System.out.println("Target reached, returning to main.");
+            System.out.println("Target reached, returning to main.\n");
             return;
         }
         System.out.println("Status: " + current);
