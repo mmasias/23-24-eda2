@@ -6,7 +6,9 @@ public class ArrayAsociativo009 {
     static final int COLUMNA = 1;
 
     private static final int FREE = 0;
-    private static final int WALL = 1;
+    private static final int VISITED = 1;
+    private static final int WALL = 2;
+    private static final int WATER = 3;
 
     static final int ARRIBA = 0;
     static final int ABAJO = 1;
@@ -300,6 +302,11 @@ public class ArrayAsociativo009 {
         minColumna = 0 + viewPort;
         maxFila = mundo.length - (viewPort + 1);
         maxColumna = mundo[0].length() - (viewPort + 1);
+
+        System.out.println("minFila: " + minFila);
+        System.out.println("minColumna: " + minColumna);
+        System.out.println("maxFila: " + maxFila);
+        System.out.println("maxColumna: " + maxColumna);
     }
 
     static void actualizarTiempo() {
@@ -565,43 +572,72 @@ public class ArrayAsociativo009 {
     }
 
     static void resolverAuto(int[] elPersonaje, String[] elMundo) throws InterruptedException{
-        if (solveMaze(elPersonaje, elMundo)) {
+        int[][] maze = convertirMundo(elMundo);
+
+        if (solveMaze(elPersonaje, elMundo, maze)) {
             System.out.println("Ha llegado!!!");
             imprimirMundo(elMundo, elPersonaje);
+            jugando = false;
         } else {
             System.out.println("No se puede escapar!!!.");
         }
     }
 
 
-    public static boolean solveMaze(int[] elPersonaje, String[] elMundo) throws InterruptedException {
-        int[][] maze = convertirMundo(elMundo);
+    public static boolean solveMaze(int[] elPersonaje, String[] elMundo, int maze[][]) throws InterruptedException {
         int x = elPersonaje[FILA];
         int y = elPersonaje[COLUMNA];
 
-        if (x < 0 || x >= maze.length || y < 0 || y >= maze[0].length) {
+        if (x < minFila || x >= maxFila + 1 || y < minColumna || y >= maxColumna + 1 ) {
             return false;
         }
-        if (maze[x][y] != FREE) {
+        if (maze[x][y] != FREE && maze[x][y] != VISITED) {
             return false;
         }
-        if (x == maze.length - 1 && y == maze[0].length - 1) {
+        if (x == 44 && y == 44) {
             return true;
         }
 
+        maze[x][y] = VISITED;
+        actualizarTiempo();
         imprimirMundo(elMundo, elPersonaje);
-        Thread.sleep(1000);
+        Thread.sleep(400);
 
-        if (solveMaze(new int[]{x+1, y}, elMundo) || 
-            solveMaze(new int[]{x, y + 1}, elMundo) || 
-            solveMaze(new int[]{x - 1, y}, elMundo) || 
-            solveMaze(new int[]{x, y - 1}, elMundo)) {
+        for (int i = VISITED; i >= FREE; i--) {
+            int[] ordenMovimiento = getRandomMovementOrder();
+            if (i == 0){}
+            else {}
+        }
+
+        if (solveMaze(new int[]{x+1, y}, elMundo, maze) || 
+            solveMaze(new int[]{x, y + 1}, elMundo, maze) || 
+            solveMaze(new int[]{x - 1, y}, elMundo, maze) || 
+            solveMaze(new int[]{x, y - 1}, elMundo, maze)) {
             return true;
         }
 
         return false;
     }
 
+    public static int[] getRandomMovementOrder() {
+        int[] movements = {ARRIBA, ABAJO, IZQUIERDA, DERECHA};
+        int[] randomMovements = new int[movements.length];
+        for (int i = 0; i < movements.length; i++) {
+            int randomIndex = (int) (Math.random() * movements.length);
+            int randomElement = movements[randomIndex];
+            randomMovements[i] = randomElement;
+            int[] newMovement = new int[movements.length - 1];
+            int newIndex = 0;
+            for (int j = 0; j < movements.length; j++) {
+                if (j != randomIndex) {
+                    newMovement[newIndex] = movements[j];
+                    newIndex++;
+                }
+            }
+            movements = newMovement;
+        }
+        return randomMovements;
+    }
 
     static void cambiaVisualizacion() {
         modoVisualizacion++;
