@@ -383,7 +383,7 @@ public class SolucionLaberinto {
     }
 
     static void imprimirLinea() {
-        System.out.println(laberinto.mapear('B', modoVisualizacion).repeat(alcanceDeVision * 2 + 1));
+        System.out.println(SolucionLaberinto.mapear('B', modoVisualizacion).repeat(alcanceDeVision * 2 + 1));
     }
 
     public static final String RESET = "\033[0m";
