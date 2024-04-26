@@ -31,7 +31,7 @@ public class Main {
             System.out.println(documento.getTitulo());
         }
 
-        
+
         resultados = biblioteca.buscarPorPalabrasClave("Tecnología");
         System.out.println("\nDocumentos encontrados por palabras clave:");
         for (Documento documento : resultados) {
