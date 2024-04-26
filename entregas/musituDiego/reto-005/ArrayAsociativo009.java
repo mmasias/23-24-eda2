@@ -12,6 +12,8 @@ public class ArrayAsociativo009 {
     static final int SALIR = 4;
     static final int CAMBIA_VISUALIZACION = 5;
     static final int OBJETIVO = 6;
+    static final int SOLVE = 7;
+    static final int BACK = 8;
     static final int NADA = 999;
 
 
@@ -34,6 +36,7 @@ public class ArrayAsociativo009 {
 
     static int minFila, minColumna, maxFila, maxColumna;
     static int[] objetivo = {40,42};
+    static Stack<int[]> steps = new Stack<>();
 
     static boolean jugando = true;
 
@@ -537,6 +540,60 @@ public class ArrayAsociativo009 {
         }
     }
 
+    static void buscarCamino(int[] elPersonaje, String[] elMundo) {
+        steps.clear();
+        buscar(elPersonaje, elMundo);
+    }
+
+    static boolean buscar(int[] posicion, String[] elMundo) {
+        int fila = posicion[FILA];
+        int columna = posicion[COLUMNA];
+    
+
+        if (fila < 0 || fila >= elMundo.length || columna < 0 || columna >= elMundo[0].length()) {
+            return false; 
+        }
+        if (elMundo[fila].charAt(columna) != ' ') {
+            return false; 
+        }
+        if (fila == objetivo[0] && columna == objetivo[1]) {
+            imprimirRuta(elMundo);
+            return true;
+        }
+    
+
+        elMundo[fila] = elMundo[fila].substring(0, columna) + '*' + elMundo[fila].substring(columna + 1);
+    
+ 
+        steps.push(new int[] { fila, columna });
+    
+
+        for (int i = 0; i < MOVIMIENTO.length; i++) {
+            int[] nextPos = { fila + MOVIMIENTO[i][FILA], columna + MOVIMIENTO[i][COLUMNA] };
+            if (buscar(nextPos, elMundo)) {
+                return true;
+            }
+        }
+    
+
+        elMundo[fila] = elMundo[fila].substring(0, columna) + ' ' + elMundo[fila].substring(columna + 1);
+        steps.pop();
+        return false;
+    }
+    
+
+    static void imprimirRuta(String[] elMundo) {
+        System.out.println("Ruta de solución:");
+        while (!steps.isEmpty()) {
+            int[] step = steps.pop();
+            int fila = step[FILA];
+            int columna = step[COLUMNA];
+            System.out.println("(" + fila + ", " + columna + ")");
+            elMundo[fila] = elMundo[fila].substring(0, columna) + 'X' + elMundo[fila].substring(columna + 1);
+        }
+    }
+
+
     static void verAccion(int[] elPersonaje, String[] elMundo) {
 
         switch (capturarMovimiento()) {
@@ -561,6 +618,17 @@ public class ArrayAsociativo009 {
 
             case CAMBIA_VISUALIZACION:
                 cambiaVisualizacion();
+                break;
+
+            case SOLVE:
+                buscarCamino(elPersonaje, elMundo);
+                break;
+            case BACK:
+                if (!steps.isEmpty()) {
+                    int[] lastStep = steps.pop();
+                    elPersonaje[FILA] = lastStep[FILA];
+                    elPersonaje[COLUMNA] = lastStep[COLUMNA];
+                }
                 break;
             case NADA:
                 break;
@@ -591,6 +659,8 @@ public class ArrayAsociativo009 {
                 return OBJETIVO;
             case 'v', 'V':
                 return CAMBIA_VISUALIZACION;
+            case 'x','X':
+                return SOLVE;
         }
         return NADA;
     }
