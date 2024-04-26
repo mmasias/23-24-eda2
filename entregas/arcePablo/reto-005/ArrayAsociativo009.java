@@ -605,17 +605,27 @@ public class ArrayAsociativo009 {
 
         for (int i = VISITED; i >= FREE; i--) {
             int[] ordenMovimiento = getRandomMovementOrder();
-            if (i == 0){}
-            else {}
+            for (int j = 0; j < ordenMovimiento.length; j++) {
+                if (ordenMovimiento[j] == ARRIBA && !(i == VISITED && maze[x][y + 1] == VISITED)) {
+                    if (solveMaze(new int[]{x, y + 1}, elMundo, maze)){
+                        return true;
+                    }
+                } 
+                if (ordenMovimiento[j] == ABAJO && !(i == VISITED && maze[x][y - 1] == VISITED)) {
+                    if (solveMaze(new int[]{x, y - 1}, elMundo, maze)){
+                        return true;
+                    }                }
+                if (ordenMovimiento[j] == IZQUIERDA && !(i == VISITED && maze[x - 1][y] == VISITED)) {
+                    if (solveMaze(new int[]{x - 1, y}, elMundo, maze)){
+                        return true;
+                    }                    }
+                if (ordenMovimiento[j] == DERECHA && !(i == VISITED && maze[x + 1][y] == VISITED)) {
+                    if (solveMaze(new int[]{x + 1, y}, elMundo, maze)){
+                        return true;
+                    }                
+                }
+            }
         }
-
-        if (solveMaze(new int[]{x+1, y}, elMundo, maze) || 
-            solveMaze(new int[]{x, y + 1}, elMundo, maze) || 
-            solveMaze(new int[]{x - 1, y}, elMundo, maze) || 
-            solveMaze(new int[]{x, y - 1}, elMundo, maze)) {
-            return true;
-        }
-
         return false;
     }
 
