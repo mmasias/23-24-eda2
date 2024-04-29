@@ -8,7 +8,9 @@
 
 ## ¿Qué?
 
-Algoritmos que reorganizan una serie de elementos de una colección (como un array o una lista) en un orden especificado, típicamente numérico o lexicográfico.
+Son algoritmos que reorganizan una serie de elementos de una colección (como un array o una lista) en un orden especificado, típicamente numérico o lexicográfico.
+
+*En computación y matemáticas un algoritmo de ordenamiento es un algoritmo que pone elementos de una lista o un vector en una secuencia dada por una relación de orden, es decir, el resultado de salida ha de ser una permutación —o reordenamiento— de la entrada que satisfaga la relación de orden dada. Las relaciones de orden más usadas son el orden numérico y el orden lexicográfico. Ordenamientos eficientes son importantes para optimizar el uso de otros algoritmos (como los de búsqueda y fusión) que requieren listas ordenadas para una ejecución rápida. También es útil para poner datos en forma canónica y para generar resultados legibles por humanos.*
 
 ## ¿Para qué?
 
