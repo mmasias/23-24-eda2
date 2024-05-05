@@ -14,7 +14,7 @@ public class Player {
   public void followPath(List<int[]> path, Renderer renderer, String[] map, GameWorld world, Visualizer visualizer) {
     for (int[] step : path) {
       moveTo(step[0], step[1]);
-      clearScreen();
+      renderer.clearScreen();
       renderer.printWorld(map, this, world, visualizer);
       try {
         Thread.sleep(500); // 500 milliseconds delay for each step
@@ -96,8 +96,4 @@ public class Player {
     return column;
   }
 
-  private void clearScreen() {
-    System.out.print("\033[H\033[2J");
-    System.out.flush();
-  }
 }

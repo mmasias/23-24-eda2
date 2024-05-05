@@ -23,25 +23,28 @@ public class GameWorld {
     calculateVisualRange();
   }
 
-  private boolean findPath(String[] map, int x, int y, int goalX, int goalY, HashSet<String> visited) {
-    String posKey = x + "," + y;
-    if (x < 0 || y < 0 || x >= map.length || y >= map[0].length())
-      return false;
-    if (map[x].charAt(y) == '0' || visited.contains(posKey))
-      return false; // '0' is a wall or visited
-    if (x == goalX && y == goalY) {
-      pathTaken.add(new int[] { x, y });
+  private boolean findPath(String[] map, int startX, int startY, int goalX, int goalY, HashSet<String> visited) {
+    String posKey = startX + "," + startY;
+    if (startX < 0 || startY < 0 || startX >= map.length || startY >= map[0].length()
+        || map[startX].charAt(startY) == '0' || visited.contains(posKey)) {
+      return false; // Invalid start position or visited
+    }
+    if (startX == goalX && startY == goalY) {
+      // Goal reached
+      pathTaken.add(new int[] { startX, startY });
       return true;
     }
 
     visited.add(posKey);
 
+    // Attempt to move in all valid directions
     int[][] moves = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
     for (int[] move : moves) {
-      int newX = x + move[0];
-      int newY = y + move[1];
+      int newX = startX + move[0];
+      int newY = startY + move[1];
       if (findPath(map, newX, newY, goalX, goalY, visited)) {
-        pathTaken.add(0, new int[] { x, y });
+        // Path found, add current position to pathTaken list
+        pathTaken.add(0, new int[] { startX, startY });
         return true;
       }
     }

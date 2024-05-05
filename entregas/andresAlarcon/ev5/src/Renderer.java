@@ -24,7 +24,7 @@ public class Renderer {
             System.out.print(visualizer.mapElement(elem, world.getVisualizationMode()));
           }
         } else {
-          System.out.print(GRAY_BACKGROUND + "   " + RESET);
+          System.out.print(visualizer.GRAY_BACKGROUND + "   " + visualizer.RESET);
         }
       }
       System.out.println();
@@ -58,16 +58,15 @@ public class Renderer {
 
   private void printStatus(Player player, GameWorld world) {
     System.out.println(
-        "Time: [" + (int) world.getTime() + "] / Position: (" + player.getRow() + "," + player.getColumn()
+        "Time: [" + (int) world.getTime() + "] / Position: (" + player.getColumn() + "," + player.getRow()
             + ") / Skin: ("
             + world.getVisualizationMode() + ")");
   }
 
-  private void clearScreen() {
+  public void clearScreen() {
     System.out.print("\033[H\033[2J");
     System.out.flush();
   }
 
-  public static final String GRAY_BACKGROUND = "\033[100m";
   public static final String RESET = "\033[0m";
 }

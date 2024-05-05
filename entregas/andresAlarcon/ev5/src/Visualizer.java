@@ -97,6 +97,8 @@ public class Visualizer {
   public static final String PURPLE_BACKGROUND = "\033[45m";
   public static final String CYAN_BACKGROUND = "\033[46m";
   public static final String WHITE_BACKGROUND = "\033[47m";
+  public static final String GRAY_BACKGROUND = "\033[100m";
+
 
   public static final String BLACK_BRIGHT = "\033[0;90m";
   public static final String RED_BRIGHT = "\033[0;91m";
