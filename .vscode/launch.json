@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "BubbleSort",
+            "request": "launch",
+            "mainClass": "evaluaciones.retos.reto006.BubbleSort",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
             "name": "Exercise",
             "request": "launch",
             "mainClass": "entregas.zamanilloLucia.ejerciciosRecursividad.Exercise",
