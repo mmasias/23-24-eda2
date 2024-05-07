@@ -48,21 +48,65 @@ public class BubbleSort {
         }
     }
 }
-java´´´
-ç
+```
 
 ## Trazabilidad del Código
 
-El código proporcionado en `BubbleSort.java` implementa el algoritmo de ordenamiento de burbuja en Java. Aquí está la trazabilidad del código:
 
-1. **Método `sort`**:
-   - Este método ordena un array de enteros utilizando el algoritmo de ordenamiento de burbuja.
-   - Utiliza un bucle `do-while` para repetir el proceso de ordenamiento hasta que no se requieran más intercambios.
-   - Dentro del bucle, utiliza un bucle `for` para comparar pares de elementos adyacentes y realizar intercambios si es necesario.
+Lista original: ([64, 34, 25, 12, 22, 11, 90])
 
-2. **Método `main`**:
-   - Este método es el punto de entrada del programa.
-   - Crea un array de enteros desordenado.
-   - Llama al método `sort` para ordenar el array.
-   - Imprime el array ordenado en la consola.
+**Pase 1:**
+- Comparando 64 con 34: Intercambio
+- Comparando 64 con 25: Intercambio
+- Comparando 64 con 12: Intercambio
+- Comparando 64 con 22: Intercambio
+- Comparando 64 con 11: Intercambio
+- Comparando 64 con 90: No hay intercambio
+- Lista actualizada: ([34, 25, 12, 22, 11, 64, 90])
 
+**Pase 2:**
+- Comparando 34 con 25: Intercambio
+- Comparando 34 con 12: Intercambio
+- Comparando 34 con 22: Intercambio
+- Comparando 34 con 11: Intercambio
+- Comparando 34 con 64: No hay intercambio
+- Comparando 64 con 90: No hay intercambio
+- Lista actualizada: ([25, 12, 22, 11, 34, 64, 90])
+
+**Pase 3:**
+- Comparando 25 con 12: Intercambio
+- Comparando 25 con 22: Intercambio
+- Comparando 25 con 11: Intercambio
+- Comparando 25 con 34: No hay intercambio
+- Comparando 34 con 64: No hay intercambio
+- Comparando 64 con 90: No hay intercambio
+- Lista actualizada: ([12, 22, 11, 25, 34, 64, 90])
+
+**Pase 4:**
+- Comparando 12 con 22: No hay intercambio
+- Comparando 22 con 11: Intercambio
+- Comparando 22 con 25: No hay intercambio
+- Comparando 25 con 34: No hay intercambio
+- Comparando 34 con 64: No hay intercambio
+- Comparando 64 con 90: No hay intercambio
+- Lista actualizada: ([12, 11, 22, 25, 34, 64, 90])
+
+**Pase 5:**
+- Comparando 12 con 11: Intercambio
+- Comparando 12 con 22: No hay intercambio
+- Comparando 22 con 25: No hay intercambio
+- Comparando 25 con 34: No hay intercambio
+- Comparando 34 con 64: No hay intercambio
+- Comparando 64 con 90: No hay intercambio
+- Lista actualizada: ([11, 12, 22, 25, 34, 64, 90])
+
+**Pase 6:**
+- Comparando 11 con 12: No hay intercambio
+- Comparando 12 con 22: No hay intercambio
+- Comparando 22 con 25: No hay intercambio
+- Comparando 25 con 34: No hay intercambio
+- Comparando 34 con 64: No hay intercambio
+- Comparando 64 con 90: No hay intercambio
+- Lista actualizada: ([11, 12, 22, 25, 34, 64, 90])
+
+**Lista Final Ordenada: ([11, 12, 22, 25, 34, 64, 90])**
