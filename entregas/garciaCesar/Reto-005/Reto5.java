@@ -378,7 +378,7 @@ public class Reto5 {
     }
 
     static void imprimirLinea() {
-
+        
         System.out.println(mapear('B', modoVisualizacion).repeat(viewPort * 2 + 1));
     }
 
@@ -607,7 +607,7 @@ public class Reto5 {
     }
 
     static void imprimirElCielo() {
-        
+
         imprimirLinea();
         for (int i = 0; i < viewPort * 2 + 1; i = i + 1) {
             if ((hora > 6) && (hora <= 18) && (i == (int) (((viewPort * 2)) - ((hora - 7) * (viewPort * 2) / 12)))) {
@@ -670,7 +670,7 @@ public class Reto5 {
             return true;
         }
         maze[x][y] = VISITED;
-        System.out.println("Intentando moverse a: (" + x + ", " + y + ") - No hay camino.");
+        System.out.println("Intentando moverse a: (" + x + ", " + y + ") - No hay camino.");  
         imprimirMundo(mapa, personaje);
         return false;
     }
