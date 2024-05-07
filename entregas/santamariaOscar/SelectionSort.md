@@ -50,7 +50,7 @@ public class SelectionSort {
         }
     }
 }
-´´´
+```
 ## Trazabilidad Del Código
 
 Lista original: ([29, 20, 73, 34, 64])
