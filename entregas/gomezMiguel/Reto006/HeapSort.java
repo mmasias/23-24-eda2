@@ -1,28 +1,37 @@
+import java.util.Scanner;
+
 public class HeapSort {
     public static void sort(int array[]) {
+        Scanner scanner = new Scanner(System.in);
         int n = array.length;
 
         // Construir el montículo (reorganizar el arreglo)
-        for (int i = n / 2 - 1; i >= 0; i--)
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            System.out.println("Reorganizando el subárbol con raíz en el índice " + i);
             heapify(array, n, i);
+            scanner.nextLine();
+        }
 
-        // Uno por uno extraer un elemento del montículo
+        
         for (int i = n - 1; i > 0; i--) {
-            // Mover la raíz actual al final
+            
+            System.out.println("Moviendo la raíz actual al final");
             int temp = array[0];
             array[0] = array[i];
             array[i] = temp;
 
-            // llamar a la función de reducción del montículo en el montículo reducido
+            
+            System.out.println("Reorganizando el subárbol con raíz en el índice 0");
             heapify(array, i, 0);
+            scanner.nextLine();
         }
     }
 
-    // Para convertir un subarreglo en un montículo
+    
     static void heapify(int array[], int n, int i) {
-        int largest = i; // Inicializar largest como raíz
-        int l = 2 * i + 1; // izquierda = 2*i + 1
-        int r = 2 * i + 2; // derecha = 2*i + 2
+        int largest = i; 
+        int l = 2 * i + 1; 
+        int r = 2 * i + 2; 
 
         // Si el hijo izquierdo es mayor que la raíz
         if (l < n && array[l] > array[largest])
@@ -38,7 +47,7 @@ public class HeapSort {
             array[i] = array[largest];
             array[largest] = swap;
 
-            // Recursivamente heapificar el subárbol afectado
+            
             heapify(array, n, largest);
         }
     }
@@ -50,5 +59,6 @@ public class HeapSort {
         for (int i : array) {
             System.out.print(i + " ");
         }
+        System.out.println();
     }
 }
