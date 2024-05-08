@@ -88,3 +88,42 @@ public class BubbleSort {
         }
     }
 }
+
+//
+### Traza
+
+**Arreglo de entrada inicial:** [64, 34, 25, 12, 22, 11, 90]
+
+#### Pasos de la Ordenación
+
+1. **Paso 1:**
+   - Iteración 1: [34, 64, 25, 12, 22, 11, 90] (Se intercambia 64 y 34)
+   - Iteración 2: [34, 25, 64, 12, 22, 11, 90] (Se intercambia 64 y 25)
+   - Iteración 3: [34, 25, 12, 64, 22, 11, 90] (Se intercambia 64 y 12)
+   - Iteración 4: [34, 25, 12, 22, 64, 11, 90] (Se intercambia 64 y 22)
+   - Iteración 5: [34, 25, 12, 22, 11, 64, 90] (Se intercambia 64 y 11)
+   - Iteración 6: [34, 25, 12, 22, 11, 64, 90]
+
+2. **Paso 2:**
+   - Iteración 1: [25, 34, 12, 22, 11, 64, 90] (Se intercambia 34 y 25)
+   - Iteración 2: [25, 12, 34, 22, 11, 64, 90] (Se intercambia 34 y 12)
+   - Iteración 3: [25, 12, 22, 34, 11, 64, 90] (Se intercambia 34 y 22)
+   - Iteración 4: [25, 12, 22, 11, 34, 64, 90] (Se intercambia 34 y 11)
+   - Iteración 5: [25, 12, 22, 11, 34, 64, 90]
+
+3. **Paso 3:**
+   - Iteración 1: [12, 25, 22, 11, 34, 64, 90] (Se intercambia 25 y 12)
+   - Iteración 2: [12, 22, 25, 11, 34, 64, 90] (Se intercambia 25 y 22)
+   - Iteración 3: [12, 22, 11, 25, 34, 64, 90] (Se intercambia 25 y 11)
+   - Iteración 4: [12, 22, 11, 25, 34, 64, 90]
+
+4. **Paso 4:**
+   - Iteración 1: [12, 22, 11, 25, 34, 64, 90] (No se realizan intercambios)
+   - Iteración 2: [12, 11, 22, 25, 34, 64, 90] (Se intercambia 22 y 11)
+   - Iteración 3: [12, 11, 22, 25, 34, 64, 90]
+
+5. **Paso 5:**
+   - Iteración 1: [11, 12, 22, 25, 34, 64, 90] (Se intercambia 12 y 11)
+   - Iteración 2: [11, 12, 22, 25, 34, 64, 90]
+
+El arreglo está ahora completamente ordenado.//
