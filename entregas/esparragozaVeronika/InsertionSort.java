@@ -1,3 +1,5 @@
+package entregas.esparragozaVeronika;
+
 public class InsertionSort {
     public static void sort(int[] array) {
         for (int i = 1; i < array.length; i++) {

@@ -1,3 +1,5 @@
+package entregas.esparragozaVeronika;
+
 public class SelectionSort {
     public static void sort(int[] array) {
         int startIndex = 0;

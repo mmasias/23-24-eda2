@@ -1,3 +1,5 @@
+package entregas.esparragozaVeronika;
+
 public class MergeSort {
 
     // Método para dividir y fusionar el array
