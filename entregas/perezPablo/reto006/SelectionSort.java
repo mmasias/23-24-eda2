@@ -18,11 +18,9 @@ public class SelectionSort {
                 System.out.println("Intercambio: " + array[minIndex] + " por " + array[startIndex]);
                 for (int n : array) {
                     System.out.print(n + " ");
-                    
                 }
                 System.out.println();
             }
-            //System.out.println();
             startIndex++;
         }
     }
