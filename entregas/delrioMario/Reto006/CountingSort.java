@@ -66,4 +66,35 @@ public class CountingSort {
         }
         System.out.println();
     }
+
+    /*
+1. **sort(int[] array)**:
+   - Este método implementa el algoritmo de Counting Sort.
+   - Calcula el número máximo en el array de entrada para determinar el rango de valores.
+   - Crea un array de conteo para contar la frecuencia de cada elemento en el array de entrada.
+   - Actualiza el array de conteo para que cada elemento `count[i]` contenga la posición actual de ese elemento en el array de salida.
+   - Construye el array de salida utilizando el array de conteo.
+   - Copia los elementos ordenados del array de salida al array original.
+
+2. **main(String[] args)**:
+   - En el método `main`, se crea una instancia de la clase `CountingSort`.
+   - Se inicializa un array de números desordenados.
+   - Se llama al método `mostrarArray(data)` para mostrar el array inicial.
+   - Se llama al método `sort(data)` de la instancia de `CountingSort` para ordenar el array.
+   - Finalmente, se imprime el array ordenado.
+
+3. **mostrarArray(int[] array)**:
+   - Este método imprime los elementos de un array.
+
+El algoritmo de Counting Sort en sí se divide en tres partes principales:
+
+- **Conteo de frecuencias**:
+  - Se recorre el array de entrada y se cuentan las ocurrencias de cada elemento, almacenándolas en un array de conteo.
+
+- **Cálculo de posiciones**:
+  - Se modifica el array de conteo para que cada elemento `count[i]` contenga la posición en la que el elemento `i` debería aparecer en el array ordenado.
+
+- **Construcción del array ordenado**:
+  - Utilizando el array de conteo, se construye el array ordenado, colocando cada elemento en su posición correcta.*/
+
 }

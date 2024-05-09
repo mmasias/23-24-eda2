@@ -59,4 +59,27 @@ public class HeapSort {
         }
         System.out.println();
     }
+
+    /*
+1. **sort(int array[])**:
+   - Este método implementa el algoritmo de Heap Sort.
+   - Inicia construyendo un heap máximo (un árbol binario completo donde el valor de cada nodo es mayor o igual que los valores de sus hijos) a partir del array dado.
+   - Luego, extrae uno por uno los elementos del heap, lo que en esencia coloca el elemento más grande en la parte final del array.
+   - Después de cada extracción, se reorganiza el heap para mantener su estructura de montículo.
+   - Durante el proceso de extracción e intercambio, se muestra el estado del array en cada paso llamando a `mostrarArray(array)`.
+
+2. **heapify(int array[], int n, int i)**:
+   - Este método se utiliza para convertir un subarreglo en un heap máximo.
+   - Se compara el elemento en la posición `i` (raíz del subárbol) con sus hijos izquierdo (`l = 2*i + 1`) y derecho (`r = 2*i + 2`).
+   - Si alguno de los hijos es mayor que el nodo actual, se intercambian y se recursivamente heapifica el subárbol afectado.
+
+3. **main(String[] args)**:
+   - En el método `main`, se inicializa un array de números desordenados.
+   - Se llama al método `sort(array)` para ordenar el array utilizando el algoritmo de Heap Sort.
+   - Finalmente, se imprime el array ordenado.
+
+4. **mostrarArray(int[] array)**:
+   - Este método imprime los elementos de un array.
+
+ */
 }

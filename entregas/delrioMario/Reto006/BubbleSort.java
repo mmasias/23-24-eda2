@@ -76,6 +76,33 @@ public class BubbleSort {
         }
         System.out.println();
     }
+
+
+    /*
+1. **sort(int[] array)**:
+   - Este método implementa el algoritmo de ordenamiento Burbuja utilizando dos bucles `for`. El bucle externo (`i`) controla el número de pasadas completas a través del array, mientras que el bucle interno (`j`) compara elementos adyacentes y realiza intercambios si es necesario.
+   - Después de cada pasada completa, se llama al método `mostrarArray(array)` para imprimir el estado actual del array.
+
+2. **main(String[] args)**:
+   - En el método `main`, se crea un array de números desordenados.
+   - Luego se llama al método `mostrarArray(data)` para mostrar el array inicial.
+   - A continuación, se llama al método `sort2(data)` para ordenar el array utilizando el segundo enfoque del algoritmo de Burbuja.
+   - Finalmente, se imprime el array ordenado.
+
+3. **sort1(int[] array)**:
+   - Este método implementa una versión alternativa del algoritmo de Burbuja.
+   - Utiliza un bucle `while` en lugar de un bucle `for` y una bandera `sorted` para determinar si el array está ordenado.
+   - Después de cada pasada completa, se llama al método `mostrarArray(array)` para imprimir el estado actual del array.
+
+4. **sort2(int[] array)**:
+   - Este método también implementa una versión alternativa del algoritmo de Burbuja.
+   - Utiliza un bucle `do-while` y una bandera `swapped` para determinar si se realizó algún intercambio en la pasada actual.
+   - Después de cada pasada completa, se llama al método `mostrarArray(array)` para imprimir el estado actual del array.
+
+5. **mostrarArray(int[] array)**:
+   - Este método simplemente imprime los elementos del array.
+
+Ambas versiones de la implementación Burbuja (`sort1` y `sort2`) tienen la misma lógica general, pero difieren en la estructura del bucle y la forma en que determinan si se han realizado intercambios. */
 }
 
 
