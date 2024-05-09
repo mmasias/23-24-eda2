@@ -2,6 +2,7 @@ package entregas.esparragozaVeronika;
 
 public class HeapSort {
     public static void sort(int array[]) {
+        System.out.println("Array en proceso:");
         int n = array.length;
 
         // Construir el montículo (reorganizar el arreglo)
@@ -17,6 +18,16 @@ public class HeapSort {
 
             // llamar a la función de reducción del montículo en el montículo reducido
             heapify(array, i, 0);
+
+            for (int j = 0; j < array.length; j++) {
+                if (temp != 0 && array[j] == temp) {
+                    System.out.print("\033[31m" + array[j] + " ");
+                } else {
+                    System.out.print("\033[38;5;220m" + array[j] + " ");
+                }
+                System.out.print("\u001B[0m");
+            }
+            System.out.println();
         }
     }
 
@@ -47,6 +58,11 @@ public class HeapSort {
 
     public static void main(String[] args) {
         int array[] = {12, 11, 13, 5, 6, 7};
+        System.out.println("Array original:");
+        for (int i : array) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
         sort(array);
         System.out.println("Array ordenado:");
         for (int i : array) {
