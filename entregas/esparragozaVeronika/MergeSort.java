@@ -4,6 +4,7 @@ public class MergeSort {
 
     // Método para dividir y fusionar el array
     public static void sort(int[] array, int left, int right) {
+        System.out.println("\u001B[37m" + "Dividiendo el array en dos mitades" + "\u001B[0m");
         if (left < right) {
             // Encuentra el punto medio del vector.
             int middle = (left + right) / 2;
@@ -24,6 +25,7 @@ public class MergeSort {
         int n2 = right - middle;
 
         // Subarrays temporales.
+        System.out.println("Creando arrays temporales");
         int[] L = new int[n1];
         int[] R = new int[n2];
 
@@ -31,6 +33,7 @@ public class MergeSort {
         for (int i = 0; i < n1; i++) {
             L[i] = array[left + i];
         }
+        //System.out.println("Array temporal L:");
         for (int j = 0; j < n2; j++) {
             R[j] = array[middle + 1 + j];
         }
@@ -38,7 +41,8 @@ public class MergeSort {
         // Índices iniciales de los subarrays.
         int i = 0, j = 0;
 
-        // Índice inicial del subarray mezclado.
+
+        // Índice inicial del subarray mezclado
         int k = left;
 
         // Ordenamiento y mezcla.
@@ -58,6 +62,11 @@ public class MergeSort {
             array[k] = L[i];
             i++;
             k++;
+
+            for (int value : array) {
+                System.out.print("\u001B[35m" + value + "\u001B[0m ");
+            }
+            System.out.println(" ");
         }
 
         // Copiar los elementos restantes de R, si los hay.
@@ -65,6 +74,10 @@ public class MergeSort {
             array[k] = R[j];
             j++;
             k++;
+
+            for (int value : array) {
+                System.out.print("\033[38;5;220m" + value + "\u001B[0m ");
+            }
         }
     }
 
@@ -75,7 +88,7 @@ public class MergeSort {
             System.out.print(i + " ");
         }
         sort(data, 0, data.length - 1);
-        System.out.println("\nArray ordenado:");
+        System.out.println("Array ordenado:");
         for (int i : data) {
             System.out.print(i + " ");
         }
