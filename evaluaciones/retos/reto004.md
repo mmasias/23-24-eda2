@@ -1,5 +1,7 @@
 # Reto 004
 
+> *Fecha de entrega*: 26 de abril
+
 ## Trazabilidad
 
 ### Parte 1
