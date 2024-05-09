@@ -3,9 +3,29 @@ package entregas.esparragozaVeronika;
 public class QuickSort {
     // Método para realizar el ordenamiento
     public static void sort(int[] array, int low, int high) {
+        for (int num : array) {
+            if (num == array[low] || num == array[high]) {
+                System.out.print("\033[38;5;220m" + num + " ");
+            } else {
+                System.out.print("\u001B[34m" + num + " ");
+            }
+            System.out.print("\u001B[0m");
+        }
+        System.out.println();
+
+
         if (low < high) {
             // Particiona el arreglo y obtiene el índice del pivote en su posición correcta
             int pivotIndex = partition(array, low, high);
+
+            for (int num : array) {
+                if (num == array[pivotIndex]) {
+                    System.out.print(num + " ");
+                } else {
+                    System.out.print("\u001B[34m" + num + "\u001B[0m ");
+                }
+            }
+            System.out.println();
 
             // Ordena recursivamente los elementos antes y después de la partición
             sort(array, low, pivotIndex - 1);
@@ -40,6 +60,11 @@ public class QuickSort {
 
     public static void main(String[] args) {
         int[] data = {10, 7, 8, 9, 1, 5};
+        System.out.println("Array en inicial:");
+        for (int num : data) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
         sort(data, 0, data.length - 1);
         System.out.println("Array ordenado:");
         for (int num : data) {
