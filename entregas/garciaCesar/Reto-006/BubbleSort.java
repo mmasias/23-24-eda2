@@ -27,6 +27,10 @@ public class BubbleSort {
             mostrarArray(array);
         }
     }
+    /*Esta variante de Bubble Sort utiliza dos bucles anidados.
+    En cada iteración de i, el algoritmo realiza un pase completo a través del arreglo.
+    En cada comparación (j con j+1), si el elemento actual es mayor que el siguiente, intercambia los elementos.
+    Muestra el estado del arreglo después de cada fase. */
 
     public static void sort2(int[] array) {
         boolean sorted = false;
@@ -47,6 +51,10 @@ public class BubbleSort {
             mostrarArray(array);
         }
     }
+    /*Esta variante utiliza un bucle while con una bandera sorted para determinar si el arreglo está completamente ordenado.
+    Realiza un pase completo a través del arreglo en cada iteración del bucle while.
+    Si se realiza algún intercambio durante un pase, sorted se establece en false, lo que significa que el arreglo aún no está completamente ordenado.
+    Muestra el estado del arreglo después de cada fase. */
 
     public static void sort3(int[] array) {
         boolean swapped;
@@ -67,6 +75,9 @@ public class BubbleSort {
             mostrarArray(array);
         } while (swapped); // Continuar mientras se realicen intercambios
     }
+    /*Esta variante también utiliza un bucle do-while con una bandera swapped para determinar si se realizan intercambios durante un pase.
+    Si no se realizan intercambios en un pase completo, significa que el arreglo está ordenado y el bucle do-while se detiene.
+    Muestra el estado del arreglo después de cada fase. */
 
     public static void mostrarArray(int[] array) {
         for (int i : array) {
