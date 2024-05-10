@@ -1,0 +1,18 @@
+@startuml class diagram
+
+hide empty methods
+hide empty attributes
+
+class DocumentManager{}
+
+class Document{}
+
+class ArrayList{}
+
+class Author{}
+DocumentManager .. ArrayList : uses
+DocumentManager -- Document : manage 
+Document -- Author : has
+Document .. ArrayList : uses
+
+@enduml
