@@ -93,24 +93,23 @@ public class Baraja {
             @Override
             public int compare(Carta carta1, Carta carta2) {
                 if (!carta1.bocaArriba() && carta2.bocaArriba()) {
-                    return -1; // carta1 es boca abajo, carta2 es boca arriba, por lo tanto, carta1 va antes
+                    return -1;
                 } else if (carta1.bocaArriba() && !carta2.bocaArriba()) {
-                    return 1; // carta1 es boca arriba, carta2 es boca abajo, por lo tanto, carta2 va antes
+                    return 1;
                 } else {
                     int palo1 = carta1.palo;
                     int palo2 = carta2.palo;
                     if (palo1 != palo2) {
-                        return palo1 - palo2; // Compara los palos
+                        return palo1 - palo2;
                     } else {
                         Integer numero1 = carta1.numero;
                         Integer numero2 = carta2.numero;
-                        return numero1.compareTo(numero2); // Si los palos son iguales, compara por número
+                        return numero1.compareTo(numero2);
                     }
                 }
             }
         });
 
-        // Después de ordenar por palo, ordenamos cada conjunto de cartas del mismo palo por número
         int i = 0;
         while (i < cartas.length) {
             int j = i + 1;

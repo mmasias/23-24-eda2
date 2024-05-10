@@ -8,17 +8,12 @@ class RetoEDA {
     public static void main(String[] args) {
 
         Baraja baraja = new Baraja();
+        int x=0;
 
-        //
-        System.out.println("Si desea ordenar la baraja por numeros presione: 1 \nSi desea ordenar la baraja por palos presione: 2 ");
-        Scanner sc = new Scanner(System.in);
-        int x = sc.nextInt();
-
-        //
-        Carta carta;
         do {
-            carta = baraja.sacar();
-
+            System.out.println("Si desea ordenar la baraja por numeros presione: 1 \nSi desea ordenar la baraja por palos presione: 2 ");
+            Scanner sc = new Scanner(System.in);
+            x = sc.nextInt();
 
             if (x == 1) {
                 baraja.ordenarPorNumero();
@@ -26,8 +21,15 @@ class RetoEDA {
                 baraja.ordenarPorPalo();
             } else {
                 System.out.println("Debe introducir 1 o 2");
-                x = sc.nextInt();
+
             }
+        }while(x<1 || x>2);
+        //
+        Carta carta;
+        do {
+            carta = baraja.sacar();
+
+
 
             carta.voltear();
             carta.mostrar();
