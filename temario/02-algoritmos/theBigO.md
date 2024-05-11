@@ -65,7 +65,7 @@ O(*n*)|O(*n²*)|O(*n³*)|...|O(*n^m*)
 
 #### O(2^N)
 
-- ***Recursión con dos llamadas por nivel***: Los algoritmos que hacen dos llamadas recursivas en cada paso tienden a tener una complejidad O(2^N). Un ejemplo clásico es el cálculo de los números de Fibonacci mediante recursión sin memorización, donde cada término se calcula a partir de los dos términos precedentes, duplicando el número de operaciones necesarias con cada incremento en NNN.
+- ***Recursión con dos llamadas por nivel***: Los algoritmos que hacen dos llamadas recursivas en cada paso tienden a tener una complejidad O(2^N). Un ejemplo clásico es el cálculo de los números de Fibonacci mediante recursión sin memorización, donde cada término se calcula a partir de los dos términos precedentes, duplicando el número de operaciones necesarias con cada incremento en N.
 - ***Subconjuntos o combinaciones***: Cualquier algoritmo que necesite generar todos los subconjuntos posibles de un conjunto entrará en esta categoría, ya que hay 2^N subconjuntos de un conjunto de N elementos.
 
 ##### Identificación en la práctica
