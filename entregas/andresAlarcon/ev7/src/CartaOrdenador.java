@@ -2,12 +2,22 @@ import java.util.Comparator;
 
 public class CartaOrdenador {
 
-    public static void ordenarPorPalo(Carta[] cartas) {
-        bubbleSort(cartas, Comparator.comparingInt(c -> c.palo));
-    }
-
     public static void ordenarPorNumero(Carta[] cartas) {
         bubbleSort(cartas, Comparator.comparingInt(c -> c.numero));
+    }
+
+    public static void ordenarPorPaloYNumero(Carta[] cartas) {
+        bubbleSort(cartas, new Comparator<Carta>() {
+            @Override
+            public int compare(Carta c1, Carta c2) {
+                int paloCompare = Integer.compare(c1.palo, c2.palo);
+                if (paloCompare != 0) {
+                    return paloCompare;
+                } else {
+                    return Integer.compare(c1.numero, c2.numero);
+                }
+            }
+        });
     }
 
     private static void bubbleSort(Carta[] cartas, Comparator<Carta> comparator) {

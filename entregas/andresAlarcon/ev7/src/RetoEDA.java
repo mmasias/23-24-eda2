@@ -7,6 +7,7 @@ public class RetoEDA {
     public static void main(String[] args) {
 
         baraja = new Baraja();
+        //
 
         // Solicita al usuario cómo ordenar las cartas
         Scanner scanner = new Scanner(System.in);
@@ -23,7 +24,7 @@ public class RetoEDA {
         }
 
         if (eleccion == 1) {
-            CartaOrdenador.ordenarPorPalo(cartas);
+            CartaOrdenador.ordenarPorPaloYNumero(cartas);
         } else {
             CartaOrdenador.ordenarPorNumero(cartas);
         }
