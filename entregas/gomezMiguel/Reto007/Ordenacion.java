@@ -28,7 +28,7 @@ public class Ordenacion{
     public void ordenarPorNumeroAsc(Baraja baraja){
         for(int i = 0; i < baraja.cartas.length; i++){
             for(int j = 0; j < baraja.cartas.length - 1; j++){
-                if(baraja.cartas[j].getnumero() < baraja.cartas[j + 1].getnumero()){
+                if(baraja.cartas[j].getnumero() > baraja.cartas[j + 1].getnumero()){
                     Carta carta = baraja.cartas[j];
                     baraja.cartas[j] = baraja.cartas[j + 1];
                     baraja.cartas[j + 1] = carta;
@@ -40,7 +40,7 @@ public class Ordenacion{
     public void ordenarPorNumeroDesc(Baraja baraja){
         for(int i = 0; i < baraja.cartas.length; i++){
             for(int j = 0; j < baraja.cartas.length - 1; j++){
-                if(baraja.cartas[j].getnumero() > baraja.cartas[j + 1].getnumero()){
+                if(baraja.cartas[j].getnumero() < baraja.cartas[j + 1].getnumero()){
                     Carta carta = baraja.cartas[j];
                     baraja.cartas[j] = baraja.cartas[j + 1];
                     baraja.cartas[j + 1] = carta;
