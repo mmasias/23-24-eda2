@@ -1,0 +1,77 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Exercise",
+            "request": "launch",
+            "mainClass": "entregas.zamanilloLucia.ejerciciosRecursividad.Exercise",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "entregas.zamanilloLucia.ejerciciosBigO.ejercicio2.App",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "entregas.zamanilloLucia.ejerciciosBigO.ejercicio1.App",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Day",
+            "request": "launch",
+            "mainClass": "Day",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
+            "name": "Diet",
+            "request": "launch",
+            "mainClass": "Diet",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
+            "name": "Intake",
+            "request": "launch",
+            "mainClass": "Intake",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
+            "name": "EnumSetExample",
+            "request": "launch",
+            "mainClass": "src.casosDeUso.enumSet.ejemplo001.EnumSetExample",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
+            "name": "SchoolSchedule",
+            "request": "launch",
+            "mainClass": "src.casosDeUso.enumSet.ejemplo002.SchoolSchedule",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
+            "name": "PriorityQueueExample",
+            "request": "launch",
+            "mainClass": "src.casosDeUso.priorityQueue.PriorityQueueExample",
+            "projectName": "23-24-eda2_b7da4c2"
+        }
+    ]
+}
