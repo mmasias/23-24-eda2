@@ -1,121 +1,137 @@
 public class Ordenacion{
     public void ordenarPorPalo1(Baraja baraja){
-        for(int i = 0; i < baraja.cartas.length; i++){
-            for(int j = 0; j < baraja.cartas.length - 1; j++){
-                if(baraja.cartas[j].getpalo() > baraja.cartas[j + 1].getpalo()){
-                    Carta carta = baraja.cartas[j];
-                    baraja.cartas[j] = baraja.cartas[j + 1];
-                    baraja.cartas[j + 1] = carta;
+        Carta[] cartas = baraja.getCartas();
+        for(int i = 0; i < cartas.length; i++){
+            for(int j = 0; j < cartas.length - 1; j++){
+                if(cartas[j].getpalo() > cartas[j + 1].getpalo()){
+                    Carta carta = cartas[j];
+                    cartas[j] = cartas[j + 1];
+                    cartas[j + 1] = carta;
                 }
             }
         }
+        baraja.setCartas(cartas);
     }
 
     public void ordenarPorPalo2(Baraja baraja){
-        for(int i = 0; i < baraja.cartas.length; i++){
-            for(int j = 0; j < baraja.cartas.length - 1; j++){
-                if(baraja.cartas[j].getpalo() < baraja.cartas[j + 1].getpalo()){
-                    Carta carta = baraja.cartas[j];
-                    baraja.cartas[j] = baraja.cartas[j + 1];
-                    baraja.cartas[j + 1] = carta;
+        Carta[] cartas = baraja.getCartas();
+        for(int i = 0; i < cartas.length; i++){
+            for(int j = 0; j < cartas.length - 1; j++){
+                if(cartas[j].getpalo() < cartas[j + 1].getpalo()){
+                    Carta carta = cartas[j];
+                    cartas[j] = cartas[j + 1];
+                    cartas[j + 1] = carta;
                 }
             }
         }
+        baraja.setCartas(cartas);
     }
 
     public void ordenarPorPalo1yNumeroAsc(Baraja baraja){
-        for (int i = 0; i < baraja.cartas.length; i++) {
-            for (int j = 0; j < baraja.cartas.length - 1; j++) {
-                if (baraja.cartas[j].getpalo() > baraja.cartas[j + 1].getpalo()) {
-                    Carta temp = baraja.cartas[j];
-                    baraja.cartas[j] = baraja.cartas[j + 1];
-                    baraja.cartas[j + 1] = temp;
-                } else if (baraja.cartas[j].getpalo() == baraja.cartas[j + 1].getpalo()) {
-                    if (baraja.cartas[j].getnumero() < baraja.cartas[j + 1].getnumero()) {
-                        Carta temp = baraja.cartas[j];
-                        baraja.cartas[j] = baraja.cartas[j + 1];
-                        baraja.cartas[j + 1] = temp;
+        Carta[] cartas = baraja.getCartas();
+        for (int i = 0; i < cartas.length; i++) {
+            for (int j = 0; j < cartas.length - 1; j++) {
+                if (cartas[j].getpalo() > cartas[j + 1].getpalo()) {
+                    Carta temp = cartas[j];
+                    cartas[j] = cartas[j + 1];
+                    cartas[j + 1] = temp;
+                } else if (cartas[j].getpalo() == cartas[j + 1].getpalo()) {
+                    if (cartas[j].getnumero() < cartas[j + 1].getnumero()) {
+                        Carta temp = cartas[j];
+                        cartas[j] = cartas[j + 1];
+                        cartas[j + 1] = temp;
                     }
                 }
             }
         }
+        baraja.setCartas(cartas);
     }
 
     public void ordenarPorPalo1yNumeroDesc(Baraja baraja){
-        for (int i = 0; i < baraja.cartas.length; i++) {
-            for (int j = 0; j < baraja.cartas.length - 1; j++) {
-                if (baraja.cartas[j].getpalo() > baraja.cartas[j + 1].getpalo()) {
-                    Carta temp = baraja.cartas[j];
-                    baraja.cartas[j] = baraja.cartas[j + 1];
-                    baraja.cartas[j + 1] = temp;
-                } else if (baraja.cartas[j].getpalo() == baraja.cartas[j + 1].getpalo()) {
-                    if (baraja.cartas[j].getnumero() > baraja.cartas[j + 1].getnumero()) {
-                        Carta temp = baraja.cartas[j];
-                        baraja.cartas[j] = baraja.cartas[j + 1];
-                        baraja.cartas[j + 1] = temp;
+        Carta[] cartas = baraja.getCartas();
+        for (int i = 0; i < cartas.length; i++) {
+            for (int j = 0; j < cartas.length - 1; j++) {
+                if (cartas[j].getpalo() > cartas[j + 1].getpalo()) {
+                    Carta temp = cartas[j];
+                    cartas[j] = cartas[j + 1];
+                    cartas[j + 1] = temp;
+                } else if (cartas[j].getpalo() == cartas[j + 1].getpalo()) {
+                    if (cartas[j].getnumero() > cartas[j + 1].getnumero()) {
+                        Carta temp = cartas[j];
+                        cartas[j] = cartas[j + 1];
+                        cartas[j + 1] = temp;
                     }
                 }
             }
         }
+        baraja.setCartas(cartas);
     }
 
     public void ordenarPorPalo2yNumeroAsc(Baraja baraja){
-        for (int i = 0; i < baraja.cartas.length; i++) {
-            for (int j = 0; j < baraja.cartas.length - 1; j++) {
-                if (baraja.cartas[j].getpalo() < baraja.cartas[j + 1].getpalo()) {
-                    Carta temp = baraja.cartas[j];
-                    baraja.cartas[j] = baraja.cartas[j + 1];
-                    baraja.cartas[j + 1] = temp;
-                } else if (baraja.cartas[j].getpalo() == baraja.cartas[j + 1].getpalo()) {
-                    if (baraja.cartas[j].getnumero() < baraja.cartas[j + 1].getnumero()) {
-                        Carta temp = baraja.cartas[j];
-                        baraja.cartas[j] = baraja.cartas[j + 1];
-                        baraja.cartas[j + 1] = temp;
+        Carta[] cartas = baraja.getCartas();
+        for (int i = 0; i < cartas.length; i++) {
+            for (int j = 0; j < cartas.length - 1; j++) {
+                if (cartas[j].getpalo() < cartas[j + 1].getpalo()) {
+                    Carta temp = cartas[j];
+                    cartas[j] = cartas[j + 1];
+                    cartas[j + 1] = temp;
+                } else if (cartas[j].getpalo() == cartas[j + 1].getpalo()) {
+                    if (cartas[j].getnumero() < cartas[j + 1].getnumero()) {
+                        Carta temp = cartas[j];
+                        cartas[j] = cartas[j + 1];
+                        cartas[j + 1] = temp;
                     }
                 }
             }
         }
+        baraja.setCartas(cartas);
     }
 
     public void ordenarPorPalo2yNumeroDesc(Baraja baraja){
-        for (int i = 0; i < baraja.cartas.length; i++) {
-            for (int j = 0; j < baraja.cartas.length - 1; j++) {
-                if (baraja.cartas[j].getpalo() < baraja.cartas[j + 1].getpalo()) {
-                    Carta temp = baraja.cartas[j];
-                    baraja.cartas[j] = baraja.cartas[j + 1];
-                    baraja.cartas[j + 1] = temp;
-                } else if (baraja.cartas[j].getpalo() == baraja.cartas[j + 1].getpalo()) {
-                    if (baraja.cartas[j].getnumero() > baraja.cartas[j + 1].getnumero()) {
-                        Carta temp = baraja.cartas[j];
-                        baraja.cartas[j] = baraja.cartas[j + 1];
-                        baraja.cartas[j + 1] = temp;
+        Carta[] cartas = baraja.getCartas();
+        for (int i = 0; i < cartas.length; i++) {
+            for (int j = 0; j < cartas.length - 1; j++) {
+                if (cartas[j].getpalo() < cartas[j + 1].getpalo()) {
+                    Carta temp = cartas[j];
+                    cartas[j] = cartas[j + 1];
+                    cartas[j + 1] = temp;
+                } else if (cartas[j].getpalo() == cartas[j + 1].getpalo()) {
+                    if (cartas[j].getnumero() > cartas[j + 1].getnumero()) {
+                        Carta temp = cartas[j];
+                        cartas[j] = cartas[j + 1];
+                        cartas[j + 1] = temp;
                     }
                 }
             }
         }
+        baraja.setCartas(cartas);
     }
 
     public void ordenarPorNumeroAsc(Baraja baraja){
-        for(int i = 0; i < baraja.cartas.length; i++){
-            for(int j = 0; j < baraja.cartas.length - 1; j++){
-                if(baraja.cartas[j].getnumero() > baraja.cartas[j + 1].getnumero()){
-                    Carta carta = baraja.cartas[j];
-                    baraja.cartas[j] = baraja.cartas[j + 1];
-                    baraja.cartas[j + 1] = carta;
+        Carta[] cartas = baraja.getCartas();
+        for(int i = 0; i < cartas.length; i++){
+            for(int j = 0; j < cartas.length - 1; j++){
+                if(cartas[j].getnumero() < cartas[j + 1].getnumero()){
+                    Carta carta = cartas[j];
+                    cartas[j] = cartas[j + 1];
+                    cartas[j + 1] = carta;
                 }
             }
         }
+        baraja.setCartas(cartas);
     }
 
     public void ordenarPorNumeroDesc(Baraja baraja){
-        for(int i = 0; i < baraja.cartas.length; i++){
-            for(int j = 0; j < baraja.cartas.length - 1; j++){
-                if(baraja.cartas[j].getnumero() < baraja.cartas[j + 1].getnumero()){
-                    Carta carta = baraja.cartas[j];
-                    baraja.cartas[j] = baraja.cartas[j + 1];
-                    baraja.cartas[j + 1] = carta;
+        Carta[] cartas = baraja.getCartas();
+        for(int i = 0; i < cartas.length; i++){
+            for(int j = 0; j < cartas.length - 1; j++){
+                if(cartas[j].getnumero() > cartas[j + 1].getnumero()){
+                    Carta carta = cartas[j];
+                    cartas[j] = cartas[j + 1];
+                    cartas[j + 1] = carta;
                 }
             }
         }
+        baraja.setCartas(cartas);
     }
 }
