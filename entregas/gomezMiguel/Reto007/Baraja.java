@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Baraja {
 
-    private Carta[] cartas;
+    Carta[] cartas;
 
     private final int PALOS = 4;
     private final int NUMEROS = 13;
@@ -73,6 +73,10 @@ public class Baraja {
 
     public boolean vacia() {
         return ultima == 0;
+    }
+
+    public Carta[] getCartas(){
+        return cartas;
     }
 
 }
