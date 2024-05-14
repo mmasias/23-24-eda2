@@ -13,10 +13,12 @@ class RetoEDA {
         System.out.println("¿Cómo quieres ordenar la baraja?");
         System.out.println("1. Por palo (♥️,♦️,♣️,♠️) sin importar Nºs");
         System.out.println("2. Por palo (♠️,♣️,♦️,♥️) sin importar Nºs");
-        System.out.println("3. Por palo (♥️,♦️,♣️,♠️) y Nºs Ascendentes");    
-        System.out.println("4. Por palo (♠️,♣️,♦️,♥️) y Nºs Descendentes");
-        System.out.println("5. Por Nºs Ascendentes sin importar palo");
-        System.out.println("6. Por Nºs Descendentes sin importar palo");
+        System.out.println("3. Por palo (♥️,♦️,♣️,♠️) y Nºs Ascendentes");
+        System.out.println("4. Por palo (♥️,♦️,♣️,♠️) y Nºs Descendentes");
+        System.out.println("5. Por palo (♠️,♣️,♦️,♥️) y Nºs Ascendentes");    
+        System.out.println("6. Por palo (♠️,♣️,♦️,♥️) y Nºs Descendentes");
+        System.out.println("7. Por Nºs Ascendentes sin importar palo");
+        System.out.println("8. Por Nºs Descendentes sin importar palo");
         int opcion = new Scanner(System.in).nextInt();
             switch (opcion) {
                 case 1:
@@ -32,9 +34,15 @@ class RetoEDA {
                     
                     break;
                 case 5:
-                    ordenacion.ordenarPorNumeroAsc(baraja);
+                        
                     break;
                 case 6:
+                    
+                    break;
+                case 7:
+                    ordenacion.ordenarPorNumeroAsc(baraja);
+                    break;
+                case 8:
                     ordenacion.ordenarPorNumeroDesc(baraja);
                     break;
                 default:
