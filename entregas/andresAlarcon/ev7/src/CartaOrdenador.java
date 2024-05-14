@@ -1,20 +1,21 @@
+import java.lang.reflect.Field;
 import java.util.Comparator;
 
 public class CartaOrdenador {
 
     public static void ordenarPorNumero(Carta[] cartas) {
-        bubbleSort(cartas, Comparator.comparingInt(c -> c.numero));
+        bubbleSort(cartas, Comparator.comparingInt(c -> getFieldValue(c, "numero")));
     }
 
     public static void ordenarPorPaloYNumero(Carta[] cartas) {
         bubbleSort(cartas, new Comparator<Carta>() {
             @Override
             public int compare(Carta c1, Carta c2) {
-                int paloCompare = Integer.compare(c1.palo, c2.palo);
+                int paloCompare = Integer.compare(getFieldValue(c1, "palo"), getFieldValue(c2, "palo"));
                 if (paloCompare != 0) {
                     return paloCompare;
                 } else {
-                    return Integer.compare(c1.numero, c2.numero);
+                    return Integer.compare(getFieldValue(c1, "numero"), getFieldValue(c2, "numero"));
                 }
             }
         });
@@ -34,5 +35,15 @@ public class CartaOrdenador {
                 }
             }
         } while (swapped);
+    }
+
+    private static int getFieldValue(Carta carta, String fieldName) {
+        try {
+            Field field = Carta.class.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return (int) field.get(carta);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

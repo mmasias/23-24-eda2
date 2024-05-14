@@ -1,8 +1,8 @@
 
 public class Carta {
 
-    int palo;
-    int numero;
+    private int palo;
+    private int numero;
     private boolean bocaArriba;
 
     private final String[] PALOS = { "♠️", "♣️", "♦️", "♥️" };
