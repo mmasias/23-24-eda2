@@ -20,7 +20,7 @@ class RetoEDA {
         int opcion = new Scanner(System.in).nextInt();
             switch (opcion) {
                 case 1:
-                    
+                    ordenacion.ordenarPorPalo1(baraja);
                     break;
                 case 2:
                     
