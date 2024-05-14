@@ -23,7 +23,7 @@ class RetoEDA {
                     ordenacion.ordenarPorPalo1(baraja);
                     break;
                 case 2:
-                    
+                    ordenacion.ordenarPorPalo2(baraja);
                     break;
                 case 3:
                     
