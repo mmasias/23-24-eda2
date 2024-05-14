@@ -88,6 +88,7 @@ public class Baraja {
             }
         });
     }
+
     public void ordenarPorPalo() {
         Arrays.sort(cartas, new Comparator<Carta>() {
             @Override
@@ -127,8 +128,6 @@ public class Baraja {
             i = j;
         }
     }
-
-
 
 
 }

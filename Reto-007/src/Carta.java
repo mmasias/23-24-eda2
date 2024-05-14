@@ -1,11 +1,11 @@
 
 public class Carta {
 
-    public int palo;
-    public int numero;
+    protected int palo;
+    protected int numero;
     private boolean bocaArriba;
 
-    private final String[] PALOS = { "♠️", "♣️", "♦️", "♥️" };
+    private final String[] PALOS = { "♠️",  "♦️", "♣️", "♥️" };
     private final String[] NUMEROS = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K" };
 
     private final Intervalo NEGROS = new Intervalo(0, 1);
