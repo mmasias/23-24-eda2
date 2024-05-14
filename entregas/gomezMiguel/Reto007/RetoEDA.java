@@ -32,10 +32,10 @@ class RetoEDA {
                     
                     break;
                 case 5:
-                    
+                    ordenacion.ordenarPorNumeroAsc(baraja);
                     break;
                 case 6:
-                    
+                    ordenacion.ordenarPorNumeroDesc(baraja);
                     break;
                 default:
                     System.out.println("Opción no válida, te paso la baraja sin ordenar");
