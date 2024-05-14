@@ -28,7 +28,7 @@ class RetoEDA {
                     ordenacion.ordenarPorPalo2(baraja);
                     break;
                 case 3:
-                    
+                    ordenacion.ordenarPorPalo1yNumeroAsc(baraja);
                     break;
                 case 4:
                     
