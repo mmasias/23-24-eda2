@@ -41,6 +41,60 @@ public class Ordenacion{
         }
     }
 
+    public void ordenarPorPalo1yNumeroDesc(Baraja baraja){
+        for (int i = 0; i < baraja.cartas.length; i++) {
+            for (int j = 0; j < baraja.cartas.length - 1; j++) {
+                if (baraja.cartas[j].getpalo() > baraja.cartas[j + 1].getpalo()) {
+                    Carta temp = baraja.cartas[j];
+                    baraja.cartas[j] = baraja.cartas[j + 1];
+                    baraja.cartas[j + 1] = temp;
+                } else if (baraja.cartas[j].getpalo() == baraja.cartas[j + 1].getpalo()) {
+                    if (baraja.cartas[j].getnumero() > baraja.cartas[j + 1].getnumero()) {
+                        Carta temp = baraja.cartas[j];
+                        baraja.cartas[j] = baraja.cartas[j + 1];
+                        baraja.cartas[j + 1] = temp;
+                    }
+                }
+            }
+        }
+    }
+
+    public void ordenarPorPalo2yNumeroAsc(Baraja baraja){
+        for (int i = 0; i < baraja.cartas.length; i++) {
+            for (int j = 0; j < baraja.cartas.length - 1; j++) {
+                if (baraja.cartas[j].getpalo() < baraja.cartas[j + 1].getpalo()) {
+                    Carta temp = baraja.cartas[j];
+                    baraja.cartas[j] = baraja.cartas[j + 1];
+                    baraja.cartas[j + 1] = temp;
+                } else if (baraja.cartas[j].getpalo() == baraja.cartas[j + 1].getpalo()) {
+                    if (baraja.cartas[j].getnumero() < baraja.cartas[j + 1].getnumero()) {
+                        Carta temp = baraja.cartas[j];
+                        baraja.cartas[j] = baraja.cartas[j + 1];
+                        baraja.cartas[j + 1] = temp;
+                    }
+                }
+            }
+        }
+    }
+
+    public void ordenarPorPalo2yNumeroDesc(Baraja baraja){
+        for (int i = 0; i < baraja.cartas.length; i++) {
+            for (int j = 0; j < baraja.cartas.length - 1; j++) {
+                if (baraja.cartas[j].getpalo() < baraja.cartas[j + 1].getpalo()) {
+                    Carta temp = baraja.cartas[j];
+                    baraja.cartas[j] = baraja.cartas[j + 1];
+                    baraja.cartas[j + 1] = temp;
+                } else if (baraja.cartas[j].getpalo() == baraja.cartas[j + 1].getpalo()) {
+                    if (baraja.cartas[j].getnumero() > baraja.cartas[j + 1].getnumero()) {
+                        Carta temp = baraja.cartas[j];
+                        baraja.cartas[j] = baraja.cartas[j + 1];
+                        baraja.cartas[j + 1] = temp;
+                    }
+                }
+            }
+        }
+    }
+
     public void ordenarPorNumeroAsc(Baraja baraja){
         for(int i = 0; i < baraja.cartas.length; i++){
             for(int j = 0; j < baraja.cartas.length - 1; j++){

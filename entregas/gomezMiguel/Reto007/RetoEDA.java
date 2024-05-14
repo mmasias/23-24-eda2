@@ -31,13 +31,13 @@ class RetoEDA {
                     ordenacion.ordenarPorPalo1yNumeroAsc(baraja);
                     break;
                 case 4:
-                    
+                    ordenacion.ordenarPorPalo1yNumeroDesc(baraja);
                     break;
                 case 5:
-                        
+                    ordenacion.ordenarPorPalo2yNumeroAsc(baraja);
                     break;
                 case 6:
-                    
+                    ordenacion.ordenarPorPalo2yNumeroDesc(baraja);
                     break;
                 case 7:
                     ordenacion.ordenarPorNumeroAsc(baraja);
