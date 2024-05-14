@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "RetoEDA",
+            "request": "launch",
+            "mainClass": "evaluaciones.retos.reto007.RetoEDA",
+            "projectName": "23-24-eda2_b7da4c2"
+        },
+        {
+            "type": "java",
             "name": "Exercise",
             "request": "launch",
             "mainClass": "entregas.zamanilloLucia.ejerciciosRecursividad.Exercise",
