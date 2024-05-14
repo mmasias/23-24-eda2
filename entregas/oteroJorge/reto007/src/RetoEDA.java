@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class RetoEDA {
 
     public static void main(String[] args) {
@@ -5,7 +7,10 @@ class RetoEDA {
         Baraja baraja = new Baraja();
 
         //
-        Ordenar.ordenarMazo(baraja.getCartas());
+        Scanner sc = new Scanner(System.in);
+        System.out.println("¿Cómo quieres ordenar la baraja? (1: por número, 2: por palo)");
+        int orden = sc.nextInt();
+        baraja.ordenar(orden);
         //
         Carta carta;
         do {

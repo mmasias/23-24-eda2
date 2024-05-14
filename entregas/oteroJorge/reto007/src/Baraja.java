@@ -30,8 +30,12 @@ public class Baraja {
         }
     }
 
-    public void ordenar() {
-        Ordenar.ordenarMazo(cartas);
+    public void ordenar(int numero) {
+        if(numero == 1){
+            Ordenar.ordenarPorNumero(cartas);
+        } else {
+            Ordenar.ordenarPorPalo(cartas);
+        }
     }
 
     public void poner(Carta carta) {
@@ -45,7 +49,7 @@ public class Baraja {
             System.out.println("No hay cartas en la baraja");
         } else {
             for (int i = 0; i < ultima; i++) {
-                cartas[i].voltear();  // Asegurarnos de que las cartas estén boca arriba para mostrarlas
+                cartas[i].voltear(); 
                 cartas[i].mostrar();
                 System.out.print(", ");
             }
