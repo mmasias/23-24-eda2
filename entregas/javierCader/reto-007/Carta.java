@@ -62,4 +62,12 @@ public class Carta {
     private boolean rojo() {
         return ROJOS.incluye(this.palo);
     }
+
+    public int getPalo() {
+        return palo;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
 }
