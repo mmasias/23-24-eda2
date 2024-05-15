@@ -2,15 +2,20 @@ package evaluaciones.retos.reto007;
 
 public class Sort {
 
-    public void insertionSort (Carta[] cartas) {
-        for (int i = 1; i < cartas.length; i++) {
-            int current = cartas[i].getNumero();
-            int j = i - 1;  
-            while(j >= 0 && cartas[j].getNumero() > current) {
-                cartas[j + 1] = cartas[j];
-                j--;
+
+    public void selectionSort(Carta[] cartas) {
+        int startIndex = 0;
+        while(startIndex < cartas.length - 1) {
+            int minIndex = startIndex;
+            for (int j = startIndex + 1; j < cartas.length; j++) {
+                if (cartas[j].getNumero() < cartas[minIndex].getNumero()) {
+                    minIndex = j;
+                }
             }
-            cartas[j + 1] = cartas[i];
+            Carta temp = cartas[minIndex];
+            cartas[minIndex] = cartas[startIndex];
+            cartas[startIndex] = temp;
+            startIndex++;
         }
     }
 

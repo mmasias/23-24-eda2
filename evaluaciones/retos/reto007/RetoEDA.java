@@ -8,7 +8,10 @@ public class RetoEDA {
         Baraja baraja = new Baraja();
 
         //
-            
+         Carta[] cartas = baraja.getCartas();
+         Sort sortingMethod = new Sort();
+         
+         sortingMethod.selectionSort(cartas);
         //
         Carta carta;
         do {
