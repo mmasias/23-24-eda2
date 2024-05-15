@@ -1,5 +1,3 @@
-package 23-24-eda2.entregas.puenteDaniel.Reto007;
-
 import java.util.Random;
 
 public class Baraja {

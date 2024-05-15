@@ -1,12 +1,10 @@
-package 23-24-eda2.entregas.puenteDaniel.Reto007;
-
 public class Carta {
 
     private int palo;
     private int numero;
     private boolean bocaArriba;
 
-    private final String[] PALOS = { "♠️", "♣️", "♦️", "♥️" };
+    private final String[] PALOS = { "PICAS", "TREBOLES", "DIAMANTES", "CORAZONES" };
     private final String[] NUMEROS = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K" };
 
     private final Intervalo NEGROS = new Intervalo(0, 1);
@@ -62,5 +60,13 @@ public class Carta {
 
     private boolean rojo() {
         return ROJOS.incluye(this.palo);
+    }
+
+    public int getNumero(){
+        return numero;
+    }
+
+    public int getPalo(){
+        return palo;
     }
 }
