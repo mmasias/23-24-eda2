@@ -63,7 +63,11 @@ public class Reto {
 
     private void showDeck() {
         for (Carta carta : baraja.getCartas()) {
-            carta.mostrar();
+            if (carta != null) {
+                carta.mostrar();
+            } else {
+                System.out.print("[null]");
+            }
         }
         System.out.println();
     }
@@ -107,12 +111,14 @@ public class Reto {
             originalCardMap.put(key, carta);
         }
 
+        System.out.println("Original card map: " + originalCardMap);
         for (int i = 0; i < sortedNumbers.length; i++) {
             int sortedKey = sortedNumbers[i];
             if (originalCardMap.containsKey(sortedKey)) {
                 cartas[i] = originalCardMap.get(sortedKey);
             } else {
                 cartas[i] = null;
+                System.out.println("Warning: Missing key " + sortedKey);
             }
         }
     }

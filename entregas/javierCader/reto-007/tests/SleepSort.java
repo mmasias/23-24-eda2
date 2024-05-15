@@ -16,7 +16,7 @@ public class SleepSort {
                 try {
                     Thread.sleep(number * 8);
                     synchronized (sortedNumbers) {
-                        sortedNumbers[index.getAndIncrement()] = numbers[currentIndex];
+                        sortedNumbers[index.getAndIncrement()] = number;
                         callback.accept(sortedNumbers.clone());
                     }
                 } catch (InterruptedException e) {
