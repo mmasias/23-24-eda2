@@ -1,11 +1,17 @@
 import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Map;
-import tests.SleepSort;
 
 public class Reto {
     private Baraja baraja;
     private Scanner scanner;
+
+    private final String ANSI_RESET = "\u001B[0m";
+    private final String ANSI_RED = "\u001B[31m";
+    private final String ANSI_GREEN = "\u001B[32m";
+    private final String ANSI_YELLOW = "\u001B[33m";
+    private final String ANSI_BLUE = "\u001B[34m";
+    private final String ANSI_PURPLE = "\u001B[35m";
+    private final String ANSI_CYAN = "\u001B[36m";
+    private final String ANSI_WHITE = "\u001B[37m";
 
     public Reto() {
         baraja = new Baraja();
@@ -14,14 +20,7 @@ public class Reto {
 
     public void start() {
         while (true) {
-            System.out.println("Menu:");
-            System.out.println("1. Shuffle Deck");
-            System.out.println("2. Sort Deck by Number");
-            System.out.println("3. Sort Deck by Palo (Suit)");
-            System.out.println("4. Show Deck");
-            System.out.println("5. Exit");
-            System.out.print("Choose an option: ");
-            
+            printMenu();
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -37,36 +36,55 @@ public class Reto {
                     showDeck();
                     break;
                 case 5:
-                    System.out.println("Exiting...");
+                    System.out.println(ANSI_PURPLE + "Exiting..." + ANSI_RESET);
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println(ANSI_RED + "Invalid choice. Please try again." + ANSI_RESET);
             }
         }
+    }
+
+    private void printMenu() {
+        System.out.println(ANSI_CYAN + "===============================" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "         Card Sorting          " + ANSI_RESET);
+        System.out.println(ANSI_CYAN + "===============================" + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "1. Shuffle Deck" + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "2. Sort Deck by Number" + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "3. Sort Deck by Palo (Suit)" + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "4. Show Deck" + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "5. Exit" + ANSI_RESET);
+        System.out.println(ANSI_CYAN + "===============================" + ANSI_RESET);
+        System.out.print(ANSI_WHITE + "Choose an option: " + ANSI_RESET);
     }
 
     private void sortDeckByNumber() {
         Carta[] cartas = baraja.getCartas();
         flipAllCards(cartas);
-        sleepSortByNumber(cartas);
+        bubbleSortByNumber(cartas);
         baraja.setCartas(cartas);
-        System.out.println("Deck sorted by number.");
+        System.out.println(ANSI_GREEN + "Deck sorted by number." + ANSI_RESET);
     }
 
     private void sortDeckByPalo() {
         Carta[] cartas = baraja.getCartas();
         flipAllCards(cartas);
-        sleepSortByPalo(cartas);
+        bubbleSortByPalo(cartas);
         baraja.setCartas(cartas);
-        System.out.println("Deck sorted by palo.");
+        System.out.println(ANSI_GREEN + "Deck sorted by palo." + ANSI_RESET);
     }
 
     private void showDeck() {
-        for (Carta carta : baraja.getCartas()) {
+        for (int i = 0; i < baraja.getCartas().length; i++) {
+            Carta carta = baraja.getCartas()[i];
             if (carta != null) {
                 carta.mostrar();
             } else {
                 System.out.print("[null]");
+            }
+            if ((i + 1) % 13 == 0) {
+                System.out.println();
+            } else {
+                System.out.print(" ");
             }
         }
         System.out.println();
@@ -80,47 +98,42 @@ public class Reto {
         }
     }
 
-    private void sleepSortByNumber(Carta[] cartas) {
-        int[] numeros = new int[cartas.length];
-        for (int i = 0; i < cartas.length; i++) {
-            numeros[i] = cartas[i].getNumero() * 4 + cartas[i].getPalo();
-        }
-        SleepSort.sleepSort(numeros, sortedNumbers -> {
-            reorderCartas(cartas, sortedNumbers, true);
-            System.out.println("Intermediate sorting state by number:");
-            showDeck();
-        });
-    }
-
-    private void sleepSortByPalo(Carta[] cartas) {
-        int[] numeros = new int[cartas.length];
-        for (int i = 0; i < cartas.length; i++) {
-            numeros[i] = cartas[i].getPalo() * 13 + cartas[i].getNumero();
-        }
-        SleepSort.sleepSort(numeros, sortedNumbers -> {
-            reorderCartas(cartas, sortedNumbers, false);
-            System.out.println("Intermediate sorting state by palo:");
-            showDeck();
-        });
-    }
-
-    private void reorderCartas(Carta[] cartas, int[] sortedNumbers, boolean sortByNumber) {
-        Map<Integer, Carta> originalCardMap = new HashMap<>();
-        for (Carta carta : cartas) {
-            int key = sortByNumber ? carta.getNumero() * 4 + carta.getPalo() : carta.getPalo() * 13 + carta.getNumero();
-            originalCardMap.put(key, carta);
-        }
-
-        System.out.println("Original card map: " + originalCardMap);
-        for (int i = 0; i < sortedNumbers.length; i++) {
-            int sortedKey = sortedNumbers[i];
-            if (originalCardMap.containsKey(sortedKey)) {
-                cartas[i] = originalCardMap.get(sortedKey);
-            } else {
-                cartas[i] = null;
-                System.out.println("Warning: Missing key " + sortedKey);
+    private void bubbleSortByNumber(Carta[] cartas) {
+        boolean swapped;
+        do {
+            swapped = false;
+            for (int i = 0; i < cartas.length - 1; i++) {
+                int currentKey = cartas[i].getNumero() * 4 + cartas[i].getPalo();
+                int nextKey = cartas[i + 1].getNumero() * 4 + cartas[i + 1].getPalo();
+                if (currentKey > nextKey) {
+                    Carta temp = cartas[i];
+                    cartas[i] = cartas[i + 1];
+                    cartas[i + 1] = temp;
+                    swapped = true;
+                }
             }
-        }
+            System.out.println("\n" + ANSI_BLUE + "--- Intermediate sorting state by number ---" + ANSI_RESET);
+            showDeck();
+        } while (swapped);
+    }
+
+    private void bubbleSortByPalo(Carta[] cartas) {
+        boolean swapped;
+        do {
+            swapped = false;
+            for (int i = 0; i < cartas.length - 1; i++) {
+                int currentKey = cartas[i].getPalo() * 13 + cartas[i].getNumero();
+                int nextKey = cartas[i + 1].getPalo() * 13 + cartas[i + 1].getNumero();
+                if (currentKey > nextKey) {
+                    Carta temp = cartas[i];
+                    cartas[i] = cartas[i + 1];
+                    cartas[i + 1] = temp;
+                    swapped = true;
+                }
+            }
+            System.out.println("\n" + ANSI_BLUE + "--- Intermediate sorting state by palo ---" + ANSI_RESET);
+            showDeck();
+        } while (swapped);
     }
 
     public static void main(String[] args) {

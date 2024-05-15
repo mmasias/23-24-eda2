@@ -1,4 +1,3 @@
-
 public class Carta {
 
     private int palo;
@@ -8,8 +7,13 @@ public class Carta {
     private final String[] PALOS = { "♠️", "♣️", "♦️", "♥️" };
     private final String[] NUMEROS = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K" };
 
-    private final Intervalo NEGROS = new Intervalo(0, 1);
-    private final Intervalo ROJOS = new Intervalo(2, 3);
+    private final String ANSI_RESET = "\u001B[0m";
+    private final String ANSI_BLACK = "\u001B[30m";
+    private final String ANSI_RED = "\u001B[31m";
+    private final String ANSI_GREEN = "\u001B[32m";
+    private final String ANSI_BLUE = "\u001B[34m";
+
+    private final String[] PALOS_COLORS = { ANSI_BLACK, ANSI_GREEN, ANSI_RED, ANSI_BLUE };
 
     public Carta(int palo, int numero) {
         this.palo = palo;
@@ -24,7 +28,7 @@ public class Carta {
             numero = NUMEROS[this.numero];
             palo = PALOS[this.palo];
         }
-        System.out.print ("[" + numero + " " + palo + "]");
+        System.out.print(PALOS_COLORS[this.palo] + "[" + numero + " " + palo + "]" + ANSI_RESET);
     }
 
     public void voltear() {
@@ -32,7 +36,7 @@ public class Carta {
     }
 
     public boolean esAs() {
-        return numero==0;
+        return numero == 0;
     }
 
     public boolean igualPalo(Carta carta) {
@@ -40,11 +44,11 @@ public class Carta {
     }
 
     public boolean siguiente(Carta carta) {
-        return this.numero == carta.numero+1;
+        return this.numero == carta.numero + 1;
     }
 
     public boolean esRey() {
-        return numero==12;
+        return numero == 12;
     }
 
     public boolean bocaArriba() {
@@ -52,15 +56,15 @@ public class Carta {
     }
 
     public boolean distintoColor(Carta carta) {
-        return this.rojo() && carta.negro() || this.negro() && carta.rojo();        
+        return this.rojo() && carta.negro() || this.negro() && carta.rojo();
     }
 
     private boolean negro() {
-        return NEGROS.incluye(this.palo);
+        return this.palo == 0 || this.palo == 1;
     }
 
     private boolean rojo() {
-        return ROJOS.incluye(this.palo);
+        return this.palo == 2 || this.palo == 3;
     }
 
     public int getPalo() {
