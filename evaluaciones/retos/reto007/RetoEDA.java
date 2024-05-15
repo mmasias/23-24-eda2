@@ -25,7 +25,7 @@ public class RetoEDA {
                 sortingMethod.selectionSortNumero(cartas);
                 break;
             case 2:
-                //selectionSortPalo
+                sortingMethod.bubbleSortPalo(cartas);
                 break;
             default:
                 System.out.println("No ha introducido una opción válida");

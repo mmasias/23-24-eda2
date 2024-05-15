@@ -19,4 +19,26 @@ public class Sort {
         }
     }
 
+    
+    public void bubbleSortPalo(Carta[] cartas) {
+        boolean swapped;
+        int passIndex = 0;
+        do {
+            swapped = false;
+            for (int j = 0; j < cartas.length - 1 - passIndex; j++) {
+                int current = cartas[j].getPalo() * 13 + cartas[j].getNumero();
+                int next = cartas[j + 1].getPalo() * 13 + cartas[j + 1].getNumero();
+                if (current > next) {
+                    Carta temp = cartas[j];
+                    cartas[j] = cartas[j + 1];
+                    cartas[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+            passIndex++;
+        } while (swapped);
+    }
+
+
+
 }
