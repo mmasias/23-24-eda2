@@ -1,6 +1,5 @@
 package tests;
 
-import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
@@ -16,8 +15,10 @@ public class SleepSort {
             threads[i] = new Thread(() -> {
                 try {
                     Thread.sleep(number * 8);
-                    sortedNumbers[index.getAndIncrement()] = number;
-                    callback.accept(sortedNumbers.clone());
+                    synchronized (sortedNumbers) {
+                        sortedNumbers[index.getAndIncrement()] = numbers[currentIndex];
+                        callback.accept(sortedNumbers.clone());
+                    }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     System.out.println("Thread interrupted: " + e.getMessage());
@@ -37,5 +38,4 @@ public class SleepSort {
 
         System.arraycopy(sortedNumbers, 0, numbers, 0, numbers.length);
     }
-
 }

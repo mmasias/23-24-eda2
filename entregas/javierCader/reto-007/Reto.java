@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import tests.SleepSort;
@@ -83,7 +82,7 @@ public class Reto {
             numeros[i] = cartas[i].getNumero() * 4 + cartas[i].getPalo();
         }
         SleepSort.sleepSort(numeros, sortedNumbers -> {
-            reorderCartas(cartas, sortedNumbers);
+            reorderCartas(cartas, sortedNumbers, true);
             System.out.println("Intermediate sorting state by number:");
             showDeck();
         });
@@ -95,21 +94,26 @@ public class Reto {
             numeros[i] = cartas[i].getPalo() * 13 + cartas[i].getNumero();
         }
         SleepSort.sleepSort(numeros, sortedNumbers -> {
-            reorderCartas(cartas, sortedNumbers);
+            reorderCartas(cartas, sortedNumbers, false);
             System.out.println("Intermediate sorting state by palo:");
             showDeck();
         });
     }
 
-    private void reorderCartas(Carta[] cartas, int[] sortedNumbers) {
+    private void reorderCartas(Carta[] cartas, int[] sortedNumbers, boolean sortByNumber) {
         Map<Integer, Carta> originalCardMap = new HashMap<>();
-        for (int i = 0; i < cartas.length; i++) {
-            int number = cartas[i].getNumero() * 4 + cartas[i].getPalo();
-            originalCardMap.put(number, cartas[i]);
+        for (Carta carta : cartas) {
+            int key = sortByNumber ? carta.getNumero() * 4 + carta.getPalo() : carta.getPalo() * 13 + carta.getNumero();
+            originalCardMap.put(key, carta);
         }
 
         for (int i = 0; i < sortedNumbers.length; i++) {
-            cartas[i] = originalCardMap.get(sortedNumbers[i]);
+            int sortedKey = sortedNumbers[i];
+            if (originalCardMap.containsKey(sortedKey)) {
+                cartas[i] = originalCardMap.get(sortedKey);
+            } else {
+                cartas[i] = null;
+            }
         }
     }
 
