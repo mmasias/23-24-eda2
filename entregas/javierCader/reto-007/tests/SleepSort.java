@@ -11,7 +11,7 @@ public class SleepSort {
             final int number = numbers[i]; 
             threads[i] = new Thread(() -> {
                 try {
-                    Thread.sleep(number * 2);
+                    Thread.sleep(number * 15);
                     System.out.println(number);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
@@ -33,7 +33,7 @@ public class SleepSort {
 
     public static void main(String[] args) {
         Random rand = new Random();
-        int[] numbers = new int[1000];
+        int[] numbers = new int[100];
         for (int i = 0; i < numbers.length; i++) {
             numbers[i] = rand.nextInt(100) + 1; 
         }
