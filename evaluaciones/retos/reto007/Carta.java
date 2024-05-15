@@ -66,4 +66,8 @@ public class Carta {
     public int getNumero() {
         return this.numero;
     }
+
+    public int getPalo() {
+        return this.palo;
+    }
 }

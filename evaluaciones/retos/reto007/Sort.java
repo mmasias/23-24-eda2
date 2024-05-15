@@ -3,7 +3,7 @@ package evaluaciones.retos.reto007;
 public class Sort {
 
 
-    public void selectionSort(Carta[] cartas) {
+    public void selectionSortNumero(Carta[] cartas) {
         int startIndex = 0;
         while(startIndex < cartas.length - 1) {
             int minIndex = startIndex;
