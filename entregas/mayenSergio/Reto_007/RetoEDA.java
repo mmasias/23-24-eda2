@@ -2,6 +2,7 @@ package entregas.mayenSergio.Reto_007;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Scanner;
 
 public class RetoEDA {
 
@@ -18,6 +19,12 @@ public class RetoEDA {
             cartas[index] = baraja.sacar();
             index++;
         }
+        
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Seleccione el tipo de ordenamiento:");
+        System.out.println("1. Ordenar por número y luego por palo");
+        System.out.println("2. Ordenar por palo y luego por número");
+        int opcion = scanner.nextInt();
 
         Arrays.sort(cartas, 0, index, new Comparator<Carta>() {
             @Override
