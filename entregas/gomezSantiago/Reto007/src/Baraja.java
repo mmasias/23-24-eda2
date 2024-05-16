@@ -1,7 +1,6 @@
 import java.util.Random;
 
 public class Baraja {
-
     private Carta[] cartas;
 
     private final int PALOS = 4;
@@ -21,7 +20,7 @@ public class Baraja {
         this.barajar();
     }
 
-    private void barajar() {
+    public void barajar() {
         Random aleatorio = new Random();
         for (int i = 0; i < 1000; i++) {
             int origen = aleatorio.nextInt(TOTAL_CARTAS);
@@ -75,4 +74,7 @@ public class Baraja {
         return ultima == 0;
     }
 
+    public Carta[] getCartas() {
+        return this.cartas;
+    }
 }

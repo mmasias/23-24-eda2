@@ -1,4 +1,3 @@
-
 public class Columna {
 
     private Carta[] cartas;

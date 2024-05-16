@@ -7,7 +7,10 @@ class RetoEDA {
         Baraja baraja = new Baraja();
 
         //
-
+        OrdenacionBaraja.ordenarBarajaPorPalo(baraja);
+        OrdenacionBaraja.mostrarBaraja(baraja);
+        OrdenacionBaraja.ordenarBarajaPorNumero(baraja);
+        OrdenacionBaraja.mostrarBaraja(baraja);
         //
         Carta carta;
         do {
