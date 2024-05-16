@@ -6,6 +6,11 @@ class RetoEDA {
     private static Baraja baraja;
 
     public static void main(String[] args) {
+        RetoEDA reto = new RetoEDA();
+        reto.iniciarJuego();
+    }
+
+    private void iniciarJuego() {
         baraja = new Baraja();
         ArrayList<Carta> conjuntoCartas = new ArrayList<>();
         System.out.println("Baraja inicial: ");
@@ -18,7 +23,7 @@ class RetoEDA {
         } while (!baraja.vacia());
 
         System.out.println();
-        new RetoEDA().imprimirMenu(conjuntoCartas);
+        imprimirMenu(conjuntoCartas);
     }
 
     private static void bubbleSort(ArrayList<Carta> cartas, Comparator<Carta> comparator) {
@@ -65,15 +70,15 @@ class RetoEDA {
                     break;
                 case 3:
                     System.out.println("Barajando otra vez...");
-                    main(null);
-                    break;
+                    iniciarJuego();
+                    return;
                 case 4:
                     System.out.println("Adiós");
                     break;
                 default:
                     System.out.println("Opción no válida");
             }
-        } while (opcion != 3);
+        } while (opcion != 4);
     }
 
     private static void ordenarPorNumero(ArrayList<Carta> conjuntoCartas) {

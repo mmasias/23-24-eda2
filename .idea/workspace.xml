@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce98a96a-649e-45a1-93ad-8701c00bca64" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/entregas/esparragozaVeronika/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entregas/esparragozaVeronika/RetoEDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/entregas/esparragozaVeronika/RetoEDA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_23-24-eda2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_23-24-eda2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_23-24-eda2/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_23-24-eda2/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_23-24-eda2/RetoEDA.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_23-24-eda2/RetoEDA.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
