@@ -16,7 +16,25 @@ class RetoEDA {
         System.out.println("1. Ordenar por palo");
         System.out.println("2. Ordenar por número");
         System.out.print("Introduce tu elección:");
-        int eleccion = scanner.nextInt();
+        int opcion = scanner.nextInt();
+
+
+        Carta[] cartas = new Carta[52];
+        for (int i = 0; i < 52; i++) {
+            cartas[i] = baraja.sacar();
+        }
+
+        if (opcion==1){
+            OrdenarCartas.clasificarPaloYNumero(cartas);
+        }
+        if (opcion==2){
+            OrdenarCartas.clasificarNumero(cartas);
+        }
+
+        for (Carta carta : cartas) {
+            baraja.poner(carta);
+        }
+
         //
         Carta carta;
         do {
