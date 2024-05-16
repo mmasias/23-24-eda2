@@ -73,4 +73,8 @@ public class Baraja {
     public boolean vacia() {
         return ultima == 0;
     }
+
+    public Carta[] getCards(){
+        return  this.cartas;
+    }
 }

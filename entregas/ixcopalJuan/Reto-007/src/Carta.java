@@ -60,4 +60,20 @@ public class Carta {
     private boolean rojo() {
         return ROJOS.incluye(this.palo);
     }
+    public int getSuit(){
+        return this.palo;
+    }
+
+    public int getNumber(){
+        return this.numero;
+    }
+    public void show(){
+        String numero = NUMEROS[this.numero];
+        String palo = PALOS[this.palo];
+        if (this.bocaArriba) {
+            numero = "?";
+            palo = "?";
+        }
+        System.out.print ("[" + numero + " " + palo + "]");
+    }
 }
