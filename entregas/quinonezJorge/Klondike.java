@@ -99,7 +99,7 @@ class Klondike {
     }
   }
 
-  public static void main(String[] args) {
-    new Klondike().jugar();
-  }
+  // public static void main(String[] args) {
+  // new Klondike().jugar();
+  // }
 }
