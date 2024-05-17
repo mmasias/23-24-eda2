@@ -18,6 +18,14 @@ public class Carta {
         bocaArriba = false;
     }
 
+    public int getPalo() {
+        return palo;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
     public void mostrar(){
         String numero = "?";
         String palo = "?";

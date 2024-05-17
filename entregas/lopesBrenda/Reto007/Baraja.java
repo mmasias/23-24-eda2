@@ -6,9 +6,9 @@ public class Baraja {
     
     private Carta[] cartas;
 
-    private final int PALOS = 4;
-    private final int NUMEROS = 13;
-    private final int TOTAL_CARTAS = PALOS * NUMEROS;
+    private final static int PALOS = 4;
+    private final static int NUMEROS = 13;
+    public final static int TOTAL_CARTAS = PALOS * NUMEROS;
 
     private int ultima;
 
