@@ -10,8 +10,8 @@ public class Ordenador {
 
     sort(cartas, 0, cartas.size() - 1);
 
-    for (Carta carta : cartas) {
-      baraja.poner(carta);
+    for (int i = cartas.size() - 1; i >= 0; i--) {
+      baraja.poner(cartas.get(i));
     }
   }
 
