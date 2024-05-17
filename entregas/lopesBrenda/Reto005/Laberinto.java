@@ -15,10 +15,15 @@ public class Laberinto {
     static final int CAMBIA_VISUALIZACION = 5;
     static final int NADA = 999;
 
+    static final int MODO_AUTOMATICO = 6;
+    static boolean modoAutomatico = false;
+
     static final int VISUALIZACION_NORMAL = 0;
     static final int VISUALIZACION_SIN_COLOR = 1;
     static final int VISUALIZACION_RAW = 2;
     static final int VISUALIZACION_COLISIONES = 3;
+
+    static final int[] POSICION_INICIAL = { 14, 15 };
 
     static final int[][] MOVIMIENTO = {
             { -1, 0 },
@@ -31,10 +36,15 @@ public class Laberinto {
     static int alcanceVision;
     static int viewPort;
     static int modoVisualizacion = VISUALIZACION_NORMAL;
-
+    //static int[][] laberinto;
     static int minFila, minColumna, maxFila, maxColumna;
 
     static boolean jugando = true;
+    private static final int LIBRE = 0;
+    private static final int MURO = 1;
+    private static final int CAMINO = 2;
+    private static final int VISITADO = 3;
+
 
     public static void main(String[] args) {
 
@@ -287,6 +297,15 @@ public class Laberinto {
             imprimirMundo(castilloLB, elPersonaje);
             verAccion(elPersonaje, castilloLB);
         } while (jugando);
+        if(modoAutomatico) {
+            //laberinto = inicializarMundo(castilloLB);
+            System.out.println("Modo automático activado");
+            if(mueveAutomatico(laberinto, posicionPersonaje, ultimoMovimiento, castilloLB)) {
+                mostrarMundo(castilloLB, posicionPersonaje);
+            } else {
+                System.out.println("No hay salida");
+            }
+        }
     }
 
     private static void inicializarMundo(String[] mundo) {
@@ -327,6 +346,10 @@ public class Laberinto {
     }
 
     static void imprimirMundo(String[] castillo, int[] personaje) {
+        if(modoAutomatico) {
+            System.out.println("Pulse una tecla: ");
+            new Scanner(System.in).nextLine();
+        }
 
         String elemento;
         limpiarPantalla();
@@ -517,6 +540,37 @@ public class Laberinto {
         }
     }
 
+    public static boolean mueveAutomatico(int[][] laberinto, int[] personaje, int direccion, String[] mundo) {
+        calculaAlcanceVision();
+        int x = personaje[FILA];
+        int y = personaje[COLUMNA];
+
+        if (x < 0 || x >= laberinto.length || y < 0 || y >= laberinto[0].length) {
+            System.out.println("Intentando moverse a: ("+ y + ", " + x +" ) Fuera de los límites del laberinto");
+            return false;
+        }
+        if (laberinto[x][y] != LIBRE) {
+            System.out.println("Intentando moverse a: ("+ y + ", " + x +" ) Celda bloqueada o ya visitada. ");
+            return false;
+        }
+        if (x == 40 && y == 42) {
+            System.out.println("Intentando moverse a: ("+ y + ", " + x +" ) Salida encontrada");
+            laberinto[x][y] = CAMINO;
+            return true;
+        }
+        laberinto[x][y] = CAMINO;
+        System.out.println("Moviendo a (" + y + ", " + x + "): Marcando como parte del camino.");
+        imprimirMundo(mundo, personaje);
+
+        if (mueveAutomatico(laberinto, personaje, DERECHA, mundo) || mueveAutomatico(laberinto, personaje,  ABAJO, mundo) ||
+            mueveAutomatico(laberinto, personaje, IZQUIERDA, mundo) || mueveAutomatico(laberinto, personaje, ARRIBA, mundo)) {
+            return true;
+        }
+
+        laberinto[x][y] = VISITADO; 
+        return false;
+    }
+
     static void verAccion(int[] elPersonaje, String[] elMundo) {
 
         switch (capturarMovimiento()) {
@@ -537,6 +591,9 @@ public class Laberinto {
                 break;
             case CAMBIA_VISUALIZACION:
                 cambiaVisualizacion();
+                break;
+            case MODO_AUTOMATICO:
+                modoAutomatico = true;
                 break;
             case NADA:
                 break;
@@ -561,6 +618,8 @@ public class Laberinto {
                 return IZQUIERDA;
             case 'd', 'D', '6':
                 return DERECHA;
+            case 'g', 'G':
+                return MODO_AUTOMATICO;
             case 'f', 'F':
                 return SALIR;
             case 'v', 'V':
