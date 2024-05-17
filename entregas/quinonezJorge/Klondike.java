@@ -25,8 +25,8 @@ class Klondike {
 
   public void jugar() {
     boolean estaJugando = true;
+    Menu menu = new Menu();
     do {
-      Menu menu = new Menu();
       menu.mostrar();
       mostrarTapete();
       int opcion = menu.getOpcion();
