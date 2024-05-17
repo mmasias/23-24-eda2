@@ -1,47 +1,101 @@
 
 class OrdenCartas {
 
-    public static void sort(Carta[] cartas, boolean ordenarPorPalo) {
-        boolean swapped;
-        int passIndex = 0;
-        do {
-            swapped = false;
-            for (int j = 0; j < cartas.length - 1 - passIndex; j++) {
-                if (ordenarPorPalo) {
-                    if (compararPorPalo(cartas[j], cartas[j + 1]) > 0) {
-                        cambiar(cartas, j, j + 1);
-                        swapped = true;
-                    }
-                } else {
-                    if (compararNumero(cartas[j], cartas[j + 1]) > 0) {
-                        cambiar(cartas, j, j + 1);
-                        swapped = true;
-                    }
-                }
+    public static void main(String[] args) {
+        Baraja baraja = new Baraja();
+        ordenarBarajaPorPalo(baraja);
+        mostrarBaraja(baraja);
+        ordenarBarajaPorNumero(baraja);
+        mostrarBaraja(baraja);
+    }
+
+    public static void ordenarBarajaPorPalo(Baraja baraja) {
+        Carta[] cartas = baraja.devolverCartas();
+        mergeSortPorPalo(cartas, 0, cartas.length - 1);
+    }
+
+    public static void ordenarBarajaPorNumero(Baraja baraja) {
+        Carta[] cartas = baraja.devolverCartas();
+        mergeSortPorNumero(cartas, 0, cartas.length - 1);
+    }
+
+    public static void mergeSortPorPalo(Carta[] cartas, int left, int right) {
+        if (left < right) {
+            int middle = (left + right) / 2;
+            mergeSortPorPalo(cartas, left, middle);
+            mergeSortPorPalo(cartas, middle + 1, right);
+            mergePorPalo(cartas, left, middle, right);
+        }
+    }
+
+    public static void mergeSortPorNumero(Carta[] cartas, int left, int right) {
+        if (left < right) {
+            int middle = (left + right) / 2;
+            mergeSortPorNumero(cartas, left, middle);
+            mergeSortPorNumero(cartas, middle + 1, right);
+            mergePorNumero(cartas, left, middle, right);
+        }
+    }
+
+    public static void mergePorPalo(Carta[] cartas, int left, int middle, int right) {
+        Carta[] temp = new Carta[right - left + 1];
+        int i = left, j = middle + 1, k = 0;
+
+        while (i <= middle && j <= right) {
+            if (cartas[i].devolverPalo() < cartas[j].devolverPalo() ||
+                    (cartas[i].devolverPalo() == cartas[j].devolverPalo() && cartas[i].devolverNumero() < cartas[j].devolverNumero())) {
+                temp[k++] = cartas[i++];
+            } else {
+                temp[k++] = cartas[j++];
             }
-            passIndex++;
-        } while (swapped);
-    }
+        }
 
-    private static int compararPorPalo(Carta carta1, Carta carta2) {
-        if (carta1.devolverPalo() == carta2.devolverPalo()) {
-            return carta1.devolverNumero() - carta2.devolverNumero();
-        } else {
-            return carta1.devolverPalo() - carta2.devolverPalo();
+        while (i <= middle) {
+            temp[k++] = cartas[i++];
+        }
+
+        while (j <= right) {
+            temp[k++] = cartas[j++];
+        }
+
+        for (i = 0; i < temp.length; i++) {
+            cartas[left + i] = temp[i];
         }
     }
 
-    private static int compararNumero(Carta carta1, Carta carta2) {
-        if (carta1.devolverNumero() == carta2.devolverNumero()) {
-            return carta1.devolverPalo() - carta2.devolverPalo();
-        } else {
-            return carta1.devolverNumero() - carta2.devolverNumero();
+    public static void mergePorNumero(Carta[] cartas, int left, int middle, int right) {
+        Carta[] temp = new Carta[right - left + 1];
+        int i = left, j = middle + 1, k = 0;
+
+        while (i <= middle && j <= right) {
+            if (cartas[i].devolverNumero() < cartas[j].devolverNumero() ||
+                    (cartas[i].devolverNumero() == cartas[j].devolverNumero() && cartas[i].devolverPalo() < cartas[j].devolverPalo())) {
+                temp[k++] = cartas[i++];
+            } else {
+                temp[k++] = cartas[j++];
+            }
+        }
+
+        while (i <= middle) {
+            temp[k++] = cartas[i++];
+        }
+
+        while (j <= right) {
+            temp[k++] = cartas[j++];
+        }
+
+        for (i = 0; i < temp.length; i++) {
+            cartas[left + i] = temp[i];
         }
     }
 
-    private static void cambiar(Carta[] cartas, int i, int j) {
-        Carta temp = cartas[i];
-        cartas[i] = cartas[j];
-        cartas[j] = temp;
+    public static void mostrarBaraja(Baraja baraja) {
+        Carta[] cartas = baraja.devolverCartas();
+        System.out.println("Baraja ordenada:");
+        for (Carta carta : cartas) {
+            carta.mostrar();
+            carta.voltear();
+        }
+        System.out.println();
     }
 }

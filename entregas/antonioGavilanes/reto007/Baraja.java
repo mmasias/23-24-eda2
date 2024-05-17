@@ -75,4 +75,8 @@ public class Baraja {
         return ultima == 0;
     }
 
+    public Carta[] devolverCartas() {
+        return cartas;
+    }
+
 }
