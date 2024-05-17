@@ -7,7 +7,8 @@ class RetoEDA {
     Baraja baraja = new Baraja();
     Ordenador ordenadorDeCartas = new Ordenador();
 
-    ordenadorDeCartas.ordenarPorNumero(baraja);
+    // ordenadorDeCartas.ordenarPorNumero(baraja);
+    ordenadorDeCartas.ordenarPorPalo(baraja);
 
     Carta carta;
     do {

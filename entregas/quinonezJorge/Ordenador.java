@@ -2,17 +2,34 @@ import java.util.ArrayList;
 
 public class Ordenador {
 
-  public void ordenarPorNumero(Baraja baraja) {
-    ArrayList<Carta> cartas = new ArrayList<>();
-    while (!baraja.vacia()) {
-      cartas.add(baraja.sacar());
+  public void ordenarPorPalo(Baraja baraja) {
+    ordenarPorNumero(baraja);
+    ArrayList<Carta> cartas = crearArrayDeCartas(baraja);
+    for (int i = 0; i < 4; i++) {
+      for (int j = cartas.size() - 1; j >= 0; j--) {
+        if (cartas.get(j).getPalo() == i) {
+          baraja.poner(cartas.get(j));
+        }
+      }
     }
+  }
+
+  public void ordenarPorNumero(Baraja baraja) {
+    ArrayList<Carta> cartas = crearArrayDeCartas(baraja);
 
     sort(cartas, 0, cartas.size() - 1);
 
     for (int i = cartas.size() - 1; i >= 0; i--) {
       baraja.poner(cartas.get(i));
     }
+  }
+
+  private ArrayList<Carta> crearArrayDeCartas(Baraja baraja) {
+    ArrayList<Carta> cartas = new ArrayList<>();
+    while (!baraja.vacia()) {
+      cartas.add(baraja.sacar());
+    }
+    return cartas;
   }
 
   private void sort(ArrayList<Carta> cartas, int left, int right) {
