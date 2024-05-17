@@ -62,4 +62,14 @@ public class Carta {
     private boolean rojo() {
         return ROJOS.incluye(this.palo);
     }
+
+    public Object devolverPalo() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'devolverPalo'");
+    }
+
+    public int devolverNumero() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'devolverNumero'");
+    }
 }
