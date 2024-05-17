@@ -2,27 +2,68 @@ import java.util.ArrayList;
 
 public class Ordenador {
 
-  public void ordenarPorPalo(Baraja baraja) {
-    ArrayList<Carta> cartas = new ArrayList<Carta>();
+  public void ordenarPorNumero(Baraja baraja) {
+    ArrayList<Carta> cartas = new ArrayList<>();
     while (!baraja.vacia()) {
       cartas.add(baraja.sacar());
     }
 
-    sortByPalo(cartas, 0, cartas.size() - 1);
+    sort(cartas, 0, cartas.size() - 1);
+
+    for (Carta carta : cartas) {
+      baraja.poner(carta);
+    }
   }
 
-  private void sortByPalo(ArrayList<Carta> cartas, int left, int right) {
+  private void sort(ArrayList<Carta> cartas, int left, int right) {
     if (left < right) {
       int middle = (left + right) / 2;
 
-      sortByPalo(cartas, left, middle);
-      sortByPalo(cartas, middle + 1, right);
+      sort(cartas, left, middle);
+      sort(cartas, middle + 1, right);
 
       merge(cartas, left, middle, right);
     }
   }
 
   private void merge(ArrayList<Carta> cartas, int left, int middle, int right) {
+    int sizeL = middle - left + 1;
+    int sizeR = right - middle;
 
+    ArrayList<Carta> L = new ArrayList<>(sizeL);
+    ArrayList<Carta> R = new ArrayList<>(sizeR);
+
+    for (int i = 0; i < sizeL; i++) {
+      L.add(cartas.get(left + i));
+    }
+    for (int j = 0; j < sizeR; j++) {
+      R.add(cartas.get(middle + 1 + j));
+    }
+
+    int i = 0, j = 0;
+    int k = left;
+
+    while (i < sizeL && j < sizeR) {
+      if (L.get(i).getNumero() <= R.get(j).getNumero()) {
+        cartas.set(k, L.get(i));
+        i++;
+      } else {
+        cartas.set(k, R.get(j));
+        j++;
+      }
+      k++;
+    }
+
+    while (i < sizeL) {
+      cartas.set(k, L.get(i));
+      i++;
+      k++;
+    }
+
+    while (j < sizeR) {
+      cartas.set(k, R.get(j));
+      j++;
+      k++;
+    }
   }
 }
