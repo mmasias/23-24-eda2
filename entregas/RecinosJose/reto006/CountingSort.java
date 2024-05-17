@@ -11,24 +11,20 @@ public class CountingSort {
         }
         System.out.println("Elemento máximo encontrado: " + max);
 
-        // Crear un arreglo de conteo para almacenar el conteo de cada elemento
         int count[] = new int[max + 1];
 
-        // Inicializar el arreglo de conteo
         for (int i = 0; i < length; i++) {
             count[array[i]]++;
         }
         System.out.print("Arreglo de conteo inicial: ");
         printArray(count);
 
-        // Modificar el arreglo de conteo para almacenar la posición real de los elementos
         for (int i = 1; i <= max; i++) {
             count[i] += count[i - 1];
         }
         System.out.print("Arreglo de conteo con posiciones acumuladas: ");
         printArray(count);
 
-        // Construir el arreglo de salida
         for (int i = length - 1; i >= 0; i--) {
             output[count[array[i]] - 1] = array[i];
             count[array[i]]--;
@@ -37,7 +33,6 @@ public class CountingSort {
         System.out.print("Arreglo de salida construido: ");
         printArray(output);
 
-        // Copiar el arreglo de salida al arreglo original
         for (int i = 0; i < length; i++) {
             array[i] = output[i];
         }

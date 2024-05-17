@@ -6,13 +6,12 @@ public class InsertionSort {
             int j = i - 1;
             System.out.println("Insertando el valor: " + current);
             while (j >= 0 && array[j] > current) {
-                array[j + 1] = array[j]; // Desplaza el elemento hacia la derecha
+                array[j + 1] = array[j]; 
                 System.out.println("Desplazando " + array[j] + " de la posición " + j + " a la posición " + (j + 1));
                 j--;
             }
-            array[j + 1] = current; // Inserta el elemento en su posición correcta
+            array[j + 1] = current; 
             System.out.println("Insertado en la posición " + (j + 1));
-            // Mostrar el estado del arreglo después de la inserción
             System.out.print("Estado del arreglo después de la inserción: ");
             for (int k : array) {
                 System.out.print(k + " ");

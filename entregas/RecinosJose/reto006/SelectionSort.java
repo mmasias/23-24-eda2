@@ -7,17 +7,16 @@ public class SelectionSort {
             System.out.println("Iniciando búsqueda del mínimo desde el índice " + startIndex);
             for (int j = startIndex + 1; j < array.length; j++) {
                 if (array[j] < array[minIndex]) {
-                    minIndex = j; // Nuevo índice del mínimo
+                    minIndex = j;
                     System.out.println("Nuevo mínimo encontrado: " + array[minIndex] + " en el índice " + minIndex);
                 }
             }
-            // Intercambio de elementos
             System.out.println("Intercambiando " + array[startIndex] + " con " + array[minIndex]);
             int temp = array[minIndex];
             array[minIndex] = array[startIndex];
             array[startIndex] = temp;
 
-            // Mostrar el estado del arreglo después del intercambio
+
             System.out.print("Estado del arreglo después del intercambio: ");
             for (int k : array) {
                 System.out.print(k + " ");
