@@ -10,7 +10,6 @@ public class App {
             String hashOriginal = persona.getHash();
             System.out.println("Hash original: " + hashOriginal);
 
-            // Simular cambio de calificación
             persona.setCalificacion(90);
 
             String hashModificado = persona.getHash();

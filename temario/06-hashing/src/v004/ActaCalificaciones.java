@@ -40,7 +40,6 @@ public class ActaCalificaciones {
 
             System.out.println("Verificación inicial: " + acta.verificarIntegridad());
 
-
             acta.personas.get(1).setCalificacion(95);
 
             System.out.println("Verificación después de modificar una calificación: " + acta.verificarIntegridad());

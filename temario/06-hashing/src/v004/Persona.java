@@ -41,4 +41,3 @@ class Persona {
         return sb.toString();
     }
 }
-
