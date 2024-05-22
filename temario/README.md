@@ -3,8 +3,8 @@
 - [x] [Estructuras de datos](01-estructurasDeDatos/README.md)
 - [x] [Algoritmos](02-algoritmos/README.md)
 - [x] [Recursividad](03-recursividad/README.md)
-- [ ] [Ordenación](04-ordenacion/README.md)
-- [ ] [Búsquedas](05-busquedas/README.md)
+- [x] [Ordenación](04-ordenacion/README.md)
+- [x] [Búsquedas](05-busquedas/README.md)
 - [ ] [Hashing](06-hashing/README.md)
 
 ## Temario++
