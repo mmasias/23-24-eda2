@@ -5,7 +5,7 @@
 - [x] [Recursividad](03-recursividad/README.md)
 - [x] [Ordenación](04-ordenacion/README.md)
 - [x] [Búsquedas](05-busquedas/README.md)
-- [ ] [Hashing](06-hashing/README.md)
+- [x] [Hashing](06-hashing/README.md)
 
 ## Temario++
 
