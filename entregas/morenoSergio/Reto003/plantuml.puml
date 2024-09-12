@@ -1,0 +1,44 @@
+@startuml
+class Autor {
+    - int id
+    - String name
+    + Autor(String name)
+    + getId() : int
+    + getName() : String
+    + setName(String newName)
+}
+
+class Biblioteca {
+    - List<Documento> documentos
+    + addDocumento(Documento doc)
+    + buscarPorTitulo(String titulo) : List<Documento>
+    + buscarPorAutor(Autor autor) : List<Documento>
+    + buscarPorAño(int año) : List<Documento>
+    + buscarPorTipo(String tipo) : List<Documento>
+    + buscarPorPalabrasClave(List<String> palabrasClave) : List<Documento>
+    + mostrarDocumentos()
+}
+
+class Documento {
+    - int id
+    - Titulo titulo
+    - String tipo
+    - List<Autor> autores
+    - List<String> keywords
+    - int añoPublicacion
+    + Documento(Titulo titulo, String tipo, List<Autor> autores, List<String> keywords, int añoPublicacion)
+    + get/set methods for each attribute
+}
+
+class Titulo {
+    - int id
+    - String name
+    + Titulo(String name)
+    + getId() : int
+    + getName() : String
+    + setName(String newName)
+}
+
+Documento "1" -- "0..*" Autor : has >
+Documento "1" -- "1" Titulo : has >
+@enduml
