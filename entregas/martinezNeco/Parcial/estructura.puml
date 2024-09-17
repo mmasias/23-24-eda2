@@ -1,0 +1,57 @@
+@startuml
+
+package "src" {
+
+    class Ejecutable {
+    }
+
+    class Documento {
+        - int id
+        - String titulo
+        - int anio
+        + Documento(int, String, int)
+        + int getId()
+        + String getTitulo()
+        + int getAnio()
+    }
+
+    class Escritor {
+        - int id
+        - String nombre
+        - String apellido
+        + Escritor(int, String, String)
+        + int getId()
+        + String getNombre()
+        + String getApellido()
+    }
+
+    class Relacion {
+        - int documentoId
+        - int escritorId
+        + Relacion(int, int)
+        + int getDocumentoId()
+        + int getEscritorId()
+    }
+
+    class ManagerBiblioteca {
+        - List<Documento> documentos
+        - List<Escritor> escritores
+        - List<Relacion> relaciones
+        + void cargarDatos()
+        + void menu()
+        + void agregarDocumento()
+        + void agregarEscritor()
+        + void listarDocumentos()
+        + void listarEscritores()
+        + void buscarDocumentosPorEscritor()
+    }
+
+    Documento "1" -- "many" Relacion : contains >
+    Escritor "1" -- "many" Relacion : contains >
+    ManagerBiblioteca ..> Documento : manages >
+    ManagerBiblioteca ..> Escritor : manages >
+    ManagerBiblioteca ..> Relacion : manages >
+}
+
+
+@enduml
